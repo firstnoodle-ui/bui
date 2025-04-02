@@ -1,0 +1,24 @@
+{
+  "name": "bui",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A Vue 3 components and TypeScript utilities library.",
+  "author": "sebastian",
+  "keywords": [
+    "vue",
+    "typescript",
+    "components",
+    "utilities"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.11.0",
+    "eslint": "^9.23.0",
+    "eslint-plugin-format": "^1.0.1",
+    "typescript": "^5.8.2"
+  }
+}
