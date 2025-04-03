@@ -10,5 +10,6 @@ export default antfu({
 }, {
   rules: {
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "vue/custom-event-name-casing": "off"
   },
 })
