@@ -12,13 +12,14 @@
     "utilities"
   ],
   "scripts": {
+    "build-lib": "cd packages/bui && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "setup-1-root": "pnpm install",
     "setup-2-docs": "cd documentation/examples && pnpm install",
     "setup-3-bui": "cd packages/bui && pnpm install",
     "start-lib": "cd packages/bui && vite build --watch",
-    "start-docs": "cd documentation/examples && vite",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "start-docs": "cd documentation/examples && vite"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.11.0",
