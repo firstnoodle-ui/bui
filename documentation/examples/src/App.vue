@@ -4,7 +4,7 @@ import { TestButton, TestButtonFour, TestButtonThree, TestButtonTwo } from "@fir
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex-col gap-2 flex">
     <TestButton text="one - annoying no props visible, can see type on F12 cool" />
     <TestButtonTwo text="Two - annoying no props visible, can see props on F12" />
     <TestButtonThree text="Three - annoying no props visible, can see imported props on F12" />
