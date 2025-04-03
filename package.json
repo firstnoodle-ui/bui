@@ -12,6 +12,11 @@
     "utilities"
   ],
   "scripts": {
+    "setup-1-root": "pnpm install",
+    "setup-2-docs": "cd documentation/examples && pnpm install",
+    "setup-3-bui": "cd packages/bui && pnpm install",
+    "start-lib": "cd packages/bui && vite build --watch",
+    "start-docs": "cd documentation/examples && vite",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
