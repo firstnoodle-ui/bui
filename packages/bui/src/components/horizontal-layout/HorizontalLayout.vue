@@ -1,54 +1,6 @@
-<template>
-  <div class="relative w-full h-full overflow-hidden">
-    <aside-component
-      v-if="slots['aside-left']"
-      side="left"
-      :border="props.borders"
-      :draggable="asideLeftDraggable"
-      :visible="asideLeftVisible"
-      :width="localAsideLeftWidth"
-      @resize-start="resizing = true"
-      @resize="onAsideLeftResize"
-      @resize-end="resizing = false"
-      @transitioning="onAsideLeftTransition"
-    >
-      <slot name="aside-left" />
-    </aside-component>
-    <!-- responsiveness: md and above -->
-    <main
-      class="relative z-0 h-full overflow-x-hidden overflow-y-auto"
-      :class="[props.mainBgColorClass, resizing ? null : 'transition-padding duration-500 ease-in-out']"
-      :style="mainStyle"
-    >
-      <slot name="main" />
-    </main>
-    <aside-component
-      v-if="slots['aside-right']"
-      side="right"
-      :border="props.borders"
-      :draggable="asideRightDraggable"
-      :visible="asideRightVisible"
-      :width="localAsideRightWidth"
-      @resize-start="resizing = true"
-      @resize="onAsideRightResize"
-      @resize-end="resizing = false"
-      @transitioning="onAsideRightTransition"
-    >
-      <slot name="aside-right" />
-    </aside-component>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed, onMounted, ref, useSlots, watch } from "vue";
 import AsideComponent from "./Aside.vue";
-
-const emit = defineEmits(["aside-left-transition-end", "aside-right-transition-end"]);
-
-const slots = useSlots();
-
-const defaultWidth: number = 256;
-const defaultBgColorClass = "bg-light";
 
 const props = withDefaults(
   defineProps<{
@@ -64,18 +16,20 @@ const props = withDefaults(
     mainBgColorClass?: string;
   }>(),
   {
-    asideLeftBgColorClass: defaultBgColorClass,
+    asideLeftBgColorClass: "bg-light",
     asideLeftDraggable: false,
     asideLeftVisible: true,
-    asideLeftWidth: defaultWidth,
-    asideRightBgColorClass: defaultBgColorClass,
+    asideLeftWidth: 256,
+    asideRightBgColorClass: "bg-light",
     asideRightDraggable: false,
     asideRightVisible: true,
-    asideRightWidth: defaultWidth,
+    asideRightWidth: 256,
     borders: false,
-    mainBgColorClass: defaultBgColorClass
-  }
+    mainBgColorClass: "bg-light",
+  },
 );
+
+const emit = defineEmits(["aside-left-transition-end", "aside-right-transition-end"]);
 
 // Resizing is when one of the asides is resized by dragging - then we remove transition classes
 const resizing = ref(false);
@@ -86,8 +40,8 @@ const localAsideRightWidth = ref(props.asideRightVisible ? props.asideRightWidth
 const paddingLeft = ref(props.asideLeftWidth);
 const paddingRight = ref(props.asideRightWidth);
 const mainStyle = computed(() => ({
-  paddingLeft: paddingLeft.value + "px",
-  paddingRight: +paddingRight.value + "px"
+  paddingLeft: `${paddingLeft.value}px`,
+  paddingRight: `${+paddingRight.value}px`,
 }));
 const onAsideLeftResize = (size: number) => (localAsideLeftWidth.value = paddingLeft.value = size);
 const onAsideLeftTransition = (transitioning: boolean) => !transitioning && emit("aside-left-transition-end");
@@ -97,25 +51,68 @@ const onAsideRightTransition = (transitioning: boolean) => !transitioning && emi
 // For transitioning the padding on <main>
 watch(
   () => props.asideLeftVisible,
-  newValue => (paddingLeft.value = newValue ? localAsideLeftWidth.value : 0)
+  newValue => (paddingLeft.value = newValue ? localAsideLeftWidth.value : 0),
 );
 watch(
   () => props.asideRightVisible,
-  newValue => (paddingRight.value = newValue ? localAsideRightWidth.value : 0)
+  newValue => (paddingRight.value = newValue ? localAsideRightWidth.value : 0),
 );
 
 // For triggering transition to a specific width
 watch(
   () => props.asideLeftWidth,
-  newValue => (localAsideLeftWidth.value = paddingLeft.value = newValue)
+  newValue => (localAsideLeftWidth.value = paddingLeft.value = newValue),
 );
 watch(
   () => props.asideRightWidth,
-  newValue => (localAsideRightWidth.value = paddingRight.value = newValue)
+  newValue => (localAsideRightWidth.value = paddingRight.value = newValue),
 );
+
+const slots = useSlots();
 
 onMounted(() => {
   paddingLeft.value = props.asideLeftVisible && slots["aside-left"] ? localAsideLeftWidth.value : 0;
   paddingRight.value = props.asideRightVisible && slots["aside-right"] ? localAsideRightWidth.value : 0;
 });
 </script>
+
+<template>
+  <div class="relative w-full h-full overflow-hidden">
+    <AsideComponent
+      v-if="slots['aside-left']"
+      side="left"
+      :border="props.borders"
+      :draggable="asideLeftDraggable"
+      :visible="asideLeftVisible"
+      :width="localAsideLeftWidth"
+      @resize-start="resizing = true"
+      @resize="onAsideLeftResize"
+      @resize-end="resizing = false"
+      @transitioning="onAsideLeftTransition"
+    >
+      <slot name="aside-left" />
+    </AsideComponent>
+    <!-- responsiveness: md and above -->
+    <main
+      class="relative z-0 h-full overflow-x-hidden overflow-y-auto"
+      :class="[props.mainBgColorClass, resizing ? null : 'transition-padding duration-500 ease-in-out']"
+      :style="mainStyle"
+    >
+      <slot name="main" />
+    </main>
+    <AsideComponent
+      v-if="slots['aside-right']"
+      side="right"
+      :border="props.borders"
+      :draggable="asideRightDraggable"
+      :visible="asideRightVisible"
+      :width="localAsideRightWidth"
+      @resize-start="resizing = true"
+      @resize="onAsideRightResize"
+      @resize-end="resizing = false"
+      @transitioning="onAsideRightTransition"
+    >
+      <slot name="aside-right" />
+    </AsideComponent>
+  </div>
+</template>

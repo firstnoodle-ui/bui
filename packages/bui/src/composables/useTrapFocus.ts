@@ -6,10 +6,9 @@ import { onUnmounted } from "vue";
  * 'trapElement' is the vue ref to the HTML element that we want to trap focus (tabindex) inside
  */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const useTrapFocus = (trapElement: any, focusFirstElement: boolean = false) => {
   // add all the elements inside modal which you want to make focusable
-  const focusableElements = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  const focusableElements = "button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])";
 
   let firstFocusableElement: HTMLElement;
   let focusableContent: Element[];
@@ -18,7 +17,8 @@ export const useTrapFocus = (trapElement: any, focusFirstElement: boolean = fals
   const handleKeyDown = (e: KeyboardEvent) => {
     const isTabPressed = e.key === "Tab";
 
-    if (!isTabPressed) return;
+    if (!isTabPressed)
+      return;
 
     if (e.shiftKey) {
       if (firstFocusableElement && lastFocusableElement) {
@@ -27,7 +27,8 @@ export const useTrapFocus = (trapElement: any, focusFirstElement: boolean = fals
           e.preventDefault();
         }
       }
-    } else {
+    }
+    else {
       if (firstFocusableElement && lastFocusableElement) {
         if (document.activeElement === lastFocusableElement) {
           firstFocusableElement!.focus();

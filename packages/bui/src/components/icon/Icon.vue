@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { TIcon } from "../types"
+import type { TIcon } from "../types";
 
-defineProps<{ name: TIcon }>()
+defineProps<{ name: TIcon }>();
 </script>
 
 <template>

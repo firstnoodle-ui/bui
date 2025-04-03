@@ -1,7 +1,8 @@
 let width: number | undefined;
 
 export const scrollbarWidth = (): number => {
-  if (scrollbarWidth !== undefined) return <number>width;
+  if (scrollbarWidth !== undefined)
+    return <number>width;
 
   const outer = document.createElement("div");
   outer.className = "el-scrollbar__wrap";

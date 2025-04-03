@@ -18,7 +18,8 @@ export const scrollIntoView = (container: HTMLElement, selected: HTMLElement): v
 
   if (top < viewRectTop) {
     container.scrollTop = top;
-  } else if (bottom > viewRectBottom) {
+  }
+  else if (bottom > viewRectBottom) {
     container.scrollTop = bottom - container.clientHeight;
   }
 };

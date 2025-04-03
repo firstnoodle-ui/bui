@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { BApplicationWrapper, BHorizontalLayout } from "@firstnoodle/bui"
+import { BApplicationWrapper, BHorizontalLayout } from "@firstnoodle/bui";
 </script>
 
 <template>

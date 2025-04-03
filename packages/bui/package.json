@@ -1,10 +1,7 @@
 {
   "name": "@firstnoodle-ui/bui",
   "type": "module",
-  "version": "0.0.2",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
+  "version": "0.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/firstnoodle-ui/bui.git"
@@ -20,11 +17,16 @@
   "scripts": {
     "build": "vite build",
     "typecheck": "vue-tsc -p tsconfig.app.json --noEmit",
-    "watch": "vite build --watch"
+    "watch": "vite build --watch",
+    "prepack": "pnpm run build",
+    "release:publish": "pnpm publish --access public"
   },
   "peerDependencies": {
     "tailwindcss": "^4.1.1",
     "vue": "^3.5.13"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",
@@ -32,17 +34,7 @@
     "@tiptap/extension-bullet-list": "^2.11.7",
     "@tiptap/extension-document": "^2.11.7",
     "@tiptap/extension-heading": "^2.11.7",
-    "@tiptap/extension-highlight": "^2.11.7",
-    "@tiptap/extension-history": "^2.11.7",
-    "@tiptap/extension-italic": "^2.11.7",
-    "@tiptap/extension-link": "^2.11.7",
-    "@tiptap/extension-list-item": "^2.11.7",
-    "@tiptap/extension-ordered-list": "^2.11.7",
-    "@tiptap/extension-paragraph": "^2.11.7",
-    "@tiptap/extension-placeholder": "^2.11.7",
-    "@tiptap/extension-text": "^2.11.7",
-    "@tiptap/extension-underline": "^2.11.7",
-    "@tiptap/vue-3": "^2.11.7"
+    "@tiptap/extension-highlight": "^2.11.7"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

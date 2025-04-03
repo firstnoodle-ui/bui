@@ -5,6 +5,6 @@ export const useNextFrame = () => {
       requestAnimationFrame(() => {
         requestAnimationFrame(callback);
       });
-    }
+    },
   };
 };
