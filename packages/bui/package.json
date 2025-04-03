@@ -1,7 +1,14 @@
 {
-  "name": "@firstnoodle/bui",
+  "name": "@firstnoodle-ui/bui",
   "type": "module",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/firstnoodle-ui/bui.git"
+  },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

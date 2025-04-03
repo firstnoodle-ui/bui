@@ -4,10 +4,6 @@
   "version": "0.0.1",
   "description": "A Vue 3 components and TypeScript utilities library.",
   "author": "sebastian",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/firstnoodle-ui/bui.git"
-  },
   "keywords": [
     "vue",
     "typescript",
@@ -29,8 +25,5 @@
     "eslint": "^9.23.0",
     "eslint-plugin-format": "^1.0.1",
     "typescript": "^5.8.2"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
   }
 }
