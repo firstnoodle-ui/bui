@@ -28,7 +28,7 @@ const emit = defineEmits<{
 
 <template>
   <template v-if="orientation === 'horizontal'">
-    <a :href="href" class="group h-full cursor-pointer py-2" @click="emit('navigate', href)">
+    <a class="group h-full cursor-pointer py-2" @click="emit('navigate', href)">
       <div
         class="h-full flex items-center space-x-2 px-4 rounded-lg bg-opacity-0 group-hover:opacity-100 group-hover:bg-opacity-100"
         :class="{
@@ -44,7 +44,7 @@ const emit = defineEmits<{
     </a>
   </template>
   <template v-else>
-    <a :href="href" class="group h-full cursor-pointer py-2" @click="emit('navigate', href)">
+    <a class="group h-full cursor-pointer py-2" @click="emit('navigate', href)">
       <div
         class="h-10 flex items-center space-x-2 px-4 rounded-lg bg-opacity-0 group-hover:opacity-100 group-hover:bg-opacity-100"
         :class="{

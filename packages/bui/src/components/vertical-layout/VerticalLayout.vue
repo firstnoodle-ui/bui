@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BFlexbox, BScrollbar } from "../";
+import { BFlexbox } from "../";
 import RunningSection from "./RunningSection.vue";
 
 const props = withDefaults(
@@ -29,9 +29,9 @@ const classes = [props.widthClass, props.windowFrame ? "px-8 py-6 bg-light shado
       <slot name="header" />
     </RunningSection>
 
-    <BScrollbar window-resize :wrap-class="mainClasses">
-      <slot name="main" />
-    </BScrollbar>
+    <!-- <BScrollbar window-resize :wrap-class="mainClasses"> -->
+    <slot name="main" />
+    <!-- </BScrollbar> -->
 
     <RunningSection v-if="$slots.footer" type="footer" :border="borders" :height-class="footerHeightClass">
       <slot name="footer" />
