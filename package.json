@@ -4,6 +4,7 @@
   "version": "0.0.8",
   "description": "A Vue 3 components and TypeScript utilities library.",
   "author": "sebastian",
+  "private":"false",
   "keywords": [
     "vue",
     "typescript",
