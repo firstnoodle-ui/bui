@@ -4,6 +4,12 @@ export type TButtonType = (typeof ButtonType)[number];
 export const Orientation = ["horizontal", "vertical"] as const;
 export type TButtonGroupOrientation = (typeof Orientation)[number];
 
+export const Alignments = ["start", "center", "end", "stretch"] as const;
+export type TAlignment = (typeof Alignments)[number];
+
+export const Justifications = [...Alignments, "between", "around", "evenly"] as const;
+export type TJustification = (typeof Justifications)[number];
+
 export type TColumnNavigationOptionBase = {
   id?: string;
   label: string;

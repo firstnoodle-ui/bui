@@ -1,0 +1,23 @@
+$color1: #eee;
+$color2: #bbb;
+
+.first-paint {
+    background-color: $color1;
+    animation-name: fade;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+
+    @for $i from 1 through 20 {
+        &.delay-#{$i} {
+            animation-delay: $i * 0.1s;
+        }
+    }
+}
+
+@keyframes fade {
+    0% { background-color: $color1; }
+    5% { background-color: $color1; }
+    25% { background-color: $color2; }
+    45% { background-color: $color1; }
+    100% { background-color: $color1; }
+}
