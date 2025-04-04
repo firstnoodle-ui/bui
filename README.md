@@ -49,7 +49,5 @@ You need write permissions to the repository. You create a personal access token
 
 Store the token somewhere safe, you will not be able to see it again.
 
-
-
 ### tips
 The more components your library has, the longer it will take to reflect changes in the playground. If it starts to slow down, consider directly importing the component from the library with a relative path or using a storybook like Histoire, which we'll cover next.
