@@ -1,30 +1,3 @@
-<template>
-  <span class="relative z-0">
-    <template v-if="segments.length === 0">
-      {{ value }}
-    </template>
-    <template v-else v-for="segment in segments">
-      <span
-        v-if="highlight && segment.toLowerCase() === highlight.toLowerCase()"
-        class="relative z-0 rounded"
-        :class="[
-          {
-            'font-bold': bold,
-            underline: underline
-          },
-          highlightColorClasses,
-          textColorClass
-        ]"
-      >
-        {{ segment }}
-      </span>
-      <span class="relative z-10" v-else>
-        {{ segment }}
-      </span>
-    </template>
-  </span>
-</template>
-
 <script setup lang="ts">
 import { computed, onBeforeMount, ref, watch } from "vue";
 
@@ -42,8 +15,8 @@ const props = withDefaults(
     bold: false,
     underline: false,
     textColorClass: "text-black",
-    backgroundColor: null
-  }
+    backgroundColor: null,
+  },
 );
 
 const segments = ref<string[]>([]);
@@ -54,32 +27,21 @@ const highlightColorClasses = computed(() => {
   const base = "ring ring-2 shadow ";
   switch (props.backgroundColor) {
     case "yellow":
-      return base + "bg-golden-sun-lighter ring-golden-sun-lighter";
+      return `${base}bg-golden-sun-lighter ring-golden-sun-lighter`;
     case "green":
-      return base + "bg-ocean-green ring-ocean-green";
+      return `${base}bg-ocean-green ring-ocean-green`;
     case "blue":
-      return base + "bg-light-blue ring-light-blue";
+      return `${base}bg-light-blue ring-light-blue`;
     case "red":
-      return base + "bg-lava-red ring-lava-red";
+      return `${base}bg-lava-red ring-lava-red`;
     case "pink":
-      return base + "bg-pink-rose ring-pink-rose";
+      return `${base}bg-pink-rose ring-pink-rose`;
     case "white":
-      return base + "bg-white ring-white";
+      return `${base}bg-white ring-white`;
     default:
-      return base + "bg-golden-sun ring-golden-sun";
+      return `${base}bg-golden-sun ring-golden-sun`;
   }
 });
-
-onBeforeMount(() => {
-  segments.value = props.highlight ? segmentiseString(props.value, props.highlight) : [];
-});
-
-watch(
-  () => props.highlight,
-  (newValue: string | null) => {
-    segments.value = newValue ? segmentiseString(props.value, newValue) : [];
-  }
-);
 
 const segmentiseString = (targetString: string, searchString: string) => {
   if (!targetString || !searchString) return [];
@@ -88,7 +50,7 @@ const segmentiseString = (targetString: string, searchString: string) => {
   const lowerCasedTargetString = targetString.toLowerCase();
   const lowerCasedSearchString = searchString.toLowerCase();
 
-  let segmentBreakPoints = [];
+  const segmentBreakPoints = [];
   let resultIndex = -1;
 
   do {
@@ -98,7 +60,7 @@ const segmentiseString = (targetString: string, searchString: string) => {
     }
   } while (resultIndex > -1);
 
-  let segments = [];
+  const segments = [];
   let segmentIndex = 0;
 
   for (const highlight of segmentBreakPoints) {
@@ -110,4 +72,42 @@ const segmentiseString = (targetString: string, searchString: string) => {
 
   return segments;
 };
+
+onBeforeMount(() => {
+  segments.value = props.highlight ? segmentiseString(props.value, props.highlight) : [];
+});
+
+watch(
+  () => props.highlight,
+  (newValue: string | null) => {
+    segments.value = newValue ? segmentiseString(props.value, newValue) : [];
+  },
+);
 </script>
+
+<template>
+  <span class="relative z-0">
+    <template v-if="segments.length === 0">
+      {{ value }}
+    </template>
+    <template v-for="segment in segments" v-else :key="segment">
+      <span
+        v-if="highlight && segment.toLowerCase() === highlight.toLowerCase()"
+        class="relative z-0 rounded"
+        :class="[
+          {
+            'font-bold': bold,
+            'underline': underline,
+          },
+          highlightColorClasses,
+          textColorClass,
+        ]"
+      >
+        {{ segment }}
+      </span>
+      <span v-else class="relative z-10">
+        {{ segment }}
+      </span>
+    </template>
+  </span>
+</template>

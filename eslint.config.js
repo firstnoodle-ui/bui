@@ -17,5 +17,6 @@ export default antfu({
     "antfu/if-newline": "off",
     "style/indent": 2,
     "style/semi": ["error", "always"],
+    "style/padded-blocks": "off",
   },
 });

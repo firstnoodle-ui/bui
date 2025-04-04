@@ -1,3 +1,7 @@
+<script setup lang="ts">
+defineProps({ title: String });
+</script>
+
 <template>
   <section class="w-full border border-default space-y-2">
     <header class="p-4 border-b border-default bg-sand-grey-40">
@@ -8,7 +12,3 @@
     </main>
   </section>
 </template>
-
-<script setup lang="ts">
-defineProps({ title: String });
-</script>

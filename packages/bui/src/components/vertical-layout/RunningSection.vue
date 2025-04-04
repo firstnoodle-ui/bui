@@ -1,20 +1,6 @@
-<template>
-  <component
-    ref="containerRef"
-    :is="type"
-    class="flex-none w-full overflow-hidden transition-height duration-500 ease-in-out"
-    :class="classes"
-    :style="heightStyle"
-  >
-    <slot />
-  </component>
-</template>
-
 <script setup lang="ts">
+import type { TSectionType } from "./types";
 import { computed, ref } from "vue";
-
-const SectionTypes = ["header", "footer"] as const;
-type TSectionType = (typeof SectionTypes)[number];
 
 const props = withDefaults(
   defineProps<{
@@ -25,8 +11,8 @@ const props = withDefaults(
   {
     border: false,
     heightClass: "h-12",
-    type: "header"
-  }
+    type: "header",
+  },
 );
 
 const containerRef = ref<HTMLElement>();
@@ -54,3 +40,15 @@ const heightStyle = computed(() => {
   return {};
 });
 </script>
+
+<template>
+  <component
+    :is="type"
+    ref="containerRef"
+    class="flex-none w-full overflow-hidden transition-height duration-500 ease-in-out"
+    :class="classes"
+    :style="heightStyle"
+  >
+    <slot />
+  </component>
+</template>
