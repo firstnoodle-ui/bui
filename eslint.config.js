@@ -14,5 +14,8 @@ export default antfu({
     "vue/custom-event-name-casing": "off",
     "antfu/top-level-function": "off",
     "ts/no-unsafe-function-types": "off",
+    "antfu/if-newline": "off",
+    "style/indent": 2,
+    "style/semi": ["error", "always"],
   },
 });

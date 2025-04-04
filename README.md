@@ -1,5 +1,6 @@
 # link to tutorial for setting up mono repo
 [complete guide to building a vue js component library](https://soubiran.dev/series/the-complete-guide-to-building-a-vue-js-component-library)
+
 [demo repository](https://github.com/Barbapapazes/huchet-vue/)
 
 # Install
@@ -30,6 +31,25 @@ By setting the source to the bui package, we instruct tailwind to also include t
 in the root repo:
 
 CTRL + SHIFT + P -> Run Task: Start Lib + Docs
+
+# publish package
+Login to the github npm registry using your **github username** as Username and **your personal access token** as password.
+
+```npm login --registry=https://npm.pkg.github.com```
+
+```pnpm release```
+this command runs a script which runs eslint, typechecks packages, auto bump package versions and releases to the registry.
+
+## install package
+```npm install @firstnoodle-ui/bui --registry=https://npm.pkg.github.com```
+
+## generate personal access token
+
+You need write permissions to the repository. You create a personal access token in github by clicking your image in the top right corner -> settings -> developer settings (bottom left corner) -> personal access token -> Tokens (classic) -> genereate token -> check write:packages (and read:packages which is auto checked when you select write:packages)
+
+Store the token somewhere safe, you will not be able to see it again.
+
+
 
 ### tips
 The more components your library has, the longer it will take to reflect changes in the playground. If it starts to slow down, consider directly importing the component from the library with a relative path or using a storybook like Histoire, which we'll cover next.
