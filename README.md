@@ -53,7 +53,7 @@ Store the token somewhere safe, you will not be able to see it again.
 
 [bui package on github packages](https://github.com/firstnoodle-ui/bui/pkgs/npm/bui)
 
-## live documentation will  some day live on
+## live documentation will some day live on
 [live documentation](https://firstnoodle-ui.github.io/bui/)
 
 ### tips
