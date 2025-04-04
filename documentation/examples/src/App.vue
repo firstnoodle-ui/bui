@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { BApplicationWrapper, BHorizontalLayout, BNavItem, BVerticalLayout } from "@firstnoodle/bui";
 import { ref } from "vue";
-import { RouterView } from "vue-router";
+import { RouterView, useRouter } from "vue-router";
+import routes from "./router/routes";
 
+const router = useRouter();
 const asideLeftWidth = ref(256);
 const componentPages = [
   {
@@ -48,11 +50,16 @@ const componentPages = [
     ],
   },
 ];
+
+const navigateTo = (page: string) => {
+  const path = routes.children.find(route => route.name === page)?.path;
+  path && router.push(path);
+};
 </script>
 
 <template>
   <BApplicationWrapper>
-    <BVerticalLayout borders header-height-class="h-12">
+    <BVerticalLayout borders header-height-class="h-12" footer-height-class="h-12">
       <template #header>
         <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-visible>
           <template #aside-left>
@@ -78,7 +85,7 @@ const componentPages = [
       <template #main>
         <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-visible>
           <template #aside-left>
-            <BVerticalLayout scrollbar>
+            <BVerticalLayout main-classes="h-full">
               <template #main>
                 <main class="w-full px-4 pt-4 pb-32 space-y-4">
                   <div v-for="group in componentPages" :key="group.name">
@@ -91,7 +98,7 @@ const componentPages = [
                       </div>
                     </div>
 
-                    <BNavItem v-for="page in group.pages" :key="page" orientation="vertical" :to="{ name: page }" type="light" @navigate="console.log($event)">
+                    <BNavItem v-for="page in group.pages" :key="page" orientation="vertical" :href="page" :to="{ name: page }" type="light" @navigate="navigateTo">
                       {{ page }}
                     </BNavItem>
                   </div>
@@ -100,9 +107,9 @@ const componentPages = [
             </BVerticalLayout>
           </template>
           <template #main>
-            <BVerticalLayout>
+            <BVerticalLayout main-classes="h-full">
               <template #main>
-                <main class="max-w-4xl mx-auto py-12">
+                <main class="max-w-4xl mx-auto py-12 h-full">
                   <RouterView />
                 </main>
               </template>
