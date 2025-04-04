@@ -3,11 +3,11 @@ import type { ThumbDragEvent } from "./types";
 import { ref } from "vue";
 import { horizontalProperties, verticalProperties } from "./enums";
 
-const props = defineProps<{
-  vertical: boolean;
-  size: string;
-  move: number;
-}>();
+const props = defineProps({
+  vertical: Boolean,
+  size: String,
+  move: Number,
+});
 
 const emit = defineEmits(["update"]);
 

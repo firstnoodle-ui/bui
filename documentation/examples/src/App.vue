@@ -91,7 +91,7 @@ const componentPages = [
                       </div>
                     </div>
 
-                    <BNavItem v-for="page in group.pages" :key="page" orientation="vertical" :to="{ name: page }" type="light">
+                    <BNavItem v-for="page in group.pages" :key="page" orientation="vertical" :to="{ name: page }" type="light" @navigate="console.log($event)">
                       {{ page }}
                     </BNavItem>
                   </div>

@@ -90,6 +90,9 @@ importers:
       debounce:
         specifier: ^2.2.0
         version: 2.2.0
+      vue-router:
+        specifier: '4'
+        version: 4.5.0(vue@3.5.13(typescript@5.8.2))
     devDependencies:
       '@types/node':
         specifier: ^22.14.0
@@ -5709,6 +5712,11 @@ snapshots:
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.7.3)
+
+  vue-router@4.5.0(vue@3.5.13(typescript@5.8.2)):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.13(typescript@5.8.2)
 
   vue-tsc@2.2.8(typescript@5.7.3):
     dependencies:
