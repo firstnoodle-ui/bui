@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TIcon } from "../types";
+import { RouterLink } from "vue-router";
 import { BIcon } from "../";
 
 withDefaults(
@@ -17,7 +18,7 @@ withDefaults(
 </script>
 
 <template>
-  <router-link v-if="orientation === 'horizontal'" v-slot="{ href, isActive, isExactActive }" :to="to" custom>
+  <RouterLink v-if="orientation === 'horizontal'" v-slot="{ href, isActive, isExactActive }" :to="to" custom>
     <a :href="href" class="group h-full cursor-pointer py-2">
       <div
         class="h-full flex items-center space-x-2 px-4 rounded-lg bg-opacity-0 group-hover:opacity-100 group-hover:bg-opacity-100"
@@ -32,8 +33,8 @@ withDefaults(
         </span>
       </div>
     </a>
-  </router-link>
-  <router-link v-else v-slot="{ href, isActive, isExactActive }" :to="to" custom>
+  </RouterLink>
+  <RouterLink v-else v-slot="{ href, isActive, isExactActive }" :to="to" custom>
     <a :href="href" class="group h-full cursor-pointer py-2">
       <div
         class="h-10 flex items-center space-x-2 px-4 rounded-lg bg-opacity-0 group-hover:opacity-100 group-hover:bg-opacity-100"
@@ -48,5 +49,5 @@ withDefaults(
         </span>
       </div>
     </a>
-  </router-link>
+  </RouterLink>
 </template>

@@ -86,7 +86,7 @@ const update = async () => {
 };
 
 onMounted(() => {
-  const children = slots.default && slots.default();
+  const children = slots.default && slots.default({});
 
   if (children && children.length > 1) {
     return console.error(`[Popper]: The <Popper> component expects only one child element at its root. You passed ${children.length} child nodes.`);

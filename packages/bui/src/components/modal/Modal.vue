@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Slots } from "vue";
 import type { TOverlayType } from "../types";
 import { onMounted, ref, useSlots } from "vue";
 import { BButton, BFadeInUp, BScreenOverlay, BVerticalLayout, BWindowFrame } from "../";
@@ -37,7 +38,7 @@ const props = withDefaults(
 
 const emit = defineEmits(["close", "ready"]);
 
-const slots = useSlots();
+const slots: Slots = useSlots();
 const windowRef = ref<typeof BWindowFrame>();
 const show = ref(false);
 

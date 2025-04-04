@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Slots } from "vue";
 import type { TOverlayType } from "../types";
 import { onMounted, ref, useSlots } from "vue";
 import { BButton, BScreenOverlay, BVerticalLayout } from "../";
@@ -20,7 +21,7 @@ const props = withDefaults(
   },
 );
 const emit = defineEmits(["close"]);
-const slots = useSlots();
+const slots: Slots = useSlots();
 const show = ref(false);
 const panelRef = ref<HTMLDivElement>();
 const { trapFocus } = useTrapFocus(panelRef);

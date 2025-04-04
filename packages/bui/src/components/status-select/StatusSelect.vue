@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // import { ref } from "vue";
 // import StatusIndicator from "./StatusIndicator.vue";
-// import { BPopper, BPopperContent, BPopperOption } from "@/bui/components";
+// import { BPopper, BPopperContent, BPopperOption } from "@firstnoodle-ui/bui";
 // import { useNextFrame } from "@/bui/composables";
 // import { TStatusSelectStatus } from "../types.ts";
 

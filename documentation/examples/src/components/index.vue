@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { BApplicationWrapper, BHorizontalLayout, BNavItem, BVerticalLayout } from "@firstnoodle/bui";
 import { ref } from "vue";
-import { RouterView } from "vue-router";
 
 const asideLeftWidth = ref(256);
 const componentPages = [
@@ -103,7 +102,7 @@ const componentPages = [
             <BVerticalLayout>
               <template #main>
                 <main class="max-w-4xl mx-auto py-12">
-                  <RouterView />
+                  <router-view />
                 </main>
               </template>
             </BVerticalLayout>
