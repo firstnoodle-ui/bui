@@ -1,0 +1,1 @@
+import{d as s,c as t,w as a,a as e,u as n,s as o,o as _}from"./index-CgTpFX8u.js";import{a as r,_ as c}from"./ComponentPageSection.vue_vue_type_script_setup_true_lang-BgEDiR2I.js";const d=s({__name:"index",setup(i){return(f,m)=>(_(),t(r,{title:"LoadSpinner"},{default:a(()=>[e(c,{title:"Basic usage"},{default:a(()=>[e(n(o))]),_:1})]),_:1}))}});export{d as default};
