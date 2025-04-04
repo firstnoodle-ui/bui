@@ -53,5 +53,8 @@ Store the token somewhere safe, you will not be able to see it again.
 
 [bui package on github packages](https://github.com/firstnoodle-ui/bui/pkgs/npm/bui)
 
+## live documentation will  some day live on
+[live documentation](https://firstnoodle-ui.github.io/bui/)
+
 ### tips
 The more components your library has, the longer it will take to reflect changes in the playground. If it starts to slow down, consider directly importing the component from the library with a relative path or using a storybook like Histoire, which we'll cover next.
