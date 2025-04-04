@@ -1,0 +1,1 @@
+import{d as t,c as s,w as a,b as e,u as n,v as o,o as _}from"./index-CAD_WRZ-.js";import{a as r,_ as c}from"./ComponentPageSection.vue_vue_type_script_setup_true_lang-tsQBSZHD.js";const d=t({__name:"index",setup(i){return(f,m)=>(_(),s(r,{title:"LoadSpinner"},{default:a(()=>[e(c,{title:"Basic usage"},{default:a(()=>[e(n(o))]),_:1})]),_:1}))}});export{d as default};
