@@ -73,6 +73,22 @@ the current packages and versions are
 
 Then try to install the package.
 
+You can also choose to have your token in a local .env which you git ignore like:
+
+**.env**
+
+```
+TOKEN=ABSC..
+```
+
+**.npmrc in project root**
+
+```
+// Specify the GitHub registry for @firstnoodle-ui packages
+@firstnoodle-ui:registry=https://npm.pkg.github.com
+npm.pkg.github.com/:_authToken=$TOKEN
+```
+
 If everything fucks up and npm install keeps being a pain in the ass, try to clean the cache. Maybe you have to install the packages manually again before installing bui.. sorry about that.
 
 ```npm cache clean --force```
