@@ -1,25 +1,7 @@
 <script setup lang="ts">
-import type { TIcon } from "@firstnoodle-ui/bui";
-import { BIcon } from "@firstnoodle-ui/bui";
-import { onBeforeMount, ref } from "vue";
+import { BIcon, icons } from "@firstnoodle-ui/bui";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
-
-const icons = ref<TIcon[]>([]);
-
-onBeforeMount(() => {
-  // get icon names from css (from the DOM)
-  for (const stylesheet of document.styleSheets) {
-    for (const rule of stylesheet.cssRules) {
-      if (rule instanceof CSSStyleRule && rule.selectorText.includes("icon-")) {
-        icons.value.push(rule.selectorText.replace(".icon-", "").replace("::before", "") as TIcon);
-      }
-    }
-  }
-  if (icons.value.length === 0) {
-    console.warn("[BIconSelect] No icons found in document.styleSheets");
-  }
-});
 </script>
 
 <template>
