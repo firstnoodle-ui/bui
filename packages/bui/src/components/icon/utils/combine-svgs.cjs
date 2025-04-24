@@ -1,3 +1,10 @@
+/*
+* This script combines all SVG files in the "svgs" folder into a single file.
+* It removes the <svg> tag, replaces fill="black" with :fill="fillColor",
+* and wraps each SVG in a <template> tag.
+* run this script with `node PATH-TO-combine-svgs.cjs` in the terminal.
+*/
+
 const fs = require("node:fs");
 const path = require("node:path");
 
