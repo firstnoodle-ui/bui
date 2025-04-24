@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import type { TIcon } from "../types";
 
-defineProps<{ name: TIcon }>();
-const height = 16;
-const width = 16;
-const viewBox = `0 0 ${width} ${height}`;
-const fillColor = "black";
+const { height = 16, width = 16, fillColor = "black" } = defineProps<{ name: TIcon; height?: number; width?: number; fillColor?: string }>();
 </script>
 
 <template>
-  <svg :width="width" :height="height" :viewBox="viewBox" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg :width="width" :height="height" :viewBox="`0 0 ${width} ${height}`" fill="none" xmlns="http://www.w3.org/2000/svg">
     <template v-if="name === 'trash'">
       <path d="M11 13V5H10V13H11Z" :fill="fillColor" />
       <path d="M6 5V13H5V5H6Z" :fill="fillColor" />
