@@ -1,7 +1,7 @@
 <template v-else-if="name === 'admin'">
 <g clip-path="url(#clip0_1_492)">
-<mask id="mask0_1_492" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_492" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_492)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M8 3.5C6.61929 3.5 5.5 4.61929 5.5 6C5.5 7.38071 6.61929 8.5 8 8.5C9.38071 8.5 10.5 7.38071 10.5 6C10.5 4.61929 9.38071 3.5 8 3.5ZM6.5 6C6.5 5.17157 7.17157 4.5 8 4.5C8.82843 4.5 9.5 5.17157 9.5 6C9.5 6.82843 8.82843 7.5 8 7.5C7.17157 7.5 6.5 6.82843 6.5 6Z" :fill="fillColor"/>
@@ -10,7 +10,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_492">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -38,8 +38,8 @@
 
 <template v-else-if="name === 'arrow-move'">
 <g clip-path="url(#clip0_1_853)">
-<mask id="mask0_1_853" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_853" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_853)">
 <path d="M8 0.292969L10.7071 3.00008L10 3.70718L8.49989 2.20597V7.49997H13.7929L12.2929 6.00008L13 5.29297L15.7071 8.00008L13 10.7072L12.2929 10.0001L13.7929 8.49997H8.49989V13.792L10 12.293L10.7071 13.0001L8 15.7072L5.29289 13.0001L6 12.293L7.49989 13.794V8.49997H2.20689L3.70711 10.0001L3 10.7072L0.292892 8.00008L3 5.29297L3.70711 6.00008L2.20489 7.49997H7.49989V2.20597L6 3.70718L5.29289 3.00008L8 0.292969Z" :fill="fillColor"/>
@@ -47,7 +47,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_853">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -62,8 +62,8 @@
 
 <template v-else-if="name === 'arrow-trend'">
 <g clip-path="url(#clip0_1_1043)">
-<mask id="mask0_1_1043" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_1043" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_1043)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M8 1C4.13401 1 1 4.13401 1 8H0C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16C4.96894 16 2.33236 14.3141 0.975485 11.8313L0.801925 11.5137L1.14071 11.1522L5 7.29289L7 9.29289L10.2929 6H8V5H12V9H11V6.70711L7 10.7071L5 8.70711L2.03764 11.6695C3.27087 13.6689 5.48031 15 8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1Z" :fill="fillColor"/>
@@ -71,7 +71,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_1043">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -99,8 +99,8 @@
 
 <template v-else-if="name === 'bell'">
 <g clip-path="url(#clip0_1_549)">
-<mask id="mask0_1_549" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_549" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_549)">
 <path d="M8 0C8.55228 0 9 0.447715 9 1L8.99518 1.09876C11.2171 1.5403 12.8925 3.44067 12.995 5.77298L13.0004 6.04796L13.0189 6.55133L13.0429 6.91583C13.0477 6.97895 13.053 7.0432 13.0587 7.10849C13.1322 7.94645 13.2644 8.78355 13.4687 9.55973C13.8556 11.03 14.4524 12.0883 15.2572 12.5713C15.6649 12.8159 15.5278 13.4181 15.0912 13.4924L15 13.5L10.9584 13.5007C10.7201 14.9192 9.48625 16 8 16C6.51374 16 5.27992 14.9192 5.04159 13.5007L0.999995 13.5C0.492884 13.5 0.307903 12.8322 0.742747 12.5713C1.54762 12.0883 2.14442 11.03 2.53133 9.55973C2.73559 8.78355 2.86777 7.94645 2.94127 7.10849C2.95845 6.91261 2.97154 6.72616 2.98107 6.55133L2.9962 6.19768L3.00459 5.78201C3.10319 3.44571 4.77981 1.54106 7.00489 1.0976L7 1C7 0.447715 7.44771 0 8 0ZM9.935 13.5H6.064L6.08468 13.5776C6.30315 14.303 6.92247 14.8548 7.68519 14.9754L7.85074 14.9945L8 15C8.84725 15 9.57146 14.4732 9.8629 13.7292L9.91532 13.5776L9.935 13.5ZM8 2C5.84353 2 4.10806 3.67013 4.00486 5.7991L3.99207 6.33563C3.98229 6.5957 3.96473 6.8848 3.93745 7.19587C3.85935 8.08619 3.71864 8.97735 3.49841 9.81423C3.26467 10.7024 2.95757 11.473 2.56352 12.0987L2.41164 12.3265L2.282 12.499H13.717L13.5884 12.3265C13.2198 11.8047 12.9208 11.1664 12.682 10.4307L12.5833 10.1095L12.5016 9.81423C12.2814 8.97735 12.1407 8.08619 12.0626 7.19587C12.0444 6.98849 12.0305 6.79088 12.0204 6.60512L12.0079 6.33563L11.9951 5.7991C11.8919 3.67013 10.1565 2 8 2Z" :fill="fillColor"/>
@@ -108,7 +108,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_549">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -125,8 +125,8 @@
 
 <template v-else-if="name === 'building'">
 <g clip-path="url(#clip0_1_561)">
-<mask id="mask0_1_561" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_561" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_561)">
 <path d="M14 0V15H16V16H0V15H2V0H14ZM13 0.999H3V14.999H5V13H4V12H12V13H11V14.999H13V0.999ZM7.5 13H6V14.999H7.5V13ZM10 13H8.5V14.999H10V13ZM9 9V10H7V9H9ZM6 9V10H4V9H6ZM12 9V10H10V9H12ZM9 6V7H7V6H9ZM6 6V7H4V6H6ZM12 6V7H10V6H12ZM9 3V4H7V3H9ZM6 3V4H4V3H6ZM12 3V4H10V3H12Z" :fill="fillColor"/>
@@ -134,7 +134,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_561">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -150,8 +150,8 @@
 
 <template v-else-if="name === 'calendar'">
 <g clip-path="url(#clip0_1_574)">
-<mask id="mask0_1_574" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_574" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_574)">
 <path d="M5 9V10H3V9H5Z" :fill="fillColor"/>
@@ -165,7 +165,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_574">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -182,8 +182,8 @@
 
 <template v-else-if="name === 'check-circled'">
 <g clip-path="url(#clip0_1_600)">
-<mask id="mask0_1_600" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_600" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_600)">
 <path d="M12.0035 5.85353L11.2963 5.14642L7.003 9.43898L4.80783 7.1503L4.09305 7.84965L6.99612 10.8609L12.0035 5.85353Z" :fill="fillColor"/>
@@ -192,15 +192,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_600">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'check-outline'">
 <g clip-path="url(#clip0_1_592)">
-<mask id="mask0_1_592" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_592" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_592)">
 <path d="M15.6971 5.11714L6.71713 14.0971L0.302917 7.68282L2.8686 5.11714L6.71713 8.96566L13.1314 2.55145L15.6971 5.11714ZM14.2826 5.11658L13.1315 3.96541L6.71713 10.3799L2.8685 6.53079L1.71733 7.68196L6.71728 12.6819L14.2826 5.11658Z" :fill="fillColor"/>
@@ -208,7 +208,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_592">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -262,8 +262,8 @@
 
 <template v-else-if="name === 'conclusion'">
 <g clip-path="url(#clip0_1_623)">
-<mask id="mask0_1_623" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_623" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_623)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3808 0.939693L11.4411 1.28171L13.8352 7.85957L14.7749 7.51755L15.1169 8.45724L7.59938 11.1934L7.25736 10.2537L8.19704 9.91169L7.17098 7.09261L0.593119 9.48675L0.251099 8.54706L6.82896 6.15292L5.80289 3.33383L4.8632 3.67585L4.52118 2.73616L12.0387 0L12.3808 0.939693ZM9.13673 9.56967L12.8955 8.20159L10.5014 1.62374L6.74259 2.99182L9.13673 9.56967Z" :fill="fillColor"/>
@@ -273,15 +273,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_623">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'copy'">
 <g clip-path="url(#clip0_1_631)">
-<mask id="mask0_1_631" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_631" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_631)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 12V0H0V12H12ZM1 1H11V11H1V1Z" :fill="fillColor"/>
@@ -290,15 +290,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_631">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'crosshair'">
 <g clip-path="url(#clip0_1_638)">
-<mask id="mask0_1_638" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_638" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_638)">
 <path d="M8.5 0L8.50033 1.51897C11.6916 1.7619 14.2387 4.30926 14.4811 7.50067L16 7.5V8.5L14.481 8.50033C14.2381 11.6913 11.6913 14.2381 8.50033 14.481L8.5 16H7.5L7.50067 14.4811C4.30926 14.2387 1.7619 11.6916 1.51897 8.50033L0 8.5V7.5L1.51889 7.50067C1.76136 4.30893 4.30893 1.76136 7.50067 1.51889L7.5 0H8.5ZM8.50061 2.52239L8.5 4H7.5L7.50039 2.52239C4.86151 2.76 2.76 4.86151 2.52239 7.50039L4 7.5V8.5L2.52239 8.50061C2.76053 11.139 4.86184 13.24 7.50039 13.4776L7.5 12H8.5L8.50061 13.4776C11.1387 13.2395 13.2395 11.1387 13.4776 8.50061L12 8.5V7.5L13.4776 7.50039C13.247 4.93945 11.261 2.8846 8.73199 2.54828L8.50061 2.52239Z" :fill="fillColor"/>
@@ -306,7 +306,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_638">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -352,8 +352,8 @@
 
 <template v-else-if="name === 'edit'">
 <g clip-path="url(#clip0_1_673)">
-<mask id="mask0_1_673" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_673" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_673)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2073 4.49688L11.4999 0.793091L0 12.2899V15.997H3.70711L4.498 15.2051L4.50355 15.2106L5.21066 14.5035L5.205 14.4981L12.498 7.20509L12.5036 7.21064L13.2107 6.50353L13.205 6.49809L15.2073 4.49688ZM1 12.703L1.497 12.2041L3.79 14.4971L3.292 14.997H1V12.703ZM2.204 11.4971L9.498 4.20509L11.79 6.49709L4.497 13.7901L2.204 11.4971ZM10.205 3.49809L11.5 2.20598L13.792 4.49698L12.497 5.79009L10.205 3.49809Z" :fill="fillColor"/>
@@ -362,7 +362,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_673">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -377,8 +377,8 @@
 
 <template v-else-if="name === 'export-document'">
 <g clip-path="url(#clip0_1_684)">
-<mask id="mask0_1_684" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_684" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_684)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M15 5.5H10.5V1H5V3H4V0H11L16 5V16H4V14H5V15H15V5.5ZM11.5 1.91421L14.0858 4.5H11.5V1.91421Z" :fill="fillColor"/>
@@ -387,7 +387,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_684">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -410,8 +410,8 @@
 
 <template v-else-if="name === 'folder'">
 <g clip-path="url(#clip0_1_720)">
-<mask id="mask0_1_720" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_720" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_720)">
 <path d="M16 4V15H0V1H7L9 4H16ZM1 5V14H15V5H1ZM6.464 2H1V4H7.797L6.464 2Z" :fill="fillColor"/>
@@ -419,7 +419,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_720">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -448,8 +448,8 @@
 
 <template v-else-if="name === 'handshake'">
 <g clip-path="url(#clip0_1_738)">
-<mask id="mask0_1_738" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_738" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_738)">
 <path d="M5.29289 3C5.81321 3 6.31459 3.18373 6.71029 3.51526L6.75195 3.55267C7.43792 3.19371 8.2079 3 9 3C10.2949 3 11.5631 3.35381 12.6685 4.02027L12.9415 4.19338L14.151 4.999L16 5V5.99194L13.8486 6L12.3868 5.02543C11.3838 4.3568 10.2054 4 9 4C7.95144 4 6.95175 4.42764 6.22867 5.17818L6.07805 5.34391L5.53008 5.98321C5.05094 6.5422 5.08295 7.37585 5.60355 7.89645C6.06564 8.35853 6.79569 8.38934 7.29351 7.98886L7.39645 7.89645L8.64645 6.64645C8.84171 6.45118 9.15829 6.45118 9.35355 6.64645C9.52712 6.82001 9.5464 7.08944 9.41141 7.28431L9.35355 7.35355L9.207 7.5L12.707 11H16V12L12.8042 12.0019C12.171 13.1242 11.1946 13.5379 9.99085 13.2141L9.843 13.17L9.81437 13.2569C9.32607 14.5557 8.18459 14.8519 6.62707 14.1248L6.583 14.102L6.48258 14.1815C5.75234 14.7128 4.96369 14.6431 4.26819 13.9772L1.43934 11.1464C1.36433 11.0714 1.26793 11.0227 1.16448 11.0062L1.08579 11H0V10H1.08579C1.43388 10 1.7695 10.121 2.03642 10.3397L2.14645 10.4393L4.86614 13.1595C5.32922 13.6575 5.66184 13.6575 6.13711 13.156C6.29317 12.9914 6.54053 12.9524 6.73964 13.0612C8.18281 13.8492 8.79139 13.6464 9.00751 12.4137C9.06439 12.0892 9.41395 11.9075 9.71219 12.0473C10.6912 12.5061 11.3446 12.4005 11.822 11.6931L11.885 11.592L8.499 8.207L8.10355 8.60355C7.21794 9.48917 5.78206 9.48917 4.89645 8.60355C4.04874 7.75585 3.95873 6.42268 4.65973 5.47203L4.77082 5.33242L5.31879 4.69312C5.48818 4.49549 5.6719 4.31329 5.86775 4.14753C5.73328 4.07262 5.58394 4.02528 5.4291 4.0077L5.29289 4H4.75C4.1035 4 3.4678 4.15618 2.8965 4.4537L2.68538 4.57187L1.13849 5.5H0V4.5L0.862 4.499L2.17089 3.71437C2.87206 3.29367 3.66427 3.05159 4.47804 3.00738L4.75 3H5.29289Z" :fill="fillColor"/>
@@ -457,7 +457,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_738">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -510,8 +510,8 @@
 
 <template v-else-if="name === 'information'">
 <g clip-path="url(#clip0_1_778)">
-<mask id="mask0_1_778" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_778" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_778)">
 <path d="M7.5 5V4H8.5V5H7.5Z" :fill="fillColor"/>
@@ -521,7 +521,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_778">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -556,8 +556,8 @@
 
 <template v-else-if="name === 'lightning'">
 <g clip-path="url(#clip0_1_808)">
-<mask id="mask0_1_808" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_808" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_808)">
 <path d="M9 0V6H13L7 16V10H3L9 0ZM7.999 3.611L4.765 9H8V12.389L11.233 7H8L7.999 3.611Z" :fill="fillColor"/>
@@ -565,7 +565,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_808">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -606,8 +606,8 @@
 
 <template v-else-if="name === 'magnifying-glass'">
 <g clip-path="url(#clip0_1_833)">
-<mask id="mask0_1_833" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_833" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_833)">
 <path d="M9.50002 0C13.0898 0 16 2.91015 16 6.5C16 10.0899 13.0898 13 9.50002 13C7.88562 13 6.40869 12.4114 5.27207 11.4372L1.00001 15.7071L0.292908 15L4.56366 10.7289C3.58891 9.59219 3.00002 8.11487 3.00002 6.5C3.00002 2.91015 5.91017 0 9.50002 0ZM9.50002 1C6.46245 1 4.00002 3.46243 4.00002 6.5C4.00002 9.53757 6.46245 12 9.50002 12C12.5376 12 15 9.53757 15 6.5C15 3.46243 12.5376 1 9.50002 1Z" :fill="fillColor"/>
@@ -615,7 +615,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_833">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -630,8 +630,8 @@
 
 <template v-else-if="name === 'message'">
 <g clip-path="url(#clip0_1_843)">
-<mask id="mask0_1_843" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_843" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_843)">
 <path d="M16 0V11H9L4 16V11H0V0H16ZM0.999 0.999V10H5L4.999 13.585L8.58579 10H14.999V1L0.999 0.999Z" :fill="fillColor"/>
@@ -639,7 +639,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_843">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -659,8 +659,8 @@
 
 <template v-else-if="name === 'news'">
 <g clip-path="url(#clip0_1_862)">
-<mask id="mask0_1_862" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_862" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_862)">
 <path d="M16 0V14C16 15.0544 15.1841 15.9182 14.1493 15.9945L14 16H2L1.85074 15.9945C0.867621 15.922 0.0821352 15.1388 0.00604447 14.1567L0 14V5H3V0H16ZM15 1H4V14L3.98871 14.2134L3.96401 14.3795L3.95976 14.4009C3.93696 14.5132 3.90468 14.6222 3.86383 14.7268L3.82605 14.8172L3.75015 14.9687L3.731 15H14C14.4734 15 14.8699 14.6711 14.9736 14.2293L14.9933 14.1166L15 14V1ZM3 6H1V14C1 14.4734 1.32893 14.8699 1.77071 14.9736L1.88338 14.9933L2 15C2.51284 15 2.93551 14.614 2.99327 14.1166L3 14V6ZM13 12V13H6V12H13ZM13 9V10H6V9H13ZM10 3V7H6V3H10ZM13 6V7H11V6H13ZM9 4H7V6H9V4ZM13 3V4H11V3H13Z" :fill="fillColor"/>
@@ -668,7 +668,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_862">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -683,8 +683,8 @@
 
 <template v-else-if="name === 'open-link'">
 <g clip-path="url(#clip0_1_874)">
-<mask id="mask0_1_874" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_874" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_874)">
 <path d="M15 6H16V0H9.99997V1H14.2915L7.14642 8.14645L7.85353 8.85355L14.9995 1.707L15 6Z" :fill="fillColor"/>
@@ -693,7 +693,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_874">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -714,8 +714,8 @@
 
 <template v-else-if="name === 'paper-plane'">
 <g clip-path="url(#clip0_1_891)">
-<mask id="mask0_1_891" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_891" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_891)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M15.8342 1.1281C15.8821 1.17116 15.9219 1.22357 15.9505 1.28299C15.9548 1.29195 15.9588 1.30101 15.9626 1.31016C15.9749 1.3401 15.9841 1.37101 15.9904 1.40244C16.003 1.46569 16.003 1.52928 15.9918 1.59019C15.9807 1.65089 15.9583 1.71013 15.9242 1.76463C15.9197 1.77192 15.915 1.7791 15.91 1.78615L7.46212 14.0831C7.35322 14.2417 7.16305 14.3237 6.97302 14.2941C6.783 14.2645 6.62679 14.1285 6.57128 13.9443L4.54999 7.23958L0.113026 1.81662C-0.00931144 1.66709 -0.0345612 1.46047 0.0481707 1.28588C0.130902 1.1113 0.30681 1 0.500005 1H15.4998C15.5831 1 15.6628 1.02061 15.7329 1.05753C15.769 1.07652 15.8031 1.1001 15.8342 1.1281ZM7.22794 12.658L5.59796 7.25124L13.9466 2.87814L7.22794 12.658ZM5.12895 6.36801L1.55513 2H13.4679L5.12895 6.36801Z" :fill="fillColor"/>
@@ -723,7 +723,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_891">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -739,8 +739,8 @@
 
 <template v-else-if="name === 'phase'">
 <g clip-path="url(#clip0_1_900)">
-<mask id="mask0_1_900" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_900" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_900)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M16 8C16 12.4183 12.4183 16 8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8ZM7.5 14.9824V1.01758C3.86736 1.27396 1 4.30212 1 8C1 11.6979 3.86736 14.726 7.5 14.9824ZM15 8C15 11.6979 12.1326 14.726 8.5 14.9824V1.01758C12.1326 1.27396 15 4.30212 15 8Z" :fill="fillColor"/>
@@ -748,7 +748,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_900">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -776,8 +776,8 @@
 
 <template v-else-if="name === 'popup'">
 <g clip-path="url(#clip0_1_915)">
-<mask id="mask0_1_915" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_915" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_915)">
 <path d="M12 9V4H7.00001V5L10.2935 4.999L5.64645 9.64645L6.35356 10.3536L10.9995 5.707L11 9H12Z" :fill="fillColor"/>
@@ -786,15 +786,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_915">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'question'">
 <g clip-path="url(#clip0_1_922)">
-<mask id="mask0_1_922" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_922" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_922)">
 <path d="M8 14C8.55228 14 9 13.5523 9 13C9 12.4477 8.55228 12 8 12C7.44772 12 7 12.4477 7 13C7 13.5523 7.44772 14 8 14Z" :fill="fillColor"/>
@@ -804,7 +804,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_922">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -843,8 +843,8 @@
 
 <template v-else-if="name === 'settings'">
 <g clip-path="url(#clip0_1_614)">
-<mask id="mask0_1_614" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_614" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_614)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M5 8C5 6.34315 6.34315 5 8 5C9.65685 5 11 6.34315 11 8C11 9.65685 9.65685 11 8 11C6.34315 11 5 9.65685 5 8ZM10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10C9.10457 10 10 9.10457 10 8Z" :fill="fillColor"/>
@@ -853,7 +853,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_614">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -865,7 +865,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_948">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -881,8 +881,8 @@
 
 <template v-else-if="name === 'sort-down'">
 <g clip-path="url(#clip0_1_956)">
-<mask id="mask0_1_956" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_956" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_956)">
 <path d="M10 3V2H0V3H10Z" :fill="fillColor"/>
@@ -895,15 +895,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_956">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'sort-up'">
 <g clip-path="url(#clip0_1_967)">
-<mask id="mask0_1_967" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_967" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_967)">
 <path d="M2 1V2H0V1H2Z" :fill="fillColor"/>
@@ -916,7 +916,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_967">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -935,8 +935,8 @@
 
 <template v-else-if="name === 'star-solid'">
 <g clip-path="url(#clip0_1_986)">
-<mask id="mask0_1_986" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_986" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_986)">
 <path d="M8.76085 0.853568C8.52137 0.11652 7.47864 0.116518 7.23916 0.853568L5.72836 5.50332H0.83933C0.0643515 5.50332 -0.25787 6.49501 0.369102 6.95053L4.32441 9.82423L2.81362 14.474C2.57413 15.211 3.41772 15.8239 4.04469 15.3684L8 12.4947L11.9553 15.3684C12.5823 15.8239 13.4259 15.211 13.1864 14.474L11.6756 9.82423L15.6309 6.95053C16.2579 6.49501 15.9357 5.50332 15.1607 5.50332H10.2716L8.76085 0.853568Z" :fill="fillColor"/>
@@ -944,15 +944,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_986">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'star'">
 <g clip-path="url(#clip0_1_992)">
-<mask id="mask0_1_992" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_992" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_992)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M7.23916 0.853568C7.47865 0.116518 8.52137 0.11652 8.76085 0.853568L10.2716 5.50332H15.1607C15.9357 5.50332 16.2579 6.49501 15.6309 6.95053L11.6756 9.82423L13.1864 14.474C13.4259 15.211 12.5823 15.8239 11.9553 15.3684L8.00001 12.4947L4.0447 15.3684C3.41772 15.8239 2.57414 15.211 2.81362 14.474L4.32442 9.82423L0.369102 6.95053C-0.25787 6.49501 0.0643516 5.50332 0.83933 5.50332H5.72837L7.23916 0.853568ZM8.00001 1.74799L6.63452 5.95053C6.52742 6.28015 6.22026 6.50332 5.87368 6.50332H1.45487L5.02976 9.10063C5.31015 9.30434 5.42748 9.66544 5.32038 9.99505L3.95489 14.1976L7.52978 11.6003C7.81017 11.3966 8.18985 11.3966 8.47024 11.6003L12.0451 14.1976L10.6796 9.99505C10.5725 9.66544 10.6899 9.30434 10.9702 9.10063L14.5451 6.50332H10.1263C9.77976 6.50332 9.47259 6.28015 9.3655 5.95053L8.00001 1.74799Z" :fill="fillColor"/>
@@ -960,7 +960,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_992">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -977,8 +977,8 @@
 
 <template v-else-if="name === 'sun'">
 <g clip-path="url(#clip0_1_1004)">
-<mask id="mask0_1_1004" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_1004" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_1004)">
 <path d="M7.5 2V0H8.5V2H7.5Z" :fill="fillColor"/>
@@ -994,7 +994,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_1004">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -1005,8 +1005,8 @@
 
 <template v-else-if="name === 'tag'">
 <g clip-path="url(#clip0_1_1020)">
-<mask id="mask0_1_1020" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_1020" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_1020)">
 <path d="M16.21 0V6.94975L7.22474 15.935L0.274994 8.98528L9.26027 0H16.21ZM15.211 0.999H9.67502L1.68902 8.985L7.22502 14.521L15.211 6.535V0.999ZM12 2C13.1046 2 14 2.89543 14 4C14 5.10457 13.1046 6 12 6C10.8954 6 9.99999 5.10457 9.99999 4C9.99999 2.89543 10.8954 2 12 2ZM12 3C11.4477 3 11 3.44772 11 4C11 4.55228 11.4477 5 12 5C12.5523 5 13 4.55228 13 4C13 3.44772 12.5523 3 12 3Z" :fill="fillColor"/>
@@ -1014,15 +1014,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_1020">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'team'">
 <g clip-path="url(#clip0_1_1026)">
-<mask id="mask0_1_1026" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_1026" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_1026)">
 <path d="M12 10C14.1614 10 15.8922 11.6993 15.9952 13.8494L16 14.0523V14.74C16 15.3912 15.5054 15.9288 14.8713 15.9935L14.7428 16H6.25723C5.60616 16 5.07086 15.5031 5.00649 14.8686L5 14.74V14.0523C5 11.8071 6.77109 10 9 10C9.27614 10 9.5 10.2239 9.5 10.5C9.5 10.7761 9.27614 11 9 11C7.38766 11 6.09529 12.2599 6.00504 13.8718L6 14.0523V14.74C6 14.8629 6.08528 14.9661 6.19853 14.9931L6.25723 15H14.7428C14.8638 15 14.9663 14.9143 14.9932 14.7995L15 14.74V14.0523C15 12.355 13.6721 11 12 11C11.7239 11 11.5 10.7761 11.5 10.5C11.5 10.2239 11.7239 10 12 10ZM4 6C4.27614 6 4.5 6.22386 4.5 6.5C4.5 6.77614 4.27614 7 4 7C2.32794 7 1 8.35497 1 10.0523C1 10.1752 1.08528 10.2784 1.19853 10.3054L1.25723 10.3123H5.06104C5.33718 10.3123 5.56104 10.5362 5.56104 10.8123C5.56104 11.0578 5.38416 11.2619 5.15091 11.3042L5.06104 11.3123H1.25723C0.562755 11.3123 0 10.7469 0 10.0523C0 7.80715 1.77109 6 4 6ZM10.5 4C12.1569 4 13.5 5.34315 13.5 7C13.5 8.65685 12.1569 10 10.5 10C8.84313 10 7.5 8.65685 7.5 7C7.5 5.34315 8.84313 4 10.5 4ZM10.5 5C9.39542 5 8.5 5.89543 8.5 7C8.5 8.10457 9.39542 9 10.5 9C11.6046 9 12.5 8.10457 12.5 7C12.5 5.89543 11.6046 5 10.5 5ZM6 6C6.29398 6 6.58346 6.03145 6.86497 6.09332C7.13468 6.1526 7.30526 6.41929 7.24598 6.689C7.1867 6.9587 6.92001 7.12929 6.65031 7.07001C6.43929 7.02363 6.22178 7 6 7C5.72386 7 5.5 6.77614 5.5 6.5C5.5 6.22386 5.72386 6 6 6ZM5 1C6.38072 1 7.5 2.11929 7.5 3.5C7.5 4.88071 6.38072 6 5 6C3.61928 6 2.5 4.88071 2.5 3.5C2.5 2.11929 3.61928 1 5 1ZM5 2C4.17157 2 3.5 2.67157 3.5 3.5C3.5 4.32843 4.17157 5 5 5C5.82843 5 6.5 4.32843 6.5 3.5C6.5 2.67157 5.82843 2 5 2Z" :fill="fillColor"/>
@@ -1030,15 +1030,15 @@
 </g>
 <defs>
 <clipPath id="clip0_1_1026">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
 
 <template v-else-if="name === 'telescope'">
 <g clip-path="url(#clip0_1_1032)">
-<mask id="mask0_1_1032" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_1032" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_1032)">
 <path d="M13.8545 0.115723L15.9067 5.75388L9.41795 8.11525C9.47132 8.29552 9.49997 8.48641 9.49997 8.68399C9.49997 9.42163 9.10064 10.066 8.50637 10.4127L10.6548 15.5167L9.73318 15.9048L7.53406 10.6827L7.46567 10.6837L5.26676 15.9048L4.34512 15.5167L6.49387 10.4129C5.89944 10.0662 5.49997 9.42175 5.49997 8.68399C5.49997 8.58006 5.5079 8.47799 5.52318 8.37834L1.45414 9.85898L0.0860596 6.10021L4.77006 4.39472L4.45758 3.53592L13.8545 0.115723ZM7.49997 7.68399C6.94768 7.68399 6.49997 8.13171 6.49997 8.68399C6.49997 9.23628 6.94768 9.68399 7.49997 9.68399C8.05225 9.68399 8.49997 9.23628 8.49997 8.68399C8.49997 8.13171 8.05225 7.68399 7.49997 7.68399ZM5.11206 5.33472L1.36723 6.69745L2.05127 8.57683L5.79606 7.21372L5.11206 5.33472ZM13.2564 1.39659L5.73884 4.13275L6.72397 6.84011C6.96258 6.73957 7.22479 6.68399 7.49997 6.68399C8.03847 6.68399 8.52727 6.89682 8.88683 7.24294L14.6245 5.15536L13.2564 1.39659Z" :fill="fillColor"/>
@@ -1046,7 +1046,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_1032">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -1077,8 +1077,8 @@
 
 <template v-else-if="name === 'user'">
 <g clip-path="url(#clip0_1_1061)">
-<mask id="mask0_1_1061" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_1061" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_1061)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M4 4.5C4 2.02847 5.77489 0 8 0C10.2251 0 12 2.02847 12 4.5C12 6.97153 10.2251 9 8 9C5.77489 9 4 6.97153 4 4.5ZM11 4.5C11 2.55326 9.64091 1 8 1C6.35909 1 5 2.55326 5 4.5C5 6.44674 6.35909 8 8 8C9.64091 8 11 6.44674 11 4.5Z" :fill="fillColor"/>
@@ -1087,7 +1087,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_1061">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -1102,8 +1102,8 @@
 
 <template v-else-if="name === 'visibility-off-alt'">
 <g clip-path="url(#clip0_1_693)">
-<mask id="mask0_1_693" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_693" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_693)">
 <path d="M14.1873 3.1816C14.3939 2.99839 14.4129 2.68238 14.2297 2.47577C14.0465 2.26916 13.7305 2.25019 13.5239 2.4334L1.81263 12.8183C1.60602 13.0016 1.58706 13.3176 1.77027 13.5242C1.95348 13.7308 2.26949 13.7498 2.4761 13.5666L14.1873 3.1816Z" :fill="fillColor"/>
@@ -1115,7 +1115,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_693">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>
@@ -1126,8 +1126,8 @@
 
 <template v-else-if="name === 'visibility-on'">
 <g clip-path="url(#clip0_1_703)">
-<mask id="mask0_1_703" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16">
-<path d="M16 0H0V16H16V0Z" fill="white"/>
+<mask id="mask0_1_703" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="width" :height="height">
+<path d="M16 0H0V16H16V0Z" :fill="bgColor"/>
 </mask>
 <g mask="url(#mask0_1_703)">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M5 8C5 6.34315 6.34315 5 8 5C9.65685 5 11 6.34315 11 8C11 9.65685 9.65685 11 8 11C6.34315 11 5 9.65685 5 8ZM10 8C10 6.89543 9.10457 6 8 6C6.89543 6 6 6.89543 6 8C6 9.10457 6.89543 10 8 10C9.10457 10 10 9.10457 10 8Z" :fill="fillColor"/>
@@ -1136,7 +1136,7 @@
 </g>
 <defs>
 <clipPath id="clip0_1_703">
-<rect width="16" height="16" fill="white"/>
+<rect :width="width" :height="height" :fill="bgColor"/>
 </clipPath>
 </defs>
 </template>

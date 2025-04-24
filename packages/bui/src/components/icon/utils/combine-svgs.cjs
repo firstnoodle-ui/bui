@@ -12,7 +12,7 @@ const path = require("node:path");
 const svgsFolder = path.join(__dirname, "svgs");
 
 // Output file path (inside the svgs folder)
-const outputFile = path.join(svgsFolder, "combined-svgs.txt");
+const outputFile = path.join(__dirname, "combined-svgs.txt");
 
 // Read all files in the svgs folder
 fs.readdir(svgsFolder, (err, files) => {
@@ -37,6 +37,9 @@ fs.readdir(svgsFolder, (err, files) => {
       .replace(/<svg[^>]*>/, "") // Remove opening <svg> tag
       .replace(/<\/svg>/, "") // Remove closing </svg> tag
       .replace(/fill="black"/g, ":fill=\"fillColor\"") // Replace fill="black" with :fill="fillColor"
+      .replace(/fill="white"/g, ":fill=\"bgColor\"") // Replace fill="black" with :fill="fillColor"
+      .replace(/height="16"/g, ":height=\"height\"")
+      .replace(/width="16"/g, ":width=\"width\"")
       .trim();
 
     return `<template v-else-if="name === '${fileName}'">\n${svgContent}\n</template>`;
