@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Library",
+      "type": "shell",
+      "command": "pnpm run start-lib",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Start Documentation",
+      "type": "shell",
+      "command": "pnpm run start-docs",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "Start Lib + Docs",
+      "dependsOn": ["Start Library", "Start Documentation"],
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}
