@@ -102,7 +102,7 @@ onBeforeUnmount(() => {
             @click="emit('toggle', id)"
           >
             <BIcon
-              :name="alignment === 'right' ? 'angle-right' : 'angle-up'"
+              :name="alignment === 'right' ? 'chevron-right' : 'chevron-up'"
               class="transform transition-all duration-100"
               :class="{ [alignment === 'right' ? 'rotate-90' : 'rotate-180']: open }"
             />

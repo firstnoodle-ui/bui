@@ -40,7 +40,7 @@ const onUpdateTargets = (targets: HTMLElement[]) => {
     <template #default>
       <button class="w-full flex items-center justify-between gap-2 px-3 h-10 bg-light text-action hover:bg-actionLightHover">
         <span>{{ option.label }}</span>
-        <BIcon name="angle-right" class="text-xs text-tertiary" />
+        <BIcon name="chevron-right" class="text-xs text-tertiary" />
       </button>
     </template>
     <template #content>
