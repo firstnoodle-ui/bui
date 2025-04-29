@@ -89,7 +89,7 @@ const onToggleSameWidthAsTrigger = () => {
             label="Select a number"
             tooltip="Click and select"
             :disabled="triggerDisabled"
-            :icon-after="visible ? 'angle-up' : 'angle-down'"
+            :icon-after="visible ? 'chevron-up' : 'chevron-down'"
             :soft-focus="visible"
           />
         </template>

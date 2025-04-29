@@ -12,7 +12,7 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
       </div>
       <div class="flex-1 flex items-center space-x-4">
         <BButton bordered rounded icon="trash" type="primary" />
-        <BButton small bordered rounded icon="angle-right" />
+        <BButton small bordered rounded icon="chevron-right" />
       </div>
       <div class="flex-1 flex items-center space-x-4">
         <BButton rounded icon="link" type="primary" />

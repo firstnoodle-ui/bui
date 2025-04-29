@@ -9,17 +9,17 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
       <div class="flex-1 flex items-center space-x-4">
         <BButton icon="envelope" label="Email" />
         <BButton icon="box" type="primary" />
-        <BButton icon-after="angle-down" label="Errors" type="error" />
+        <BButton icon-after="chevron-down" label="Errors" type="error" />
       </div>
       <div class="flex-1 flex items-center space-x-4">
         <BButton bordered icon="envelope" label="Email" />
         <BButton bordered icon="download" type="primary" />
-        <BButton bordered icon-after="angle-down" label="Errors" type="error" />
+        <BButton bordered icon-after="chevron-down" label="Errors" type="error" />
       </div>
       <div class="flex-1 flex items-center space-x-4">
         <BButton solid icon="envelope" label="Email" />
         <BButton solid icon="download" type="primary" />
-        <BButton solid icon-after="angle-down" label="Errors" type="error" />
+        <BButton solid icon-after="chevron-down" label="Errors" type="error" />
       </div>
     </section>
   </ComponentPageSection>

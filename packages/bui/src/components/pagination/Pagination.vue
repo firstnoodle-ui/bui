@@ -49,7 +49,7 @@ const onPageSelect = (pageOption: TPopSelectOption) => {
   <nav class="relative z-0 inline-flex">
     <BTooltip text="Previous page" :delay="500">
       <button rel="prev" aria-label="previous page" class="rounded-l-lg" :class="[arrowClasses]" @click="onChange(-1)">
-        <BIcon name="angle-left" />
+        <BIcon name="chevron-left" />
       </button>
     </BTooltip>
     <BPopSelect same-width-as-trigger :value="currentPage" :options="pageOptions" @select="onPageSelect">
@@ -65,7 +65,7 @@ const onPageSelect = (pageOption: TPopSelectOption) => {
     </BPopSelect>
     <BTooltip text="Next page" :delay="500">
       <button rel="next" aria-label="next page" class="-ml-px rounded-r-lg" :class="[arrowClasses]" @click="onChange(1)">
-        <BIcon name="angle-right" />
+        <BIcon name="chevron-right" />
       </button>
     </BTooltip>
   </nav>

@@ -33,22 +33,22 @@
 .icon-admin:before {
   content: "\e902";
 }
-.icon-angle-double-left:before {
+.icon-chevron-double-left:before {
   content: "\e903";
 }
-.icon-angle-double-right:before {
+.icon-chevron-double-right:before {
   content: "\e904";
 }
-.icon-angle-down:before {
+.icon-chevron-down:before {
   content: "\e905";
 }
-.icon-angle-left:before {
+.icon-chevron-left:before {
   content: "\e906";
 }
-.icon-angle-right:before {
+.icon-chevron-right:before {
   content: "\e907";
 }
-.icon-angle-up:before {
+.icon-chevron-up:before {
   content: "\e908";
 }
 .icon-arrow-down:before {
