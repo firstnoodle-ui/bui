@@ -92,7 +92,7 @@ const buttonClasses = computed(() => {
 
   props.bordered && !props.solid ? result.push("border-default") : result.push("border-transparent");
 
-  props.disabled ? result.push("opacity-75 cursor-not-allowed") : result.push("cursor-pointer active:scale-[0.98]");
+  props.disabled ? result.push("opacity-75 cursor-not-allowed") : result.push("cursor-pointer");
 
   props.fullwidth && result.push("w-full");
 
