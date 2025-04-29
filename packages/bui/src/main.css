@@ -1,1 +1,66 @@
 @import "tailwindcss";
+
+body {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  height: 100vh;
+}
+
+
+/* COMMON FOR BOTH THEMES */
+@theme {
+    /* BG */
+    --bg-action: var(--color-blue-500);
+    --bg-action-hover: var(--color-blue-600);
+    --bg-action-active: var(--color-blue-700);
+    --bg-destructive: var(--color-red-500);
+    --bg-destructive-hover: var(--color-red-600);
+    --bg-destructive-active: var(--color-red-700);
+}
+
+
+:root[color-theme="light"] {
+    /* BG */
+    --bg-default: var(--color-white);
+    --bg-medium: var(--color-stone-100);
+    --bg-heavy: var(--color-stone-200);
+
+    /* BORDER */
+    --border-default: var(--color-stone-300);
+    --border-strong: var(--color-stone-400);
+    --border-weak: var(--color-stone-200);
+
+    /* TEXT */
+    --text-primary: var(--color-slate-900);
+    --text-secondary: var(--color-slate-700);
+    --text-tertiary: var(--color-slate-500);
+    --text-muted: var(--color-slate-300);
+}
+
+
+:root[color-theme="dark"] {
+    /* BG */
+    --bg-default: #212121;
+    --bg-medium: #262626;
+    --bg-heavy: #333333;
+
+    /* BORDER */
+    --border-default: var(--color-neutral-700);
+    --border-strong: var(--color-neutral-600);
+    --border-weak: #2E2E2E;
+
+    /* TEXT */
+    --text-primary: var(--color-stone-100);
+    --text-secondary: var(--color-stone-300);
+    --text-tertiary: var(--color-stone-400);
+    --text-muted: var(--color-500);
+}
