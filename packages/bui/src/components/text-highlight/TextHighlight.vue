@@ -24,7 +24,7 @@ const segments = ref<string[]>([]);
 const highlightColorClasses = computed(() => {
   if (!props.backgroundColor) return "";
 
-  const base = "ring ring-2 shadow-sm ";
+  const base = "ring-2 shadow-sm ";
   switch (props.backgroundColor) {
     case "yellow":
       return `${base}bg-golden-sun-lighter ring-golden-sun-lighter`;
