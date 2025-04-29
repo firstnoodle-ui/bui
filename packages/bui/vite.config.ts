@@ -3,12 +3,15 @@ import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
 import Dts from "vite-plugin-dts";
 
+import tailwindcss from "@tailwindcss/vite";
+
 export default defineConfig({
   plugins: [
     vue(),
     Dts({
       tsconfigPath: resolve(__dirname, "tsconfig.app.json"),
     }),
+    tailwindcss(),
   ],
   build: {
     lib: {

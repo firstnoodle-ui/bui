@@ -11,7 +11,7 @@ defineProps<{ value: number; disabled: boolean }>();
       'border-default bg-medium': disabled && value,
       'border-subtle bg-heavy': disabled && !value,
       'cursor-default': disabled,
-      'hover:border-action focus:border-actionLightActive focus:outline-none': !disabled,
+      'hover:border-action focus:border-actionLightActive focus:outline-hidden': !disabled,
     }"
   >
     <svg v-if="value === 1" width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">

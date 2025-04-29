@@ -33,7 +33,7 @@ const onOptionClick = () => {
   <div
     ref="root"
     tabindex="0"
-    class="flex items-center justify-between w-full h-8 px-3 space-x-2 text-sm focus:outline-none"
+    class="flex items-center justify-between w-full h-8 px-3 space-x-2 text-sm focus:outline-hidden"
     :class="{
       'cursor-not-allowed text-muted ': disabled,
       'cursor-pointer text-primary hover:bg-blue-100 focus:bg-blue-100': !disabled && !selected,

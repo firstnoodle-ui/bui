@@ -36,10 +36,10 @@ const onSelect = () => {
     :disabled="disabled"
     class=""
     :class="{
-      'relative flex items-center justify-center space-x-1 px-3 h-8 border-b focus:outline-none focus:border-action': type === 'default',
+      'relative flex items-center justify-center space-x-1 px-3 h-8 border-b focus:outline-hidden focus:border-action': type === 'default',
       'border-action text-action': selected && type === 'default',
       'border-subtle text-tertiary hover:text-secondary': !selected && type === 'default',
-      'relative flex items-center justify-center  px-3 h-8 border border-transparent rounded-lg focus:outline-none': type === 'pill',
+      'relative flex items-center justify-center  px-3 h-8 border border-transparent rounded-lg focus:outline-hidden': type === 'pill',
       'bg-actionLightActive text-action': selected && type === 'pill',
       'text-primary bg-sand-grey-40 hover:text-secondary hover:bg-actionLightHover focus:bg-actionLightActive focus:text-action':
         !disabled && !selected && type === 'pill',

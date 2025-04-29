@@ -43,7 +43,7 @@ withDefaults(
   >
     <slot />
     <template #content>
-      <div class="z-50 min-w-0 px-2 py-1 rounded-md text-sm shadow-md" :class="[bgColorClass, textColorClass]">
+      <div class="z-50 min-w-0 px-2 py-1 rounded-md text-sm shadow-sm-md" :class="[bgColorClass, textColorClass]">
         <span v-if="text">
           {{ text }}
         </span>

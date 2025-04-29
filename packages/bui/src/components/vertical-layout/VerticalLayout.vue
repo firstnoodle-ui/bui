@@ -20,7 +20,7 @@ const props = withDefaults(
   },
 );
 
-const classes = [props.widthClass, props.windowFrame ? "px-8 py-6 bg-light shadow-xl rounded-lg" : ""];
+const classes = [props.widthClass, props.windowFrame ? "px-8 py-6 bg-light shadow-sm-xl rounded-lg" : ""];
 </script>
 
 <template>

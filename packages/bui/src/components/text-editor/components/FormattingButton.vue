@@ -27,7 +27,7 @@ const emit = defineEmits(["click"]);
       tag="button"
       inline
       justify="center"
-      class="h-8 gap-2 rounded-lg border border-transparent focus:outline-none focus:border-strong"
+      class="h-8 gap-2 rounded-lg border border-transparent focus:outline-hidden focus:border-strong"
       :class="{
         'bg-4 text-primary font-bold': active && !highlight,
         'bg-4 text-action border border-subtle': highlight,

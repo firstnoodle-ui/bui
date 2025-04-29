@@ -101,10 +101,10 @@ function onTransition(transitionActive: boolean, focusAside: boolean) {
       <slot />
       <button
         v-if="props.draggable"
-        class="absolute top-0 h-full w-1 hover:border-action hover:bg-actionLight hover:bg-opacity-50 cursor-ew-resize"
+        class="absolute top-0 h-full w-1 hover:border-action hover:bg-actionLight/10 cursor-ew-resize"
         :class="[
           props.side === 'left' ? 'right-0 border-r' : 'left-0 border-l',
-          dragging ? 'border-actionLight bg-actionLight bg-opacity-50' : 'border-transparent bg-transparent',
+          dragging ? 'border-actionLight bg-actionLight/10' : 'border-transparent bg-transparent',
         ]"
         @mousedown="startDrag"
       />

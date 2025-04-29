@@ -60,7 +60,7 @@ defineExpose({ close });
           v-show="show"
           ref="panelRef"
           tabindex="0"
-          class="ml-auto flex flex-col bg-light shadow-xl rounded-xl max-w-lg w-full h-full focus:outline-none"
+          class="ml-auto flex flex-col bg-light shadow-sm-xl rounded-xl max-w-lg w-full h-full focus:outline-hidden"
           :class="{ 'px-6 py-4': !slots.default }"
           style="pointer-events: auto"
         >

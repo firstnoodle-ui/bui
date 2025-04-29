@@ -28,7 +28,7 @@ const inputRef = ref<HTMLInputElement>();
 
 const outerClass = computed(() => {
   const result = [];
-  result.push(props.disabled ? "bg-medium border-subtle text-secondary" : "bg-light border-default text-primary shadow-inner-sm");
+  result.push(props.disabled ? "bg-medium border-subtle text-secondary" : "bg-light border-default text-primary shadow-sm-inner-sm");
   result.push(props.icon ? "pr-3 pl-8" : "px-3");
   return result;
 });
@@ -49,7 +49,7 @@ defineExpose({ focus });
 
 <template>
   <div
-    class="relative overflow-hidden inline-block w-full text-sm leading-tight rounded-md border focus:shadow-inner focus:outline-none focus-within:border-blue-500"
+    class="relative overflow-hidden inline-block w-full text-sm leading-tight rounded-md border focus:shadow-sm-inner focus:outline-hidden focus-within:border-blue-500"
     :class="outerClass"
   >
     <div
@@ -69,7 +69,7 @@ defineExpose({ focus });
       :disabled="disabled"
       :value="value"
       :placeholder="placeholder"
-      class="py-2 w-full text-sm leading-tight bg-transparent focus:outline-none"
+      class="py-2 w-full text-sm leading-tight bg-transparent focus:outline-hidden"
       @input.stop.prevent="onInput"
     />
     <input
@@ -80,7 +80,7 @@ defineExpose({ focus });
       :type="inputType"
       :value="value"
       :placeholder="placeholder"
-      class="py-2 w-full text-sm leading-tight bg-transparent focus:outline-none"
+      class="py-2 w-full text-sm leading-tight bg-transparent focus:outline-hidden"
       @input.stop.prevent="onInput"
     >
   </div>

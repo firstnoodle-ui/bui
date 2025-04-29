@@ -268,7 +268,7 @@ defineExpose({ close, focus });
               ref="inputRef"
               v-model="currentQuery"
               type="text"
-              class="w-full h-8 text-sm leading-none bg-light rounded-tr-lg focus:outline-none"
+              class="w-full h-8 text-sm leading-none bg-light rounded-tr-lg focus:outline-hidden"
               :placeholder="placeholder"
               @click.stop.prevent
               @input="debounceOnQuery"

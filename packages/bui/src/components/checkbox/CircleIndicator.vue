@@ -21,7 +21,7 @@ const classes = computed(() => {
 
 <template>
   <button
-    class="inline-flex items-center justify-center w-6 h-6 rounded-full border focus:outline-none focus-visible:border-true-blue active:scale-[0.98]"
+    class="inline-flex items-center justify-center w-6 h-6 rounded-full border focus:outline-hidden focus-visible:border-true-blue active:scale-[0.98]"
     :class="classes"
   >
     <BIcon v-if="icon" :name="icon" class="text-white" :class="{ '-ml-px': value === 1 }" />

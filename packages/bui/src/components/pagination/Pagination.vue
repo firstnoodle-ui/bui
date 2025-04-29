@@ -22,7 +22,7 @@ const pageOptions = computed((): TPopSelectOption[] => {
 });
 
 const shared
-  = "relative inline-flex items-center h-8 bg-default text-sm text-primary hover:bg-sand-grey-15 focus:z-10 focus:outline-none focus-visible:bg-sand-grey-40 active:scale-[0.98]";
+  = "relative inline-flex items-center h-8 bg-default text-sm text-primary hover:bg-sand-grey-15 focus:z-10 focus:outline-hidden focus-visible:bg-sand-grey-40 active:scale-[0.98]";
 
 const arrowClasses = computed(() => {
   return props.noBorders

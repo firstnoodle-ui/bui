@@ -50,7 +50,7 @@ const classes = computed(() => {
     default:
   }
 
-  if (props.button) result.push("focus:outline-none focus-visible:ring active:scale-[0.98]");
+  if (props.button) result.push("focus:outline-hidden focus-visible:ring-3 active:scale-[0.98]");
 
   return result;
 });

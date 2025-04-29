@@ -176,7 +176,7 @@ defineExpose({ blur, closeInsert, focus, setContent });
       :class="{
         'border': !embedded,
         'flex-1 min-h-0': expandVertically,
-        'shadow-outline border-action': softFocus,
+        'shadow-sm-outline border-action': softFocus,
         'border-transparent': !softFocus && embedded,
         'border-subtle': !softFocus && !embedded,
       }"
@@ -192,7 +192,7 @@ defineExpose({ blur, closeInsert, focus, setContent });
       </BFlexbox>
       <BFlexbox tag="main" align="start" fullwidth>
         <EditorContent
-          class="flex-1 overflow-y-auto rounded-t-lg focus:outline-none"
+          class="flex-1 overflow-y-auto rounded-t-lg focus:outline-hidden"
           :class="{
             [editorContentClasses]: !softFocus,
             [editorContentFocusClasses]: softFocus,

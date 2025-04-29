@@ -83,7 +83,7 @@ onBeforeUnmount(() => {
         {
           [props.borderClassOpen]: open,
           [props.borderClassClosed]: !open,
-          'shadow-sm border-brand': isSticky,
+          'shadow-sm-xs border-brand': isSticky,
           'sticky z-10': isSticky,
           'relative': !isSticky,
         },
@@ -98,7 +98,7 @@ onBeforeUnmount(() => {
           <button
             v-if="$slots.content"
             ref="buttonRef"
-            class="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-black hover:bg-opacity-10 focus:outline-none focus-visible:bg-black focus-visible:bg-opacity-10"
+            class="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-black/10 focus:outline-hidden focus-visible:bg-black/10"
             @click="emit('toggle', id)"
           >
             <BIcon
