@@ -11,8 +11,8 @@ const router = createRouter({
       path: "/",
       name: "app",
       component: () => import("../App.vue"),
+      children: buiDocsRoutes,
     },
-    buiDocsRoutes,
   ],
 });
 
