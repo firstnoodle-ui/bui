@@ -1,127 +1,146 @@
-export default {
-  path: "/bui",
-  name: "Components",
-  component: () => import("../components/index.vue"),
-  children: [
+export default [
     {
       path: "/button",
       name: "Button",
       component: () => import("../views/Button/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/checkbox",
       name: "Checkbox",
       component: () => import("../views/Checkbox/index.vue"),
+      meta: { group: "Standard" }
     },
     {
       path: "/collapse",
       name: "Collapse",
       component: () => import("../views/Collapse/index.vue"),
+      meta: { group: "Data" }
     },
     {
       path: "/confirm-cancel",
       name: "ConfirmCancel",
       component: () => import("../views/ConfirmCancel/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/dialog",
       name: "Dialog",
       component: () => import("../views/Dialog/index.vue"),
+      meta: { group: 'Modals' }
     },
     {
       path: "/first-paint",
       name: "FirstPaint",
       component: () => import("../views/FirstPaint/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/horizontal-layout",
       name: "HorizontalLayout",
       component: () => import("../views/HorizontalLayout/index.vue"),
+      meta: { group: 'Layouts' }
     },
     {
       path: "/icon",
       name: "Icon",
       component: () => import("../views/Icon/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/load-spinner",
       name: "LoadSpinner",
       component: () => import("../views/LoadSpinner/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/modal",
       name: "Modal",
       component: () => import("../views/Modal/index.vue"),
+      meta: { group: 'Modals' }
     },
     {
       path: "/notification",
       name: "Notification",
       component: () => import("../views/Notification/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/pagination",
       name: "Pagination",
       component: () => import("../views/Pagination/index.vue"),
+      meta: { group: 'Data' }
     },
     {
       path: "/pill",
       name: "Pill",
       component: () => import("../views/Pill/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/pop-confirm",
       name: "PopConfirm",
       component: () => import("../views/PopConfirm/index.vue"),
+      meta: { group: 'Poppers' }
     },
     {
       path: "/popper",
       name: "Popper",
       component: () => import("../views/Popper/index.vue"),
+      meta: { group: 'Utils' }
     },
     {
       path: "/pop-select",
       name: "PopSelect",
       component: () => import("../views/PopSelect/index.vue"),
+      meta: { group: 'Poppers' }
     },
     {
       path: "/side-over",
       name: "SideOver",
       component: () => import("../views/SideOver/index.vue"),
+      meta: { group: 'Modals' }
     },
     {
       path: "/status-select",
       name: "StatusSelect",
       component: () => import("../views/StatusSelect/index.vue"),
+      meta: { group: '' }
     },
     {
       path: "/switch",
       name: "Switch",
       component: () => import("../views/Switch/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/tab",
       name: "Tab",
       component: () => import("../views/Tab/index.vue"),
+      meta: { group: 'Layouts' }
     },
     {
       path: "/tag",
       name: "Tag",
       component: () => import("../views/Tag/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/text-highlight",
       name: "TextHighlight",
       component: () => import("../views/TextHighlight/index.vue"),
+      meta: { group: 'Text' }
     },
     {
       path: "/tooltip",
       name: "Tooltip",
       component: () => import("../views/Tooltip/index.vue"),
+      meta: { group: 'Standard' }
     },
     {
       path: "/vertical-layout",
       name: "VerticalLayout",
       component: () => import("../views/VerticalLayout/index.vue"),
-    },
-  ],
-};
+      meta: { group: 'Layouts' }
+    }
+];
