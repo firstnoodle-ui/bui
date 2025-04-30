@@ -53,10 +53,10 @@ const loadSpinnerClass = computed(() => {
   const classes = ["w-4 h-4"];
   if (props.variant === "fill" || props.variant === "destructive") {
     classes.push("text-light");
-  } else if(props.variant === "outline") {
+  } else if(props.variant === "outline" || props.variant === "text") {
     classes.push("text-blue-500");
-  } else if(props.variant === "outlineSubtle") {
-    classes.push("text-slate-700");
+  } else if(props.variant === "outlineSubtle" || props.variant === "textSubtle") {
+    classes.push("text-slate-700 dark:text-slate-200");
   }
   return classes.join(" ");
 });
@@ -90,6 +90,8 @@ const buttonClasses = computed(() => {
         "bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 active:bg-blue-700",
         "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
         "text-white focus-visible:outline",
+        "dark:bg-blue-700 dark:hover:bg-blue-600 focus-visible:bg-blue-600 dark:active:bg-blue-500",
+        "border dark:border-blue-700 dark:hover:border-blue-600 focus-visible:border-blue-600 dark:active:border-blue-500",
       );
       break;
     case "outline":
@@ -97,6 +99,9 @@ const buttonClasses = computed(() => {
         "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
         "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
         "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+        "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
+        "dark:border-blue-500 dark:hover:border-blue-500 dark:focus-visible:border-blue-500 dark:active:border-blue-600",
+        "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
       );
       break;
     case "outlineSubtle":
@@ -104,6 +109,9 @@ const buttonClasses = computed(() => {
         "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
         "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
         "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+        "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+        "dark:border-stone-700 dark:hover:border-stone-600 focus-visible:border-stone-600 dark:active:border-stone-500",
+        "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
       );
       break;
     case "text":
@@ -111,6 +119,8 @@ const buttonClasses = computed(() => {
         "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
         "border-none",
         "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+        "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
+        "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
       );
       break;
     case "textSubtle":
@@ -118,6 +128,8 @@ const buttonClasses = computed(() => {
         "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
         "border-none",
         "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+        "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+        "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
       );
       break;
     case "destructive":
@@ -146,13 +158,6 @@ const disabledStyle = computed(() => {
   return {};
 });
 
-onBeforeMount(() => {
-  if (props.bordered && props.solid) {
-    console.warn("[Button]: bordered and solid props should not be used together. Bordered is disabled.");
-  }
-
-});
-
 const onClick = (event: MouseEvent) => {
   props.stopPropagation && event.stopPropagation();
 
@@ -176,7 +181,7 @@ defineExpose({ focus });
       :is="component"
       ref="buttonRef"
       :to="routerLinkTo"
-      class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black"
+      class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
       :class="buttonClasses"
       :disabled="disabled || loading"
       :style="disabledStyle"
@@ -198,7 +203,7 @@ defineExpose({ focus });
     ref="buttonRef"
     :to="routerLinkTo"
     :target="props.linkTarget"
-    class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black"
+    class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
     :class="buttonClasses"
     :disabled="disabled || loading"
     :style="disabledStyle"
