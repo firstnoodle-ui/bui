@@ -8,18 +8,18 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
     <section class="flex items-center">
       <div class="flex-1 flex items-center space-x-4">
         <BButton icon="envelope" label="Email" />
-        <BButton icon="box" type="primary" />
-        <BButton icon-after="chevron-down" label="Errors" type="error" />
+        <BButton variant="outline" icon="box" />
+        <BButton variant="textSubtle" icon-after="chevron-down" label="Errors" />
       </div>
       <div class="flex-1 flex items-center space-x-4">
-        <BButton bordered icon="envelope" label="Email" />
-        <BButton bordered icon="download" type="primary" />
-        <BButton bordered icon-after="chevron-down" label="Errors" type="error" />
+        <BButton rounded icon="envelope" label="Email" />
+        <BButton rounded variant="outline" icon="download" />
+        <BButton rounded variant="destructive" icon-after="chevron-down" label="Errors" />
       </div>
       <div class="flex-1 flex items-center space-x-4">
-        <BButton solid icon="envelope" label="Email" />
-        <BButton solid icon="download" type="primary" />
-        <BButton solid icon-after="chevron-down" label="Errors" type="error" />
+        <BButton small icon="envelope" label="Email" />
+        <BButton small variant="outline" icon="download" />
+        <BButton small variant="textSubtle" icon-after="chevron-down" label="Errors" />
       </div>
     </section>
   </ComponentPageSection>

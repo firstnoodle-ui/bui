@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { Placement } from "@floating-ui/dom";
-import type { TButtonType, TIcon } from "../types";
-import { computed, inject, onBeforeMount, ref } from "vue";
+import type { ButtonVariant, TIcon } from "../types";
+import { computed, onBeforeMount, ref } from "vue";
 import { BIcon, BLoadSpinner, BTooltip } from "../";
 import NotificationBadge from "./NotificationBadge.vue";
 
 const props = withDefaults(
   defineProps<{
-    bordered?: boolean;
+    variant?: ButtonVariant;
     classes?: string;
     disabled?: boolean;
     fullwidth?: boolean;
@@ -22,16 +22,14 @@ const props = withDefaults(
     rounded?: boolean;
     routerLinkTo?: string | { path: string } | { name: string };
     small?: boolean;
-    softFocus?: boolean; // remove
-    solid?: boolean;
+    focus?: boolean; // remove
     stopPropagation?: boolean;
     tooltip?: string;
     tooltipDelay?: number;
     tooltipPlacement?: Placement;
-    type?: TButtonType;
   }>(),
   {
-    bordered: false,
+    variant: "fill",
     disabled: false,
     focus: false,
     fullwidth: false,
@@ -39,12 +37,10 @@ const props = withDefaults(
     notification: false,
     rounded: false,
     small: false,
-    softFocus: false, // remove
-    solid: false,
+    focus: false, // remove
     stopPropagation: false,
     tooltipDelay: 500,
     tooltipPlacement: "top",
-    type: "primary",
   },
 );
 
@@ -52,25 +48,15 @@ const emit = defineEmits(["click", "blur"]);
 
 const component = ref<string>(props.routerLinkTo ? "router-link" : "button");
 const buttonRef = ref<HTMLButtonElement>();
-const childOfButtonGroup = inject("childOfButtonGroup", null);
 
 const loadSpinnerClass = computed(() => {
   const classes = ["w-4 h-4"];
-  if (props.solid) {
+  if (props.variant === "fill" || props.variant === "destructive") {
     classes.push("text-light");
-  }
-  else {
-    switch (props.type) {
-      case "default":
-        classes.push("text-primary");
-        break;
-      case "primary":
-        classes.push("text-action");
-        break;
-      case "error":
-        classes.push("text-destructive");
-        break;
-    }
+  } else if(props.variant === "outline") {
+    classes.push("text-blue-500");
+  } else if(props.variant === "outlineSubtle") {
+    classes.push("text-slate-700");
   }
   return classes.join(" ");
 });
@@ -90,52 +76,61 @@ const buttonClasses = computed(() => {
     props.small ? result.push("w-6") : result.push("w-8");
   }
 
-  props.bordered && !props.solid ? result.push("border-default") : result.push("border-transparent");
+  // props.bordered && !props.solid ? result.push("border-default") : result.push("border-transparent");
 
   props.disabled ? result.push("opacity-75 cursor-not-allowed") : result.push("cursor-pointer");
-
   props.fullwidth && result.push("w-full");
 
-  /**
-   * childOfButtonGroup is an injected boolean (always true) from the ButtonGroup component,
-   * so it only exists if the Button is a child of ButtonGroup
-   * Classes will be applied from ButtonGroup component
-   */
-  if (childOfButtonGroup) {
-    result.push("z-0 focus:z-10");
-  }
-  else {
-    if (props.rounded) result.push("rounded-full");
-    else result.push("rounded-lg");
-  }
+  if (props.rounded) result.push("rounded-full");
+  else result.push("rounded-lg");
 
-  switch (props.type) {
-    case "default":
-      props.solid
-        ? result.push(
-            "text-light hover:bg-neutralHover active:bg-neutralActive focus-visible:bg-neutralHover",
-            props.softFocus ? "bg-neutralHover" : "bg-neutral",
-          )
-        : result.push(
-            "hover:bg-neutralHover active:bg-neutralActive focus-visible:bg-neutralHover text-secondary hover:text-primary",
-            props.softFocus ? "bg-neutral-hover" : null,
-          );
+  switch (props.variant) {
+    case "fill":
+      result.push(
+        "bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 active:bg-blue-700",
+        "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
+        "text-white focus-visible:outline",
+      );
       break;
-    case "primary":
-      props.solid
-        ? result.push(
-            "text-light hover:bg-actionHover active:bg-actionActive focus-visible:bg-actionHover",
-            props.softFocus ? "bg-actionHover" : "bg-action",
-          )
-        : result.push(
-            "hover:bg-actionLightHover active:bg-actionLightActive focus-visible:bg-actionLightHover text-action hover:text-actionHover",
-            props.softFocus ? "bg-actionLightHover" : null,
-          );
+    case "outline":
+      result.push(
+        "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
+        "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
+        "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+      );
       break;
-    case "error":
-      props.solid
-        ? result.push("text-light bg-error hover:bg-errorHover focus-visible:bg-errorActive", props.softFocus ? "bg-error" : "bg-errorHover")
-        : result.push("hover:bg-sand-grey-15 focus-visible:bg-sand-grey-40 text-error hover:text-errorHover", props.softFocus ? "bg-subtle" : null);
+    case "outlineSubtle":
+      result.push(
+        "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
+        "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
+        "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+      );
+      break;
+    case "text":
+      result.push(
+        "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
+        "border-none",
+        "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+      );
+      break;
+    case "textSubtle":
+      result.push(
+        "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
+        "border-none",
+        "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+      );
+      break;
+    case "destructive":
+      result.push(
+        ...(props.focus
+          ? ["bg-red-800 border-red-800 text-white"]
+          : [
+            "bg-red-600 hover:bg-red-700 focus-visible:bg-red-700 active:bg-red-800",
+            "border border-red-600 hover:border-red-700 focus-visible:border-red-700 active:border-red-800",
+            "text-white"
+          ]
+        ),
+      );
       break;
   }
 
@@ -146,7 +141,7 @@ const buttonClasses = computed(() => {
 
 const disabledStyle = computed(() => {
   if (props.disabled) {
-    return props.solid ? { filter: "grayscale(50%)" } : { background: "hsl(0 0% 90%)" };
+    return props.variant === "fill" || props.variant === "destructive" ? { filter: "grayscale(50%)" } : { background: "hsl(0 0% 90%)" };
   }
   return {};
 });
@@ -156,13 +151,6 @@ onBeforeMount(() => {
     console.warn("[Button]: bordered and solid props should not be used together. Bordered is disabled.");
   }
 
-  /**
-   * childOfButtonGroup is an injected function from the ButtonGroup component,
-   * so it only exists if the Button is a child of ButtonGroup
-   */
-  if (props.rounded && childOfButtonGroup) {
-    console.warn("[Button]: rounded buttons should not be in a ButtonGroup.");
-  }
 });
 
 const onClick = (event: MouseEvent) => {
@@ -188,7 +176,7 @@ defineExpose({ focus });
       :is="component"
       ref="buttonRef"
       :to="routerLinkTo"
-      class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus:outline-hidden focus-visible:border-black"
+      class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black"
       :class="buttonClasses"
       :disabled="disabled || loading"
       :style="disabledStyle"
@@ -210,7 +198,7 @@ defineExpose({ focus });
     ref="buttonRef"
     :to="routerLinkTo"
     :target="props.linkTarget"
-    class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus:outline-hidden focus-visible:border-black"
+    class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black"
     :class="buttonClasses"
     :disabled="disabled || loading"
     :style="disabledStyle"

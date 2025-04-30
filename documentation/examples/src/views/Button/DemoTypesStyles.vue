@@ -4,22 +4,27 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
 </script>
 
 <template>
-  <ComponentPageSection title="Types & Styles (bordered, solid)">
+  <ComponentPageSection title="Variants">
     <section class="flex items-center">
       <div class="flex-1 flex items-center space-x-4">
-        <BButton label="Default" />
-        <BButton label="Primary" type="primary" />
-        <BButton label="Error" type="error" />
+        <BButton label="Fill" />
+        <BButton variant="outline" label="Outline" />
+        <BButton variant="outlineSubtle" label="OutlineSubtle" />
+        <BButton variant="text" label="Text" />
+        <BButton variant="textSubtle" label="TextSubtle" />
+        <BButton focus variant="destructive" label="Destructive" />
       </div>
+    </section>
+  </ComponentPageSection>
+  <ComponentPageSection title="Small">
+    <section class="flex items-center">
       <div class="flex-1 flex items-center space-x-4">
-        <BButton bordered label="Default" />
-        <BButton bordered type="primary" label="Primary" />
-        <BButton bordered type="error" label="Error" />
-      </div>
-      <div class="flex-1 flex items-center space-x-4">
-        <BButton solid label="Default" />
-        <BButton solid label="Primary" type="primary" />
-        <BButton solid type="error" label="Error" />
+        <BButton small label="Fill" />
+        <BButton small variant="outline" label="Outline" />
+        <BButton small variant="outlineSubtle" label="OutlineSubtle" />
+        <BButton small variant="text" label="Text" />
+        <BButton small variant="textSubtle" label="TextSubtle" />
+        <BButton small variant="destructive" label="Destructive" />
       </div>
     </section>
   </ComponentPageSection>
