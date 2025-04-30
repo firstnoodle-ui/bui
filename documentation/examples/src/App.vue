@@ -1,58 +1,27 @@
 <script setup lang="ts">
 import { BApplicationWrapper, BHorizontalLayout, BNavItem, BVerticalLayout } from "@firstnoodle/bui";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { RouterView, useRouter } from "vue-router";
 import routes from "./router/routes";
 
 const router = useRouter();
 const asideLeftWidth = ref(256);
-const componentPages = [
-  {
-    name: "Layouts",
-    pages: [
-      // "ApplicationLayout",
-      "HorizontalLayout",
-      "VerticalLayout",
-      // "Scrollbar",
-      "Tab",
-    ],
-  },
-  {
-    name: "Modals",
-    pages: ["Dialog", "Modal", "SideOver"],
-  },
-  {
-    name: "Data",
-    pages: ["Collapse", /* "ColumnNavigation", */ "Pagination"],
-  },
-  {
-    name: "Text",
-    pages: ["TextHighlight"],
-  },
-  {
-    name: "Standard",
-    pages: ["Button", "Checkbox", "ConfirmCancel", "FirstPaint", "Icon", "LoadSpinner", "Notification", "Pill", "Switch", "Tag", "Tooltip"],
-  },
-  {
-    name: "Select",
-    pages: [
-      // "CalendarView",
-      // 'DatePicker',
-      "Popper",
-      // "PopCalendar",
-      "PopConfirm",
-      // 'PopOver',
-      "PopSelect",
-      // "StatusSelect"
-      // 'Select',
-      // 'TagSelect',
-      // 'TextEditor',
-    ],
-  },
-];
+
+type PageGroup = {
+  name: string,
+  pages: string[]
+};
+
+const componentPages = computed(():PageGroup[] => {
+  return routes.reduce((result:PageGroup[], current) => {
+    if(!result.map(i => i.name).includes(current.meta.group)) result.push({ name: current.meta.group, pages: [ current.name ]})
+    else result.find(i => i.name === current.meta.group)!.pages.push(current.name);
+    return result;
+  }, []);
+});
 
 const navigateTo = (page: string) => {
-  const path = routes.children.find(route => route.name === page)?.path;
+  const path = routes.find(route => route.name === page)?.path;
   path && router.push(path);
 };
 </script>
@@ -83,21 +52,20 @@ const navigateTo = (page: string) => {
       </template>
 
       <template #main>
-        <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-visible>
+        <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-draggable aside-left-visible>
           <template #aside-left>
             <BVerticalLayout main-classes="h-full">
               <template #main>
                 <main class="w-full px-4 pt-4 pb-32 space-y-4">
                   <div v-for="group in componentPages" :key="group.name">
                     <div class="w-full h-12 flex items-center">
-                      <div class="flex-none pr-2 text-xs leading-none font-medium text-secondary">
+                      <div class="flex-none pr-2 text-xs leading-none font-medium text-muted">
                         {{ group.name }}
                       </div>
                       <div class="flex-1 h-full">
                         <div class="w-full border-b border-default" style="height: 54%" />
                       </div>
                     </div>
-
                     <BNavItem v-for="page in group.pages" :key="page" orientation="vertical" :href="page" :to="{ name: page }" type="light" @navigate="navigateTo">
                       {{ page }}
                     </BNavItem>
@@ -106,6 +74,7 @@ const navigateTo = (page: string) => {
               </template>
             </BVerticalLayout>
           </template>
+
           <template #main>
             <BVerticalLayout main-classes="h-full">
               <template #main>
@@ -115,6 +84,7 @@ const navigateTo = (page: string) => {
               </template>
             </BVerticalLayout>
           </template>
+
         </BHorizontalLayout>
       </template>
     </BVerticalLayout>
