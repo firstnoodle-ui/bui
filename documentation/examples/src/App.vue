@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { BApplicationWrapper, BHorizontalLayout, BNavItem, BVerticalLayout } from "@firstnoodle/bui";
+import { BApplicationWrapper, BButton, BHorizontalLayout, BNavItem, BSwitch, BVerticalLayout } from "@firstnoodle/bui";
 import { computed, ref } from "vue";
 import { RouterView, useRouter } from "vue-router";
 import routes from "./router/routes";
 
 const router = useRouter();
 const asideLeftWidth = ref(256);
+const theme = ref(false);
 
 type PageGroup = {
   name: string,
@@ -27,7 +28,7 @@ const navigateTo = (page: string) => {
 </script>
 
 <template>
-  <BApplicationWrapper>
+  <BApplicationWrapper :data-theme="theme ? 'dark' : 'light'">
     <BVerticalLayout borders header-height-class="h-12" footer-height-class="h-12">
       <template #header>
         <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-visible>
@@ -48,10 +49,18 @@ const navigateTo = (page: string) => {
               </div>
             </div>
           </template>
+          <template #aside-right>
+            <section class="h-full flex items-center gap-2">
+              <BButton :icon="theme ? 'moon' : 'sun'" :label="theme ? 'Dark' : 'Light'" variant="textSubtle" @click="theme = !theme" />
+            </section>
+          </template>
         </BHorizontalLayout>
       </template>
 
       <template #main>
+        <!-- 
+        TODO : topbar not toggling theme 
+         -->
         <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-draggable aside-left-visible>
           <template #aside-left>
             <BVerticalLayout>
