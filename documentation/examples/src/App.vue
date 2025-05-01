@@ -54,7 +54,7 @@ const navigateTo = (page: string) => {
       <template #main>
         <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-draggable aside-left-visible>
           <template #aside-left>
-            <BVerticalLayout main-classes="h-full">
+            <BVerticalLayout>
               <template #main>
                 <main class="w-full px-4 pt-4 pb-32 space-y-4">
                   <div v-for="group in componentPages" :key="group.name">
