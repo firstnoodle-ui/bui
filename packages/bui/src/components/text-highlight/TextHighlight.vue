@@ -14,7 +14,7 @@ const props = withDefaults(
     highlight: null,
     bold: false,
     underline: false,
-    textColorClass: "text-black",
+    textColorClass: "text-primary",
     backgroundColor: null,
   },
 );
@@ -27,19 +27,19 @@ const highlightColorClasses = computed(() => {
   const base = "ring-2 shadow-sm ";
   switch (props.backgroundColor) {
     case "yellow":
-      return `${base}bg-golden-sun-lighter ring-golden-sun-lighter`;
+      return `${base}bg-yellow-500 ring-yellow-500`;
     case "green":
-      return `${base}bg-ocean-green ring-ocean-green`;
+      return `${base}bg-green-500 ring-green-500`;
     case "blue":
-      return `${base}bg-light-blue ring-light-blue`;
+      return `${base}bg-blue-500 ring-blue-500`;
     case "red":
-      return `${base}bg-lava-red ring-lava-red`;
+      return `${base}bg-red-500 ring-red-500`;
     case "pink":
-      return `${base}bg-pink-rose ring-pink-rose`;
+      return `${base}bg-pink-500 ring-pink-500`;
     case "white":
       return `${base}bg-white ring-white`;
     default:
-      return `${base}bg-golden-sun ring-golden-sun`;
+      return `${base}bg-yellow-500 ring-yellow-500`;
   }
 });
 
