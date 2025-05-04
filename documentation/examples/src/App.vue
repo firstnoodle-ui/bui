@@ -1,25 +1,12 @@
 <script setup lang="ts">
-import { BApplicationWrapper, BButton, BHorizontalLayout, BNavItem, BSwitch, BVerticalLayout } from "@firstnoodle/bui";
-import { computed, ref } from "vue";
+import { BApplicationWrapper, BButton, BHorizontalLayout, BNavItem, BVerticalLayout } from "@firstnoodle/bui";
+import { ref } from "vue";
 import { RouterView, useRouter } from "vue-router";
 import routes from "./router/routes";
 
 const router = useRouter();
 const asideLeftWidth = ref(256);
 const theme = ref(false);
-
-type PageGroup = {
-  name: string,
-  pages: string[]
-};
-
-const componentPages = computed(():PageGroup[] => {
-  return routes.reduce((result:PageGroup[], current) => {
-    if(!result.map(i => i.name).includes(current.meta.group)) result.push({ name: current.meta.group, pages: [ current.name ]})
-    else result.find(i => i.name === current.meta.group)!.pages.push(current.name);
-    return result;
-  }, []);
-});
 
 const navigateTo = (page: string) => {
   const path = routes.find(route => route.name === page)?.path;
@@ -33,16 +20,16 @@ const navigateTo = (page: string) => {
       <template #header>
         <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-visible>
           <template #aside-left>
-            <div class="h-full flex items-center justify-start px-4">
+            <div class="h-full flex items-center justify-start px-4 text-primary">
               <svg width="13" height="26" viewBox="0 0 26 52" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
                   d="M11 0C10.7348 0 10.4804 0.105357 10.2929 0.292893C10.1054 0.48043 10 0.734784 10 1V3C9.44771 3 9 3.44772 9 4V4.79294L7.85355 3.64648L7.14644 4.35359L8.79289 6.00004L7.14644 7.64648L7.85355 8.35359L9 7.20714V8C9 8.55228 9.44771 9 10 9V9.53822L8.17662 11.0915C8.15636 11.1088 8.1368 11.1268 8.11799 11.1456C7.6408 11.6228 7.27977 12.1892 7.03798 12.7875C6.89035 13.1527 6.80526 13.649 6.75808 13.9696C6.73196 14.1472 6.71262 14.3073 6.6998 14.4228C6.69336 14.4808 6.6885 14.5282 6.68519 14.5618L6.68137 14.6015L6.68032 14.6128L6.67984 14.6182L6.6784 14.6362L5.38154 33.0248L5.37199 33.1564C5.36392 33.2664 5.35283 33.4148 5.34068 33.5689C5.32849 33.7237 5.31547 33.8814 5.30353 34.011C5.29755 34.076 5.29212 34.1308 5.28746 34.1731C5.28317 34.2121 5.28098 34.2276 5.28098 34.2276C5.28098 34.2276 5.28119 34.2265 5.28155 34.2244C5.1786 34.8096 4.89537 35.3509 4.46787 35.7705L0.935605 39.2373C0.337154 39.8247 0 40.628 0 41.4665V43.3414C0 45.9817 0.992537 48.8773 3.69224 50.1671C5.69849 51.1255 8.61408 52 12.5589 52H13.4411C17.3859 52 20.3015 51.1255 22.3078 50.1671C25.0075 48.8773 26 45.9817 26 43.3414V41.4665C26 40.628 25.6628 39.8247 25.0644 39.2373L21.5321 35.7705C21.1046 35.3509 20.8216 34.8095 20.7186 34.2243C20.7178 34.218 20.7157 34.202 20.7125 34.1731C20.7079 34.1308 20.7024 34.076 20.6965 34.011C20.6845 33.8814 20.6715 33.7237 20.6593 33.5689C20.6472 33.4148 20.6361 33.2664 20.628 33.1564L20.6185 33.0248L19.3216 14.6362L19.3201 14.6174L19.3197 14.6128L19.3186 14.6015L19.3148 14.5618C19.3115 14.5282 19.3066 14.4808 19.3002 14.4228C19.2874 14.3073 19.268 14.1472 19.2419 13.9696C19.1947 13.649 19.1096 13.1527 18.962 12.7875C18.7202 12.1892 18.3592 11.6228 17.882 11.1456C17.8632 11.1268 17.8436 11.1088 17.8234 11.0915L16 9.53822V9C16.5523 9 17 8.55228 17 8V7.20714L18.1465 8.35359L18.8536 7.64648L17.2071 6.00004L18.8536 4.35359L18.1465 3.64648L17 4.79294V4C17 3.44772 16.5523 3 16 3V1C16 0.447715 15.5523 0 15 0H11ZM11 7V5C11.5523 5 12 4.55228 12 4V2H14V4C14 4.55228 14.4477 5 15 5V7C14.4477 7 14 7.44772 14 8V10C14 10.293 14.1285 10.5712 14.3515 10.7612L16.4936 12.586C16.6517 12.7484 16.7899 12.9312 16.9062 13.1282C16.0285 12.9767 14.7727 12.8552 13 12.8552C11.1854 12.8552 9.93759 12.9825 9.08697 13.1399C9.20465 12.9384 9.34521 12.7516 9.50636 12.586L11.6485 10.7612C11.8715 10.5712 12 10.293 12 10V8C12 7.44772 11.5523 7 11 7ZM8.74016 14.238L8.73678 14.2608C8.71497 14.409 8.69855 14.5447 8.6876 14.6434C8.68215 14.6925 8.67812 14.7318 8.67552 14.7582L8.6727 14.7875L8.26837 20.5207C8.38498 20.5082 8.50946 20.4956 8.6416 20.4829C9.66495 20.385 11.1486 20.2876 13 20.2876C14.8513 20.2876 16.3759 20.385 17.4396 20.4827C17.5409 20.4921 17.6381 20.5014 17.7309 20.5106L17.3273 14.7876L17.3245 14.7582C17.3219 14.7318 17.3179 14.6925 17.3124 14.6434C17.3014 14.5447 17.285 14.409 17.2632 14.2608L17.2567 14.2172C16.4757 14.0386 15.1493 13.8552 13 13.8552C10.8062 13.8552 9.51411 14.0463 8.78521 14.2267L8.74016 14.238ZM17.8023 21.523C17.6625 21.5085 17.5109 21.4935 17.3481 21.4786C16.3104 21.3832 14.8166 21.2876 13 21.2876C11.1835 21.2876 9.73177 21.3832 8.73681 21.4784C8.53841 21.4974 8.35819 21.5163 8.19687 21.5345L7.90271 25.7056C7.97582 25.7016 8.05272 25.6976 8.13353 25.6936C9.11612 25.6448 10.6766 25.5964 13 25.5964C15.3235 25.5964 16.9251 25.6448 17.9485 25.6935L18.0969 25.7008L17.8023 21.523ZM18.1678 26.7058C18.0839 26.7013 17.9949 26.6969 17.9009 26.6924C16.8954 26.6446 15.3098 26.5964 13 26.5964C10.6902 26.5964 9.14643 26.6446 8.18307 26.6923C8.05601 26.6986 7.93906 26.7049 7.8318 26.7111L7.37642 33.1678L7.36663 33.3027L7.3624 33.3602C7.5805 33.3719 7.83634 33.3845 8.12888 33.3971C9.24121 33.4451 10.884 33.4932 13 33.4932C15.116 33.4932 16.8221 33.4451 17.9981 33.3971C18.233 33.3875 18.4467 33.3779 18.6382 33.3687L18.6334 33.3027L18.6236 33.1678L18.1678 26.7058ZM18.7219 34.3658C18.5189 34.3757 18.2909 34.3859 18.0389 34.3962C16.8508 34.4447 15.1311 34.4932 13 34.4932C10.8689 34.4932 9.2117 34.4447 8.0858 34.3962C7.77633 34.3828 7.507 34.3695 7.27899 34.3571C7.26961 34.4451 7.26021 34.5203 7.25129 34.571C7.07637 35.5652 6.5952 36.4849 5.8688 37.1978L2.78629 40.2233C3.13525 40.3735 3.59989 40.5483 4.19649 40.7249C5.91074 41.2323 8.71713 41.7558 13 41.7558C17.2826 41.7558 20.1323 41.2324 21.891 40.7236C22.4506 40.5617 22.9 40.4012 23.2504 40.2593L20.1312 37.1978C19.4048 36.4849 18.9236 35.5652 18.7487 34.571C18.7401 34.522 18.731 34.4501 18.7219 34.3658ZM24 41.5722C23.573 41.7537 23.0146 41.96 22.3079 42.1645C20.3967 42.7175 17.4047 43.2558 13 43.2558C8.59564 43.2558 5.64335 42.7175 3.77073 42.1632C3.01027 41.9381 2.42831 41.7105 2 41.5155L2 43.3414C2 45.5941 2.83912 47.543 4.55439 48.3624C6.29892 49.1959 8.92064 50 12.5589 50H13.4411C17.0794 50 19.7011 49.1959 21.4456 48.3624C23.1609 47.543 24 45.5941 24 43.3414V41.5722Z"
-                  fill="black"
+                  fill="currentColor"
                 />
               </svg>
-              <div class="text-black ml-4">
+              <div class="text-primary ml-4">
                 <div class="tracking-widest">
                   {{ "The BUI" }}
                 </div>
@@ -58,32 +45,18 @@ const navigateTo = (page: string) => {
       </template>
 
       <template #main>
-        <!-- 
-        TODO : topbar not toggling theme 
-         -->
         <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-draggable aside-left-visible>
           <template #aside-left>
             <BVerticalLayout>
               <template #main>
                 <main class="w-full px-4 pt-4 pb-32 space-y-4">
-                  <div v-for="group in componentPages" :key="group.name">
-                    <div class="w-full h-12 flex items-center">
-                      <div class="flex-none pr-2 text-xs leading-none font-medium text-muted">
-                        {{ group.name }}
-                      </div>
-                      <div class="flex-1 h-full">
-                        <div class="w-full border-b border-default" style="height: 54%" />
-                      </div>
-                    </div>
-                    <BNavItem v-for="page in group.pages" :key="page" orientation="vertical" :href="page" :to="{ name: page }" type="light" @navigate="navigateTo">
-                      {{ page }}
-                    </BNavItem>
-                  </div>
+                  <BNavItem v-for="page in routes" :key="page.name" orientation="vertical" :href="page.name" :to="{ name: page.name }" type="light" @navigate="navigateTo">
+                    {{ page.name }}
+                  </BNavItem>
                 </main>
               </template>
             </BVerticalLayout>
           </template>
-
           <template #main>
             <BVerticalLayout main-classes="h-full">
               <template #main>
@@ -93,7 +66,6 @@ const navigateTo = (page: string) => {
               </template>
             </BVerticalLayout>
           </template>
-
         </BHorizontalLayout>
       </template>
     </BVerticalLayout>
