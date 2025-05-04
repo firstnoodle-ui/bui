@@ -14,7 +14,7 @@ const windowRef = ref<HTMLDivElement>();
 </script>
 
 <template>
-  <div ref="windowRef" tabindex="0" class="w-full flex flex-col bg-light shadow-sm-xl rounded-xl focus:outline-hidden">
+  <div ref="windowRef" tabindex="0" class="w-full flex flex-col bg-primary shadow-xl rounded-xl focus:outline-hidden">
     <slot />
   </div>
 </template>
