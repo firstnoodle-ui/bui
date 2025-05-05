@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TButtonType, TIcon } from "../types";
+import type { ButtonVariant, TIcon } from "../types";
 import { computed } from "vue";
 import { BButton, BFlexbox } from "../";
 
@@ -10,10 +10,11 @@ const props = withDefaults(
     cancelDisabled?: boolean;
     cancelIcon?: TIcon;
     cancelLabel?: string;
+    cancelVariant?: ButtonVariant;
     confirmDisabled?: boolean;
     confirmIcon?: TIcon;
     confirmLabel?: string;
-    confirmType?: TButtonType;
+    confirmVariant?: ButtonVariant;
     fillContainer?: boolean;
     loading?: boolean;
     small?: boolean;
@@ -23,9 +24,10 @@ const props = withDefaults(
     cancelButtonIsText: false,
     cancelDisabled: false,
     cancelLabel: "Cancel",
+    cancelVariant: "outline",
     confirmDisabled: false,
     confirmLabel: "Confirm",
-    confirmType: "primary",
+    confirmVariant: "fill",
     fillContainer: false,
     loading: false,
     small: false,
@@ -42,19 +44,17 @@ const leftAligned = computed(() => props.alignment === "left");
     <BButton
       v-if="leftAligned"
       :small="small"
-      solid
       stop-propagation
       :icon="confirmIcon"
       :label="confirmLabel"
-      :type="confirmType"
+      :type="confirmVariant"
       :disabled="confirmDisabled"
       :loading="loading"
       :class="{ 'flex-1': fillContainer }"
       @click="emit('confirm')"
     />
     <BButton
-      :bordered="!cancelButtonIsText"
-      type="primary"
+      :variant="cancelVariant"
       stop-propagation
       :disabled="cancelDisabled"
       :small="small"
@@ -66,11 +66,10 @@ const leftAligned = computed(() => props.alignment === "left");
     <BButton
       v-if="!leftAligned"
       :small="small"
-      solid
       stop-propagation
       :icon="confirmIcon"
       :label="confirmLabel"
-      :type="confirmType"
+      :variant="confirmVariant"
       :disabled="confirmDisabled"
       :loading="loading"
       :class="{ 'flex-1': fillContainer }"

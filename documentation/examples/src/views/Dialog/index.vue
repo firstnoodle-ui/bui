@@ -24,7 +24,7 @@ const onClose = () => {
           <p>This dialog can only be closed by clicking the button below</p>
         </template>
         <template #footer>
-          <BButton solid type="primary" label="Close" @click="dialogRef!.close()" />
+          <BButton variant="fill" label="Close" @click="dialogRef!.close()" />
         </template>
       </BDialog>
     </ComponentPageSection>

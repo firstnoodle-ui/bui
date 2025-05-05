@@ -217,7 +217,7 @@ const onShowErrorDetails = () => {
         {{ errorDetails.message }}
       </template>
       <template #footer>
-        <BButton solid type="primary" label="Close" @click="errorDetails = null" />
+        <BButton variant="fill" label="Close" @click="errorDetails = null" />
       </template>
     </BDialog>
   </section>

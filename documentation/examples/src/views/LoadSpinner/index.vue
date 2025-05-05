@@ -7,7 +7,7 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
 <template>
   <ComponentPage title="LoadSpinner">
     <ComponentPageSection title="Basic usage">
-      <BLoadSpinner />
+      <BLoadSpinner class="w-4 h-4" />
     </ComponentPageSection>
   </ComponentPage>
 </template>

@@ -22,7 +22,7 @@ const props = withDefaults(
     rounded?: boolean;
     routerLinkTo?: string | { path: string } | { name: string };
     small?: boolean;
-    focus?: boolean; // remove
+    focus?: boolean;
     stopPropagation?: boolean;
     tooltip?: string;
     tooltipDelay?: number;
@@ -37,7 +37,6 @@ const props = withDefaults(
     notification: false,
     rounded: false,
     small: false,
-    focus: false, // remove
     stopPropagation: false,
     tooltipDelay: 500,
     tooltipPlacement: "top",
@@ -76,8 +75,6 @@ const buttonClasses = computed(() => {
     props.small ? result.push("w-6") : result.push("w-8");
   }
 
-  // props.bordered && !props.solid ? result.push("border-default") : result.push("border-transparent");
-
   props.disabled ? result.push("opacity-75 cursor-not-allowed") : result.push("cursor-pointer");
   props.fullwidth && result.push("w-full");
 
@@ -87,49 +84,74 @@ const buttonClasses = computed(() => {
   switch (props.variant) {
     case "fill":
       result.push(
-        "bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 active:bg-blue-700",
-        "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
-        "text-white focus-visible:outline",
-        "dark:bg-blue-700 dark:hover:bg-blue-600 focus-visible:bg-blue-600 dark:active:bg-blue-500",
-        "border dark:border-blue-700 dark:hover:border-blue-600 focus-visible:border-blue-600 dark:active:border-blue-500",
+        ...(props.focus
+          ? [""]
+          : [
+            "bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 active:bg-blue-700",
+            "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
+            "text-white focus-visible:outline",
+            "dark:bg-blue-700 dark:hover:bg-blue-600 focus-visible:bg-blue-600 dark:active:bg-blue-500",
+            "border dark:border-blue-700 dark:hover:border-blue-600 focus-visible:border-blue-600 dark:active:border-blue-500",
+          ]
+        )
       );
       break;
     case "outline":
       result.push(
-        "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
-        "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
-        "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
-        "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
-        "dark:border-blue-500 dark:hover:border-blue-500 dark:focus-visible:border-blue-500 dark:active:border-blue-600",
-        "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
+        ...(props.focus
+          ? [""]
+          : [
+            "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
+            "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
+            "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+            "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
+            "dark:border-blue-500 dark:hover:border-blue-500 dark:focus-visible:border-blue-500 dark:active:border-blue-600",
+            "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
+          ]
+        )
       );
       break;
     case "outlineSubtle":
       result.push(
-        "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
-        "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
-        "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
-        "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
-        "dark:border-stone-700 dark:hover:border-stone-600 focus-visible:border-stone-600 dark:active:border-stone-500",
-        "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+        ...(props.focus
+          ? [""]
+          : [
+            "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
+            "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
+            "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+            "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+            "dark:border-stone-700 dark:hover:border-stone-600 focus-visible:border-stone-600 dark:active:border-stone-500",
+            "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+          ]
+        )
       );
       break;
     case "text":
       result.push(
-        "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
-        "border-none",
-        "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
-        "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
-        "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
+        ...(props.focus
+          ? [""]
+          : [
+            "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
+            "border-none",
+            "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+            "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
+            "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
+          ]
+        )
       );
       break;
     case "textSubtle":
       result.push(
-        "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
-        "border-none",
-        "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
-        "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
-        "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+        ...(props.focus
+          ? ["bg-slate-200 text-slate-900 dark:bg-neutral-600 dark:text-white"]
+          : [
+            "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
+            "border-none",
+            "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+            "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+            "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+          ]
+        )
       );
       break;
     case "destructive":
@@ -194,7 +216,7 @@ defineExpose({ focus });
         {{ label }}
       </div>
       <BIcon v-if="iconAfter" :name="iconAfter" class="opacity-75" />
-      <NotificationBadge v-if="notification" :inside="!bordered && !solid" />
+      <NotificationBadge v-if="notification" :inside="variant === 'text' || variant === 'textSubtle'" />
     </component>
   </BTooltip>
   <component
@@ -216,6 +238,6 @@ defineExpose({ focus });
       {{ label }}
     </div>
     <BIcon v-if="iconAfter" :name="iconAfter" />
-    <NotificationBadge v-if="notification" :inside="!bordered && !solid" />
+    <NotificationBadge v-if="notification" :inside="variant === 'text' || variant === 'textSubtle'" />
   </component>
 </template>

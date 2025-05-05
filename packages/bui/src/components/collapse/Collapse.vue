@@ -14,9 +14,9 @@ const props = withDefaults(
   }>(),
   {
     alignment: "right",
-    borderClassOpen: "border-default",
-    borderClassClosed: "border-subtle",
-    headerBgClass: "bg-white",
+    borderClassOpen: "border-strong",
+    borderClassClosed: "border-default",
+    headerBgClass: "bg-primary",
     id: "",
     open: false,
     sticky: false,

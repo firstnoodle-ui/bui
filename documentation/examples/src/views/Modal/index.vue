@@ -39,7 +39,7 @@ const widthTriggerRef = ref<typeof BButton>();
           </p>
         </template>
         <template #footer>
-          <BButton label="close" solid type="primary" @click="defaultModalRef!.close()" />
+          <BButton label="close" variant="fill" @click="defaultModalRef!.close()" />
         </template>
       </BModal>
     </ComponentPageSection>
@@ -79,7 +79,7 @@ const widthTriggerRef = ref<typeof BButton>();
         "
       >
         <p>If you want to have complete control of the layout, use the default slot (and none of the other!)</p>
-        <BButton label="close" solid type="primary" @click="bareModalRef!.close()" />
+        <BButton label="close" variant="fill" @click="bareModalRef!.close()" />
       </BModal>
     </ComponentPageSection>
     <ComponentPageSection title="Width">

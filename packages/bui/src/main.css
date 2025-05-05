@@ -1,9 +1,12 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -15,52 +18,99 @@ body {
   height: 100vh;
 }
 
+@layer base {
+  h1 {
+    @apply text-2xl font-bold;
+  }
+  h2 {
+    @apply text-xl font-bold;
+  }
+  h3 {
+    @apply text-lg font-bold;
+  }
+  h4 {
+    @apply text-base font-bold;
+  }
 
-/* COMMON FOR BOTH THEMES */
-@theme {
-    /* BG */
-    --bg-action: var(--color-blue-500);
-    --bg-action-hover: var(--color-blue-600);
-    --bg-action-active: var(--color-blue-700);
-    --bg-destructive: var(--color-red-500);
-    --bg-destructive-hover: var(--color-red-600);
-    --bg-destructive-active: var(--color-red-700);
+  /* Shared in both themes */
+  :root {
+    --color-action: var(--color-blue-500);
+    --color-action-hover: var(--color-blue-600);
+    --color-action-active: var(--color-blue-700);
+    --color-destructive: var(--color-red-500);
+    --color-destructive-hover: var(--color-red-600);
+    --color-destructive-active: var(--color-red-700);
+  }
+
+  [data-theme="light"] {
+    --color-bg-primary: var(--color-white);
+    --color-bg-secondary: var(--color-stone-100);
+    --color-bg-tertiary: var(--color-stone-200);
+
+    --color-border-weak: var(--color-stone-200);
+    --color-border-default: var(--color-stone-300);
+    --color-border-strong: var(--color-stone-400);
+
+    --color-text-primary: var(--color-slate-900);
+    --color-text-secondary: var(--color-slate-700);
+    --color-text-tertiary: var(--color-slate-500);
+    --color-text-muted: var(--color-slate-300);
+  }
+  [data-theme="dark"] {
+    --color-bg-primary: #212121;
+    --color-bg-secondary: var(--color-neutral-800);
+    --color-bg-tertiary: #333333;
+
+    --color-border-weak: var(--color-neutral-800);
+    --color-border-default: var(--color-neutral-700);
+    --color-border-strong: var(--color-neutral-600);
+
+    --color-text-primary: var(--color-stone-100);
+    --color-text-secondary: var(--color-stone-300);
+    --color-text-tertiary: var(--color-stone-400);
+    --color-text-muted: var(--color-stone-500);
+  }
 }
 
+/* @utility content-auto {
+  content-visibility: auto;
+} */
 
-:root[color-theme="light"] {
-    /* BG */
-    --bg-default: var(--color-white);
-    --bg-medium: var(--color-stone-100);
-    --bg-heavy: var(--color-stone-200);
-
-    /* BORDER */
-    --border-default: var(--color-stone-300);
-    --border-strong: var(--color-stone-400);
-    --border-weak: var(--color-stone-200);
-
-    /* TEXT */
-    --text-primary: var(--color-slate-900);
-    --text-secondary: var(--color-slate-700);
-    --text-tertiary: var(--color-slate-500);
-    --text-muted: var(--color-slate-300);
+@utility bg-primary {
+  background-color: var(--color-bg-primary);
+}
+@utility bg-secondary {
+  background-color: var(--color-bg-secondary);
+}
+@utility bg-tertiary {
+  background-color: var(--color-bg-tertiary);
+}
+@utility bg-action {
+  background-color: var(--color-action);
 }
 
+@utility border-weak {
+  border-color: var(--color-border-weak);
+}
+@utility border-default {
+  border-color: var(--color-border-default);
+}
+@utility border-strong {
+  border-color: var(--color-border-strong);
+}
+@utility border-action {
+  border-color: var(--color-action);
+}
 
-:root[color-theme="dark"] {
-    /* BG */
-    --bg-default: #212121;
-    --bg-medium: #262626;
-    --bg-heavy: #333333;
-
-    /* BORDER */
-    --border-default: var(--color-neutral-700);
-    --border-strong: var(--color-neutral-600);
-    --border-weak: #2E2E2E;
-
-    /* TEXT */
-    --text-primary: var(--color-stone-100);
-    --text-secondary: var(--color-stone-300);
-    --text-tertiary: var(--color-stone-400);
-    --text-muted: var(--color-500);
+@utility text-primary {
+  color: var(--color-text-primary);
+}
+@utility text-secondary {
+  color: var(--color-text-secondary);
+}
+@utility text-tertiary {
+  color: var(--color-text-tertiary);
+}
+@utility text-muted {
+  color: var(--color-text-muted);
 }

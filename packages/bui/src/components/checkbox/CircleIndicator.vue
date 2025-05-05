@@ -2,28 +2,26 @@
 import { computed } from "vue";
 import { BIcon } from "../";
 
-const props = defineProps<{ value: number; disabled: boolean }>();
+const { value, disabled } = defineProps<{ value: number; disabled: boolean }>();
 
 const icon = computed(() => {
-  if (props.value) {
-    return props.value === 1 ? "check" : "dash";
+  if (value) {
+    return value === 1 ? "check" : "dash";
   }
   return null;
-});
-
-const classes = computed(() => {
-  if (!props.disabled && props.value) return "border-action bg-light-blue text-white";
-  if (props.disabled && props.value) return "border-default bg-granite-grey-15 text-white cursor-default";
-  if (props.disabled && !props.value) return "border-subtle bg-granite-grey-40 cursor-default";
-  return "border-default bg-white";
 });
 </script>
 
 <template>
   <button
-    class="inline-flex items-center justify-center w-6 h-6 rounded-full border focus:outline-hidden focus-visible:border-true-blue active:scale-[0.98]"
-    :class="classes"
+    class="group inline-flex items-center justify-center w-6 h-6 rounded-full border focus:outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+    :class="{
+      'border-action bg-action text-white': !disabled && value,
+      'border-strong bg-tertiary text-white cursor-default': disabled && value,
+      'border-default bg-secondary hover:bg-secondary cursor-pointer': disabled && !value,
+      'border-default bg-primary hover:bg-amber-300 cursor-pointer': !disabled && !value,
+    }"
   >
-    <BIcon v-if="icon" :name="icon" class="text-white" :class="{ '-ml-px': value === 1 }" />
+    <BIcon v-if="icon" :name="icon" class="text-white group-hover:text-muted" />
   </button>
 </template>

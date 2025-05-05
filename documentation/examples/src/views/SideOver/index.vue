@@ -31,7 +31,7 @@ const onClose = () => {
         </template>
         <template #footer>
           <div class="w-full h-12 flex items-center justify-end">
-            <BButton solid type="primary" label="Done" @click="sideOverRef!.close()" />
+            <BButton variant="fill" label="Done" @click="sideOverRef!.close()" />
           </div>
         </template>
       </BSideOver>

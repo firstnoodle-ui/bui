@@ -27,8 +27,8 @@ const onToggle = (id: string) => {
               Fruit
             </div>
             <div>
-              <BButton icon="download" />
-              <BButton icon="trash" />
+              <BButton variant="textSubtle" icon="download" />
+              <BButton variant="textSubtle" icon="trash" />
             </div>
           </section>
         </template>
@@ -41,8 +41,8 @@ const onToggle = (id: string) => {
                     Arrow disappears if content slot is empty + header-bg-class
                   </div>
                   <div>
-                    <BButton icon="download" />
-                    <BButton icon="trash" />
+                    <BButton variant="textSubtle" icon="download" />
+                    <BButton variant="textSubtle" icon="trash" />
                   </div>
                 </section>
               </template>
@@ -54,8 +54,8 @@ const onToggle = (id: string) => {
                     Red Fruit
                   </div>
                   <div>
-                    <BButton icon="download" />
-                    <BButton icon="trash" />
+                    <BButton variant="textSubtle" icon="download" />
+                    <BButton variant="textSubtle" icon="trash" />
                   </div>
                 </section>
               </template>
@@ -72,8 +72,8 @@ const onToggle = (id: string) => {
                     Yellow Fruit
                   </div>
                   <div>
-                    <BButton icon="download" />
-                    <BButton icon="trash" />
+                    <BButton variant="textSubtle" icon="download" />
+                    <BButton variant="textSubtle" icon="trash" />
                   </div>
                 </section>
               </template>

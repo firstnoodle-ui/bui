@@ -60,7 +60,7 @@ defineExpose({ close });
           v-show="show"
           ref="panelRef"
           tabindex="0"
-          class="ml-auto flex flex-col bg-light shadow-sm-xl rounded-xl max-w-lg w-full h-full focus:outline-hidden"
+          class="ml-auto flex flex-col bg-primary shadow-sm-xl rounded-xl overflow-hidden max-w-lg w-full h-full focus:outline-hidden"
           :class="{ 'px-6 py-4': !slots.default }"
           style="pointer-events: auto"
         >
@@ -69,7 +69,7 @@ defineExpose({ close });
             <template v-if="props.title || $slots.header" #header>
               <header v-if="props.title" class="flex items-center justify-between w-full h-12">
                 <h4>{{ props.title }}</h4>
-                <BButton v-if="props.closeable" icon="close" @click="onClose" />
+                <BButton v-if="props.closeable" small icon="close" variant="textSubtle" @click="onClose" />
               </header>
               <slot v-else name="header" />
             </template>

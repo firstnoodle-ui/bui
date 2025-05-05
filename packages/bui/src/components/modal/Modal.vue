@@ -91,7 +91,7 @@ defineExpose({ close });
             <template v-if="props.title || $slots.header" #header>
               <header v-if="props.title" class="flex items-center justify-between h-12 w-full mb-4">
                 <h4>{{ props.title }}</h4>
-                <BButton v-if="closeable" icon="close" @click="onClose" />
+                <BButton v-if="closeable" icon="close" variant="textSubtle" @click="onClose" />
               </header>
               <slot name="header" />
             </template>

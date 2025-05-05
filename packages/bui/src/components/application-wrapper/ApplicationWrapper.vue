@@ -1,5 +1,5 @@
 <template>
-  <main class="fixed top-0 left-0 w-screen h-screen overflow-hidden">
+  <main class="fixed top-0 left-0 w-screen h-screen overflow-hidden text-primary">
     <slot />
     <div id="modals" class="z-10 fixed w-screen h-screen top-0 left-0 pointer-events-none" />
     <div id="notifications" class="z-10 fixed w-screen h-screen top-0 left-0 pointer-events-none flex items-end justify-center p-12" />

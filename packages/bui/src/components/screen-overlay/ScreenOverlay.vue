@@ -20,7 +20,7 @@ const styles = reactive({ backdropFilter: "" });
 
 onBeforeMount(() => {
   if (props.type === "default") {
-    classes.value = "bg-black/25";
+    classes.value = "bg-black/25 dark:bg-black/50";
     styles.backdropFilter = "";
   }
   else if (props.type === "blurred") {

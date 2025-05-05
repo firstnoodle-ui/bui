@@ -10,8 +10,8 @@ const props = withDefaults(
   }>(),
   {
     value: false,
-    offColorClass: "bg-light",
-    onColorClass: "bg-heavy",
+    offColorClass: "bg-secondary",
+    onColorClass: "bg-tertiary",
     small: false,
   },
 );
@@ -41,12 +41,12 @@ const backgroundStyle = computed(() => {
     tabindex="0"
     aria-checked="false"
     :class="backgroundClass"
-    class="group relative inline-flex flex-shrink-0 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-hidden"
+    class="group relative inline-flex flex-shrink-0 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
     :style="backgroundStyle"
     @click.stop.prevent="emit('toggle', $event)"
     @keydown.space.prevent="emit('toggle', $event)"
     @keydown.enter.prevent="emit('toggle', $event)"
   >
-    <span aria-hidden="true" :class="knobClass" class="inline-block rounded-full bg-light shadow-sm transform transition ease-in-out duration-200" />
+    <span aria-hidden="true" :class="knobClass" class="inline-block rounded-full bg-primary shadow-sm transform transition ease-in-out duration-200" />
   </button>
 </template>

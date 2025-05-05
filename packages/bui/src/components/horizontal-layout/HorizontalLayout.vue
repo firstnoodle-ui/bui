@@ -16,16 +16,16 @@ const props = withDefaults(
     mainBgColorClass?: string;
   }>(),
   {
-    asideLeftBgColorClass: "bg-light",
+    asideLeftBgColorClass: "",
     asideLeftDraggable: false,
     asideLeftVisible: true,
     asideLeftWidth: 256,
-    asideRightBgColorClass: "bg-light",
+    asideRightBgColorClass: "",
     asideRightDraggable: false,
     asideRightVisible: true,
     asideRightWidth: 256,
     borders: false,
-    mainBgColorClass: "bg-light",
+    mainBgColorClass: "",
   },
 );
 
@@ -77,7 +77,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative w-full h-full overflow-hidden">
+  <div class="relative w-full h-full overflow-hidden bg-primary">
     <AsideComponent
       v-if="slots['aside-left']"
       side="left"

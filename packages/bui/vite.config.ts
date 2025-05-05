@@ -8,9 +8,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [
     vue(),
-    Dts({
-      tsconfigPath: resolve(__dirname, "tsconfig.app.json"),
-    }),
+    Dts({tsconfigPath: resolve(__dirname, "tsconfig.app.json")}),
     tailwindcss(),
   ],
   build: {

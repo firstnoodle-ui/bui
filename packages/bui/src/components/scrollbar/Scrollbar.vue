@@ -22,7 +22,7 @@ const props = withDefaults(
     disableX: false,
     disableY: false,
     wrapClass: "",
-    viewClass: "",
+    viewClass: "h-full",
     viewHeightClass: "h-full",
     noresize: false,
     show: false,

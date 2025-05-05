@@ -1,5 +1,5 @@
 <template>
-  <div class="pointer-events-auto rounded-lg overflow-hidden border border-subtle bg-2 shadow-sm">
+  <div class="pointer-events-auto rounded-lg overflow-hidden border border-default bg-primary shadow-sm">
     <slot />
   </div>
 </template>

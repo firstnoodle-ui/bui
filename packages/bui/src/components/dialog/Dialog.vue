@@ -51,7 +51,7 @@ defineExpose({ close });
                 <h4 v-else>
                   <slot name="title" />
                 </h4>
-                <BButton v-if="props.closeable" icon="close" @click="onClose" />
+                <BButton v-if="props.closeable" small icon="close" variant="textSubtle" @click="onClose" />
               </header>
             </template>
             <template #main>
