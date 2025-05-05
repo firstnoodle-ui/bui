@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { TIcon } from "../types";
+
 defineProps<{ name: TIcon }>();
 </script>
 

@@ -1,4 +1,4 @@
-import './main.css';
+import "./main.css";
 
 export * from "./components";
 export * from "./composables";

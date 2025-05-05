@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Placement } from "@floating-ui/dom";
 import type { ButtonVariant, TIcon } from "../types";
-import { computed, onBeforeMount, ref } from "vue";
+import { computed, ref } from "vue";
 import { BIcon, BLoadSpinner, BTooltip } from "../";
 import NotificationBadge from "./NotificationBadge.vue";
 
@@ -52,9 +52,11 @@ const loadSpinnerClass = computed(() => {
   const classes = ["w-4 h-4"];
   if (props.variant === "fill" || props.variant === "destructive") {
     classes.push("text-light");
-  } else if(props.variant === "outline" || props.variant === "text") {
+  }
+  else if (props.variant === "outline" || props.variant === "text") {
     classes.push("text-blue-500");
-  } else if(props.variant === "outlineSubtle" || props.variant === "textSubtle") {
+  }
+  else if (props.variant === "outlineSubtle" || props.variant === "textSubtle") {
     classes.push("text-slate-700 dark:text-slate-200");
   }
   return classes.join(" ");
@@ -87,13 +89,13 @@ const buttonClasses = computed(() => {
         ...(props.focus
           ? [""]
           : [
-            "bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 active:bg-blue-700",
-            "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
-            "text-white focus-visible:outline",
-            "dark:bg-blue-700 dark:hover:bg-blue-600 focus-visible:bg-blue-600 dark:active:bg-blue-500",
-            "border dark:border-blue-700 dark:hover:border-blue-600 focus-visible:border-blue-600 dark:active:border-blue-500",
-          ]
-        )
+              "bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 active:bg-blue-700",
+              "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
+              "text-white focus-visible:outline",
+              "dark:bg-blue-700 dark:hover:bg-blue-600 focus-visible:bg-blue-600 dark:active:bg-blue-500",
+              "border dark:border-blue-700 dark:hover:border-blue-600 focus-visible:border-blue-600 dark:active:border-blue-500",
+            ]
+        ),
       );
       break;
     case "outline":
@@ -101,14 +103,14 @@ const buttonClasses = computed(() => {
         ...(props.focus
           ? [""]
           : [
-            "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
-            "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
-            "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
-            "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
-            "dark:border-blue-500 dark:hover:border-blue-500 dark:focus-visible:border-blue-500 dark:active:border-blue-600",
-            "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
-          ]
-        )
+              "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
+              "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
+              "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+              "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
+              "dark:border-blue-500 dark:hover:border-blue-500 dark:focus-visible:border-blue-500 dark:active:border-blue-600",
+              "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
+            ]
+        ),
       );
       break;
     case "outlineSubtle":
@@ -116,14 +118,14 @@ const buttonClasses = computed(() => {
         ...(props.focus
           ? [""]
           : [
-            "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
-            "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
-            "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
-            "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
-            "dark:border-stone-700 dark:hover:border-stone-600 focus-visible:border-stone-600 dark:active:border-stone-500",
-            "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
-          ]
-        )
+              "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
+              "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
+              "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+              "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+              "dark:border-stone-700 dark:hover:border-stone-600 focus-visible:border-stone-600 dark:active:border-stone-500",
+              "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+            ]
+        ),
       );
       break;
     case "text":
@@ -131,13 +133,13 @@ const buttonClasses = computed(() => {
         ...(props.focus
           ? [""]
           : [
-            "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
-            "border-none",
-            "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
-            "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
-            "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
-          ]
-        )
+              "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
+              "border-none",
+              "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
+              "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
+              "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
+            ]
+        ),
       );
       break;
     case "textSubtle":
@@ -145,13 +147,13 @@ const buttonClasses = computed(() => {
         ...(props.focus
           ? ["bg-slate-200 text-slate-900 dark:bg-neutral-600 dark:text-white"]
           : [
-            "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
-            "border-none",
-            "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
-            "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
-            "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
-          ]
-        )
+              "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
+              "border-none",
+              "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
+              "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+              "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+            ]
+        ),
       );
       break;
     case "destructive":
@@ -159,10 +161,10 @@ const buttonClasses = computed(() => {
         ...(props.focus
           ? ["bg-red-800 border-red-800 text-white"]
           : [
-            "bg-red-600 hover:bg-red-700 focus-visible:bg-red-700 active:bg-red-800",
-            "border border-red-600 hover:border-red-700 focus-visible:border-red-700 active:border-red-800",
-            "text-white"
-          ]
+              "bg-red-600 hover:bg-red-700 focus-visible:bg-red-700 active:bg-red-800",
+              "border border-red-600 hover:border-red-700 focus-visible:border-red-700 active:border-red-800",
+              "text-white",
+            ]
         ),
       );
       break;
