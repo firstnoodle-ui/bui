@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.11...main
+
+[compare changes](https://github.com/firstnoodle/bui/compare/v0.0.11...main)
+
+### 🏡 Chore
+
+- Release v0.0.11 ([faf6420](https://github.com/firstnoodle/bui/commit/faf6420))
+
+### ❤️ Contributors
+
+- Sebastian <seb.thielke@gmail.com>
+
 ## v0.0.10...main
 
 [compare changes](https://github.com/firstnoodle/bui/compare/v0.0.10...main)
