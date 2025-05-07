@@ -50,7 +50,14 @@ const navigateTo = (page: string) => {
             <BVerticalLayout>
               <template #main>
                 <main class="w-full px-4 pt-4 pb-32 space-y-4">
-                  <BNavItem v-for="page in routes" :key="page.name" orientation="vertical" :href="page.name" :to="{ name: page.name }" type="light" @navigate="navigateTo">
+                  <BNavItem
+                    v-for="page in routes"
+                    :key="page.name"
+                    orientation="vertical"
+                    :href="page.name" :to="{ name: page.name }"
+                    :is-active="router.currentRoute.value.name === page.name"
+                    @navigate="navigateTo"
+                  >
                     {{ page.name }}
                   </BNavItem>
                 </main>
