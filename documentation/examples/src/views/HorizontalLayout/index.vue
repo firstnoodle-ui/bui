@@ -9,7 +9,7 @@ const asideLeftWidth = ref(182);
 const asideLeftVisible = ref(true);
 const asideRightWidth = ref(182);
 const asideRightVisible = ref(true);
-const borders = ref(false);
+const borders = ref(true);
 
 const onAsideLeftTransitionEnd = () => console.log("aside left transition done");
 const onAsideRightTransitionEnd = () => console.log("aside right transition done");
