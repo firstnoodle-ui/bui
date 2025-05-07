@@ -1,42 +1,30 @@
 <script setup lang="ts">
 import type { TPopSelectOption } from "../types";
-import { computed } from "vue";
-import { BIcon, BPopSelect, BTooltip } from "../";
+import { computed, ref } from "vue";
+import { BButton, BPopSelect } from "../";
 import { range } from "../../utils";
 
-const props = withDefaults(
-  defineProps<{
-    noBorders?: boolean;
-    currentPage: number;
-    lastPage: number;
-  }>(),
-  {
-    noBorders: false,
-  },
-);
+const { borders = false, currentPage, lastPage } = defineProps<{
+  borders?: boolean;
+  currentPage: number;
+  lastPage: number;
+}>()
 
 const emit = defineEmits(["change"]);
+const navRef = ref<HTMLElement>();
 
 const pageOptions = computed((): TPopSelectOption[] => {
-  return range(0, props.lastPage).map((num: number) => ({ label: `${num + 1}` }));
+  return range(0, lastPage).map((num: number) => ({ label: `${num + 1}` }));
 });
-
-const shared
-  = "relative inline-flex items-center h-8 bg-primary text-sm text-primary hover:bg-sand-grey-15 focus:z-10 focus:outline-hidden focus-visible:bg-sand-grey-40 active:scale-[0.98]";
-
-const arrowClasses = computed(() => {
-  return props.noBorders
-    ? `${shared} px-2 rounded-lg border border-transparent focus-visible:border-true-blue`
-    : `${shared} px-2 border border-default focus-visible:border-true-blue`;
-});
-const triggerClasses = computed(() => {
-  return props.noBorders ? `${shared} px-3 rounded-lg` : `${shared} -ml-px px-3 border border-default focus-visible:border-true-blue`;
-});
+const prevStyle = borders ? { borderRadius: '8px 0 0 8px' } : undefined;
+const nextStyle = borders ? { borderRadius: '0px 8px 8px 0px' } : undefined;
+const midStyle = borders ? { borderRadius: '0' } : undefined;
+const variant = borders ? 'outlineSubtle' : 'textSubtle';
 
 const onChange = (direction: -1 | 1) => {
-  let targetPage = props.currentPage + direction;
-  if (targetPage > props.lastPage) targetPage = 1;
-  if (targetPage < 1) targetPage = props.lastPage;
+  let targetPage = currentPage + direction;
+  if (targetPage > lastPage) targetPage = 1;
+  if (targetPage < 1) targetPage = lastPage;
   emit("change", targetPage);
 };
 
@@ -46,27 +34,31 @@ const onPageSelect = (pageOption: TPopSelectOption) => {
 </script>
 
 <template>
-  <nav class="relative z-0 inline-flex">
-    <BTooltip text="Previous page" :delay="500">
-      <button rel="prev" aria-label="previous page" class="rounded-l-lg" :class="[arrowClasses]" @click="onChange(-1)">
-        <BIcon name="chevron-left" />
-      </button>
-    </BTooltip>
-    <BPopSelect same-width-as-trigger :value="currentPage" :options="pageOptions" @select="onPageSelect">
-      <template #trigger>
-        <BTooltip text="current / total" :delay="500">
-          <button :class="triggerClasses">
-            <span class="">{{ currentPage }}</span>
-            <span class="px-2">/</span>
-            <span class="">{{ lastPage }}</span>
-          </button>
-        </BTooltip>
+  <nav ref="navRef" class="relative z-0 inline-flex">
+    <BButton
+      :variant="variant"
+      icon="chevron-left"
+      :style="prevStyle"
+      class="z-0 hover:z-10 focus:z-10 active:z-10"
+      @click="onChange(-1)"
+    />
+    <BPopSelect :same-width-as-element="navRef" placement="bottom" :value="currentPage" :options="pageOptions" @select="onPageSelect">
+      <template #trigger="slotProps">
+        <BButton
+          :variant="variant"
+          :label="`${currentPage} / ${lastPage}`"
+          :style="midStyle"
+          :focus="slotProps && slotProps.visible"
+          class="z-0 hover:z-10 focus:z-10 active:z-10 -ml-px"
+        />
       </template>
     </BPopSelect>
-    <BTooltip text="Next page" :delay="500">
-      <button rel="next" aria-label="next page" class="-ml-px rounded-r-lg" :class="[arrowClasses]" @click="onChange(1)">
-        <BIcon name="chevron-right" />
-      </button>
-    </BTooltip>
+    <BButton
+      :variant="variant"
+      icon="chevron-right"
+      :style="nextStyle"
+      class="z-0 hover:z-10 focus:z-10 active:z-10 -ml-px"
+      @click="onChange(1)"
+    />
   </nav>
 </template>
