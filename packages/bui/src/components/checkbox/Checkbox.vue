@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import CircleIndicator from "./CircleIndicator.vue";
 import DefaultIndicator from "./DefaultIndicator.vue";
+import { type TCheckboxType } from "../types";
 
 const { checked, type = "default", indeterminate = false, disabled = false } = defineProps<{
   label?: string;
-  type?: "default" | "circle";
+  type?: TCheckboxType;
   checked: boolean;
-  indeterminate?: false,
+  indeterminate?: boolean,
   disabled?: boolean;
 }>()
 
