@@ -31,6 +31,9 @@ body {
   h4 {
     @apply text-base font-bold;
   }
+  h5 {
+    @apply text-sm font-bold;
+  }
 
   /* Shared in both themes */
   :root {
@@ -88,6 +91,12 @@ body {
 @utility bg-action {
   background-color: var(--color-action);
 }
+@utility bg-action-hover {
+  background-color: var(--color-action-hover);
+}
+@utility bg-action-active {
+  background-color: var(--color-action-active);
+}
 
 @utility border-weak {
   border-color: var(--color-border-weak);
@@ -100,6 +109,12 @@ body {
 }
 @utility border-action {
   border-color: var(--color-action);
+}
+@utility border-action-hover {
+  border-color: var(--color-action-hover);
+}
+@utility border-action-active {
+  border-color: var(--color-action-active);
 }
 
 @utility text-primary {
