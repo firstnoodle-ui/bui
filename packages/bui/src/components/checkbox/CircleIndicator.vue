@@ -5,8 +5,8 @@ import { BIcon } from "../";
 const { value, disabled = false, indeterminate = false } = defineProps<{ value: boolean; indeterminate?: boolean; disabled?: boolean }>();
 
 const icon = computed(() => {
-  if (value) return "check";
   if (indeterminate) return "dash"
+  if (value) return "check";
   return null;
 });
 </script>
