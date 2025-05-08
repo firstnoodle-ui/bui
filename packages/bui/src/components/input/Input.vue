@@ -10,7 +10,7 @@ const props = withDefaults(
     icon?: TIcon;
     multiline?: boolean;
     placeholder?: string;
-    value: string | number;
+    value: string;
     inputType?: InputTypeHTMLAttribute;
     autoFocus?: boolean;
   }>(),
@@ -21,14 +21,14 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(["change"]);
+const emit = defineEmits(["change", "enter"]);
 
 const textareaRef = ref<HTMLTextAreaElement>();
 const inputRef = ref<HTMLInputElement>();
 
 const outerClass = computed(() => {
   const result = [];
-  result.push(props.disabled ? "bg-medium border-subtle text-secondary" : "bg-light border-default text-primary shadow-sm-inner-sm");
+  result.push(props.disabled ? "bg-secondary border-weak text-secondary" : "bg-primary border-default text-primary shadow-sm-inner-sm");
   result.push(props.icon ? "pr-3 pl-8" : "px-3");
   return result;
 });
@@ -38,11 +38,24 @@ const focus = () => {
   else (inputRef.value as HTMLInputElement).focus();
 };
 
-const onInput = (event: Event) => {
-  if (event.target) {
+const onInput = (event: InputEvent) => {
+  if(event.target) {
     emit("change", (event.target as HTMLInputElement).value);
   }
 };
+
+const onEnter = (e:KeyboardEvent) => {
+  e.stopPropagation();
+  e.preventDefault();
+  emit('enter');
+}
+
+const onBlur = (event:Event) => {
+  event.stopImmediatePropagation();
+  event.stopPropagation();
+  event.preventDefault();
+  console.log('blur');
+}
 
 defineExpose({ focus });
 </script>
@@ -81,6 +94,10 @@ defineExpose({ focus });
       :value="value"
       :placeholder="placeholder"
       class="py-2 w-full text-sm leading-tight bg-transparent focus:outline-hidden"
+      @change.stop.prevent
+      @keydown.enter.stop.prevent="onEnter"
+      @keyup.enter.stop.prevent
+      @blur="onBlur"
       @input.stop.prevent="onInput"
     >
   </div>
