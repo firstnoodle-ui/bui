@@ -95,7 +95,7 @@ function onTransition(transitionActive: boolean, focusAside: boolean) {
         width: `${width}px`,
         transitionProperty: dragging ? 'none' : 'transform, width',
       }"
-      class="absolute top-0 z-10 h-full overflow-x-hidden duration-500 ease-in-out"
+      class="absolute top-0 z-10 h-full overflow-x-hidden duration-500 ease-in-out bg-primary"
       :class="classes"
     >
       <slot />
