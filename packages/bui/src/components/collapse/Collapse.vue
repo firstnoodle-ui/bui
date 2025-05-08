@@ -29,6 +29,7 @@ const buttonRef = ref<HTMLButtonElement>();
 const headerRef = ref<HTMLHeadElement>();
 const isSticky = ref(false);
 
+const borderClass = computed(() => props.open ? props.borderClassOpen : props.borderClassClosed)
 const styles = computed(() => {
   return isSticky.value
     ? {
@@ -81,12 +82,10 @@ onBeforeUnmount(() => {
       :style="styles"
       :class="[
         {
-          [props.borderClassOpen]: open,
-          [props.borderClassClosed]: !open,
-          'shadow-sm-xs border-brand': isSticky,
-          'sticky z-10': isSticky,
+          'shadow-sm-xs border-strong sticky z-10': isSticky,
           'relative': !isSticky,
         },
+        borderClass,
         headerBgClass,
       ]"
     >
