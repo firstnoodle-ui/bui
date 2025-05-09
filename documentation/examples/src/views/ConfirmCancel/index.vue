@@ -22,6 +22,26 @@ const onConfirm = () => console.log("confirm");
           @cancel="onCancel"
         />
       </div>
+      <template #controls>
+        alignment?: "left" | "right";
+        cancelButtonIsText?: boolean;
+        cancelDisabled?: boolean;
+        cancelIcon?: TIcon;
+        cancelLabel?: string;
+        cancelVariant?: ButtonVariant;
+        confirmDisabled?: boolean;
+        confirmIcon?: TIcon;
+        confirmLabel?: string;
+        confirmVariant?: ButtonVariant;
+        fillContainer?: boolean;
+        loading?: boolean;
+        small?: boolean;
+        <!-- <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
+        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
+        <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
+        <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
+        <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" /> -->
+      </template>
     </ComponentPageSection>
   </ComponentPage>
 </template>

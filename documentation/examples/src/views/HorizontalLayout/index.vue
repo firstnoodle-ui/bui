@@ -78,6 +78,23 @@ const onToggleBorders = () => {
           </aside>
         </template>
       </BHorizontalLayout>
+      <template #controls>
+        asideLeftBgColorClass?: string;
+        asideLeftDraggable?: boolean;
+        asideLeftVisible?: boolean;
+        asideLeftWidth?: number;
+        asideRightBgColorClass?: string;
+        asideRightDraggable?: boolean;
+        asideRightVisible?: boolean;
+        asideRightWidth?: number;
+        borders?: boolean;
+        mainBgColorClass?: string;
+        <!-- <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
+        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
+        <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
+        <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
+        <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" /> -->
+      </template>
     </ComponentPageSection>
   </ComponentPage>
 </template>
