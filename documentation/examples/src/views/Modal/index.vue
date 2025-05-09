@@ -31,7 +31,7 @@ const widthClasses:string[] = [
   "max-w-8xl",
   "max-w-full"
 ];
-const selectedWidthClass = ref(widthClasses[0]);
+const selectedWidthClass = ref(widthClasses[5]);
 </script>
 
 <template>
