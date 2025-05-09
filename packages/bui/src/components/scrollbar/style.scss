@@ -1,5 +1,3 @@
-// reference https://github.com/ElemeFE/element/blob/dev/packages/theme-chalk/src/scrollbar.scss
-
 .scrollbar {
   overflow: hidden;
   position: relative;
@@ -24,6 +22,10 @@
         height: 0;
       }
     }
+  }
+  // using css to set the width so negative margin can be set in Scrollbar.vue (gutterWidth)
+  &__wrap::-webkit-scrollbar {
+    width: 6px;
   }
 
   &__view {

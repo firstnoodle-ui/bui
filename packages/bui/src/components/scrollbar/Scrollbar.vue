@@ -2,7 +2,6 @@
 import type { ScrollIntersectionEvent, ScrollTrigger, ThumbDragEvent } from "./types";
 import { nextTick, onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import Bar from "./Bar.vue";
-import { scrollbarWidth } from "./scrollbarWidth.ts";
 import "./style.scss";
 
 const props = withDefaults(
@@ -40,7 +39,7 @@ const emit = defineEmits<{
 
 let mutationObserver: MutationObserver;
 
-const gutterWidth = ref(scrollbarWidth());
+const gutterWidth = ref(6);
 const moveX = ref(0);
 const moveY = ref(0);
 const previousY = ref(0);
@@ -208,7 +207,7 @@ defineExpose({ handleScroll: onScroll, reset, jumpToPercentage, scrollToPercenta
 </script>
 
 <template>
-  <main class="scrollbar" :class="[viewHeightClass, { show }]">
+  <main class="scrollbar scroll-hidden" :class="[viewHeightClass, { show }]">
     <div id="wrapRef" ref="wrapRef" :class="[wrapClasses]" :style="wrapStyle" @scroll="onScroll">
       <component :is="props.tag" ref="contentRef" class="scrollbar__view" :class="[viewClass]">
         <slot />
