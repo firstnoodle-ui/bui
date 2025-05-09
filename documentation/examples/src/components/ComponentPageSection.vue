@@ -22,7 +22,7 @@ const showControls = ref(true);
         @toggle="showControls = !showControls"
       >
         <template #header>
-          <h5>Props, events, exposed</h5>
+          <h5>Props, slots, events, exposed</h5>
         </template>
         <template #content>
           <section class="p-2">
