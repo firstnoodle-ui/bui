@@ -47,7 +47,7 @@ const leftAligned = computed(() => props.alignment === "left");
       stop-propagation
       :icon="confirmIcon"
       :label="confirmLabel"
-      :type="confirmVariant"
+      :variant="confirmVariant"
       :disabled="confirmDisabled"
       :loading="loading"
       :class="{ 'flex-1': fillContainer }"
