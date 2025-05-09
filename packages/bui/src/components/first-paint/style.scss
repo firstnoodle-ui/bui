@@ -2,7 +2,7 @@ $color1: #eee;
 $color2: #bbb;
 
 .first-paint {
-    background-color: $color1;
+    background-color: var(--color-bg-tertiary);
     animation-name: fade;
     animation-duration: 3s;
     animation-iteration-count: infinite;
@@ -15,9 +15,9 @@ $color2: #bbb;
 }
 
 @keyframes fade {
-    0% { background-color: $color1; }
-    5% { background-color: $color1; }
-    25% { background-color: $color2; }
-    45% { background-color: $color1; }
-    100% { background-color: $color1; }
+    0% { background-color: var(--color-bg-tertiary); }
+    5% { background-color: var(--color-bg-tertiary); }
+    25% { background-color: var(--color-bg-secondary); }
+    45% { background-color: var(--color-bg-tertiary); }
+    100% { background-color: var(--color-bg-tertiary); }
 }
