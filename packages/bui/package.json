@@ -11,23 +11,29 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs"
-    }
+    },
+    "./bui.css": "./dist/bui.css"
   },
   "main": "./dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "dist/bui.css"
+  ],
   "scripts": {
     "build": "vite build",
     "typecheck": "vue-tsc -p tsconfig.app.json --noEmit",
     "watch": "vite build --watch",
     "prepack": "pnpm run build",
-    "release:publish": "pnpm publish --access public --otp=211713"
+    "release:publish": "pnpm publish --access public --otp=533339 --no-git-checks"
   },
   "peerDependencies": {
     "tailwindcss": "^4.1.1",
     "vue": "^3.5.13"
   },
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",
