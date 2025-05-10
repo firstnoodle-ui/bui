@@ -1,6 +1,6 @@
-w<script setup lang="ts">
+<script setup lang="ts">
 import type { Placement } from "@floating-ui/dom";
-import type { TButtonType } from "../types";
+import type { ButtonVariant, TIcon } from "../types";
 import { nextTick, ref } from "vue";
 import { BConfirmCancel, BPopper, BPopperContent } from "../";
 import { type ConfirmCancelProps } from "../confirm-cancel/types";
@@ -75,7 +75,7 @@ const onConfirm = () => {
             :cancel-label="cancelLabel"
             :confirm-disabled="confirmDisabled"
             :cancel-disabled="cancelDisabled"
-            :fillContainer="fillContainer || (title || description)"
+            :fillContainer="fillContainer || Boolean(title || description)"
             :loading="loading"
             order="confirm-last"
             @cancel="onCancel"
