@@ -13,7 +13,7 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
         placement="bottom-start"
       >
         <template #trigger="slotProps">
-          <BButton 
+          <BButton
             icon="trash"
             label="Delete"
             variant="outlineSubtle"

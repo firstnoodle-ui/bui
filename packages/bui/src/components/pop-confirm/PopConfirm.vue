@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { Placement } from "@floating-ui/dom";
+import type { ConfirmCancelProps } from "../confirm-cancel/types";
 import type { ButtonVariant, TIcon } from "../types";
 import { nextTick, ref } from "vue";
 import { BConfirmCancel, BPopper, BPopperContent } from "../";
-import { type ConfirmCancelProps } from "../confirm-cancel/types";
 import { useTrapFocus } from "../../";
 
 withDefaults(
-  defineProps< ConfirmCancelProps & {
+  defineProps<ConfirmCancelProps & {
     title?: string;
     description?: string;
     placement?: Placement;
@@ -62,7 +62,9 @@ const onConfirm = () => {
         >
           <section v-if="title || description" class="flex flex-col gap-0">
             <h5>{{ title }}</h5>
-            <p class="text-sm text-secondary">{{ description }}</p>
+            <p class="text-sm text-secondary">
+              {{ description }}
+            </p>
           </section>
           <BConfirmCancel
             :vertical="!(title || description)"
@@ -75,7 +77,7 @@ const onConfirm = () => {
             :cancel-label="cancelLabel"
             :confirm-disabled="confirmDisabled"
             :cancel-disabled="cancelDisabled"
-            :fillContainer="fillContainer || Boolean(title || description)"
+            :fill-container="fillContainer || Boolean(title || description)"
             :loading="loading"
             order="confirm-last"
             @cancel="onCancel"

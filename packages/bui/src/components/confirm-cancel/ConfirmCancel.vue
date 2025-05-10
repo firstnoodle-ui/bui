@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type ConfirmCancelProps } from "./types";
+import type { ConfirmCancelProps } from "./types";
 import { computed } from "vue";
 import { BButton, BFlexbox } from "../";
 

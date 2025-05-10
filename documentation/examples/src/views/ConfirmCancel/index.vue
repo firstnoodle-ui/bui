@@ -4,15 +4,15 @@ import { BConfirmCancel, buttonVariants, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
+import EventFlasher from "../../components/EventFlasher.vue";
 import PropControlBoolean from "../../components/PropControlBoolean.vue";
 import PropControlSelect from "../../components/PropControlSelect.vue";
 import PropControlString from "../../components/PropControlString.vue";
-import EventFlasher from "../../components/EventFlasher.vue";
 
 const confirmRef = ref<typeof EventFlasher>();
 const cancelRef = ref<typeof EventFlasher>();
 
-const orderOptions = ['confirm-first', 'confirm-last'];
+const orderOptions = ["confirm-first", "confirm-last"];
 const selectedOrder = ref(orderOptions[0]);
 const vertical = ref(false);
 
@@ -57,11 +57,15 @@ const small = ref(false);
       </div>
       <template #controls>
         <section class="flex items-center justify-end gap-2 mb-8">
-          <div class="text-sm font-bold">Events</div>
+          <div class="text-sm font-bold">
+            Events
+          </div>
           <EventFlasher ref="confirmRef" name="confirm" />
           <EventFlasher ref="cancelRef" name="cancel" />
         </section>
-        <PropControlBoolean name="Vertical" :value="vertical" @toggle="vertical = !vertical">Mainly used in PopConfirm</PropControlBoolean>
+        <PropControlBoolean name="Vertical" :value="vertical" @toggle="vertical = !vertical">
+          Mainly used in PopConfirm
+        </PropControlBoolean>
         <PropControlBoolean name="Cancel disabled" :value="cancelButtonDisabled" @toggle="cancelButtonDisabled = !cancelButtonDisabled" />
         <PropControlBoolean name="Confirm disabled" :value="confirmButtonDisabled" @toggle="confirmButtonDisabled = !confirmButtonDisabled" />
         <PropControlBoolean name="Fill container" :value="fillContainer" @toggle="fillContainer = !fillContainer" />

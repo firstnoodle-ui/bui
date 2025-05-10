@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { TAlignment, TJustification } from "../types";
+import { computed } from "vue";
 
 const props = withDefaults(
   defineProps<{
