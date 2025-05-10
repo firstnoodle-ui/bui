@@ -38,24 +38,23 @@ const focus = () => {
   else (inputRef.value as HTMLInputElement).focus();
 };
 
-const onInput = (event: InputEvent) => {
-  if(event.target) {
+const onInput = (event: Event) => {
+  if (event.target) {
     emit("change", (event.target as HTMLInputElement).value);
   }
 };
 
-const onEnter = (e:KeyboardEvent) => {
+const onEnter = (e: KeyboardEvent) => {
   e.stopPropagation();
   e.preventDefault();
-  emit('enter');
-}
+  emit("enter");
+};
 
-const onBlur = (event:Event) => {
+const onBlur = (event: Event) => {
   event.stopImmediatePropagation();
   event.stopPropagation();
   event.preventDefault();
-  console.log('blur');
-}
+};
 
 defineExpose({ focus });
 </script>

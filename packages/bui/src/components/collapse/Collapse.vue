@@ -29,7 +29,7 @@ const buttonRef = ref<HTMLButtonElement>();
 const headerRef = ref<HTMLHeadElement>();
 const isSticky = ref(false);
 
-const borderClass = computed(() => props.open ? props.borderClassOpen : props.borderClassClosed)
+const borderClass = computed(() => props.open ? props.borderClassOpen : props.borderClassClosed);
 const styles = computed(() => {
   return isSticky.value
     ? {

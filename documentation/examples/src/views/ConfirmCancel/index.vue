@@ -1,30 +1,31 @@
 <!-- eslint-disable no-console -->
 <script setup lang="ts">
-import { ref } from 'vue';
-import { BConfirmCancel, buttonVariants, icons, type ButtonVariant, type TIcon } from "@firstnoodle-ui/bui";
+import type { ButtonVariant, TIcon } from "@firstnoodle-ui/bui";
+import { BConfirmCancel, buttonVariants, icons } from "@firstnoodle-ui/bui";
+import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
 import PropControlBoolean from "../../components/PropControlBoolean.vue";
-import PropControlString from "../../components/PropControlString.vue";
 import PropControlSelect from "../../components/PropControlSelect.vue";
+import PropControlString from "../../components/PropControlString.vue";
 
 const onCancel = () => console.log("cancel");
 const onConfirm = () => console.log("confirm");
 
-const alignments = ['left', 'right'];
+const alignments = ["left", "right"];
 const selectedAlignment = ref(alignments[0]);
 
-const variantOptions:string[] = ['fill', 'outline', 'outlineSubtle', 'text', 'textSubtle', 'destructive'];
+const variantOptions: string[] = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive"];
 
 const cancelButtonVariant = ref(variantOptions[1]);
 const cancelButtonDisabled = ref(false);
-const cancelIcon = ref<string|undefined>();
-const cancelLabel = ref('Cancel');
+const cancelIcon = ref<string | undefined>();
+const cancelLabel = ref("Cancel");
 
 const confirmButtonVariant = ref(variantOptions[0]);
 const confirmButtonDisabled = ref(false);
-const confirmIcon = ref<string|undefined>();
-const confirmLabel = ref('Confirm');
+const confirmIcon = ref<string | undefined>();
+const confirmLabel = ref("Confirm");
 
 const fillContainer = ref(false);
 const loading = ref(false);
@@ -45,7 +46,7 @@ const small = ref(false);
           :cancel-label="cancelLabel"
           :confirm-disabled="confirmButtonDisabled"
           :cancel-disabled="cancelButtonDisabled"
-          :fillContainer="fillContainer"
+          :fill-container="fillContainer"
           :loading="loading"
           :alignment="(selectedAlignment as any)"
           @confirm="onConfirm"
@@ -55,9 +56,9 @@ const small = ref(false);
       <template #controls>
         <PropControlBoolean name="Cancel disabled" :value="cancelButtonDisabled" @toggle="cancelButtonDisabled = !cancelButtonDisabled" />
         <PropControlBoolean name="Confirm disabled" :value="confirmButtonDisabled" @toggle="confirmButtonDisabled = !confirmButtonDisabled" />
-        <PropControlBoolean name="Fill container" :value="fillContainer" @toggle="fillContainer = !fillContainer"/>
-        <PropControlBoolean name="Loading" :value="loading" @toggle="loading = !loading"/>
-        <PropControlBoolean name="Small" :value="small" @toggle="small = !small"/>
+        <PropControlBoolean name="Fill container" :value="fillContainer" @toggle="fillContainer = !fillContainer" />
+        <PropControlBoolean name="Loading" :value="loading" @toggle="loading = !loading" />
+        <PropControlBoolean name="Small" :value="small" @toggle="small = !small" />
         <PropControlString name="Confirm label" :value="confirmLabel" @change="(value:string) => confirmLabel = value" />
         <PropControlString name="Cancel label" :value="cancelLabel" @change="(value:string) => cancelLabel = value" />
         <PropControlSelect name="Alignment" :value="selectedAlignment" :options="[...alignments]" @select="(option:string) => selectedAlignment = option" />

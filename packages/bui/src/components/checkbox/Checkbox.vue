@@ -1,15 +1,15 @@
 <script setup lang="ts">
+import type { TCheckboxType } from "../types";
 import CircleIndicator from "./CircleIndicator.vue";
 import DefaultIndicator from "./DefaultIndicator.vue";
-import { type TCheckboxType } from "../types";
 
 const { checked, type = "default", indeterminate = false, disabled = false } = defineProps<{
   label?: string;
   type?: TCheckboxType;
   checked: boolean;
-  indeterminate?: boolean,
+  indeterminate?: boolean;
   disabled?: boolean;
-}>()
+}>();
 
 const emit = defineEmits(["click"]);
 </script>

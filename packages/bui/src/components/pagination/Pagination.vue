@@ -8,7 +8,7 @@ const { borders = false, currentPage, lastPage } = defineProps<{
   borders?: boolean;
   currentPage: number;
   lastPage: number;
-}>()
+}>();
 
 const emit = defineEmits(["change"]);
 const navRef = ref<HTMLElement>();
@@ -16,10 +16,10 @@ const navRef = ref<HTMLElement>();
 const pageOptions = computed((): TPopSelectOption[] => {
   return range(0, lastPage).map((num: number) => ({ label: `${num + 1}` }));
 });
-const prevStyle = borders ? { borderRadius: '8px 0 0 8px' } : undefined;
-const nextStyle = borders ? { borderRadius: '0px 8px 8px 0px' } : undefined;
-const midStyle = borders ? { borderRadius: '0' } : undefined;
-const variant = borders ? 'outlineSubtle' : 'textSubtle';
+const prevStyle = borders ? { borderRadius: "8px 0 0 8px" } : undefined;
+const nextStyle = borders ? { borderRadius: "0px 8px 8px 0px" } : undefined;
+const midStyle = borders ? { borderRadius: "0" } : undefined;
+const variant = borders ? "outlineSubtle" : "textSubtle";
 
 const onChange = (direction: -1 | 1) => {
   let targetPage = currentPage + direction;

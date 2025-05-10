@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import { BButton, BModal, type TOverlayType } from "@firstnoodle-ui/bui";
+import type { TOverlayType } from "@firstnoodle-ui/bui";
+import { BButton, BModal } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
 import PropControlBoolean from "../../components/PropControlBoolean.vue";
-import PropControlString from "../../components/PropControlString.vue";
 import PropControlSelect from "../../components/PropControlSelect.vue";
+import PropControlString from "../../components/PropControlString.vue";
 
 const show = ref(false);
 const modalRef = ref<typeof BModal>();
@@ -15,8 +16,8 @@ const closeable = ref(false);
 const expandVertically = ref(false);
 const overlayTypes = ["default", "blurred"];
 const selectedOverlayType = ref(overlayTypes[0]);
-const title = ref('Modal title');
-const widthClasses:string[] = [
+const title = ref("Modal title");
+const widthClasses: string[] = [
   "max-w-xs",
   "max-w-sm",
   "max-w-md",
@@ -29,7 +30,7 @@ const widthClasses:string[] = [
   "max-w-6xl",
   "max-w-7xl",
   "max-w-8xl",
-  "max-w-full"
+  "max-w-full",
 ];
 const selectedWidthClass = ref(widthClasses[5]);
 </script>

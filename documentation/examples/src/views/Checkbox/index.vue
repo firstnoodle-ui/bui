@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { BCheckbox, checkboxTypes, type TCheckboxType } from "@firstnoodle-ui/bui";
+import type { TCheckboxType } from "@firstnoodle-ui/bui";
+import { BCheckbox, checkboxTypes } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
 import PropControlBoolean from "../../components/PropControlBoolean.vue";
-import PropControlString from "../../components/PropControlString.vue";
 import PropControlSelect from "../../components/PropControlSelect.vue";
+import PropControlString from "../../components/PropControlString.vue";
 
 const checked = ref(false);
 const indeterminate = ref(false);
 const disabled = ref(false);
-const label = ref('Label');
+const label = ref("Label");
 
 const selectedType = ref<string>(checkboxTypes[0]);
 </script>
@@ -28,7 +29,9 @@ const selectedType = ref<string>(checkboxTypes[0]);
       />
       <template #controls>
         <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
-        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
+        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">
+          Overrides <strong>Checked</strong> prop
+        </PropControlBoolean>
         <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
         <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
         <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" />

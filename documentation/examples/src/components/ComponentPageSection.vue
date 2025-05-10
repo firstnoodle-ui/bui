@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { BCollapse } from '@firstnoodle/bui';
+import { BCollapse } from "@firstnoodle/bui";
+import { ref } from "vue";
+
 defineProps({ title: String });
 const showControls = ref(true);
 </script>
