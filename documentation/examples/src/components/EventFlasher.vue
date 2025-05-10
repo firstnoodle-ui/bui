@@ -5,7 +5,7 @@ defineProps<{ name: string }>();
 
 const active = ref(false);
 
-defineExpose({ flash: (payload: any) => {
+defineExpose({ flash: () => {
   active.value = true;
   setTimeout(() => {
     active.value = false;
