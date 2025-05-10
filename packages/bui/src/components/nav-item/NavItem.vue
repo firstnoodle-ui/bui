@@ -32,8 +32,8 @@ const emit = defineEmits<{
       <div
         class="h-full flex items-center space-x-2 px-4 rounded-lg group-hover:opacity-100"
         :class="{
-          'opacity-100': isActive || isExactActive,
-          'opacity-50 bg-transparent': !(isActive || isExactActive),
+          'bg-secondary text-primary opacity-100': isActive || isExactActive,
+          'bg-primary text-secondary opacity-50 hover:bg-secondary': !(isActive || isExactActive),
         }"
       >
         <BIcon v-if="icon" :name="icon" />
@@ -48,8 +48,8 @@ const emit = defineEmits<{
       <div
         class="h-10 flex items-center space-x-2 px-4 rounded-lg group-hover:opacity-100"
         :class="{
-          'opacity-100': isActive || isExactActive,
-          'opacity-50 bg-transparent': !(isActive || isExactActive),
+          'bg-action text-white font-medium opacity-100': isActive || isExactActive,
+          'bg-primary text-secondary opacity-50 hover:bg-secondary active:bg-tertiary': !(isActive || isExactActive),
         }"
       >
         <BIcon v-if="icon" :name="icon" />

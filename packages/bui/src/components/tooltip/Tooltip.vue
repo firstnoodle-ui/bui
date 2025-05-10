@@ -23,7 +23,7 @@ withDefaults(
     offsetMain: 2,
     offsetCross: 0,
     placement: "top",
-    textColorClass: "text-light",
+    textColorClass: "text-white",
     trigger: "hover",
     triggerFullWidth: false,
   },

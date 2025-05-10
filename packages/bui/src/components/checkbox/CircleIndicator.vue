@@ -2,12 +2,11 @@
 import { computed } from "vue";
 import { BIcon } from "../";
 
-const { value, disabled } = defineProps<{ value: number; disabled: boolean }>();
+const { value, disabled = false, indeterminate = false } = defineProps<{ value: boolean; indeterminate?: boolean; disabled?: boolean }>();
 
 const icon = computed(() => {
-  if (value) {
-    return value === 1 ? "check" : "dash";
-  }
+  if (indeterminate) return "dash"
+  if (value) return "check";
   return null;
 });
 </script>
@@ -16,12 +15,12 @@ const icon = computed(() => {
   <button
     class="group inline-flex items-center justify-center w-6 h-6 rounded-full border focus:outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
     :class="{
-      'border-action bg-action text-white': !disabled && value,
-      'border-strong bg-tertiary text-white cursor-default': disabled && value,
-      'border-default bg-secondary hover:bg-secondary cursor-pointer': disabled && !value,
-      'border-default bg-primary hover:bg-amber-300 cursor-pointer': !disabled && !value,
+      'border-default bg-primary hover:bg-secondary hover:border-strong cursor-pointer': !disabled && !value,
+      'border-action bg-action text-white hover:bg-action-hover hover:border-action-hover cursor-pointer': !disabled && value,
+      'border-default bg-tertiary text-white cursor-default': disabled && value,
+      'border-default bg-secondary hover:bg-secondary': disabled && !value,
     }"
   >
-    <BIcon v-if="icon" :name="icon" class="text-white group-hover:text-muted" />
+    <BIcon v-if="icon" :name="icon" class="text-white" />
   </button>
 </template>

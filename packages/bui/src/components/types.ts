@@ -4,6 +4,9 @@ export type ButtonVariant = (typeof buttonVariants)[number];
 export const ButtonType = ["default", "primary", "error"] as const;
 export type TButtonType = (typeof ButtonType)[number];
 
+export const checkboxTypes = ['default', 'circle'] as const;
+export type TCheckboxType = (typeof checkboxTypes)[number];
+
 export const Orientation = ["horizontal", "vertical"] as const;
 export type TButtonGroupOrientation = (typeof Orientation)[number];
 

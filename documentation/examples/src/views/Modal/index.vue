@@ -1,36 +1,54 @@
 <script setup lang="ts">
-import { BButton, BModal } from "@firstnoodle-ui/bui";
+import { BButton, BModal, type TOverlayType } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
+import PropControlBoolean from "../../components/PropControlBoolean.vue";
+import PropControlString from "../../components/PropControlString.vue";
+import PropControlSelect from "../../components/PropControlSelect.vue";
 
-const showDefault = ref(false);
-const defaultModalRef = ref<typeof BModal>();
-const defaultTriggerRef = ref<typeof BButton>();
+const show = ref(false);
+const modalRef = ref<typeof BModal>();
+const triggerRef = ref<typeof BButton>();
 
-const showBare = ref(false);
-const bareModalRef = ref<typeof BModal>();
-const bareTriggerRef = ref<typeof BButton>();
-
-const showBlurred = ref(false);
-const blurredTriggerRef = ref<typeof BButton>();
-
-const showWidth = ref(false);
-const widthTriggerRef = ref<typeof BButton>();
+const closeable = ref(false);
+const expandVertically = ref(false);
+const overlayTypes = ["default", "blurred"];
+const selectedOverlayType = ref(overlayTypes[0]);
+const title = ref('Modal title');
+const widthClasses:string[] = [
+  "max-w-xs",
+  "max-w-sm",
+  "max-w-md",
+  "max-w-lg",
+  "max-w-xl",
+  "max-w-2xl",
+  "max-w-3xl",
+  "max-w-4xl",
+  "max-w-5xl",
+  "max-w-6xl",
+  "max-w-7xl",
+  "max-w-8xl",
+  "max-w-full"
+];
+const selectedWidthClass = ref(widthClasses[5]);
 </script>
 
 <template>
   <ComponentPage title="Modal">
     <ComponentPageSection title="Basic usage (+ not closeable)">
-      <BButton ref="defaultTriggerRef" bordered icon="popup" label="Open modal" @click="showDefault = true" />
+      <BButton ref="triggerRef" bordered icon="popup" label="Open modal" @click="show = true" />
       <BModal
-        v-if="showDefault"
-        ref="defaultModalRef"
-        :closeable="false"
-        title="Some kind of titly"
+        v-if="show"
+        ref="modalRef"
+        :closeable="closeable"
+        :title="title"
+        :overlay-type="(selectedOverlayType as TOverlayType)"
+        :expand-vertically="expandVertically"
+        :width-class="(selectedWidthClass as any)"
         @close="
-          showDefault = false;
-          defaultTriggerRef!.focus();
+          show = false;
+          triggerRef!.focus();
         "
       >
         <template #main>
@@ -39,65 +57,16 @@ const widthTriggerRef = ref<typeof BButton>();
           </p>
         </template>
         <template #footer>
-          <BButton label="close" variant="fill" @click="defaultModalRef!.close()" />
+          <BButton label="close" variant="fill" @click="modalRef!.close()" />
         </template>
       </BModal>
-    </ComponentPageSection>
-    <ComponentPageSection title="Blurred overlay">
-      <BButton ref="blurredTriggerRef" bordered icon="popup" label="Open modal" @click="showBlurred = true" />
-      <BModal
-        v-if="showBlurred"
-        expand-vertically
-        overlay-type="blurred"
-        title="Blurred overlay + expand-vertically"
-        @close="
-          showBlurred = false;
-          blurredTriggerRef!.focus();
-        "
-      >
-        <template #header>
-          <header class="h-8 flex items-center bg-sand-grey-15">
-            Hello from the #header slot (using header together with title)
-          </header>
-        </template>
-        <template #main>
-          <p class="py-4">
-            Close this modal by hitting the escape key, clicking on the close button, or clicking on the overlay behind the modal
-          </p>
-        </template>
-      </BModal>
-    </ComponentPageSection>
-    <ComponentPageSection title="Bare">
-      <BButton ref="bareTriggerRef" bordered icon="popup" label="Open modal" @click="showBare = true" />
-      <BModal
-        v-if="showBare"
-        ref="bareModalRef"
-        width-class="max-w-xl"
-        @close="
-          showBare = false;
-          bareTriggerRef!.focus();
-        "
-      >
-        <p>If you want to have complete control of the layout, use the default slot (and none of the other!)</p>
-        <BButton label="close" variant="fill" @click="bareModalRef!.close()" />
-      </BModal>
-    </ComponentPageSection>
-    <ComponentPageSection title="Width">
-      <BButton ref="widthTriggerRef" bordered icon="popup" label="Open modal" @click="showWidth = true" />
-      <BModal
-        v-if="showWidth"
-        expand-vertically
-        width-class="max-w-8xl"
-        title="Width is 8xl"
-        @close="
-          showWidth = false;
-          widthTriggerRef!.focus();
-        "
-      >
-        <template #main>
-          <p>Close this modal by hitting the escape key, clicking on the close button, or clicking on the overlay behind the modal</p>
-        </template>
-      </BModal>
+      <template #controls>
+        <PropControlBoolean name="Closeable" :value="closeable" @toggle="closeable = !closeable" />
+        <PropControlBoolean name="Expand vertically" :value="expandVertically" @toggle="expandVertically = !expandVertically" />
+        <PropControlString name="Title" :value="title" @change="(value:string) => title = value" />
+        <PropControlSelect name="Overlay type" :value="selectedOverlayType" :options="overlayTypes" @select="(option:string) => selectedOverlayType = option" />
+        <PropControlSelect name="Width class" :value="selectedWidthClass" :options="widthClasses" @select="(option:string) => selectedWidthClass = option" />
+      </template>
     </ComponentPageSection>
   </ComponentPage>
 </template>

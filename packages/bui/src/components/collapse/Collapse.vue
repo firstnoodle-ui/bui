@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
-import { BIcon } from "../";
+import { BButton } from "../";
 
 const props = withDefaults(
   defineProps<{
@@ -29,6 +29,7 @@ const buttonRef = ref<HTMLButtonElement>();
 const headerRef = ref<HTMLHeadElement>();
 const isSticky = ref(false);
 
+const borderClass = computed(() => props.open ? props.borderClassOpen : props.borderClassClosed)
 const styles = computed(() => {
   return isSticky.value
     ? {
@@ -81,12 +82,10 @@ onBeforeUnmount(() => {
       :style="styles"
       :class="[
         {
-          [props.borderClassOpen]: open,
-          [props.borderClassClosed]: !open,
-          'shadow-sm-xs border-brand': isSticky,
-          'sticky z-10': isSticky,
+          'shadow-sm-xs border-strong sticky z-10': isSticky,
           'relative': !isSticky,
         },
+        borderClass,
         headerBgClass,
       ]"
     >
@@ -95,18 +94,13 @@ onBeforeUnmount(() => {
           <slot name="header" :sticky="isSticky" />
         </div>
         <div class="flex-none w-8 h-8 flex items-center justify-center">
-          <button
+          <BButton
             v-if="$slots.content"
-            ref="buttonRef"
-            class="w-6 h-6 flex items-center justify-center rounded-lg hover:bg-black/10 focus:outline-hidden focus-visible:bg-black/10"
+            small
+            variant="textSubtle"
+            :icon="open ? 'chevron-down' : 'chevron-right'"
             @click="emit('toggle', id)"
-          >
-            <BIcon
-              :name="alignment === 'right' ? 'chevron-right' : 'chevron-up'"
-              class="transform transition-all duration-100"
-              :class="{ [alignment === 'right' ? 'rotate-90' : 'rotate-180']: open }"
-            />
-          </button>
+          />
         </div>
         <div v-if="alignment === 'right'" class="relative flex-1 min-w-0 flex items-center text-sm">
           <slot name="header" :sticky="isSticky" />

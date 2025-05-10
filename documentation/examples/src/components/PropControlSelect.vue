@@ -1,0 +1,43 @@
+<template>
+    <PropControlBase type="<T>">
+        <template #control>
+            <div class="text-secondary font-medium text-sm">{{ name }}</div>
+            <BPopSelect
+                :options="localOptions"
+                :selected="selected"
+                filterable
+                @select="onSelect"
+            >
+                <template #trigger="{ visible }">
+                    <BButton
+                        :label="value || `Select ${name}`"
+                        :soft-focus="visible"
+                        variant="outlineSubtle"
+                        icon-after="chevron-down"
+                    />
+                </template>
+            </BPopSelect>
+            <BButton
+                v-if="clearable && value"
+                variant="text"
+                icon="trash"
+                @click="onClear"
+            />
+        </template>
+        <template #notes><slot/></template>
+    </PropControlBase>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue';
+import PropControlBase from './PropControlBase.vue';
+import { BButton, BPopSelect, type TPopSelectOption } from '@firstnoodle/bui';
+const { clearable = false, options, value } = defineProps<{ value?:string; options:string[], name:string, clearable?: boolean }>();
+
+const selected = computed(() => localOptions.value.find(o => o.label === value))
+const localOptions = computed(() => options.map(o => ({ label: o })));
+
+const emit = defineEmits(['select']);
+const onSelect = (option:TPopSelectOption) => emit('select', option.label);
+const onClear = () => emit('select', undefined);
+</script>

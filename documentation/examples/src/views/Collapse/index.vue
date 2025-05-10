@@ -86,6 +86,20 @@ const onToggle = (id: string) => {
           </main>
         </template>
       </BCollapse>
+      <template #controls>
+        alignment?: "left" | "right";
+        borderClassOpen?: string;
+        borderClassClosed?: string;
+        headerBgClass?: string;
+        id?: string | number;
+        open?: boolean;
+        sticky?: boolean;
+        <!-- <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
+        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
+        <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
+        <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
+        <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" /> -->
+      </template>
     </ComponentPageSection>
   </ComponentPage>
 </template>

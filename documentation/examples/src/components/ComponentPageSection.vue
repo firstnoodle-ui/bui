@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { BCollapse } from '@firstnoodle/bui';
 defineProps({ title: String });
+const showControls = ref(true);
 </script>
 
 <template>
@@ -10,5 +13,23 @@ defineProps({ title: String });
     <main class="p-4 text-primary">
       <slot />
     </main>
+    <section v-if="$slots.controls" class="w-full px-2 bg-secondary border-t border-default">
+      <BCollapse
+        border-class-open="border-transparent"
+        border-class-closed="border-transparent"
+        header-bg-class="bg-secondary"
+        :open="showControls"
+        @toggle="showControls = !showControls"
+      >
+        <template #header>
+          <h5>Props, slots, events, exposed</h5>
+        </template>
+        <template #content>
+          <section class="p-2">
+            <slot name="controls" />
+          </section>
+        </template>
+      </BCollapse>
+    </section>
   </section>
 </template>

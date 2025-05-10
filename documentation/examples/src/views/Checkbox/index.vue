@@ -1,27 +1,38 @@
 <script setup lang="ts">
-import { BCheckbox } from "@firstnoodle-ui/bui";
+import { BCheckbox, checkboxTypes, type TCheckboxType } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
+import PropControlBoolean from "../../components/PropControlBoolean.vue";
+import PropControlString from "../../components/PropControlString.vue";
+import PropControlSelect from "../../components/PropControlSelect.vue";
 
-const chekcStatus1 = ref(0);
-const chekcStatus2 = ref(0);
-const chekcStatus3 = ref(0);
+const checked = ref(false);
+const indeterminate = ref(false);
+const disabled = ref(false);
+const label = ref('Label');
+
+const selectedType = ref<string>(checkboxTypes[0]);
 </script>
 
 <template>
   <ComponentPage title="Checkbox">
     <ComponentPageSection title="Basic usage">
-      <BCheckbox label="Check it" :value="chekcStatus1" @click="chekcStatus1 = Boolean(chekcStatus1) ? 0 : 1" />
-      <BCheckbox label="Check it" :value="chekcStatus1" disabled />
-    </ComponentPageSection>
-    <ComponentPageSection title="Button tag">
-      <BCheckbox button label="Check it" :value="chekcStatus2" @click="chekcStatus2 = Boolean(chekcStatus2) ? 0 : 1" />
-      <BCheckbox button label="Check it" :value="chekcStatus2" disabled @click="chekcStatus2 = Boolean(chekcStatus2) ? 0 : 1" />
-    </ComponentPageSection>
-    <ComponentPageSection title="Circle">
-      <BCheckbox type="circle" label="Check it" :value="chekcStatus3" @click="chekcStatus3 = Boolean(chekcStatus3) ? 0 : 1" />
-      <BCheckbox type="circle" label="Check it" disabled :value="chekcStatus3" />
+      <BCheckbox
+        :type="(selectedType as TCheckboxType)"
+        :label="label"
+        :checked="checked"
+        :indeterminate="indeterminate"
+        :disabled="disabled"
+        @click="checked = !checked"
+      />
+      <template #controls>
+        <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
+        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
+        <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
+        <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
+        <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" />
+      </template>
     </ComponentPageSection>
   </ComponentPage>
 </template>
