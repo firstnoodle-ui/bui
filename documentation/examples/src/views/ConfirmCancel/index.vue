@@ -1,4 +1,3 @@
-<!-- eslint-disable no-console -->
 <script setup lang="ts">
 import type { ButtonVariant, TIcon } from "@firstnoodle-ui/bui";
 import { BConfirmCancel, buttonVariants, icons } from "@firstnoodle-ui/bui";
@@ -8,12 +7,14 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
 import PropControlBoolean from "../../components/PropControlBoolean.vue";
 import PropControlSelect from "../../components/PropControlSelect.vue";
 import PropControlString from "../../components/PropControlString.vue";
+import EventFlasher from "../../components/EventFlasher.vue";
 
-const onCancel = () => console.log("cancel");
-const onConfirm = () => console.log("confirm");
+const confirmRef = ref<typeof EventFlasher>();
+const cancelRef = ref<typeof EventFlasher>();
 
-const alignments = ["left", "right"];
-const selectedAlignment = ref(alignments[0]);
+const orderOptions = ['confirm-first', 'confirm-last'];
+const selectedOrder = ref(orderOptions[0]);
+const vertical = ref(false);
 
 const variantOptions: string[] = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive"];
 
@@ -35,8 +36,9 @@ const small = ref(false);
 <template>
   <ComponentPage title="ConfirmCancel">
     <ComponentPageSection title="ConfirmCancel">
-      <div class="w-1/3">
+      <div class="">
         <BConfirmCancel
+          :vertical="vertical"
           :small="small"
           :cancel-variant="(cancelButtonVariant as ButtonVariant)"
           :confirm-variant="(confirmButtonVariant as ButtonVariant)"
@@ -48,12 +50,18 @@ const small = ref(false);
           :cancel-disabled="cancelButtonDisabled"
           :fill-container="fillContainer"
           :loading="loading"
-          :alignment="(selectedAlignment as any)"
-          @confirm="onConfirm"
-          @cancel="onCancel"
+          :order="(selectedOrder as any)"
+          @confirm="confirmRef!.flash()"
+          @cancel="cancelRef!.flash()"
         />
       </div>
       <template #controls>
+        <section class="flex items-center justify-end gap-2 mb-8">
+          <div class="text-sm font-bold">Events</div>
+          <EventFlasher ref="confirmRef" name="confirm" />
+          <EventFlasher ref="cancelRef" name="cancel" />
+        </section>
+        <PropControlBoolean name="Vertical" :value="vertical" @toggle="vertical = !vertical">Mainly used in PopConfirm</PropControlBoolean>
         <PropControlBoolean name="Cancel disabled" :value="cancelButtonDisabled" @toggle="cancelButtonDisabled = !cancelButtonDisabled" />
         <PropControlBoolean name="Confirm disabled" :value="confirmButtonDisabled" @toggle="confirmButtonDisabled = !confirmButtonDisabled" />
         <PropControlBoolean name="Fill container" :value="fillContainer" @toggle="fillContainer = !fillContainer" />
@@ -61,7 +69,7 @@ const small = ref(false);
         <PropControlBoolean name="Small" :value="small" @toggle="small = !small" />
         <PropControlString name="Confirm label" :value="confirmLabel" @change="(value:string) => confirmLabel = value" />
         <PropControlString name="Cancel label" :value="cancelLabel" @change="(value:string) => cancelLabel = value" />
-        <PropControlSelect name="Alignment" :value="selectedAlignment" :options="[...alignments]" @select="(option:string) => selectedAlignment = option" />
+        <PropControlSelect name="Order" :value="selectedOrder" :options="[...orderOptions]" @select="(option:string) => selectedOrder = option" />
         <PropControlSelect name="Confirm variant" :value="confirmButtonVariant" :options="[...buttonVariants]" @select="(option:string) => confirmButtonVariant = option" />
         <PropControlSelect name="Cancel variant" :value="cancelButtonVariant" :options="[...buttonVariants]" @select="(option:string) => cancelButtonVariant = option" />
         <PropControlSelect name="Confirm icon" :value="confirmIcon" :options="[...icons]" @select="(option:string) => confirmIcon = option" />

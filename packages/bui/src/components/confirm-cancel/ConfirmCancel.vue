@@ -1,26 +1,12 @@
 <script setup lang="ts">
-import type { ButtonVariant, TIcon } from "../types";
+import { type ConfirmCancelProps } from "./types";
 import { computed } from "vue";
 import { BButton, BFlexbox } from "../";
 
 const props = withDefaults(
-  defineProps<{
-    alignment?: "left" | "right";
-    cancelButtonIsText?: boolean;
-    cancelDisabled?: boolean;
-    cancelIcon?: TIcon;
-    cancelLabel?: string;
-    cancelVariant?: ButtonVariant;
-    confirmDisabled?: boolean;
-    confirmIcon?: TIcon;
-    confirmLabel?: string;
-    confirmVariant?: ButtonVariant;
-    fillContainer?: boolean;
-    loading?: boolean;
-    small?: boolean;
-  }>(),
+  defineProps<ConfirmCancelProps>(),
   {
-    alignment: "left",
+    order: "confirm-first",
     cancelButtonIsText: false,
     cancelDisabled: false,
     cancelLabel: "Cancel",
@@ -31,18 +17,19 @@ const props = withDefaults(
     fillContainer: false,
     loading: false,
     small: false,
+    vertical: false,
   },
 );
 
 const emit = defineEmits(["confirm", "cancel"]);
 
-const leftAligned = computed(() => props.alignment === "left");
+const confirmFirst = computed(() => props.order === "confirm-first");
 </script>
 
 <template>
-  <BFlexbox class="gap-2">
+  <BFlexbox :col="vertical" class="gap-2">
     <BButton
-      v-if="leftAligned"
+      v-if="confirmFirst"
       :small="small"
       stop-propagation
       :icon="confirmIcon"
@@ -64,7 +51,7 @@ const leftAligned = computed(() => props.alignment === "left");
       @click="emit('cancel')"
     />
     <BButton
-      v-if="!leftAligned"
+      v-if="!confirmFirst"
       :small="small"
       stop-propagation
       :icon="confirmIcon"

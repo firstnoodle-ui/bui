@@ -61,7 +61,7 @@ defineExpose({ focus });
 
 <template>
   <div
-    class="relative overflow-hidden inline-block w-full text-sm leading-tight rounded-md border focus:shadow-sm-inner focus:outline-hidden focus-within:border-blue-500"
+    class="relative overflow-hidden inline-block text-sm leading-tight rounded-md border focus:shadow-sm-inner focus:outline-hidden focus-within:border-blue-500"
     :class="outerClass"
   >
     <div

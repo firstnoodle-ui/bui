@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import type { TAlignment, TJustification } from "../types";
 
 const props = withDefaults(
@@ -35,12 +36,12 @@ const justificationClasses: Record<TJustification, string> = {
   stretch: "justify-stretch",
 } as const;
 
-const classes = [
+const classes = computed(() => ([
   props.inline ? "inline-flex" : "flex",
-  props.col ? "flex-col" : "",
+  props.col ? "flex-col items-stretch" : "",
   props.align ? alignmentClasses[props.align] : "",
   props.justify ? justificationClasses[props.justify] : "",
-];
+]));
 </script>
 
 <template>

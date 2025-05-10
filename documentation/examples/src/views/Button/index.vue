@@ -13,6 +13,7 @@ const isRounded = ref(false);
 const isLoading = ref(false);
 const isDisabled = ref(false);
 const isFullwidth = ref(false);
+const isFocused = ref(false);
 const hasNotification = ref(false);
 const label = ref("Label");
 
@@ -32,6 +33,7 @@ const selectedIcon = ref<string | undefined>();
         :disabled="isDisabled"
         :fullwidth="isFullwidth"
         :rounded="isRounded"
+        :focus="isFocused"
         :notification="hasNotification"
         :icon="(selectedIcon as TIcon)"
         :label="label"
@@ -41,6 +43,7 @@ const selectedIcon = ref<string | undefined>();
         <PropControlBoolean name="Rounded" :value="isRounded" @toggle="isRounded = !isRounded" />
         <PropControlBoolean name="Loading" :value="isLoading" @toggle="isLoading = !isLoading" />
         <PropControlBoolean name="Disabled" :value="isDisabled" @toggle="isDisabled = !isDisabled" />
+        <PropControlBoolean name="Focus" :value="isFocused" @toggle="isFocused = !isFocused" />
         <PropControlSelect name="Icon" clearable :value="selectedIcon" :options="[...icons]" @select="(option:string|undefined) => selectedIcon = option">
           Will be hidden when <strong>loading=true</strong>
         </PropControlSelect>
