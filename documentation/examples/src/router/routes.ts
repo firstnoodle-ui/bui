@@ -30,6 +30,12 @@ export default [
     meta: { group: "Modals" },
   },
   {
+    path: "/filter-chip",
+    name: "FilterChip",
+    component: () => import("../views/FilterChip/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/first-paint",
     name: "FirstPaint",
     component: () => import("../views/FirstPaint/index.vue"),

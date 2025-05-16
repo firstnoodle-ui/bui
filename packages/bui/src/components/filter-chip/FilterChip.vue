@@ -1,0 +1,17 @@
+<template>
+    <button
+        class="h-6 py-2 rounded-md flex items-center gap-1 cursor-pointer"
+        :class="{
+            'px-2 border border-weak text-tertiary hover:bg-secondary hover:text-secondary hover:border-default active:bg-tertiary active:text-primary active:border-strong': !active,
+            'pl-2 pr-1 border border-none text-white bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800': active
+        }"
+    >
+        <span class="text-sm">{{ label }}</span>
+        <BDeleteButton v-if="active" />
+    </button>
+</template>
+
+<script setup lang="ts">
+import { BDeleteButton } from '../delete-button';
+const { count = 0 } = defineProps<{ label:string, active:boolean, count?:number}>();
+</script>
