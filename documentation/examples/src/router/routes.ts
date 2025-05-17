@@ -60,6 +60,12 @@ export default [
     meta: { group: "Standard" },
   },
   {
+    path: "/input",
+    name: "Input",
+    component: () => import("../views/Input/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/load-spinner",
     name: "LoadSpinner",
     component: () => import("../views/LoadSpinner/index.vue"),
