@@ -30,6 +30,12 @@ export default [
     meta: { group: "Modals" },
   },
   {
+    path: "/delete-button",
+    name: "DeleteButton",
+    component: () => import("../views/DeleteButton/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/filter-chip",
     name: "FilterChip",
     component: () => import("../views/FilterChip/index.vue"),

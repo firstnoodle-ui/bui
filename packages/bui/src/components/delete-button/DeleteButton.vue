@@ -1,5 +1,14 @@
 <template>
-    <button class="flex items-center justify-center w-4 h-4 rounded-full hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200 text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900 cursor-pointer"><BIcon name="close" /></button>
+    <button class="
+        flex items-center justify-center w-4 h-4 rounded-full
+        hover:bg-black/15 focus-visible:bg-black/15 active:bg-black/25
+        dark:hover:bg-white/15 dark:focus-visible:bg-white/15 dark:active:bg-white/25
+        text-primary
+        cursor-pointer"
+        @click.stop.prevent="$emit('click')"
+    >
+        <BIcon name="close"/>
+    </button>
 </template>
 
 <script setup lang="ts">
