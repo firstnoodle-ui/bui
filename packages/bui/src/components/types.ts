@@ -172,6 +172,10 @@ export const icons = [
   "open-link",
   "options",
   "page",
+  "panel-left-show",
+  "panel-left-hide",
+  "panel-right-show",
+  "panel-right-hide",
   "paper-plane",
   "paper",
   "pen-and-paper",
@@ -219,6 +223,7 @@ export const icons = [
   "visibility-off",
   "visibility-on",
   "warning",
+  "zoom",
 ] as const;
 
 export type TIcon = (typeof icons)[number];
