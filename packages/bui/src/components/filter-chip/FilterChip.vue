@@ -2,8 +2,8 @@
     <button
         class="h-6 py-2 rounded-md flex items-center gap-1 cursor-pointer"
         :class="{
-            'px-2 border border-weak text-tertiary hover:bg-secondary hover:text-secondary hover:border-default active:bg-tertiary active:text-primary active:border-strong': !active,
-            'pl-2 pr-1 border border-none text-white bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800': active
+            'px-2 border border-default text-tertiary hover:bg-secondary hover:text-secondary hover:border-strong active:bg-tertiary active:text-primary active:border-strong': !active,
+            'pl-2 pr-1 border border-transparent text-white bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800': active
         }"
         @click="$emit('click')"
     >
