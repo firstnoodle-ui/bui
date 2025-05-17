@@ -1101,6 +1101,10 @@ defineProps<{ name: TIcon }>();
       </defs>
     </template>
 
+    <template v-else-if="name === 'text-select'">
+      <path d="M11 1V2H9V14H11V15H6V14H8V2H6V1H11Z" />
+    </template>
+
     <template v-else-if="name === 'trash'">
       <path d="M11 13V5H10V13H11Z" />
       <path d="M6 5V13H5V5H6Z" />

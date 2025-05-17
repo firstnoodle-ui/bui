@@ -211,6 +211,7 @@ export const icons = [
   "tag",
   "team",
   "telescope",
+  "text-select",
   "trash",
   "triangle-angle",
   "triangle-side",
