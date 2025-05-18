@@ -35,6 +35,12 @@ body {
     @apply text-sm font-bold;
   }
 
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   /* Shared in both themes */
   :root {
     --color-action: var(--color-blue-500);
