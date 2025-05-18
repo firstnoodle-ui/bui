@@ -41,7 +41,7 @@ const paddingLeft = ref(props.asideLeftWidth);
 const paddingRight = ref(props.asideRightWidth);
 const mainStyle = computed(() => ({
   paddingLeft: `${paddingLeft.value}px`,
-  paddingRight: `${+paddingRight.value}px`,
+  paddingRight: `${paddingRight.value}px`,
 }));
 const onAsideLeftResize = (size: number) => (localAsideLeftWidth.value = paddingLeft.value = size);
 const onAsideLeftTransition = (transitioning: boolean) => !transitioning && emit("aside-left-transition-end");
