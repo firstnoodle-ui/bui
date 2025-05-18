@@ -31,7 +31,7 @@ const navigateTo = (page: string) => {
               </svg>
               <div class="text-primary ml-4">
                 <div class="tracking-widest">
-                  {{ "The BUI" }}
+                  {{ "BUI" }}
                 </div>
               </div>
             </div>
