@@ -15,6 +15,7 @@ export * from "./flexbox";
 export * from "./horizontal-layout";
 export * from "./icon";
 export * from "./input";
+export * from "./input-number";
 export * from "./load-spinner";
 export * from "./modal";
 export * from "./nav-item";
