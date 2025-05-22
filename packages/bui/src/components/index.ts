@@ -21,7 +21,6 @@ export * from "./modal";
 export * from "./nav-item";
 export * from "./notification";
 export * from "./pagination";
-export * from "./pill";
 export * from "./pop-confirm";
 export * from "./pop-select";
 export * from "./popper";

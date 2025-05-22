@@ -96,12 +96,6 @@ export default [
     meta: { group: "Data" },
   },
   {
-    path: "/pill",
-    name: "Pill",
-    component: () => import("../views/Pill/index.vue"),
-    meta: { group: "Standard" },
-  },
-  {
     path: "/pop-confirm",
     name: "PopConfirm",
     component: () => import("../views/PopConfirm/index.vue"),
