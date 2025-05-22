@@ -66,6 +66,12 @@ export default [
     meta: { group: "Standard" },
   },
   {
+    path: "/input-number",
+    name: "InputNumber",
+    component: () => import("../views/InputNumber/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/load-spinner",
     name: "LoadSpinner",
     component: () => import("../views/LoadSpinner/index.vue"),
