@@ -7,6 +7,7 @@ import {
   EventFlasher,
   EventSection,
   PropControlBoolean,
+  PropControlNumber,
   PropControlString
 } from "../../components";
 
@@ -15,12 +16,13 @@ const deleteFlasher = ref<typeof EventFlasher>();
 
 const isActive = ref(false);
 const label = ref('Category');
+const count = ref(0);
 </script>
 
 <template>
   <ComponentPage title="FilterChip">
     <ComponentPageSection title="Basic usage">
-        <BFilterChip :active="isActive" :label="label" @click="clickFlasher?.flash()" @delete="deleteFlasher?.flash()" />
+        <BFilterChip :active="isActive" :label="label" :count="count" @click="clickFlasher?.flash()" @delete="deleteFlasher?.flash()" />
       <template #controls>
         <EventSection>
           <EventFlasher ref="clickFlasher" name="click" />
@@ -28,6 +30,7 @@ const label = ref('Category');
         </EventSection>
         <PropControlBoolean name="Active" :value="isActive" @toggle="isActive = !isActive" />
         <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
+        <PropControlNumber name="Count" :value="count" @change="(value:number) => count = value" />
       </template>
     </ComponentPageSection>
   </ComponentPage>

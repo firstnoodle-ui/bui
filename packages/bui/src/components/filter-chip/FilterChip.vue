@@ -8,6 +8,7 @@
         @click="$emit('click')"
     >
         <span class="text-sm">{{ label }}</span>
+        <span v-if="active && count" class="w-4 h-4 flex items-center justify-center rounded-full text-xs font-medium bg-black/15 ">{{ count }}</span>
         <BDeleteButton data-theme="dark" v-if="active" @click="$emit('delete')" />
     </button>
 </template>
