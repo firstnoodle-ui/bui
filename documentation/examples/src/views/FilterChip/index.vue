@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import { BFilterChip } from "@firstnoodle/bui";
 import { ref } from "vue";
-import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
-import PropControlBoolean from "../../components/PropControlBoolean.vue";
-import PropControlString from "../../components/PropControlString.vue";
-import EventFlasher from "../../components/EventFlasher.vue";
-import EventSection from "../../components/EventSection.vue";
+import { 
+  ComponentPage,
+  ComponentPageSection,
+  EventFlasher,
+  EventSection,
+  PropControlBoolean,
+  PropControlString
+} from "../../components";
 
 const clickFlasher = ref<typeof EventFlasher>();
 const deleteFlasher = ref<typeof EventFlasher>();

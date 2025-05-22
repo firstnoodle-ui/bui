@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { BInput, icons, type TIcon } from "@firstnoodle-ui/bui";
-import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
-import PropControlBoolean from "../../components/PropControlBoolean.vue";
-import PropControlSelect from "../../components/PropControlSelect.vue";
-import PropControlString from "../../components/PropControlString.vue";
-import EventFlasher from "../../components/EventFlasher.vue";
-import EventSection from "../../components/EventSection.vue";
+import { 
+  ComponentPage,
+  ComponentPageSection,
+  EventFlasher,
+  EventSection,
+  PropControlBoolean,
+  PropControlSelect,
+  PropControlString
+} from "../../components";
 
 const str = ref('');
 const placeholder = ref('Write something');

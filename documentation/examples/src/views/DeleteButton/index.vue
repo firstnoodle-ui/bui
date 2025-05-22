@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { BDeleteButton } from "@firstnoodle-ui/bui";
-import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
-import EventFlasher from "../../components/EventFlasher.vue";
+import { 
+  ComponentPage,
+  ComponentPageSection,
+  EventFlasher,
+} from "../../components";
 
 const clickFlasher = ref<typeof EventFlasher>();
 </script>
