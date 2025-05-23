@@ -10,6 +10,7 @@ const {
   disabled = false,
   icon,
   placeholder = "Write",
+  value,
   min,
   max,
 } = defineProps<{
