@@ -9,12 +9,9 @@ defineEmits<{
 </script>
 
 <template>
-  <PropControlBase type="Boolean">
+  <PropControlBase type="Boolean" :name="name">
     <template #control>
       <BSwitch small off-color-class="bg-tertiary" on-color-class="bg-action" :value="value" @toggle="$emit('toggle')" />
-      <div class="text-secondary font-medium text-sm">
-        {{ name }}
-      </div>
     </template>
     <template #notes>
       <slot />

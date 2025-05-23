@@ -18,7 +18,7 @@ defineExpose({ flash: () => {
     class="inline-flex items-center gap-1 p-1 h-6 rounded-sm border transition-all"
     :class="{
       'bg-purple-400 text-white duration-75': active,
-      'bg-white text-purple-700 border-purple-500 duration-200': !active,
+      'text-purple-700 border-purple-500 duration-200': !active,
     }"
   >
     <div class="">

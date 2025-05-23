@@ -162,6 +162,9 @@ export const icons = [
   "lock-unlocked",
   "magnifying-glass",
   "map",
+  "match-case",
+  "match-diacritics",
+  "match-full-word",
   "megaphone",
   "message",
   "microscope",
@@ -172,6 +175,10 @@ export const icons = [
   "open-link",
   "options",
   "page",
+  "panel-left-show",
+  "panel-left-hide",
+  "panel-right-show",
+  "panel-right-hide",
   "paper-plane",
   "paper",
   "pen-and-paper",
@@ -207,6 +214,7 @@ export const icons = [
   "tag",
   "team",
   "telescope",
+  "text-select",
   "trash",
   "triangle-angle",
   "triangle-side",
@@ -219,6 +227,7 @@ export const icons = [
   "visibility-off",
   "visibility-on",
   "warning",
+  "zoom",
 ] as const;
 
 export type TIcon = (typeof icons)[number];

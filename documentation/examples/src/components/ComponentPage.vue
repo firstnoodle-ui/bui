@@ -16,7 +16,7 @@ defineProps({
         <span>WIP</span>
       </span>
     </header>
-    <main class="w-full space-y-20">
+    <main class="w-full flex flex-col gap-20 pb-20">
       <slot />
     </main>
   </article>

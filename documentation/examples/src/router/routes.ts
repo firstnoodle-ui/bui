@@ -30,6 +30,18 @@ export default [
     meta: { group: "Modals" },
   },
   {
+    path: "/delete-button",
+    name: "DeleteButton",
+    component: () => import("../views/DeleteButton/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
+    path: "/filter-chip",
+    name: "FilterChip",
+    component: () => import("../views/FilterChip/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/first-paint",
     name: "FirstPaint",
     component: () => import("../views/FirstPaint/index.vue"),
@@ -45,6 +57,18 @@ export default [
     path: "/icon",
     name: "Icon",
     component: () => import("../views/Icon/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
+    path: "/input",
+    name: "Input",
+    component: () => import("../views/Input/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
+    path: "/input-number",
+    name: "InputNumber",
+    component: () => import("../views/InputNumber/index.vue"),
     meta: { group: "Standard" },
   },
   {
@@ -70,12 +94,6 @@ export default [
     name: "Pagination",
     component: () => import("../views/Pagination/index.vue"),
     meta: { group: "Data" },
-  },
-  {
-    path: "/pill",
-    name: "Pill",
-    component: () => import("../views/Pill/index.vue"),
-    meta: { group: "Standard" },
   },
   {
     path: "/pop-confirm",

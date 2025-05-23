@@ -7,7 +7,7 @@ const showControls = ref(true);
 </script>
 
 <template>
-  <section class="w-full border border-default space-y-2">
+  <section class="w-full border border-default gap-2">
     <header class="p-4 border-b border-default bg-secondary text-primary">
       <h5>{{ title }}</h5>
     </header>
@@ -23,7 +23,7 @@ const showControls = ref(true);
         @toggle="showControls = !showControls"
       >
         <template #header>
-          <h5>Props, slots, events, exposed</h5>
+          <h5>Controls</h5>
         </template>
         <template #content>
           <section class="p-2">

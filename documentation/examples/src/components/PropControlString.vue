@@ -9,12 +9,9 @@ defineEmits<{
 </script>
 
 <template>
-  <PropControlBase type="String">
+  <PropControlBase type="String" :name="name">
     <template #control>
-      <div class="text-secondary font-medium text-sm">
-        {{ name }}
-      </div>
-      <BInput :value="value" @change="(str:string) => $emit('change', str)" />
+      <BInput class="w-full" :value="value" @change="(str:string) => $emit('change', str)" />
     </template>
     <template #notes>
       <slot />

@@ -15,11 +15,8 @@ const onClear = () => emit("select", undefined);
 </script>
 
 <template>
-  <PropControlBase type="<T>">
+  <PropControlBase type="<T>" :name="name">
     <template #control>
-      <div class="text-secondary font-medium text-sm">
-        {{ name }}
-      </div>
       <BPopSelect
         :options="localOptions"
         :selected="selected"
@@ -28,7 +25,7 @@ const onClear = () => emit("select", undefined);
       >
         <template #trigger="{ visible }">
           <BButton
-            :label="value || `Select ${name}`"
+            :label="value || 'Select'"
             :soft-focus="visible"
             variant="outlineSubtle"
             icon-after="chevron-down"

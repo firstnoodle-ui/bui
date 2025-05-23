@@ -2,39 +2,38 @@
 import type { InputTypeHTMLAttribute } from "vue";
 import type { TIcon } from "../types";
 import { computed, ref } from "vue";
-import { BIcon } from "../";
+import { BDeleteButton, BIcon } from "../";
 
-const props = withDefaults(
-  defineProps<{
-    disabled?: boolean;
-    icon?: TIcon;
-    multiline?: boolean;
-    placeholder?: string;
-    value: string;
-    inputType?: InputTypeHTMLAttribute;
-    autoFocus?: boolean;
-  }>(),
-  {
-    disabled: false,
-    multiline: false,
-    placeholder: "Write something...",
-  },
-);
+const {
+  disabled = false,
+  icon,
+  multiline = false,
+  placeholder = "Write",
+} = defineProps<{
+  disabled?: boolean;
+  clearable?: boolean;
+  icon?: TIcon;
+  multiline?: boolean;
+  placeholder?: string;
+  value: string;
+  inputType?: InputTypeHTMLAttribute;
+  autoFocus?: boolean;
+}>();
 
-const emit = defineEmits(["change", "enter"]);
+const emit = defineEmits(["change", "clear", "enter"]);
 
 const textareaRef = ref<HTMLTextAreaElement>();
 const inputRef = ref<HTMLInputElement>();
 
 const outerClass = computed(() => {
   const result = [];
-  result.push(props.disabled ? "bg-secondary border-weak text-secondary" : "bg-primary border-default text-primary shadow-sm-inner-sm");
-  result.push(props.icon ? "pr-3 pl-8" : "px-3");
+  result.push(disabled ? "bg-secondary border-weak text-secondary" : "bg-primary border-default text-primary");
+  result.push(icon ? "pr-3 pl-8" : "px-3");
   return result;
 });
 
 const focus = () => {
-  if (props.multiline) (textareaRef.value as HTMLTextAreaElement).focus();
+  if (multiline) (textareaRef.value as HTMLTextAreaElement).focus();
   else (inputRef.value as HTMLInputElement).focus();
 };
 
@@ -61,7 +60,7 @@ defineExpose({ focus });
 
 <template>
   <div
-    class="relative overflow-hidden inline-block text-sm leading-tight rounded-md border focus:shadow-sm-inner focus:outline-hidden focus-within:border-blue-500"
+    class="relative overflow-hidden inline-flex items-center text-sm leading-tight rounded-lg border focus:shadow-sm-inner focus:outline-hidden focus-within:border-action"
     :class="outerClass"
   >
     <div
@@ -81,7 +80,7 @@ defineExpose({ focus });
       :disabled="disabled"
       :value="value"
       :placeholder="placeholder"
-      class="py-2 w-full text-sm leading-tight bg-transparent focus:outline-hidden"
+      class="flex-1 py-2 w-full text-sm leading-tight bg-transparent focus:outline-hidden"
       @input.stop.prevent="onInput"
     />
     <input
@@ -92,12 +91,13 @@ defineExpose({ focus });
       :type="inputType"
       :value="value"
       :placeholder="placeholder"
-      class="py-2 w-full text-sm leading-tight bg-transparent focus:outline-hidden"
+      class="flex-1 py-2 text-sm leading-tight bg-transparent focus:outline-hidden"
       @change.stop.prevent
       @keydown.enter.stop.prevent="onEnter"
       @keyup.enter.stop.prevent
       @blur="onBlur"
       @input.stop.prevent="onInput"
     >
+    <BDeleteButton v-if="clearable && value.length" class="flex-none" @click="emit('clear')" />
   </div>
 </template>

@@ -11,11 +11,13 @@ const props = withDefaults(
     notification?: boolean;
     selected: boolean;
     type?: "default" | "pill";
+    size?: "small" | "default";
     disabled?: boolean;
   }>(),
   {
     grow: false,
     notification: false,
+    size: "default",
     type: "default",
   },
 );
@@ -34,22 +36,26 @@ const onSelect = () => {
   <button
     ref="tabRef"
     :disabled="disabled"
-    class=""
+    class="cursor-pointer"
     :class="{
-      'relative flex items-center justify-center space-x-1 px-3 h-8 border-b focus:outline-hidden focus:border-action': type === 'default',
+      'text-sm gap-2 px-4 h-8': size === 'default' && type === 'default',
+      'text-xs gap-1 px-3 h-6': size === 'small' && type === 'default',
+      'relative flex items-center justify-center border-b focus:outline-hidden focus-visible:outline': type === 'default',
       'border-action text-action': selected && type === 'default',
-      'border-subtle text-tertiary hover:text-secondary': !selected && type === 'default',
-      'relative flex items-center justify-center  px-3 h-8 border border-transparent rounded-lg focus:outline-hidden': type === 'pill',
-      'bg-actionLightActive text-action': selected && type === 'pill',
-      'text-primary bg-sand-grey-40 hover:text-secondary hover:bg-actionLightHover focus:bg-actionLightActive focus:text-action':
+      'border-default text-tertiary hover:text-secondary active:text-action hover:border-strong': !selected && type === 'default',
+      'text-sm px-3 h-8 rounded-lg': size === 'default' && type === 'pill',
+      'text-xs px-2 h-6 rounded': size === 'small' && type === 'pill',
+      'relative flex items-center justify-center gap-1 border border-transparent focus:outline-hidden': type === 'pill',
+      'bg-tertiary text-primary hover:bg-tertiary hover:text-primary': selected && type === 'pill',
+      'text-tertiary hover:bg-secondary active:bg-tertiary active:text-primary':
         !disabled && !selected && type === 'pill',
-      'text-disabled': disabled,
+      'text-muted': disabled,
       'flex-grow': grow,
     }"
     @click.stop.prevent="onSelect"
   >
-    <BIcon v-if="icon" :name="icon" />
-    <span class="relative text-sm">
+    <BIcon v-if="icon && size === 'default'" :name="icon" />
+    <span class="relative">
       {{ name }}
       <div v-if="notification" class="absolute" style="top: 0.124em; right: -0.65em">
         <div class="w-3 h-3 bg-orange-500 rounded-full border border-white" />

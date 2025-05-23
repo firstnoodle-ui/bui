@@ -1,7 +1,7 @@
 <script setup lang="ts" generic="T extends TPopSelectOption">
 import type { Placement } from "@floating-ui/dom";
 import type { TIcon, TPopSelectOption, TPopSelectResultFilter } from "../types";
-import { computed, nextTick, onBeforeMount, ref, useSlots, watch, withDefaults } from "vue";
+import { computed, nextTick, onBeforeMount, ref, useSlots, watch } from "vue";
 import { BIcon, BLoadSpinner, BPopper, BPopperContent, BScrollbar, BTextHighlight } from "../";
 import { useNextFrame } from "../../composables";
 import { debounce, scrollIntoView } from "../../utils";
@@ -262,13 +262,13 @@ defineExpose({ close, focus });
     <template #content>
       <BPopperContent ref="contentRef" class="flex flex-col" :class="{ 'h-72': fixedHeight }">
         <header v-if="filterable || remoteMethod || resultFilters" class="border-b border-default">
-          <header v-if="filterable || remoteMethod" class="flex items-center w-full px-3 space-x-2 bg-light overflow-hidden">
+          <header v-if="filterable || remoteMethod" class="flex items-center w-full px-3 space-x-2 bg-primary overflow-hidden">
             <BIcon name="magnifying-glass" class="text-light-blue" />
             <input
               ref="inputRef"
               v-model="currentQuery"
               type="text"
-              class="w-full h-8 text-sm leading-none bg-light rounded-tr-lg focus:outline-hidden"
+              class="w-full h-8 text-sm leading-none bg-primary rounded-tr-lg focus:outline-hidden"
               :placeholder="placeholder"
               @click.stop.prevent
               @input="debounceOnQuery"
@@ -287,17 +287,17 @@ defineExpose({ close, focus });
           />
         </header>
 
-        <div v-if="$slots.error" ref="errorRef" class="flex-1 bg-light h-full">
+        <div v-if="$slots.error" ref="errorRef" class="flex-1 bg-primary h-full">
           <slot name="error" />
         </div>
         <div v-else-if="state === State.LOADING" class="flex-1">
-          <div class="flex items-center space-x-2 bg-light text-tertiary py-3 px-3">
+          <div class="flex items-center space-x-2 bg-primary text-tertiary py-3 px-3">
             <BLoadSpinner class="w-4 h-4 text-granite-grey" />
             <span class="italic leading-none text-sm">{{ loadingText }}</span>
           </div>
         </div>
         <div v-else-if="state === State.NO_MATCH" class="flex-1">
-          <div class="flex space-x-2 bg-light text-tertiary py-3 px-3">
+          <div class="flex space-x-2 bg-primary text-tertiary py-3 px-3">
             <div class="w-4 h-4 text-center leading-none">
               ...
             </div>
@@ -305,15 +305,15 @@ defineExpose({ close, focus });
           </div>
         </div>
         <div v-else-if="state === State.IDLE" class="flex-1">
-          <div class="flex items-center space-x-2 bg-light text-tertiary py-3 px-3">
+          <div class="flex items-center space-x-2 bg-primary text-tertiary py-3 px-3">
             <BIcon :name="emptyStateIcon" />
             <span class="italic leading-none text-sm">{{ emptyStateText }}</span>
           </div>
-          <div class="h-8 w-full bg-light" />
+          <div class="h-8 w-full bg-primary" />
         </div>
 
         <BScrollbar v-else-if="state === State.MATCH" ref="scrollbarRef">
-          <div class="max-h-60 bg-light">
+          <div class="max-h-60 bg-primary">
             <PopSelectOption
               v-for="option in localOptions"
               ref="optionsRef"
@@ -337,7 +337,7 @@ defineExpose({ close, focus });
           </div>
         </BScrollbar>
 
-        <footer v-if="slots.footer" class="flex-none border-t border-default bg-light">
+        <footer v-if="slots.footer" class="flex-none border-t border-default bg-primary">
           <slot name="footer" />
         </footer>
       </BPopperContent>

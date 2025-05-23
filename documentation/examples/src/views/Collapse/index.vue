@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { BButton, BCollapse } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
+import {
+  ComponentPage,
+  ComponentPageSection,
+} from "../../components";
 
 const rootOpen = ref(false);
 const selectedId = ref<string | null>(null);

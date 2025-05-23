@@ -1,6 +1,6 @@
 <script setup lang="ts" generic="T extends TPopSelectOption">
 import type { TPopSelectOption, TPopSelectResultFilter } from "../types";
-import { BPill } from "../";
+import { BFilterChip } from "../";
 
 withDefaults(defineProps<{
   selected: TPopSelectResultFilter<T> | null;
@@ -15,17 +15,14 @@ const emit = defineEmits(["change"]);
 
 <template>
   <section class="flex items-center px-2 pb-2 space-x-2">
-    <BPill
+    <BFilterChip
       v-for="filter in filters"
       :key="filter.name"
-      :selected="Boolean(selected && selected.name === filter.name)"
+      :active="Boolean(selected && selected.name === filter.name)"
+      :count="filter.count"
+      :label="filter.name"
       stop-propagation
       @click="emit('change', filter)"
-    >
-      <span class="flex items-center space-x-1">
-        <span>{{ filter.name }}</span>
-        <span v-if="showCounts && filter.count" class="text-xs opacity-75">{{ `(${filter.count})` }}</span>
-      </span>
-    </BPill>
+    />
   </section>
 </template>
