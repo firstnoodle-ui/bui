@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { BIcon } from "../icon";
 
 const { direction } = defineProps<{ direction: "up" | "down" }>();
+const emit = defineEmits(["click"]);
 const active = ref(false);
 defineExpose({ setActive: (state: boolean) => active.value = state });
 </script>
@@ -15,7 +16,7 @@ defineExpose({ setActive: (state: boolean) => active.value = state });
       'h-[calc(--spacing(4)+1px)] rounded-br-lg': direction === 'down',
       'bg-tertiary': active,
     }"
-    @click="$emit('click')"
+    @click="emit('click')"
   >
     <BIcon :name="direction === 'up' ? 'chevron-up' : 'chevron-down'" />
   </button>

@@ -40,7 +40,6 @@ const clearable = ref(false);
         @change="(newValue:number) => {
           changeFlasher?.flash();
           value = newValue;
-          console.log(newValue);
         }"
         @enter="enterFlasher?.flash()"
         @clear="clearFlasher?.flash()"

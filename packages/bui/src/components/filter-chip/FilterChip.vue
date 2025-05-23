@@ -2,6 +2,7 @@
 import { BDeleteButton } from "../delete-button";
 
 const { count = 0 } = defineProps<{ label: string; active: boolean; count?: number }>();
+defineEmits(["click", "delete"]);
 </script>
 
 <template>

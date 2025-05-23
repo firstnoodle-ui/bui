@@ -10,7 +10,6 @@ const {
   disabled = false,
   icon,
   placeholder = "Write",
-  value = 0,
   min,
   max,
 } = defineProps<{
@@ -35,7 +34,6 @@ const focus = () => {
 };
 
 const onInput = (event: Event) => {
-  console.log("onInput", event);
   if (event.target) {
     emit("change", Number.parseInt((event.target as HTMLInputElement).value));
   }
