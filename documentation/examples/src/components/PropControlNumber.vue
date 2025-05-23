@@ -9,12 +9,9 @@ defineEmits<{
 </script>
 
 <template>
-  <PropControlBase type="Number">
+  <PropControlBase type="Number" :name="name">
     <template #control>
-      <div class="text-secondary font-medium text-sm">
-        {{ name }}
-      </div>
-      <BInputNumber :value="value" @change="(newValue:number) => $emit('change', newValue)" class="w-20" />
+      <BInputNumber :value="value" @change="(newValue:number) => $emit('change', newValue)" class="w-40" />
     </template>
     <template #notes>
       <slot />
