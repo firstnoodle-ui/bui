@@ -8,7 +8,7 @@ const {
   disabled = false,
   icon,
   multiline = false,
-  placeholder = 'Write'
+  placeholder = "Write",
 } = defineProps<{
   disabled?: boolean;
   clearable?: boolean;
@@ -18,7 +18,7 @@ const {
   value: string;
   inputType?: InputTypeHTMLAttribute;
   autoFocus?: boolean;
-}>()
+}>();
 
 const emit = defineEmits(["change", "clear", "enter"]);
 
@@ -98,6 +98,6 @@ defineExpose({ focus });
       @blur="onBlur"
       @input.stop.prevent="onInput"
     >
-    <BDeleteButton v-if="clearable && value.length" @click="emit('clear')" class="flex-none" />
+    <BDeleteButton v-if="clearable && value.length" class="flex-none" @click="emit('clear')" />
   </div>
 </template>

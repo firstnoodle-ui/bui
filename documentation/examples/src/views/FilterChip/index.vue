@@ -1,28 +1,28 @@
 <script setup lang="ts">
 import { BFilterChip } from "@firstnoodle/bui";
 import { ref } from "vue";
-import { 
+import {
   ComponentPage,
   ComponentPageSection,
   EventFlasher,
   EventSection,
   PropControlBoolean,
   PropControlNumber,
-  PropControlString
+  PropControlString,
 } from "../../components";
 
 const clickFlasher = ref<typeof EventFlasher>();
 const deleteFlasher = ref<typeof EventFlasher>();
 
 const isActive = ref(false);
-const label = ref('Category');
+const label = ref("Category");
 const count = ref(0);
 </script>
 
 <template>
   <ComponentPage title="FilterChip">
     <ComponentPageSection title="Basic usage">
-        <BFilterChip :active="isActive" :label="label" :count="count" @click="clickFlasher?.flash()" @delete="deleteFlasher?.flash()" />
+      <BFilterChip :active="isActive" :label="label" :count="count" @click="clickFlasher?.flash()" @delete="deleteFlasher?.flash()" />
       <template #controls>
         <EventSection>
           <EventFlasher ref="clickFlasher" name="click" />

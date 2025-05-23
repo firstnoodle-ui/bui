@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type { InputTypeHTMLAttribute } from "vue";
 import type { TIcon } from "../types";
-import { clamp } from "../../utils";
 import { ref } from "vue";
 import { BIcon } from "../";
+import { clamp } from "../../utils";
 import StepButton from "./StepButton.vue";
 
 const {
   disabled = false,
   icon,
-  placeholder = 'Write',
+  placeholder = "Write",
   value = 0,
   min,
-  max
+  max,
 } = defineProps<{
   disabled?: boolean;
   icon?: TIcon;
@@ -22,7 +22,7 @@ const {
   max?: number;
   inputType?: InputTypeHTMLAttribute;
   autoFocus?: boolean;
-}>()
+}>();
 
 const emit = defineEmits(["change", "enter"]);
 
@@ -35,9 +35,9 @@ const focus = () => {
 };
 
 const onInput = (event: Event) => {
-  console.log('onInput', event);
+  console.log("onInput", event);
   if (event.target) {
-    emit("change", parseInt((event.target as HTMLInputElement).value));
+    emit("change", Number.parseInt((event.target as HTMLInputElement).value));
   }
 };
 
@@ -47,17 +47,18 @@ const onEnter = (e: KeyboardEvent) => {
   emit("enter");
 };
 
-const onArrowKey = (direction:-1|1, active:boolean) => {
-  if(direction === 1) {
+const onArrowKey = (direction: -1 | 1, active: boolean) => {
+  if (direction === 1) {
     upButtonRef.value?.setActive(active);
-  } else {
+  }
+  else {
     downButtonRef.value?.setActive(active);
   }
-}
+};
 
-const onStep = (direction:1|-1) => {
-  emit('change', clamp(value + direction, min??null, max??null));
-}
+const onStep = (direction: 1 | -1) => {
+  emit("change", clamp(value + direction, min ?? null, max ?? null));
+};
 
 const onBlur = (event: Event) => {
   event.stopImmediatePropagation();
@@ -75,7 +76,7 @@ defineExpose({ focus });
       'bg-secondary border-weak text-secondary': disabled,
       'bg-primary border-default text-primary shadow-sm-inner-sm': !disabled,
       'pl-8': icon,
-      'pl-3': !icon
+      'pl-3': !icon,
     }"
   >
     <div

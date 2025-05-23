@@ -36,7 +36,7 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
-    
+
   },
   "dependencies": {
     "@floating-ui/dom": "^1.6.13",

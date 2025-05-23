@@ -1,20 +1,21 @@
 <script setup lang="ts">
+import type { TIcon } from "@firstnoodle-ui/bui";
+import { BInputNumber, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-import { BInputNumber, icons, type TIcon } from "@firstnoodle-ui/bui";
 
 import {
   ComponentPage,
   ComponentPageSection,
+  EventFlasher,
+  EventSection,
   PropControlBoolean,
   PropControlNumber,
   PropControlSelect,
   PropControlString,
-  EventFlasher,
-  EventSection
 } from "../../components";
 
 const value = ref(0);
-const placeholder = ref('Age');
+const placeholder = ref("Age");
 const selectedIcon = ref<string | undefined>();
 const min = ref(0);
 const max = ref(10);
@@ -40,22 +41,22 @@ const clearable = ref(false);
           changeFlasher?.flash();
           value = newValue;
           console.log(newValue);
-        }" 
+        }"
         @enter="enterFlasher?.flash()"
         @clear="clearFlasher?.flash()"
       />
-        <template #controls>
-          <EventSection>
-            <EventFlasher ref="changeFlasher" name="change" />
-            <EventFlasher ref="enterFlasher" name="enter" />
-            <EventFlasher ref="clearFlasher" name="clear" />
-          </EventSection>
-        <PropControlString name="Placeholder" :value="placeholder" @change="(value:string) => placeholder = value"/>
-        <PropControlNumber name="Min" :value="min" @change="(value:number) => min = value"/>
-        <PropControlNumber name="Max" :value="max" @change="(value:number) => max = value"/>
-        <PropControlSelect name="Icon" clearable :value="selectedIcon" :options="[...icons]" @select="(option:string|undefined) => selectedIcon = option"/>
+      <template #controls>
+        <EventSection>
+          <EventFlasher ref="changeFlasher" name="change" />
+          <EventFlasher ref="enterFlasher" name="enter" />
+          <EventFlasher ref="clearFlasher" name="clear" />
+        </EventSection>
+        <PropControlString name="Placeholder" :value="placeholder" @change="(value:string) => placeholder = value" />
+        <PropControlNumber name="Min" :value="min" @change="(value:number) => min = value" />
+        <PropControlNumber name="Max" :value="max" @change="(value:number) => max = value" />
+        <PropControlSelect name="Icon" clearable :value="selectedIcon" :options="[...icons]" @select="(option:string|undefined) => selectedIcon = option" />
         <PropControlBoolean name="Clearable" :value="clearable" @toggle="clearable = !clearable" />
-        </template>
+      </template>
     </ComponentPageSection>
   </ComponentPage>
 </template>

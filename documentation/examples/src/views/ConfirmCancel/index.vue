@@ -2,13 +2,13 @@
 import type { ButtonVariant, TIcon } from "@firstnoodle-ui/bui";
 import { BConfirmCancel, buttonVariants, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-import { 
+import {
   ComponentPage,
   ComponentPageSection,
   EventFlasher,
   PropControlBoolean,
   PropControlSelect,
-  PropControlString
+  PropControlString,
 } from "../../components";
 
 const confirmRef = ref<typeof EventFlasher>();

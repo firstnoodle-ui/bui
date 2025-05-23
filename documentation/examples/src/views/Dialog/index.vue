@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { BButton, BDialog } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-import { 
+import {
   ComponentPage,
   ComponentPageSection,
 } from "../../components";

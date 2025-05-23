@@ -11,7 +11,7 @@ defineEmits<{
 <template>
   <PropControlBase type="Number" :name="name">
     <template #control>
-      <BInputNumber :value="value" @change="(newValue:number) => $emit('change', newValue)" class="w-40" />
+      <BInputNumber :value="value" class="w-40" @change="(newValue:number) => $emit('change', newValue)" />
     </template>
     <template #notes>
       <slot />

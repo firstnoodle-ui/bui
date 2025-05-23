@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { BDeleteButton } from "@firstnoodle-ui/bui";
-import { 
+import { ref } from "vue";
+import {
   ComponentPage,
   ComponentPageSection,
   EventFlasher,

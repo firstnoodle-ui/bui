@@ -2,12 +2,12 @@
 import type { ButtonVariant, TIcon } from "@firstnoodle/bui";
 import { BButton, icons } from "@firstnoodle/bui";
 import { ref } from "vue";
-import { 
+import {
   ComponentPage,
   ComponentPageSection,
   PropControlBoolean,
   PropControlSelect,
-  PropControlString
+  PropControlString,
 } from "../../components";
 
 const isSmall = ref(false);

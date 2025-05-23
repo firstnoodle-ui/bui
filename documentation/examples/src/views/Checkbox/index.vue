@@ -2,12 +2,12 @@
 import type { TCheckboxType } from "@firstnoodle-ui/bui";
 import { BCheckbox, checkboxTypes } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-import { 
+import {
   ComponentPage,
   ComponentPageSection,
   PropControlBoolean,
   PropControlSelect,
-  PropControlString
+  PropControlString,
 } from "../../components";
 
 const checked = ref(false);
