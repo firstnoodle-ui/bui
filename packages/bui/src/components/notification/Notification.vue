@@ -48,7 +48,7 @@ const icon = computed(() => {
         small
         variant="textSubtle"
         icon="close"
-        @click="emit('show-details')"
+        @click="emit('close')"
       />
     </BFlexbox>
   </div>
