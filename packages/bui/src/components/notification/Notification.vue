@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { TIcon } from "../types";
 import { BButton, BFlexbox, BIcon } from "../";
 
 const { type = "default" } = defineProps<{
-  icon?: TIcon;
   showDetailsButton?: boolean;
   text: string;
   type: "default"|"error"|"warning"|"success";
