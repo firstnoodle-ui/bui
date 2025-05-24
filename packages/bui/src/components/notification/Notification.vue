@@ -1,34 +1,55 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import type { TIcon } from "../types";
-import { BIcon } from "../";
+import { BButton, BFlexbox, BIcon } from "../";
 
-defineProps<{
+const { type = "default" } = defineProps<{
   icon?: TIcon;
   showDetailsButton?: boolean;
   text: string;
+  type: "default"|"error"|"warning"|"success";
 }>();
 
 const emit = defineEmits(["close", "show-details"]);
+
+const icon = computed(() => {
+  if(type === "default") return "information";
+  if(type === "error") return "error";
+  if(type === "warning") return "warning";
+  return "check-circled";
+})
 </script>
 
 <template>
-  <div class="inline-flex items-stretch rounded-lg shadow-sm-md pointer-events-auto">
-    <div class="flex items-center space-x-2 px-4 h-8 text-white bg-black rounded-l-lg">
-      <BIcon v-if="icon" :name="icon" />
+  <div data-theme="dark" class="inline-flex items-stretch h-10 px-1 rounded-xl bg-black shadow-xl pointer-events-auto">
+    <BFlexbox
+      class="gap-2 px-3 rounded-l-lg"
+      :class="{
+        'text-stone-300': type === 'default',
+        'text-amber-300': type === 'warning',
+        'text-red-300': type === 'error',
+        'text-emerald-300': type === 'success',
+      }"
+    >
+      <BIcon :name="icon" />
       <span class="text-sm cursor-default">{{ text }}</span>
-    </div>
-    <button
-      v-if="showDetailsButton"
-      class="px-4 h-8 text-sm text-action bg-black border-l border-gray-600 hover:bg-gray-800 focus:outline-hidden focus:shadow-sm-outline"
-      @click="emit('show-details')"
-    >
-      Details
-    </button>
-    <button
-      class="flex items-center justify-center px-3 h-8 text-white bg-black rounded-r-lg border-l border-gray-600 hover:bg-gray-800 focus:outline-hidden focus:shadow-sm-outline"
-      @click="emit('close')"
-    >
-      <BIcon name="close" class="text-white" />
-    </button>
+    </BFlexbox>
+    <BFlexbox class="px-2">
+      <BButton
+        v-if="showDetailsButton"
+        small
+        variant="text"
+        label="Details"
+        @click="emit('show-details')"
+      />
+    </BFlexbox>
+    <BFlexbox class="px-1">
+      <BButton
+        small
+        variant="textSubtle"
+        icon="close"
+        @click="emit('show-details')"
+      />
+    </BFlexbox>
   </div>
 </template>

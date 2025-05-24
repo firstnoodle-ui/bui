@@ -6,11 +6,8 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
 
 <template>
   <ComponentPage title="Notification">
-    <ComponentPageSection title="Default">
-      <BNotification text="Notified" />
-    </ComponentPageSection>
     <ComponentPageSection title="Show details button">
-      <BNotification text="Notified" show-details-button />
+      <BNotification type="default" icon="trash" text="Item deleted" show-details-button />
     </ComponentPageSection>
   </ComponentPage>
 </template>
