@@ -6,7 +6,7 @@ import routes from "./router/routes";
 
 const router = useRouter();
 const asideLeftWidth = ref(256);
-const theme = ref(false);
+const theme = ref(true);
 
 const navigateTo = (page: string) => {
   const path = routes.find(route => route.name === page)?.path;
