@@ -34,6 +34,7 @@ export * from "./tag";
 export * from "./text-editor";
 export * from "./text-highlight";
 export * from "./text-viewer";
+export * from "./toggle-button";
 export * from "./tooltip";
 export * from "./types";
 export * from "./vertical-layout";

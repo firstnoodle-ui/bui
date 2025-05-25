@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { InputTypeHTMLAttribute } from "vue";
 import type { TIcon } from "../types";
-import { computed, ref } from "vue";
-import { BDeleteButton, BIcon } from "../";
+import { ref } from "vue";
+import { BButton, BIcon } from "../";
 
 const {
   disabled = false,
@@ -24,13 +24,6 @@ const emit = defineEmits(["change", "clear", "enter"]);
 
 const textareaRef = ref<HTMLTextAreaElement>();
 const inputRef = ref<HTMLInputElement>();
-
-const outerClass = computed(() => {
-  const result = [];
-  result.push(disabled ? "bg-secondary border-weak text-secondary" : "bg-primary border-default text-primary");
-  result.push(icon ? "pr-3 pl-8" : "px-3");
-  return result;
-});
 
 const focus = () => {
   if (multiline) (textareaRef.value as HTMLTextAreaElement).focus();
@@ -60,8 +53,16 @@ defineExpose({ focus });
 
 <template>
   <div
-    class="relative overflow-hidden inline-flex items-center text-sm leading-tight rounded-lg border focus:shadow-sm-inner focus:outline-hidden focus-within:border-action"
-    :class="outerClass"
+    class="relative overflow-hidden inline-flex items-center h-8 text-sm leading-tight rounded-lg border focus:shadow-sm-inner focus:outline-hidden focus-within:border-action"
+    :class="{
+      'bg-secondary border-weak text-secondary': disabled,
+      'bg-primary border-default text-primary': !disabled,
+      'pl-8': icon,
+      'pl-3': !icon,
+      'pr-1': clearable,
+      'pr-0.5': $slots['inline-controls'],
+      'pr-3': !clearable && !$slots['inline-controls'],
+    }"
   >
     <div
       v-if="icon"
@@ -91,13 +92,16 @@ defineExpose({ focus });
       :type="inputType"
       :value="value"
       :placeholder="placeholder"
-      class="flex-1 py-2 text-sm leading-tight bg-transparent focus:outline-hidden"
+      class="flex-1 text-sm leading-tight bg-transparent focus:outline-hidden"
       @change.stop.prevent
       @keydown.enter.stop.prevent="onEnter"
       @keyup.enter.stop.prevent
       @blur="onBlur"
       @input.stop.prevent="onInput"
     >
-    <BDeleteButton v-if="clearable && value.length" class="flex-none" @click="emit('clear')" />
+    <section v-if="$slots['inline-controls']" class="px-1">
+      <slot name="inline-controls" />
+    </section>
+    <BButton v-if="clearable && value.length" small icon="close" variant="textSubtle" class="flex-none" @click="emit('clear')" />
   </div>
 </template>
