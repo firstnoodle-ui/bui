@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BTag } from "@firstnoodle-ui/bui";
+import { BFlexbox, BTag } from "@firstnoodle-ui/bui";
 import ComponentPage from "../../components/ComponentPage.vue";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
 </script>
@@ -7,7 +7,10 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
 <template>
   <ComponentPage title="Tag">
     <ComponentPageSection title="Basic usage">
-      <BTag deletable icon="index-finger-up" label="remember" @delete="console.log('delete!')" />
+      <BFlexbox class="gap-2">
+        <BTag icon="admin" label="ChatGPT 40." @delete="console.log('delete!')" />
+        <BTag icon="venn" label="Mixed" @delete="console.log('delete!')" />
+      </BFlexbox>
     </ComponentPageSection>
   </ComponentPage>
 </template>
