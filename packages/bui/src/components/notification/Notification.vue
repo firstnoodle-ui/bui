@@ -36,7 +36,7 @@ const icon = computed(() => {
       <BButton
         v-if="showDetailsButton"
         small
-        variant="text"
+        variant="outline"
         label="Details"
         @click="emit('show-details')"
       />
