@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.17...main
+
+[compare changes](https://github.com/firstnoodle/bui/compare/v0.0.17...main)
+
+### 🏡 Chore
+
+- Release v0.0.17 ([79c93c8](https://github.com/firstnoodle/bui/commit/79c93c8))
+
+### ❤️ Contributors
+
+- Sebastian <seb.thielke@gmail.com>
+
 ## v0.0.16...main
 
 [compare changes](https://github.com/firstnoodle-ui/bui/compare/v0.0.16...main)
