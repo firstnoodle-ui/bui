@@ -50,7 +50,7 @@ const buttonClasses = computed(() => {
           "dark:bg-blue-800/25 dark:hover:bg-blue-800/50 dark:focus-visible:bg-blue-800/50 dark:active:bg-blue-800/75",
           "dark:border-action dark:hover:border-action-hover dark:focus-visible:border-action-hover dark:active:border-action-active",
           "dark:text-action dark:hover:text-action-hover dark:focus-visible:text-action-hover dark:active:text-action-active",
-      ]
+        ]
       : [
           "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
           "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
@@ -58,8 +58,8 @@ const buttonClasses = computed(() => {
           "dark:hover:bg-neutral-700 dark:focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
           "dark:border-stone-700 dark:hover:border-stone-600 dark:focus-visible:border-stone-600 dark:active:border-stone-500",
           "dark:text-slate-200 dark:hover:text-slate-100 dark:focus-visible:text-slate-100 dark:active:text-white",
-      ]
-    )
+        ]
+    ),
   );
 
   return result.filter(i => i).join(" ");
@@ -75,7 +75,7 @@ const disabledStyle = computed(() => {
 const onClick = (event: MouseEvent) => {
   props.stopPropagation && event.stopPropagation();
 
-  if(!props.disabled) {
+  if (!props.disabled) {
     emit("click");
   }
 };
@@ -87,19 +87,19 @@ defineExpose({ focus });
 
 <template>
   <BTooltip v-if="tooltip" hover :text="tooltip" :delay="tooltipDelay" :placement="tooltipPlacement">
-      <button
-        ref="buttonRef"
-        class="z-0 relative inline-flex items-center justify-center gap-1 h-6 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
-        :class="buttonClasses"
-        :disabled="disabled"
-        :style="disabledStyle"
-        @click="onClick"
-        @blur="emit('blur')"
-      >
-        <BIcon v-if="icon" :name="icon" />
-        <div v-if="label">
-          {{ label }}
-        </div>
-      </button>
+    <button
+      ref="buttonRef"
+      class="z-0 relative inline-flex items-center justify-center gap-1 h-6 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+      :class="buttonClasses"
+      :disabled="disabled"
+      :style="disabledStyle"
+      @click="onClick"
+      @blur="emit('blur')"
+    >
+      <BIcon v-if="icon" :name="icon" />
+      <div v-if="label">
+        {{ label }}
+      </div>
+    </button>
   </BTooltip>
 </template>

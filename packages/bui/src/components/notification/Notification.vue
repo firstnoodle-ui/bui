@@ -5,17 +5,17 @@ import { BButton, BFlexbox, BIcon } from "../";
 const { type = "default" } = defineProps<{
   showDetailsButton?: boolean;
   text: string;
-  type: "default"|"error"|"warning"|"success";
+  type?: "default" | "error" | "warning" | "success";
 }>();
 
 const emit = defineEmits(["close", "show-details"]);
 
 const icon = computed(() => {
-  if(type === "default") return "information";
-  if(type === "error") return "error";
-  if(type === "warning") return "warning";
+  if (type === "default") return "information";
+  if (type === "error") return "error";
+  if (type === "warning") return "warning";
   return "check-circled";
-})
+});
 </script>
 
 <template>
