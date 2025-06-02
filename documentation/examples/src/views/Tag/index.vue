@@ -8,7 +8,7 @@ import ComponentPageSection from "../../components/ComponentPageSection.vue";
   <ComponentPage title="Tag">
     <ComponentPageSection title="Basic usage">
       <BFlexbox class="gap-2">
-        <BTag icon="admin" label="ChatGPT 40." @delete="console.log('delete!')" />
+        <BTag label="ChatGPT 40." @delete="console.log('delete!')" />
         <BTag icon="venn" label="Mixed" @delete="console.log('delete!')" />
       </BFlexbox>
     </ComponentPageSection>

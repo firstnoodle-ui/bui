@@ -46,6 +46,7 @@ const selectedIcon = ref<string | undefined>();
         <PropControlBoolean name="Loading" :value="isLoading" @toggle="isLoading = !isLoading" />
         <PropControlBoolean name="Disabled" :value="isDisabled" @toggle="isDisabled = !isDisabled" />
         <PropControlBoolean name="Focus" :value="isFocused" @toggle="isFocused = !isFocused" />
+        <PropControlBoolean name="Notification" :value="hasNotification" @toggle="hasNotification = !hasNotification" />
         <PropControlSelect name="Icon" clearable :value="selectedIcon" :options="[...icons]" @select="(option:string|undefined) => selectedIcon = option">
           Will be hidden when <strong>loading=true</strong>
         </PropControlSelect>

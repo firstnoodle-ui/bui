@@ -4,10 +4,11 @@ import { computed, ref } from "vue";
 import { BButton, BPopSelect } from "../";
 import { range } from "../../utils";
 
-const { borders = false, currentPage, lastPage } = defineProps<{
+const { borders = false, currentPage, lastPage, orientation = "horizontal" } = defineProps<{
   borders?: boolean;
   currentPage: number;
   lastPage: number;
+  orientation?: "horizontal" | "vertical";
 }>();
 
 const emit = defineEmits(["change"]);
@@ -37,7 +38,7 @@ const onPageSelect = (pageOption: TPopSelectOption) => {
   <nav ref="navRef" class="relative z-0 inline-flex">
     <BButton
       :variant="variant"
-      icon="chevron-left"
+      :icon="orientation === 'horizontal' ? 'chevron-left' : 'chevron-up'"
       :style="prevStyle"
       class="z-0 hover:z-10 focus:z-10 active:z-10"
       @click="onChange(-1)"
@@ -55,7 +56,7 @@ const onPageSelect = (pageOption: TPopSelectOption) => {
     </BPopSelect>
     <BButton
       :variant="variant"
-      icon="chevron-right"
+      :icon="orientation === 'horizontal' ? 'chevron-right' : 'chevron-down'"
       :style="nextStyle"
       class="z-0 hover:z-10 focus:z-10 active:z-10 -ml-px"
       @click="onChange(1)"
