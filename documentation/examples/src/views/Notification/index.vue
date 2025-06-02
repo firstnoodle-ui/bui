@@ -18,7 +18,7 @@ const keys = {
     </ComponentPageSection>
     <ComponentPageSection title="Validate input length">
       <div class="flex flex-col gap-4">
-        <div class="">
+        <div>
           <BButton label="Validate" @click="notificationsEventBus.emit('validate', Object.values(keys))" />
         </div>
         <div class="flex flex-col gap-4">
