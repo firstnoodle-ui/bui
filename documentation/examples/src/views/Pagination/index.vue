@@ -23,7 +23,7 @@ const onChange2 = (page: number) => {
       <BPagination borders :current-page="currentPage1" :last-page="5" @change="onChange1" />
     </ComponentPageSection>
     <ComponentPageSection title="No borders">
-      <BPagination :current-page="currentPage2" :last-page="5" @change="onChange2" />
+      <BPagination :current-page="currentPage2" :last-page="5" @change="onChange2" orientation="vertical" />
     </ComponentPageSection>
   </ComponentPage>
 </template>
