@@ -33,7 +33,7 @@ const emit = defineEmits(["delete"]);
   </BFlexbox> -->
   <BFlexbox
     inline
-    class="h-5 truncate text-xs border border-default rounded-lg text-tertiary bg-secondary"
+    class="h-5 truncate text-xs rounded-lg text-tertiary bg-tertiary"
     :class="{
       'px-1': !deletable,
       'pl-1 pr-0.5': deletable,
