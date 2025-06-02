@@ -8,7 +8,7 @@ const { borders = false, currentPage, lastPage, orientation = "horizontal" } = d
   borders?: boolean;
   currentPage: number;
   lastPage: number;
-  orientation?: "horizontal"|"vertical"
+  orientation?: "horizontal" | "vertical";
 }>();
 
 const emit = defineEmits(["change"]);
