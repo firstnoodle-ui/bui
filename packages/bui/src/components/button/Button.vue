@@ -87,7 +87,7 @@ const buttonClasses = computed(() => {
     case "fill":
       result.push(
         ...(props.focus
-          ? [""]
+          ? ["text-white bg-blue-700 border-blue-700 dark:bg-blue-500 dark:border-blue-500"]
           : [
               "bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 active:bg-blue-700",
               "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
@@ -101,7 +101,7 @@ const buttonClasses = computed(() => {
     case "outline":
       result.push(
         ...(props.focus
-          ? [""]
+          ? ["bg-blue-200 border-blue-700 text-blue-700 dark:bg-blue-700 dark:border-blue-600 dark:text-white"]
           : [
               "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
               "border border-blue-500 hover:border-blue-600 focus-visible:border-blue-600 active:border-blue-700",
@@ -116,7 +116,7 @@ const buttonClasses = computed(() => {
     case "outlineSubtle":
       result.push(
         ...(props.focus
-          ? [""]
+          ? ["bg-slate-200 border-stone-500 text-slate-900 dark:bg-neutral-600 dark:border-stone-500 dark:text-white"]
           : [
               "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
               "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
@@ -131,7 +131,7 @@ const buttonClasses = computed(() => {
     case "text":
       result.push(
         ...(props.focus
-          ? [""]
+          ? ["border-none bg-blue-200 text-blue-700 dark:bg-blue-700 dark:text-white"]
           : [
               "hover:bg-blue-100 focus-visible:bg-blue-100 active:bg-blue-200",
               "border-none",
@@ -145,7 +145,7 @@ const buttonClasses = computed(() => {
     case "textSubtle":
       result.push(
         ...(props.focus
-          ? ["bg-slate-200 text-slate-900 dark:bg-neutral-600 dark:text-white"]
+          ? ["border-none bg-slate-200 text-slate-900 dark:bg-neutral-600 dark:text-white"]
           : [
               "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
               "border-none",
