@@ -48,7 +48,9 @@ const selectedIconAfter = ref<string | undefined>();
         <PropControlBoolean name="Small" :value="isSmall" @toggle="isSmall = !isSmall" />
         <PropControlBoolean name="Rounded" :value="isRounded" @toggle="isRounded = !isRounded" />
         <PropControlBoolean name="Fullwidth" :value="isFullwidth" @toggle="isFullwidth = !isFullwidth" />
-        <PropControlBoolean name="SpaceBetween" :value="isSpaceBetween" @toggle="isSpaceBetween = !isSpaceBetween">Only makes sense when fullwidth is true</PropControlBoolean>
+        <PropControlBoolean name="SpaceBetween" :value="isSpaceBetween" @toggle="isSpaceBetween = !isSpaceBetween">
+          Only makes sense when fullwidth is true
+        </PropControlBoolean>
         <PropControlBoolean name="Loading" :value="isLoading" @toggle="isLoading = !isLoading" />
         <PropControlBoolean name="Disabled" :value="isDisabled" @toggle="isDisabled = !isDisabled" />
         <PropControlBoolean name="Focus" :value="isFocused" @toggle="isFocused = !isFocused" />

@@ -34,7 +34,7 @@ const props = withDefaults(
     disabled: false,
     focus: false,
     fullwidth: false,
-    spaceBetween: false, 
+    spaceBetween: false,
     loading: false,
     notification: false,
     rounded: false,
@@ -81,7 +81,7 @@ const buttonClasses = computed(() => {
 
   props.disabled ? result.push("opacity-75 cursor-not-allowed") : result.push("cursor-pointer");
   props.fullwidth && result.push("w-full");
-  result.push(props.spaceBetween ? "justify-between" : "justify-center")
+  result.push(props.spaceBetween ? "justify-between" : "justify-center");
 
   if (props.rounded) result.push("rounded-full");
   else result.push(props.small ? "rounded-md" : "rounded-lg");
