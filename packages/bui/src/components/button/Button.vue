@@ -11,6 +11,7 @@ const props = withDefaults(
     classes?: string;
     disabled?: boolean;
     fullwidth?: boolean;
+    spaceBetween?: boolean;
     href?: string;
     icon?: TIcon;
     iconAfter?: TIcon;
@@ -33,6 +34,7 @@ const props = withDefaults(
     disabled: false,
     focus: false,
     fullwidth: false,
+    spaceBetween: false, 
     loading: false,
     notification: false,
     rounded: false,
@@ -79,9 +81,10 @@ const buttonClasses = computed(() => {
 
   props.disabled ? result.push("opacity-75 cursor-not-allowed") : result.push("cursor-pointer");
   props.fullwidth && result.push("w-full");
+  result.push(props.spaceBetween ? "justify-between" : "justify-center")
 
   if (props.rounded) result.push("rounded-full");
-  else result.push("rounded-lg");
+  else result.push(props.small ? "rounded-md" : "rounded-lg");
 
   switch (props.variant) {
     case "fill":
@@ -205,17 +208,19 @@ defineExpose({ focus });
       :is="component"
       ref="buttonRef"
       :to="routerLinkTo"
-      class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+      class="z-0 relative inline-flex items-center gap-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
       :class="buttonClasses"
       :disabled="disabled || loading"
       :style="disabledStyle"
       @click="onClick"
       @blur="emit('blur')"
     >
-      <BLoadSpinner v-if="loading" :class="loadSpinnerClass" />
-      <BIcon v-else-if="icon" :name="icon" />
-      <div v-if="label">
-        {{ label }}
+      <div class="flex items-center gap-1">
+        <BLoadSpinner v-if="loading" :class="loadSpinnerClass" />
+        <BIcon v-else-if="icon" :name="icon" />
+        <div v-if="label" class="min-w-0 truncate">
+          {{ label }}
+        </div>
       </div>
       <BIcon v-if="iconAfter" :name="iconAfter" class="opacity-75" />
       <NotificationBadge v-if="notification" :inside="variant === 'text' || variant === 'textSubtle'" />
@@ -227,17 +232,19 @@ defineExpose({ focus });
     ref="buttonRef"
     :to="routerLinkTo"
     :target="props.linkTarget"
-    class="z-0 relative inline-flex items-center justify-center space-x-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+    class="z-0 relative inline-flex items-center gap-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
     :class="buttonClasses"
     :disabled="disabled || loading"
     :style="disabledStyle"
     @click="onClick"
     @blur="emit('blur')"
   >
-    <BLoadSpinner v-if="loading" :class="loadSpinnerClass" />
-    <BIcon v-else-if="icon" :name="icon" />
-    <div v-if="label">
-      {{ label }}
+    <div class="flex items-center gap-1">
+      <BLoadSpinner v-if="loading" :class="loadSpinnerClass" />
+      <BIcon v-else-if="icon" :name="icon" />
+      <div v-if="label" class="flex-1 min-w-0 truncate">
+        {{ label }}
+      </div>
     </div>
     <BIcon v-if="iconAfter" :name="iconAfter" />
     <NotificationBadge v-if="notification" :inside="variant === 'text' || variant === 'textSubtle'" />
