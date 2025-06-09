@@ -73,7 +73,7 @@ const buttonClasses = computed(() => {
     ? result.push(props.small ? "px-2" : "px-3")
     : result.push(props.loading && props.icon && !props.label ? "px-0" : "px-2");
 
-  props.small ? result.push("h-6") : result.push("h-8");
+  props.small ? result.push("h-6 text-xs") : result.push("h-8 text-sm");
 
   if (props.icon && !props.label) {
     props.small ? result.push("w-6") : result.push("w-8");
@@ -84,7 +84,7 @@ const buttonClasses = computed(() => {
   result.push(props.spaceBetween ? "justify-between" : "justify-center");
 
   if (props.rounded) result.push("rounded-full");
-  else result.push(props.small ? "rounded-md" : "rounded-lg");
+  else result.push(props.small ? "rounded" : "rounded-lg");
 
   switch (props.variant) {
     case "fill":
@@ -208,7 +208,7 @@ defineExpose({ focus });
       :is="component"
       ref="buttonRef"
       :to="routerLinkTo"
-      class="z-0 relative inline-flex items-center gap-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+      class="z-0 relative inline-flex items-center gap-1 leading-none border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
       :class="buttonClasses"
       :disabled="disabled || loading"
       :style="disabledStyle"
@@ -232,7 +232,7 @@ defineExpose({ focus });
     ref="buttonRef"
     :to="routerLinkTo"
     :target="props.linkTarget"
-    class="z-0 relative inline-flex items-center gap-1 leading-none text-sm border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+    class="z-0 relative inline-flex items-center gap-1 leading-none border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
     :class="buttonClasses"
     :disabled="disabled || loading"
     :style="disabledStyle"
