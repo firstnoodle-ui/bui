@@ -19,7 +19,7 @@ const emit = defineEmits(["delete"]);
 <template>
   <BFlexbox
     inline
-    class="h-5 truncate text-xs rounded-lg text-tertiary bg-tertiary"
+    class="h-5 truncate text-xs rounded-sm text-tertiary bg-tertiary"
     :class="{
       'px-1': !deletable,
       'pl-1 pr-0.5': deletable,
