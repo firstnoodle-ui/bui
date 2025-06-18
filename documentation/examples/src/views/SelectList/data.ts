@@ -1,0 +1,75 @@
+import type { SelectListOption, SelectListOptionGroup, SelectListFilter } from "@firstnoodle/bui";
+
+export const options:SelectListOption[] = [
+    { id: 1, icon: "box", label: "Apple", suffix: "green" },
+    { id: 2, icon: "box", label: "Orange", suffix: "orange" },
+    { id: 3, icon: "box", label: "Pineapple", suffix: "yellow" },
+    { id: 4, icon: "box", label: "Pear", suffix: "green" },
+    { id: 5, icon: "box", label: "Lemon", suffix: "yellow" },
+    { id: 6, icon: "box", label: "Grape", suffix: "yellow" },
+    { id: 7, icon: "box", label: "Banana", suffix: "yellow" },
+    { id: 8, icon: "box", label: "Lime", suffix: "green" },
+    { id: 9, icon: "box", label: "Watermelon", suffix: "pink" },
+    { id: 10, icon: "box", label: "Lychee", suffix: "white" },
+];
+
+export const groupedOptions:SelectListOptionGroup[] = [
+    {
+        name: "Green",
+        options: options.filter(o => o.suffix === "green")
+    },
+    {
+        name: "Orange",
+        options: options.filter(o => o.suffix === "orange")
+    },
+    {
+        name: "Yellow",
+        options: options.filter(o => o.suffix === "yellow")
+    },
+    {
+        name: "Pink",
+        options: options.filter(o => o.suffix === "pink")
+    },
+    {
+        name: "White",
+        options: options.filter(o => o.suffix === "white")
+    },
+]
+
+export const filters:SelectListFilter[] = [
+    {
+        id: 1,
+        name: "All",
+        disabled: false,
+        execute: (_option) => true,
+        count: 0
+    },
+    {
+        id: 2,
+        name: "Yellow",
+        disabled: false,
+        execute: (option) => option.suffix === "yellow",
+        count: 0
+    },
+    {
+        id: 3,
+        name: "Green",
+        disabled: false,
+        execute: (option) => option.suffix === "green",
+        count: 0
+    },
+    {
+        id: 4,
+        name: "Orange",
+        disabled: false,
+        execute: (option) => option.suffix === "orange",
+        count: 0
+    },
+    {
+        id: 5,
+        name: "Pink",
+        disabled: false,
+        execute: (option) => option.suffix === "pink",
+        count: 0
+    }
+]

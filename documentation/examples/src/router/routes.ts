@@ -114,6 +114,12 @@ export default [
     meta: { group: "Poppers" },
   },
   {
+    path: "/select-list",
+    name: "SelectList",
+    component: () => import("../views/SelectList/index.vue"),
+    meta: { group: "Not sure" },
+  },
+  {
     path: "/side-over",
     name: "SideOver",
     component: () => import("../views/SideOver/index.vue"),
