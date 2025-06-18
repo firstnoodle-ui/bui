@@ -1,3 +1,5 @@
+import { type ScrollDirection } from "./scrollbar";
+
 export const buttonVariants = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive"] as const;
 export type ButtonVariant = (typeof buttonVariants)[number];
 
@@ -62,14 +64,6 @@ export type TPopSelectResultFilter<T> = {
   disabled: boolean;
   execute: (record: T) => boolean;
   count?: number;
-};
-
-export const directions = ["up", "down", "left", "right"] as const;
-export type TScrollDirection = (typeof directions)[number];
-
-export type TScrollTrigger = {
-  px: number;
-  callback: (trigger: TScrollTrigger, direction: TScrollDirection) => void;
 };
 
 export const statuses = ["Ok", "Not Ok", "Not Applicable"] as const;
