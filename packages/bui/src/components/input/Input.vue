@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { InputTypeHTMLAttribute } from "vue";
+import { onMounted, type InputTypeHTMLAttribute } from "vue";
 import type { TIcon } from "../types";
 import { ref } from "vue";
 import { BButton, BIcon } from "../";
@@ -9,12 +9,15 @@ const {
   icon,
   multiline = false,
   placeholder = "Write",
+  small = false,
+  autoFocus = false,
 } = defineProps<{
   disabled?: boolean;
   clearable?: boolean;
   icon?: TIcon;
   multiline?: boolean;
   placeholder?: string;
+  small?: boolean;
   value: string;
   inputType?: InputTypeHTMLAttribute;
   autoFocus?: boolean;
@@ -24,6 +27,14 @@ const emit = defineEmits(["change", "clear", "enter"]);
 
 const textareaRef = ref<HTMLTextAreaElement>();
 const inputRef = ref<HTMLInputElement>();
+
+onMounted(() => {
+  if(multiline) {
+    textareaRef.value?.focus();
+  } else {
+    inputRef.value?.focus();
+  }
+});
 
 const focus = () => {
   if (multiline) (textareaRef.value as HTMLTextAreaElement).focus();
@@ -92,7 +103,7 @@ defineExpose({ focus });
       :type="inputType"
       :value="value"
       :placeholder="placeholder"
-      class="flex-1 text-sm leading-tight bg-transparent focus:outline-hidden"
+      class="flex-1 min-w-0 text-sm leading-tight bg-transparent focus:outline-hidden"
       @change.stop.prevent
       @keydown.enter.stop.prevent="onEnter"
       @keyup.enter.stop.prevent
