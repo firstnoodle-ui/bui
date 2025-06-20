@@ -10,7 +10,7 @@ const props = withDefaults(
   }>(),
   {
     value: false,
-    offColorClass: "bg-secondary",
+    offColorClass: "bg-tertiary",
     onColorClass: "bg-tertiary",
     small: false,
   },
