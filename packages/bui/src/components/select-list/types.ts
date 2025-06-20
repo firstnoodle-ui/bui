@@ -1,9 +1,9 @@
 import type { TIcon } from "../types";
 
-const states = ["error", "idle", "loading", "match", "no match"] as const;
+export const states = ["error", "idle", "loading", "match", "no match"] as const;
 export type SelectListState = typeof states[number];
 
-const selectOptionVariants = ["checkbox", "deletable", "single"] as const;
+export const selectOptionVariants = ["checkbox", "deletable", "single"] as const;
 export type SelectOptionVariant = typeof selectOptionVariants[number];
 
 export type SelectListOption = {
@@ -41,7 +41,7 @@ export type SelectListProps<T> = {
   rootClass?: string;
   sameWidthAsTrigger?: boolean;
   searchDebounce?: number;
-  searchFunction?: Function | null;
+  searchFunction?: (query: string) => T[] | null;
   selectAll?: boolean;
   selected: T | null | T[];
   showSelection?: boolean;

@@ -1,6 +1,6 @@
 import type { SelectListFilter, SelectListOption, SelectListOptionGroup } from "@firstnoodle/bui";
 
-export const options: SelectListOption<string>[] = [
+export const demoOptions: SelectListOption<string>[] = [
   { id: 1, icon: "box", label: "Apple", suffix: "green" },
   { id: 2, icon: "box", label: "Orange", suffix: "orange" },
   { id: 3, icon: "box", label: "Pineapple", suffix: "yellow" },
@@ -17,27 +17,27 @@ export const groupedOptions: SelectListOptionGroup<SelectListOption<string>>[] =
   {
     id: 1,
     name: "Green",
-    options: options.filter(o => o.suffix === "green"),
+    options: demoOptions.filter(o => o.suffix === "green"),
   },
   {
     id: 2,
     name: "Orange",
-    options: options.filter(o => o.suffix === "orange"),
+    options: demoOptions.filter(o => o.suffix === "orange"),
   },
   {
     id: 3,
     name: "Yellow",
-    options: options.filter(o => o.suffix === "yellow"),
+    options: demoOptions.filter(o => o.suffix === "yellow"),
   },
   {
     id: 4,
     name: "Pink",
-    options: options.filter(o => o.suffix === "pink"),
+    options: demoOptions.filter(o => o.suffix === "pink"),
   },
   {
     id: 5,
     name: "White",
-    options: options.filter(o => o.suffix === "white"),
+    options: demoOptions.filter(o => o.suffix === "white"),
   },
 ];
 

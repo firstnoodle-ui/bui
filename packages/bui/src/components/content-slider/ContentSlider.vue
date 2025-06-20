@@ -9,17 +9,17 @@ const scrollStep = 120; // Change this value to adjust the scroll amount
 const listContainer = ref<HTMLElement | null>(null);
 const buttonList = ref<HTMLElement | null>(null);
 
-const showLeftButton = computed(() => scrollPosition.value > 0);
-const showRightButton = computed(() => {
-  return scrollPosition.value < contentWidth.value - containerWidth.value;
-});
-
 const containerWidth = ref(listContainer.value ? listContainer.value.clientWidth : 0);
 const contentWidth = ref(buttonList.value ? buttonList.value.scrollWidth : 0);
 const scrollLeft = () => scrollPosition.value = Math.max(0, scrollPosition.value - scrollStep);
 const scrollRight = () => {
   scrollPosition.value = Math.min(contentWidth.value - containerWidth.value, scrollPosition.value + scrollStep);
 };
+
+const showLeftButton = computed(() => scrollPosition.value > 0);
+const showRightButton = computed(() => {
+  return scrollPosition.value < contentWidth.value - containerWidth.value;
+});
 
 const { nextFrame } = useNextFrame();
 const update = () => {

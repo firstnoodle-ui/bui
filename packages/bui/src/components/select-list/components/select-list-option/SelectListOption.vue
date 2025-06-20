@@ -21,23 +21,10 @@ const highlighted = computed(() => {
     }
     return hoveredOption && hoveredOption.label === option.label;
   }
+  return false;
 });
 
-const onClick = (e: PointerEvent | boolean) => {
-  if (variant === "checkbox" && selected !== undefined) {
-    onToggle(e);
-  }
-  else {
-    emit("click");
-  }
-};
-
-const onToggle = (e: PointerEvent | boolean) => {
-  emit("click");
-  // if(variant === 'checkbox' && e instanceof PointerEvent) {
-  //     emit('click');
-  // }
-};
+const onToggle = () => emit("click");
 </script>
 
 <template>
@@ -49,7 +36,7 @@ const onToggle = (e: PointerEvent | boolean) => {
         '': variant === 'checkbox',
         'bg-secondary': highlighted,
       }"
-      @click="onClick"
+      @click="onToggle"
       @mouseover="emit('hover', option)"
       @focus="emit('focus', option)"
     >

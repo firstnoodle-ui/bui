@@ -9,7 +9,6 @@ const {
   icon,
   multiline = false,
   placeholder = "Write",
-  small = false,
   autoFocus = false,
 } = defineProps<{
   disabled?: boolean;

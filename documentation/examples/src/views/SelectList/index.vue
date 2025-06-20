@@ -8,7 +8,7 @@ import {
   PropControlBoolean,
 } from "../../components";
 import EventSection from "../../components/EventSection.vue";
-import { filters, groupedOptions, options } from "./data";
+import { demoOptions, filters, groupedOptions } from "./data";
 
 const selectRef = ref<typeof EventFlasher>();
 
@@ -26,13 +26,13 @@ const showIcons = ref(true);
 
 // group
 const hasGroupedOptions = ref(false);
-const selectListOptions = computed(() => hasGroupedOptions.value ? groupedOptions : options);
+const selectListOptions = computed(() => hasGroupedOptions.value ? groupedOptions : demoOptions);
 
 // search related
 const hasSearch = ref(false);
-const searchFunction = computed(() => hasSearch.value ? onSearch : undefined);
 const searchQuery = ref("");
 const onSearch = (query: string) => searchQuery.value = query;
+const searchFunction = computed(() => hasSearch.value ? onSearch : undefined);
 const computedOptions = computed(() => {
   if (searchQuery.value.length > 0) {
     if (hasGroupedOptions.value) {
@@ -45,8 +45,8 @@ const computedOptions = computed(() => {
       });
     }
     else {
-      const options = selectListOptions.value as SelectListOption[];
-      return options.filter((option: SelectListOption) => option.label.toLowerCase().includes(searchQuery.value.toLowerCase()));
+      const typedOptions = selectListOptions.value as SelectListOption[];
+      return typedOptions.filter((option: SelectListOption) => option.label.toLowerCase().includes(searchQuery.value.toLowerCase()));
     }
   }
   return selectListOptions.value;
@@ -73,29 +73,30 @@ const hasSelectAll = ref(false);
           @select="updateSelection"
         >
           <template #options="{ options, select, getIsSelected }">
-            <template
-              v-for="group in options"
-              v-if="hasGroupedOptions"
-              :key="group.id"
-            >
-              <BSelectListOptionGroup
-                v-if="group.options.length"
-                :label="group.name"
+            <template v-if="hasGroupedOptions">
+              <template
+                v-for="group in options"
+                :key="group.id"
               >
-                <BSelectListOption
-                  v-for="option in group.options"
-                  :key="option.id"
-                  :variant="isCheckbox ? 'checkbox' : 'single'"
-                  :option="option"
-                  :selected="getIsSelected(option)"
-                  :search="searchQuery"
-                  @click="
-                    select(option);
-                    selectRef?.flash();
-                    print(option);
-                  "
-                />
-              </BSelectListOptionGroup>
+                <BSelectListOptionGroup
+                  v-if="group.options.length"
+                  :label="group.name"
+                >
+                  <BSelectListOption
+                    v-for="option in group.options"
+                    :key="option.id"
+                    :variant="isCheckbox ? 'checkbox' : 'single'"
+                    :option="option"
+                    :selected="getIsSelected(option)"
+                    :search="searchQuery"
+                    @click="
+                      select(option);
+                      selectRef?.flash();
+                      print(option);
+                    "
+                  />
+                </BSelectListOptionGroup>
+              </template>
             </template>
             <template v-else>
               <BSelectListOption
