@@ -36,7 +36,7 @@ export type SelectListProps = {
   errorMessage?: string;
   filters?: SelectListFilter[];
   loading?: boolean;
-  options: T[] | SelectListOptionGroup[];
+  options: SelectListOption[] | SelectListOptionGroup[];
   placeholder?: string;
   rootClass?: string;
   sameWidthAsTrigger?: boolean;

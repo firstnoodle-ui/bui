@@ -279,7 +279,7 @@ const scrollToOption = (_option: SelectListOption) => {
 
   // TODO add data attribute to options and query those within the optionsRef
 
-  const target = null; //optionsRef.value.children[localOptions.value.findIndex(o => o.label === option.label)].$el;
+  const target = null; // optionsRef.value.children[localOptions.value.findIndex(o => o.label === option.label)].$el;
 
   if (scrollbarRef.value && target) {
     const scrollView: HTMLElement | null = scrollbarRef.value.$el.querySelector(".scrollbar__wrap");
