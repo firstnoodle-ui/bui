@@ -100,7 +100,7 @@ watch(() => props.selected, (newValue: SelectListOption | SelectListOption[] | n
   }
 });
 
-watch(() => props.options, (newValue: T[] | SelectListOptionGroup[]) => {
+watch(() => props.options, (newValue: SelectListOption[] | SelectListOptionGroup[]) => {
   // eslint-disable-next-line ts/no-use-before-define
   updateLocalOptions(newValue);
   hoveredOption.value = null;
@@ -183,7 +183,7 @@ const onSearch = async (value: string) => {
 };
 const debounceOnSearch = props.searchDebounce ? debounce(onSearch, props.searchDebounce) : onSearch;
 
-const updateLocalOptions = (options: T[] | SelectListOptionGroup[]) => {
+const updateLocalOptions = (options: SelectListOption[] | SelectListOptionGroup[]) => {
   if (isGrouped.value) {
     const groups = options as SelectListOptionGroup[];
     localOptions.value = groups.map(group => ({
