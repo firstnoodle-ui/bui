@@ -1,75 +1,133 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import { BSelectList, BSelectListOption, type SelectListOption } from "@firstnoodle-ui/bui";
+import { BSelectList, BSelectListOption, type SelectListOption, BSelectListOptionGroup, type SelectListOptionGroup } from "@firstnoodle-ui/bui";
 import {
   ComponentPage,
-  ComponentPageSection,
   EventFlasher,
   PropControlBoolean,
-  PropControlSelect,
-  PropControlString,
 } from "../../components";
-import { options, filters } from "./data";
+import { options, groupedOptions, filters } from "./data";
+import EventSection from "../../components/EventSection.vue";
 
 const selectRef = ref<typeof EventFlasher>();
+
+// multiselect - In progress.....
+const isMultiSelect = ref(false);
+const onToggleMultiSelect = () => {
+    isMultiSelect.value = !isMultiSelect.value;
+}
 
 const selected = ref<SelectListOption[]>([]);
 const updateSelection = (selection:SelectListOption[]) => selected.value = [...selection];
 
+const isCheckbox = ref(true);
+const showIcons = ref(true);
+
+// group
+const hasGroupedOptions = ref(false);
+const selectListOptions = computed(() => hasGroupedOptions.value ? groupedOptions : options);
+
 // search related
+const hasSearch = ref(false);
+const searchFunction = computed(() => hasSearch.value ? onSearch : undefined);
 const searchQuery = ref('');
 const onSearch = (query:string) => searchQuery.value = query;
 const computedOptions = computed(() => {
-    if(searchQuery.value.length) {
-        return options.filter(option => option.label.toLowerCase().includes(searchQuery.value.toLowerCase()));
+    if(searchQuery.value.length > 0) {
+        if(hasGroupedOptions.value) {
+            const groups = selectListOptions.value as SelectListOptionGroup[];
+            return groups.map(group => {
+                return {
+                    ...group,
+                    options: group.options.filter((option:SelectListOption) => option.label.toLowerCase().includes(searchQuery.value.toLowerCase()))
+                }
+            });
+        } else {
+            const options = selectListOptions.value as SelectListOption[];
+            return options.filter((option:SelectListOption) => option.label.toLowerCase().includes(searchQuery.value.toLowerCase()));
+        }
     }
-    return options;
-})
+    return selectListOptions.value;
+});
 
+// filters
+const hasFilters = ref(false);
+const optionFilters = computed(() => hasFilters.value ? filters : undefined);
+
+// selectAll
 const hasSelectAll = ref(false);
+
 </script>
 
 <template>
   <ComponentPage title="SelectList">
-    <ComponentPageSection title="Basic usage">
-        <BSelectList
-            :select-all="hasSelectAll"
-            :search-function="onSearch"
-            :options="computedOptions"
-            :filters="filters"
-            :selected="selected"
-            @select="updateSelection"
-        >
-            <template #options="{ options, select, getIsSelected }">
-                <BSelectListOption
-                    v-for="option in options"
-                    :key="option.id"
-                    variant="checkbox"
-                    :option="option"
-                    :selected="getIsSelected(option)"
-                    :search="searchQuery"
-                    @click="
-                        select(option);
-                        selectRef?.flash();
-                    "
-                />
-            </template>
-        </BSelectList>
-      <template #controls>
-        <section class="flex items-center justify-end gap-2 mb-8">
-          <div class="text-sm font-bold">
-            Events
-          </div>
-          <EventFlasher ref="selectRef" name="select" />
-          <!-- <EventFlasher ref="cancelRef" name="cancel" /> -->
-        </section>
+    <template #default="{ print }">
+        <div class="w-96 border border-default rounded-lg overflow-hidden">
+            <BSelectList
+                :select-all="hasSelectAll"
+                :search-function="searchFunction"
+                :options="computedOptions"
+                :filters="optionFilters"
+                :selected="selected"
+                @select="updateSelection"
+            >
+                <template #options="{ options, select, getIsSelected }">
+                    <template 
+                        v-if="hasGroupedOptions"
+                        v-for="group in options"
+                        :key="group.id"
+                    >
+                        <BSelectListOptionGroup 
+                            v-if="group.options.length"
+                            :label="group.name"
+                        >
+                            <BSelectListOption
+                                v-for="option in group.options"
+                                :key="option.id"
+                                :variant="isCheckbox ? 'checkbox' : 'single'"
+                                :option="option"
+                                :selected="getIsSelected(option)"
+                                :search="searchQuery"
+                                @click="
+                                    select(option);
+                                    selectRef?.flash();
+                                    print(option);
+                                "
+                            />
+                        </BSelectListOptionGroup>
+                    </template>
+                    <template v-else>
+                        <BSelectListOption
+                            v-for="option in options"
+                            :key="option.id"
+                            :variant="isCheckbox ? 'checkbox' : 'single'"
+                            :option="option"
+                            :selected="getIsSelected(option)"
+                            :search="searchQuery"
+                            @click="
+                                select(option);
+                                selectRef?.flash();
+                                print(option);
+                            "
+                        />
+                    </template>
+                </template>
+            </BSelectList>
+        </div>
+    </template>
+    <template #controls>
+        <EventSection>
+            <EventFlasher ref="selectRef" name="select" />
+        </EventSection>
+        <PropControlBoolean name="Multiselect" :value="isMultiSelect" @toggle="onToggleMultiSelect" />
+        <PropControlBoolean name="Checkbox" :value="isCheckbox" @toggle="isCheckbox = !isCheckbox" />
+        <PropControlBoolean name="Show icons" :value="showIcons" @toggle="showIcons = !showIcons" />
+        <PropControlBoolean name="Group options" :value="hasGroupedOptions" @toggle="hasGroupedOptions = !hasGroupedOptions" />
+        <PropControlBoolean name="Search function" :value="hasSearch" @toggle="hasSearch = !hasSearch" />
+        <PropControlBoolean name="Filters" :value="hasFilters" @toggle="hasFilters = !hasFilters" />
         <PropControlBoolean name="Select All" :value="hasSelectAll" @toggle="hasSelectAll = !hasSelectAll">
-          Mainly used in PopConfirm
+            Mainly used in PopConfirm
         </PropControlBoolean>
-        <!-- <PropControlBoolean name="Small" :value="small" @toggle="small = !small" />
-        <PropControlString name="Confirm label" :value="confirmLabel" @change="(value:string) => confirmLabel = value" />
-        <PropControlSelect name="Order" :value="selectedOrder" :options="[...orderOptions]" @select="(option:string) => selectedOrder = option" /> -->
-      </template>
-    </ComponentPageSection>
+    </template>
   </ComponentPage>
 </template>
