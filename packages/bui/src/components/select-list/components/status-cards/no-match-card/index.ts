@@ -1,1 +1,1 @@
-export { default as BNoMatchCard } from './NoMatchCard.vue';
+export { default as BNoMatchCard } from "./NoMatchCard.vue";

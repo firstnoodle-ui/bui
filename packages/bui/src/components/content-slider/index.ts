@@ -1,1 +1,1 @@
-export { default as BContentSlider } from './ContentSlider.vue';
+export { default as BContentSlider } from "./ContentSlider.vue";

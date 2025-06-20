@@ -1,1 +1,1 @@
-export { default as BSelectListOption } from './SelectListOption.vue';
+export { default as BSelectListOption } from "./SelectListOption.vue";

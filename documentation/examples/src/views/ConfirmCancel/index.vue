@@ -4,7 +4,6 @@ import { BConfirmCancel, buttonVariants, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  ComponentPageSection,
   EventFlasher,
   PropControlBoolean,
   PropControlSelect,
@@ -37,7 +36,7 @@ const small = ref(false);
 
 <template>
   <ComponentPage title="ConfirmCancel">
-    <template v-slot="{ print }">
+    <template #default="{ print }">
       <BConfirmCancel
         :vertical="vertical"
         :small="small"

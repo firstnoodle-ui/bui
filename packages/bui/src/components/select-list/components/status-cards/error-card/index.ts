@@ -1,1 +1,1 @@
-export { default as BErrorCard } from './ErrorCard.vue';
+export { default as BErrorCard } from "./ErrorCard.vue";

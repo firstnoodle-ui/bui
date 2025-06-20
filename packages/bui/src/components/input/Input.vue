@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { onMounted, type InputTypeHTMLAttribute } from "vue";
+import type { InputTypeHTMLAttribute } from "vue";
 import type { TIcon } from "../types";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { BButton, BIcon } from "../";
 
 const {
@@ -29,9 +29,10 @@ const textareaRef = ref<HTMLTextAreaElement>();
 const inputRef = ref<HTMLInputElement>();
 
 onMounted(() => {
-  if(multiline) {
+  if (multiline) {
     textareaRef.value?.focus();
-  } else {
+  }
+  else {
     inputRef.value?.focus();
   }
 });

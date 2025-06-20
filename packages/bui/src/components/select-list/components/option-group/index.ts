@@ -1,1 +1,1 @@
-export { default as BSelectListOptionGroup } from './OptionGroup.vue';
+export { default as BSelectListOptionGroup } from "./OptionGroup.vue";

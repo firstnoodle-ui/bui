@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { BHorizontalLayout, BVerticalLayout } from "@firstnoodle/bui";
 import { ref } from "vue";
-import { BHorizontalLayout, BVerticalLayout } from '@firstnoodle/bui';
-import Console from './Console.vue';
+import Console from "./Console.vue";
+
 defineProps({ title: String });
 const consoleRef = ref<typeof Console>();
-const print = (msg:string) => consoleRef.value?.log(msg);
+const print = (msg: string) => consoleRef.value?.log(msg);
 </script>
 
 <template>

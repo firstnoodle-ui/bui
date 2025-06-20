@@ -1,1 +1,1 @@
-export { default as BLoadingCard } from './LoadingCard.vue';
+export { default as BLoadingCard } from "./LoadingCard.vue";

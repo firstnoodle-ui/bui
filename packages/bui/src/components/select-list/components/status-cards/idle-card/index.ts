@@ -1,1 +1,1 @@
-export { default as BIdleCard } from './IdleCard.vue';
+export { default as BIdleCard } from "./IdleCard.vue";

@@ -1,5 +1,3 @@
-import { type ScrollDirection } from "./scrollbar";
-
 export const buttonVariants = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive"] as const;
 export type ButtonVariant = (typeof buttonVariants)[number];
 
