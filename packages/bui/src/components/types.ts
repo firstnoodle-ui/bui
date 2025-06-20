@@ -64,14 +64,6 @@ export type TPopSelectResultFilter<T> = {
   count?: number;
 };
 
-export const directions = ["up", "down", "left", "right"] as const;
-export type TScrollDirection = (typeof directions)[number];
-
-export type TScrollTrigger = {
-  px: number;
-  callback: (trigger: TScrollTrigger, direction: TScrollDirection) => void;
-};
-
 export const statuses = ["Ok", "Not Ok", "Not Applicable"] as const;
 export type TStatusSelectStatus = (typeof statuses)[number];
 

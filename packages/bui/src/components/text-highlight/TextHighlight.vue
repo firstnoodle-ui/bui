@@ -14,7 +14,7 @@ const props = withDefaults(
     highlight: null,
     bold: false,
     underline: false,
-    textColorClass: "text-primary",
+    textColorClass: "text-primary dark:text-black",
     backgroundColor: null,
   },
 );

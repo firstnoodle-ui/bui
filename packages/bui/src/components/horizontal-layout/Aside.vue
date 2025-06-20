@@ -76,6 +76,7 @@ function onTransition(transitionActive: boolean, focusAside: boolean) {
 
 <template>
   <transition
+    key="aside"
     enter-active-class="transform"
     :enter-from-class="enterClass"
     enter-to-class=""

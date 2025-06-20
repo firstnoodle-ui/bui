@@ -45,9 +45,13 @@ const navigateTo = (page: string) => {
       </template>
 
       <template #main>
-        <BHorizontalLayout :aside-left-width="asideLeftWidth" aside-left-draggable aside-left-visible>
+        <BHorizontalLayout
+          :aside-left-width="asideLeftWidth"
+          aside-left-draggable
+          aside-left-visible
+        >
           <template #aside-left>
-            <BVerticalLayout>
+            <BVerticalLayout class="border-r border-default">
               <template #main>
                 <main class="w-full px-4 pt-4 pb-32 space-y-4">
                   <BNavItem
@@ -65,13 +69,7 @@ const navigateTo = (page: string) => {
             </BVerticalLayout>
           </template>
           <template #main>
-            <BVerticalLayout main-classes="h-full">
-              <template #main>
-                <main class="max-w-4xl mx-auto py-12 h-full">
-                  <RouterView />
-                </main>
-              </template>
-            </BVerticalLayout>
+            <RouterView />
           </template>
         </BHorizontalLayout>
       </template>

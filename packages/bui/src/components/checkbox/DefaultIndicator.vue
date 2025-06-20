@@ -7,7 +7,7 @@ const { value, disabled = false, indeterminate = false } = defineProps<{ value: 
     class="flex items-center justify-center w-4 h-4 border rounded focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
     :class="{
       'border-action bg-action hover:bg-action-hover hover:border-action-hover cursor-pointer': (value || indeterminate) && !disabled,
-      'bg-primary border-default hover:border-strong hover:bg-secondary cursor-pointer': !value && !disabled,
+      'bg-primary border-default hover:border-strong hover:bg-secondary cursor-pointer': !value && !indeterminate && !disabled,
       'cursor-default border-default bg-tertiary': disabled,
     }"
   >

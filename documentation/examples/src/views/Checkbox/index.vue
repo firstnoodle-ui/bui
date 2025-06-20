@@ -29,15 +29,15 @@ const selectedType = ref<string>(checkboxTypes[0]);
         :disabled="disabled"
         @click="checked = !checked"
       />
-      <template #controls>
-        <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
-        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">
-          Overrides <strong>Checked</strong> prop
-        </PropControlBoolean>
-        <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
-        <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
-        <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" />
-      </template>
     </ComponentPageSection>
+    <template #controls>
+      <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
+      <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">
+        Overrides <strong>Checked</strong> prop
+      </PropControlBoolean>
+      <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
+      <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
+      <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" />
+    </template>
   </ComponentPage>
 </template>
