@@ -6,7 +6,7 @@ export type SelectListState = typeof states[number];
 const selectOptionVariants = ['checkbox', 'deletable', 'single'] as const;
 export type SelectOptionVariant = typeof selectOptionVariants[number];
 
-export type SelectListOption<T> = {
+export type SelectListOption = {
     id?: string|number
     icon?: TIcon
     label: string
@@ -14,12 +14,13 @@ export type SelectListOption<T> = {
     suffix?: string|number
     group?: string
     value?: any
-    handler?: (option:SelectListOption<T>) => void
+    handler?: (option:SelectListOption) => void
 }
 
-export type SelectListOptionGroup<T> = {
+export type SelectListOptionGroup = {
+    id: string|number
     name?: string
-    options: SelectListOption<T>[]
+    options: SelectListOption[]
 }
 
 export type SelectListFilter<T> = {
@@ -35,7 +36,7 @@ export type SelectListProps<T> = {
     errorMessage?: string,
     filters?: SelectListFilter<T>[]
     loading?: boolean
-    options: T[]//|SelectListOptionGroup<T>[]
+    options: T[]|SelectListOptionGroup[]
     placeholder?: string
     rootClass?: string
     sameWidthAsTrigger?: boolean

@@ -32,8 +32,7 @@ const onClick = (e:PointerEvent|boolean) => {
 };
 
 const onToggle = (e:PointerEvent|boolean) => {
-    console.log('toggle', variant, e);
-        emit('click');
+    emit('click');
     // if(variant === 'checkbox' && e instanceof PointerEvent) {
     //     emit('click');
     // }
@@ -41,10 +40,10 @@ const onToggle = (e:PointerEvent|boolean) => {
 </script>
 
 <template>
-    <li class="list-none flex items-center w-full overflow-hidden shadow bg-primary">
+    <li class="list-none flex items-center w-full overflow-hidden bg-primary">
         <component
             :is="isButton ? 'button' : 'div'"
-            class="cursor-pointer w-full overflow-hidden rounded-lg flex items-center h-9 px-4 py-1 gap-2 text-sm hover:bg-secondary active:bg-tertiary"
+            class="cursor-pointer w-full overflow-hidden rounded-lg flex items-center h-9 px-2 py-1 gap-2 text-sm hover:bg-secondary active:bg-tertiary"
             :class="{
                 '': variant === 'checkbox',
                 'bg-secondary': highlighted,
@@ -72,13 +71,13 @@ const onToggle = (e:PointerEvent|boolean) => {
                     background-color="yellow"
                     :value="option.label"
                     :highlight="search"
-                    class="flex-1 text-left min-w-0 truncate"
+                    class="flex-1 pl-1 -ml-1 text-left min-w-0 truncate"
                     :class="{
                         'text-action text-sm': selected && variant === 'single'
                     }"
                 />
             </main>
-            <span v-if="option.suffix" class="flex-0 text-sm text-secondary uppercase">{{ option.suffix }}</span>
+            <span v-if="option.suffix" class="flex-0 text-sm text-secondary">{{ option.suffix }}</span>
             <BButton
                 v-if="variant === 'deletable'"
                 small

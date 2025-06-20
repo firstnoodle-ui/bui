@@ -1,14 +1,14 @@
-<script setup lang="ts">
-type T = SelectListOption;
+<script setup lang="ts" generic="T extends SelectListOption">
 import { computed, onBeforeMount, onMounted, onBeforeUnmount, nextTick, ref, watch } from 'vue';
 import debounce from "debounce";
 import { scrollIntoView } from '../../utils';
 import { useNextFrame } from '../../composables';
-import type { SelectListOption, SelectListFilter, SelectListProps, SelectListState } from './types.ts';
+import type { SelectListOption, SelectListOptionGroup, SelectListFilter, SelectListProps, SelectListState } from './types.ts';
 import { BErrorCard, BIdleCard, BLoadingCard, BNoMatchCard } from './components/status-cards';
 import { type ScrollIntersectionEvent } from '../../components';
 
 import { BButton, BCheckbox, BInput, BScrollbar } from "../..";
+import BSelectListOption from './components/select-list-option/SelectListOption.vue';
 
 // TODO:
 // Control fixed height via props. See style attribute in root <div/>
@@ -25,7 +25,7 @@ const props = withDefaults(defineProps<SelectListProps<T>>(), {
 })
 
 const hoveredOption = ref<SelectListOption|null>(null)
-const localOptions = ref<SelectListOption[]>([])
+const localOptions = ref<SelectListOption[]|SelectListOptionGroup[]>([])
 const searchQuery = ref('')
 
 // const searchFieldRef = ref<typeof NSearchField>()
@@ -41,6 +41,18 @@ const selectionOpen = ref(false)
 const selectionOverflow = ref(false)
 const selectionScrollClasses = ref('');
 
+// we need to know if the options passed is an array of options or option groups
+const isOptionGroup = (obj: unknown): obj is SelectListOptionGroup => {
+  if(!Array.isArray(obj)) throw new Error("Item passed must be an Array");
+  if(obj.length === 0) return false;
+  return "options" in obj[0];
+}
+const isGrouped = computed(() => isOptionGroup(props.options));
+const flattenedOptions = computed(() => {
+    if(!isGrouped.value) return props.options;
+    return (props.options as SelectListOptionGroup[]).flatMap((group:SelectListOptionGroup) => group.options);
+});
+
 const state = computed(():SelectListState => {
     if(props.loading) return 'loading';
     if(props.errorMessage) return 'error';
@@ -49,21 +61,29 @@ const state = computed(():SelectListState => {
     return 'idle';
 });
 
-const multiselect = computed(() => props.selected && 'length' in props.selected)
+const isMultiselect = computed(() => props.selected && 'length' in props.selected)
 
 const selectedCount = computed(() => {
     if(!props.selected) return 0;
-    return multiselect.value ? (props.selected as T[]).length : 1;
+    return isMultiselect.value ? (props.selected as T[]).length : 1;
 });
 
 const allOptionsSelected = computed(() => {
     if(!props.selected) return false;
-    return multiselect.value ? (props.selected as T[]).length === localOptions.value.length : true;
+    // TODO - consider whether or not we should show "all selected" when a filter is applied and all the filtered items has been selected
+    // introduces complexity, as we need to check if exactely the same options are selected and not just the count
+    // plus what if more items are selected than the filtered... this is why I will currently abandon this idea
+
+    if(selectedOptionFilter.value) {
+        return (props.selected as T[]).length >= flattenedOptions.value.filter(selectedOptionFilter.value.execute).length
+    }
+
+    return isMultiselect.value ? (props.selected as T[]).length === flattenedOptions.value.length : false;
 });
 
 const noSelection = computed(() => {
     if(!props.selected) return true;
-    return multiselect.value ? !(props.selected as T[]).length : !props.selected
+    return isMultiselect.value ? !(props.selected as T[]).length : !props.selected
 });
 
 watch(() => props.selected, (newValue:T|T[]|null) => {
@@ -71,7 +91,7 @@ watch(() => props.selected, (newValue:T|T[]|null) => {
         nextFrame(() => {
             scrollbarRef.value!.update()
 
-            if(multiselect.value && selectedCount.value) {
+            if(isMultiselect.value && selectedCount.value) {
                 console.log(selectedOptionsRef.value);
                 const target = selectedOptionsRef.value[selectedOptionsRef.value.length-1].$el;
                 const scrollView:HTMLElement|null = selectionScrollbarRef.value!.$el.querySelector('.scrollbar__wrap')
@@ -85,15 +105,16 @@ watch(() => props.selected, (newValue:T|T[]|null) => {
 });
 
 
-watch(() => props.options, (newValue:T[]) => {
-    updateLocalOptions(newValue)
-    hoveredOption.value = null
+watch(() => props.options, (newValue:T[]|SelectListOptionGroup<T>[]) => {
+    console.log('options changed', newValue);
+    updateLocalOptions(newValue);
+    hoveredOption.value = null;
 });
 
 onBeforeMount(() => updateLocalOptions(props.options));
 onMounted(() => {
-    if(!multiselect.value && props.selectAll) {
-        console.warn('[SelectList] selectAll prop not allowed when SelectList is not multiselect. You need to pass an Array of selected options (or empty) if you want it to be multiselect.');
+    if(!isMultiselect.value && props.selectAll) {
+        console.warn('[SelectList] selectAll prop not allowed when SelectList is not isMultiselect. You need to pass an Array of selected options (or empty) if you want it to be isMultiselect.');
     }
 
     nextFrame(() => {
@@ -119,7 +140,7 @@ const onKeydown = (event:KeyboardEvent) => {
 }
 
 const onSelect = (option:SelectListOption) => {
-    if(multiselect.value) {
+    if(isMultiselect.value) {
         const newSelection = (props.selected as T[]).map(i => i.label).includes(option.label)
             ? [...(props.selected as T[]).filter(i => i.label !== option.label)]
             : [...(props.selected as T[]), option]
@@ -140,7 +161,7 @@ const selectOption = () => {
 const optionIsSelected = (option:SelectListOption) => {
     if(!props.selected) return false;
 
-    if(multiselect.value) {
+    if(isMultiselect.value) {
         return (props.selected as T[]).some(o => o[props.identifier] === (option as T)[props.identifier]);
     }
 
@@ -157,13 +178,27 @@ const onSearch = async (value:string) => {
 };
 const debounceOnSearch = props.searchDebounce ? debounce(onSearch, props.searchDebounce) : onSearch;
 
-const updateLocalOptions = (options:T[]) => {
-    localOptions.value = selectedOptionFilter.value ? options.filter(selectedOptionFilter.value.execute) : options
+const updateLocalOptions = (options:T[]|SelectListOptionGroup[]) => {
+    if(isGrouped.value) {
+        const groups = options as SelectListOptionGroup[];
+        localOptions.value = groups.map(group => ({
+            ...group,
+            options: selectedOptionFilter.value ? group.options.filter(selectedOptionFilter.value?.execute) : group.options
+        }));
+    } else {
+        const flatOptions = options as SelectListOption[];
+        localOptions.value = selectedOptionFilter.value ? flatOptions.filter(selectedOptionFilter.value?.execute) :flatOptions;
+    }
 
     // Update option filter counts
     if(props.filters) {
         localOptionFilters.value.forEach(filter => {
-            filter.count = options.filter(filter.execute).length
+            filter.count = isGrouped
+                ? options.reduce((acc:number, group:SelectListOptionGroup):number => {
+                    acc += group.options.filter(filter.execute).length
+                    return acc;
+                }, 0)
+                : options.filter(filter.execute).length
         })
     }
     // nextFrame(() => scrollbarRef.value!.update());
@@ -176,10 +211,12 @@ const onOptionFilterChange = (filter:SelectListFilter<T>) => {
 };
 
 const onToggleAll = () => {
-    if(!multiselect.value) throw new Error('[SelectList@onToggleAll] method should not be called when "multiselect=false"');
+    if(!isMultiselect.value) throw new Error('[SelectList@onToggleAll] method should not be called when "isMultiselect=false"');
 
+    // need to do a different check if selectedOptionFilter has a value
+    // then check if "allFilteredOptionsSelected"
     if(selectedCount.value === 0 || Boolean(selectedCount.value && !allOptionsSelected.value)) {
-        emit('select', localOptions.value);
+        emit('select', selectedOptionFilter.value ? flattenedOptions.value.filter(selectedOptionFilter.value.execute) : flattenedOptions.value);
     } else {
         emit('select', []);
     }
@@ -275,7 +312,7 @@ const reset = () => {
 
 defineExpose({
     // focusSearch,
-    multiselect,
+    isMultiselect,
     reset,
     scrollbarRef
 });
@@ -293,21 +330,23 @@ defineExpose({
     >
         <header
             v-if="$slots.header || searchFunction || filters || selectAll"
-            class="flex-0 flex flex-col border-b border-default"
+            class="flex-0 flex flex-col gap-2 p-2 border-b border-default"
         >
             <slot name="header" />
 
-            <section v-if="searchFunction" class="pb-2 px-4">
+            <section v-if="searchFunction" class="">
                 <BInput
                     ref="searchFieldRef"
-                    :value="searchQuery"
                     class="w-full"
+                    clearable
+                    :value="searchQuery"
                     :placeholder="placeholder"
                     @change="debounceOnSearch"
+                    @clear="onSearch('')"
                 />
             </section>
 
-            <section v-if="filters" class="flex items-center gap-1 last:pb-4 px-4">
+            <section v-if="filters" class="flex items-center gap-1">
                 <BButton
                     v-for="filter in filters"
                     :key="filter.name"
@@ -321,7 +360,7 @@ defineExpose({
 
             <button
                 v-if="selectAll"
-                class="flex items-center gap-2 py-1 px-4 mb-1 rounded-lg hover:bg-secondary active:bg-tertiary"
+                class="cursor-pointer flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary active:bg-tertiary"
                 @click="onToggleAll"
             > 
                 <BCheckbox
@@ -344,7 +383,7 @@ defineExpose({
                 class="flex-1"
                 show
             >
-                <ul class="py-2" ref="optionsRef">
+                <ul class="px-2" :class="{ 'py-4': isGrouped, 'py-2': !isGrouped }" ref="optionsRef">
                     <slot
                         name="options"
                         :options="localOptions"
@@ -386,7 +425,7 @@ defineExpose({
                             <section class="w-full px-4 flex flex-wrap items-center gap-2">
                                 <!-- <NInputChip
                                     ref="selectedOptionsRef"
-                                    v-if="selected && multiselect"
+                                    v-if="selected && isMultiselect"
                                     v-for="option in selected"
                                     :key="(option as T).id || (option as T).label"
                                     :selected="optionIsSelected(option as T)"
