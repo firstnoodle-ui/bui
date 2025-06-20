@@ -23,26 +23,26 @@ export type SelectListOptionGroup = {
   options: SelectListOption[];
 };
 
-export type SelectListFilter<T> = {
+export type SelectListFilter = {
   id?: string | number;
   name: string;
   disabled: boolean;
-  execute: (record: T) => boolean;
+  execute: (record: SelectListOption) => boolean;
   count?: number;
 };
 
-export type SelectListProps<T> = {
-  identifier?: keyof T;
+export type SelectListProps = {
+  identifier?: keyof SelectListOption;
   errorMessage?: string;
-  filters?: SelectListFilter<T>[];
+  filters?: SelectListFilter[];
   loading?: boolean;
   options: T[] | SelectListOptionGroup[];
   placeholder?: string;
   rootClass?: string;
   sameWidthAsTrigger?: boolean;
   searchDebounce?: number;
-  searchFunction?: (query: string) => T[] | null;
+  searchFunction?: (query: string) => SelectListOption[] | null;
   selectAll?: boolean;
-  selected: T | null | T[];
+  selected: SelectListOption | null | SelectListOption[];
   showSelection?: boolean;
 };

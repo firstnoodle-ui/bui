@@ -9,7 +9,7 @@ import { scrollIntoView } from "../../utils";
 
 import { BErrorCard, BIdleCard, BLoadingCard, BNoMatchCard } from "./components/status-cards";
 
-const props = withDefaults(defineProps<SelectListProps<T>>(), {
+const props = withDefaults(defineProps<SelectListProps>(), {
   identifier: "label",
   loading: false,
   placeholder: "Search",
@@ -33,8 +33,8 @@ const scrollbarRef = ref<typeof BScrollbar>();
 const selectedOptionsRef = ref();
 const selectionScrollbarRef = ref<typeof BScrollbar>();
 
-const localOptionFilters = ref<SelectListFilter<T>[]>(props.filters || []);
-const selectedOptionFilter = ref<SelectListFilter<T> | null>(props.filters ? props.filters[0] : null);
+const localOptionFilters = ref<SelectListFilter[]>(props.filters || []);
+const selectedOptionFilter = ref<SelectListFilter | null>(props.filters ? props.filters[0] : null);
 const selectionOpen = ref(false);
 const selectionOverflow = ref(false);
 const selectionScrollClasses = ref("");
@@ -46,8 +46,8 @@ const isOptionGroup = (obj: unknown): obj is SelectListOptionGroup => {
   return "options" in obj[0];
 };
 const isGrouped = computed(() => isOptionGroup(props.options));
-const flattenedOptions = computed(() => {
-  if (!isGrouped.value) return props.options;
+const flattenedOptions = computed(():SelectListOption[] => {
+  if (!isGrouped.value) return props.options as SelectListOption[];
   return (props.options as SelectListOptionGroup[]).flatMap((group: SelectListOptionGroup) => group.options);
 });
 
@@ -84,7 +84,7 @@ const noSelection = computed(() => {
   return isMultiselect.value ? !(props.selected as T[]).length : !props.selected;
 });
 
-watch(() => props.selected, (newValue: T | T[] | null) => {
+watch(() => props.selected, (newValue: SelectListOption | SelectListOption[] | null) => {
   if (newValue && selectionOpen.value) {
     nextFrame(() => {
       scrollbarRef.value!.update();
@@ -101,7 +101,7 @@ watch(() => props.selected, (newValue: T | T[] | null) => {
   }
 });
 
-watch(() => props.options, (newValue: T[] | SelectListOptionGroup<T>[]) => {
+watch(() => props.options, (newValue: T[] | SelectListOptionGroup[]) => {
   // eslint-disable-next-line ts/no-use-before-define
   updateLocalOptions(newValue);
   hoveredOption.value = null;
@@ -198,20 +198,20 @@ const updateLocalOptions = (options: T[] | SelectListOptionGroup[]) => {
   }
 
   // Update option filter counts
-  if (props.filters) {
-    localOptionFilters.value.forEach((filter) => {
-      filter.count = isGrouped.value
-        ? options.reduce((acc: number, group: SelectListOptionGroup): number => {
-            acc += group.options.filter(filter.execute).length;
-            return acc;
-          }, 0)
-        : options.filter(filter.execute).length;
-    });
-  }
+  // if (props.filters) {
+  //   localOptionFilters.value.forEach((filter) => {
+  //     filter.count = isGrouped.value
+  //       ? options.reduce((acc: number, group: SelectListOptionGroup): number => {
+  //           acc += group.options.filter(filter.execute).length;
+  //           return acc;
+  //         }, 0)
+  //       : options.filter(filter.execute).length;
+  //   });
+  // }
   // nextFrame(() => scrollbarRef.value!.update());
 };
 
-const onOptionFilterChange = (filter: SelectListFilter<T>) => {
+const onOptionFilterChange = (filter: SelectListFilter) => {
   selectedOptionFilter.value = filter;
   updateLocalOptions(props.options);
   // focusSearch();
@@ -233,7 +233,7 @@ const onToggleAll = () => {
 /**
  * Navigating and highlighting
  */
-const onOptionHover = (option: T) => hoveredOption.value = localOptions.value.find(o => (o as T)[props.identifier] === option[props.identifier]) || null;
+const onOptionHover = (option: T) => hoveredOption.value = flattenedOptions.value.find(o => (o as T)[props.identifier] === option[props.identifier]) || null;
 const allOptionsDisabled = computed(() => {
   // If options are grouped, flatten them before checking
   const options = Array.isArray(localOptions.value) && localOptions.value.length > 0 && "options" in localOptions.value[0]
@@ -245,7 +245,7 @@ const allOptionsDisabled = computed(() => {
 const navigateOptions = async (direction: "next" | "prev") => {
   if (localOptions.value.length === 0) return;
 
-  let hoverIndex = localOptions.value.findIndex(o => o.label === hoveredOption.value?.label);
+  let hoverIndex = flattenedOptions.value.findIndex(o => o.label === hoveredOption.value?.label);
 
   if (!allOptionsDisabled.value) {
     if (direction === "next") {
@@ -260,7 +260,7 @@ const navigateOptions = async (direction: "next" | "prev") => {
         hoverIndex = localOptions.value.length - 1;
       }
     }
-    hoveredOption.value = localOptions.value[hoverIndex];
+    hoveredOption.value = flattenedOptions.value[hoverIndex];
 
     if (hoveredOption.value.disabled === true) {
       navigateOptions(direction);
@@ -279,16 +279,17 @@ const scrollToOption = (option: SelectListOption) => {
   if (!optionsRef.value.children.length) return;
 
   // TODO add data attribute to options and query those within the optionsRef
+  return;
 
-  const target = optionsRef.value.children[localOptions.value.findIndex(o => o.label === option.label)].$el;
+  // const target = optionsRef.value.children[localOptions.value.findIndex(o => o.label === option.label)].$el;
 
-  if (scrollbarRef.value && target) {
-    const scrollView: HTMLElement | null = scrollbarRef.value.$el.querySelector(".scrollbar__wrap");
-    if (scrollView) {
-      scrollIntoView(scrollView, target);
-      scrollbarRef.value.handleScroll();
-    }
-  }
+  // if (scrollbarRef.value && target) {
+  //   const scrollView: HTMLElement | null = scrollbarRef.value.$el.querySelector(".scrollbar__wrap");
+  //   if (scrollView) {
+  //     scrollIntoView(scrollView, target);
+  //     scrollbarRef.value.handleScroll();
+  //   }
+  // }
 };
 
 const onToggleSelectionFooter = () => {
