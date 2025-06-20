@@ -44,6 +44,7 @@ const selectedIconAfter = ref<string | undefined>();
         :icon-after="(selectedIconAfter as TIcon)"
         :label="label"
       />
+    </ComponentPageSection>
       <template #controls>
         <PropControlBoolean name="Small" :value="isSmall" @toggle="isSmall = !isSmall" />
         <PropControlBoolean name="Rounded" :value="isRounded" @toggle="isRounded = !isRounded" />
@@ -64,6 +65,5 @@ const selectedIconAfter = ref<string | undefined>();
         <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
         <PropControlSelect name="Variant" :value="selectedVariant" :options="variantOptions" @select="(option:string|undefined) => selectedVariant = option" />
       </template>
-    </ComponentPageSection>
   </ComponentPage>
 </template>
