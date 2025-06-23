@@ -3,7 +3,7 @@ defineProps<{ label: string }>();
 </script>
 
 <template>
-    <div class="min-w-0 truncate">
-        {{ label }}
-    </div>
+  <div class="min-w-0 truncate">
+    {{ label }}
+  </div>
 </template>
