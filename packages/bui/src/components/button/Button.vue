@@ -3,7 +3,7 @@ import type { Placement } from "@floating-ui/dom";
 import type { ButtonVariant, TIcon } from "../types";
 import { computed, ref } from "vue";
 import { BIcon, BLoadSpinner, BTooltip } from "../";
-import NotificationBadge from "./NotificationBadge.vue";
+import { ButtonLabel, LeftGroup, NotificationBadge } from "./components";
 
 const props = withDefaults(
   defineProps<{
@@ -65,7 +65,7 @@ const loadSpinnerClass = computed(() => {
 });
 
 const buttonClasses = computed(() => {
-  const result = [];
+  const result = ["z-0 relative inline-flex items-center gap-1 leading-none border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"];
 
   // Set padding x.
   // Add extra if rounded and there is a label
@@ -208,20 +208,17 @@ defineExpose({ focus });
       :is="component"
       ref="buttonRef"
       :to="routerLinkTo"
-      class="z-0 relative inline-flex items-center gap-1 leading-none border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
       :class="buttonClasses"
       :disabled="disabled || loading"
       :style="disabledStyle"
       @click="onClick"
       @blur="emit('blur')"
     >
-      <div class="flex items-center gap-1">
+      <LeftGroup>
         <BLoadSpinner v-if="loading" :class="loadSpinnerClass" />
         <BIcon v-else-if="icon" :name="icon" />
-        <div v-if="label" class="min-w-0 truncate">
-          {{ label }}
-        </div>
-      </div>
+        <ButtonLabel v-if="label" :label="label" />
+      </LeftGroup>
       <BIcon v-if="iconAfter" :name="iconAfter" class="opacity-75" />
       <NotificationBadge v-if="notification" :inside="variant === 'text' || variant === 'textSubtle'" />
     </component>
@@ -232,20 +229,17 @@ defineExpose({ focus });
     ref="buttonRef"
     :to="routerLinkTo"
     :target="props.linkTarget"
-    class="z-0 relative inline-flex items-center gap-1 leading-none border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
     :class="buttonClasses"
     :disabled="disabled || loading"
     :style="disabledStyle"
     @click="onClick"
     @blur="emit('blur')"
   >
-    <div class="flex-1 flex items-center gap-1 overflow-hidden">
+    <LeftGroup>
       <BLoadSpinner v-if="loading" :class="loadSpinnerClass" />
       <BIcon v-else-if="icon" :name="icon" />
-      <div v-if="label" class="flex-1 min-w-0 truncate">
-        {{ label }}
-      </div>
-    </div>
+      <ButtonLabel v-if="label" :label="label" />
+    </LeftGroup>
     <BIcon v-if="iconAfter" :name="iconAfter" />
     <NotificationBadge v-if="notification" :inside="variant === 'text' || variant === 'textSubtle'" />
   </component>
