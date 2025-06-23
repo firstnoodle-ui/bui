@@ -71,7 +71,7 @@ const buttonClasses = computed(() => {
   // Add extra if rounded and there is a label
   props.rounded && props.label
     ? result.push(props.small ? "px-2" : "px-3")
-    : result.push(props.loading && props.icon && !props.label ? "px-0" : "px-2");
+    : result.push((props.loading || props.icon) && !props.label ? "px-0" : "px-2");
 
   props.small ? result.push("h-6 text-xs") : result.push("h-8 text-sm");
 
