@@ -12,7 +12,7 @@ const print = (msg: string) => consoleRef.value?.log(msg);
   <BHorizontalLayout
     aside-right-visible
     aside-right-draggable
-    :aside-right-width="640"
+    :aside-right-width="800"
   >
     <template #main>
       <BVerticalLayout footer-height-class="">

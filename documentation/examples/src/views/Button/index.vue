@@ -14,11 +14,11 @@ const isSmall = ref(false);
 const isRounded = ref(false);
 const isLoading = ref(false);
 const isDisabled = ref(false);
-const isFullwidth = ref(false);
-const isSpaceBetween = ref(false);
+const isFullwidth = ref(true);
+const isSpaceBetween = ref(true);
 const isFocused = ref(false);
 const hasNotification = ref(false);
-const label = ref("Label");
+const label = ref("Label is toooo long to fit in the button and should be truncated");
 
 const variantOptions: string[] = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive"];
 const selectedVariant = ref<string | undefined>();
