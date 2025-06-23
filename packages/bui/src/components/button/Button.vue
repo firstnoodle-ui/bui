@@ -239,7 +239,7 @@ defineExpose({ focus });
     @click="onClick"
     @blur="emit('blur')"
   >
-    <div class="flex items-center gap-1">
+    <div class="flex-1 flex items-center gap-1 overflow-hidden">
       <BLoadSpinner v-if="loading" :class="loadSpinnerClass" />
       <BIcon v-else-if="icon" :name="icon" />
       <div v-if="label" class="flex-1 min-w-0 truncate">
