@@ -18,11 +18,11 @@ const props = withDefaults(
   {
     asideLeftBgColorClass: "",
     asideLeftDraggable: false,
-    asideLeftVisible: true,
+    asideLeftVisible: false,
     asideLeftWidth: 256,
     asideRightBgColorClass: "",
     asideRightDraggable: false,
-    asideRightVisible: true,
+    asideRightVisible: false,
     asideRightWidth: 256,
     borders: false,
     mainBgColorClass: "",
@@ -36,7 +36,7 @@ const resizing = ref(false);
 
 // we cannot mutate props, so we create a local copy - TODO... should we not just emit the new value
 const localAsideLeftWidth = ref(props.asideLeftWidth);
-const localAsideRightWidth = ref(props.asideRightVisible ? props.asideRightWidth : 0);
+const localAsideRightWidth = ref(props.asideRightWidth);
 const paddingLeft = ref(props.asideLeftWidth);
 const paddingRight = ref(props.asideRightWidth);
 const mainStyle = computed(() => ({
