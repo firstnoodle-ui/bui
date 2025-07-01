@@ -12,7 +12,7 @@ const print = (msg: string) => consoleRef.value?.log(msg);
   <BHorizontalLayout
     aside-right-visible
     aside-right-draggable
-    :aside-right-width="800"
+    :aside-right-width="700"
   >
     <template #main>
       <BVerticalLayout footer-height-class="">
@@ -25,7 +25,7 @@ const print = (msg: string) => consoleRef.value?.log(msg);
         </template>
         <template #main>
           <article class="relative w-full bg-primary p-8">
-            <main class="w-full flex flex-col">
+            <main class="w-full">
               <slot :print="print" />
             </main>
           </article>

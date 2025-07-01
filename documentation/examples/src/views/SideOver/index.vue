@@ -16,9 +16,18 @@ const onClose = () => {
 
 <template>
   <ComponentPage title="SideOver">
-    <ComponentPageSection title="Basic usage">
+    <template #default="{ print }">
       <BButton ref="buttonRef" bordered label="Show" @click="show = true" />
-      <BSideOver v-if="show" ref="sideOverRef" title="The Title" @close="onClose">
+      <BSideOver
+        v-if="show"
+        ref="sideOverRef"
+        title="The Title"
+        @ready="print('@ready')"
+        @close="
+          onClose();
+          print('@close')
+        "
+      >
         <template #main>
           <section class="space-y-4">
             <div class="w-full h-64 bg-rose-pink-40 rounded" />
@@ -35,6 +44,6 @@ const onClose = () => {
           </div>
         </template>
       </BSideOver>
-    </ComponentPageSection>
+    </template>
   </ComponentPage>
 </template>

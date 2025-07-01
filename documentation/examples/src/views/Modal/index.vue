@@ -3,7 +3,6 @@ import type { TOverlayType } from "@firstnoodle-ui/bui";
 import { BButton, BModal } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
 import PropControlBoolean from "../../components/PropControlBoolean.vue";
 import PropControlSelect from "../../components/PropControlSelect.vue";
 import PropControlString from "../../components/PropControlString.vue";
@@ -37,7 +36,7 @@ const selectedWidthClass = ref(widthClasses[5]);
 
 <template>
   <ComponentPage title="Modal">
-    <ComponentPageSection title="Basic usage (+ not closeable)">
+    <template #default="{ print }">
       <BButton ref="triggerRef" bordered icon="popup" label="Open modal" @click="show = true" />
       <BModal
         v-if="show"
@@ -47,9 +46,11 @@ const selectedWidthClass = ref(widthClasses[5]);
         :overlay-type="(selectedOverlayType as TOverlayType)"
         :expand-vertically="expandVertically"
         :width-class="(selectedWidthClass as any)"
+        @ready="print('@ready')"
         @close="
           show = false;
           triggerRef!.focus();
+          print('@close');
         "
       >
         <template #main>
@@ -61,6 +62,7 @@ const selectedWidthClass = ref(widthClasses[5]);
           <BButton label="close" variant="fill" @click="modalRef!.close()" />
         </template>
       </BModal>
+    </template>
       <template #controls>
         <PropControlBoolean name="Closeable" :value="closeable" @toggle="closeable = !closeable" />
         <PropControlBoolean name="Expand vertically" :value="expandVertically" @toggle="expandVertically = !expandVertically" />
@@ -68,6 +70,5 @@ const selectedWidthClass = ref(widthClasses[5]);
         <PropControlSelect name="Overlay type" :value="selectedOverlayType" :options="overlayTypes" @select="(option:string) => selectedOverlayType = option" />
         <PropControlSelect name="Width class" :value="selectedWidthClass" :options="widthClasses" @select="(option:string) => selectedWidthClass = option" />
       </template>
-    </ComponentPageSection>
   </ComponentPage>
 </template>

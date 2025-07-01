@@ -1,17 +1,17 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
-import DefaultExample from "./DefaultExample.vue";
-import PillExample from "./PillExample.vue";
+import { BTab } from "@firstnoodle/bui";
+const selected = ref("News");
 </script>
 
 <template>
   <ComponentPage title="Tab">
-    <ComponentPageSection title="Default type">
-      <DefaultExample />
-    </ComponentPageSection>
-    <ComponentPageSection title="Pill type">
-      <PillExample />
-    </ComponentPageSection>
+    <nav class="flex items-center w-full">
+      <BTab name="News" icon="news" :selected="selected === 'News'" @select="selected = 'News'" />
+      <BTab name="Products" icon="box" notification :selected="selected === 'Products'" @select="selected = 'Products'" />
+      <BTab name="Messages" icon="message" :selected="selected === 'Messages'" @select="selected = 'Messages'" />
+      <BTab name="Notifications" icon="bell" :selected="selected === 'Notifications'" @select="selected = 'Notifications'" />
+    </nav>
   </ComponentPage>
 </template>

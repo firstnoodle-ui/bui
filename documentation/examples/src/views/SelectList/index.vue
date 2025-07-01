@@ -21,6 +21,7 @@ const onToggleMultiSelect = () => {
 const selected = ref<SelectListOption[]>([]);
 const updateSelection = (selection: SelectListOption[]) => selected.value = [...selection];
 
+const isSmall = ref(false);
 const isCheckbox = ref(true);
 const showIcons = ref(true);
 
@@ -63,59 +64,61 @@ const hasSelectAll = ref(false);
 <template>
   <ComponentPage title="SelectList">
     <template #default="{ print }">
-      <div class="w-96 border border-default rounded-lg overflow-hidden">
-        <BSelectList
-          :select-all="hasSelectAll"
-          :search-function="searchFunction"
-          :options="computedOptions"
-          :filters="optionFilters"
-          :selected="selected"
-          @select="updateSelection"
-        >
-          <template #options="{ options, select, getIsSelected }">
-            <template v-if="hasGroupedOptions">
-              <template
-                v-for="group in options"
-                :key="group.id"
+      <BSelectList
+        :select-all="hasSelectAll"
+        :search-function="searchFunction"
+        :options="computedOptions"
+        :filters="optionFilters"
+        :selected="selected"
+        :small="isSmall"
+        @select="updateSelection"
+      >
+        <template #options="{ options, select, getIsSelected }">
+          <template v-if="hasGroupedOptions">
+            <template
+              v-for="group in options"
+              :key="group.id"
+            >
+              <BSelectListOptionGroup
+                v-if="group.options.length"
+                :label="group.name"
+                :small="isSmall"
               >
-                <BSelectListOptionGroup
-                  v-if="group.options.length"
-                  :label="group.name"
-                >
-                  <BSelectListOption
-                    v-for="option in group.options"
-                    :key="option.id"
-                    :variant="isCheckbox ? 'checkbox' : 'single'"
-                    :option="option"
-                    :selected="getIsSelected(option)"
-                    :search="searchQuery"
-                    @click="
-                      select(option);
-                      selectRef?.flash();
-                      print(option);
-                    "
-                  />
-                </BSelectListOptionGroup>
-              </template>
-            </template>
-            <template v-else>
-              <BSelectListOption
-                v-for="option in options"
-                :key="option.id"
-                :variant="isCheckbox ? 'checkbox' : 'single'"
-                :option="option"
-                :selected="getIsSelected(option)"
-                :search="searchQuery"
-                @click="
-                  select(option);
-                  selectRef?.flash();
-                  print(option);
-                "
-              />
+                <BSelectListOption
+                  v-for="option in group.options"
+                  :key="option.id"
+                  :variant="isCheckbox ? 'checkbox' : 'single'"
+                  :option="option"
+                  :selected="getIsSelected(option)"
+                  :search="searchQuery"
+                  :small="isSmall"
+                  @click="
+                    select(option);
+                    selectRef?.flash();
+                    print(option);
+                  "
+                />
+              </BSelectListOptionGroup>
             </template>
           </template>
-        </BSelectList>
-      </div>
+          <template v-else>
+            <BSelectListOption
+              v-for="option in options"
+              :key="option.id"
+              :variant="isCheckbox ? 'checkbox' : 'single'"
+              :small="isSmall"
+              :option="option"
+              :selected="getIsSelected(option)"
+              :search="searchQuery"
+              @click="
+                select(option);
+                selectRef?.flash();
+                print(option);
+              "
+            />
+          </template>
+        </template>
+      </BSelectList>
     </template>
     <template #controls>
       <EventSection>
@@ -123,6 +126,7 @@ const hasSelectAll = ref(false);
       </EventSection>
       <PropControlBoolean name="Multiselect" :value="isMultiSelect" @toggle="onToggleMultiSelect" />
       <PropControlBoolean name="Checkbox" :value="isCheckbox" @toggle="isCheckbox = !isCheckbox" />
+      <PropControlBoolean name="Small" :value="isSmall" @toggle="isSmall = !isSmall" />
       <PropControlBoolean name="Show icons" :value="showIcons" @toggle="showIcons = !showIcons" />
       <PropControlBoolean name="Group options" :value="hasGroupedOptions" @toggle="hasGroupedOptions = !hasGroupedOptions" />
       <PropControlBoolean name="Search function" :value="hasSearch" @toggle="hasSearch = !hasSearch" />

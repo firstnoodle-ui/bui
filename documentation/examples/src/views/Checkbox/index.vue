@@ -20,16 +20,19 @@ const selectedType = ref<string>(checkboxTypes[0]);
 
 <template>
   <ComponentPage title="Checkbox">
-    <ComponentPageSection title="Basic usage">
+    <template #default="{ print }">
       <BCheckbox
         :type="(selectedType as TCheckboxType)"
         :label="label"
         :checked="checked"
         :indeterminate="indeterminate"
         :disabled="disabled"
-        @click="checked = !checked"
+        @click="
+          checked = !checked;
+          print('click')
+        "
       />
-    </ComponentPageSection>
+    </template>
     <template #controls>
       <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
       <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">

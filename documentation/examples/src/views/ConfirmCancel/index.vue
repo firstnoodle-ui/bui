@@ -4,14 +4,10 @@ import { BConfirmCancel, buttonVariants, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  EventFlasher,
   PropControlBoolean,
   PropControlSelect,
   PropControlString,
 } from "../../components";
-
-const confirmRef = ref<typeof EventFlasher>();
-const cancelRef = ref<typeof EventFlasher>();
 
 const orderOptions = ["confirm-first", "confirm-last"];
 const selectedOrder = ref(orderOptions[0]);
@@ -56,13 +52,6 @@ const small = ref(false);
       />
     </template>
     <template #controls>
-      <section class="flex items-center justify-end gap-2 mb-8">
-        <div class="text-sm font-bold">
-          Events
-        </div>
-        <EventFlasher ref="confirmRef" name="confirm" />
-        <EventFlasher ref="cancelRef" name="cancel" />
-      </section>
       <PropControlBoolean name="Vertical" :value="vertical" @toggle="vertical = !vertical">
         Mainly used in PopConfirm
       </PropControlBoolean>

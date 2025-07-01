@@ -2,7 +2,6 @@
 import { BPagination } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
 
 const currentPage1 = ref(2);
 
@@ -19,11 +18,6 @@ const onChange2 = (page: number) => {
 
 <template>
   <ComponentPage title="Pagination">
-    <ComponentPageSection title="Default">
-      <BPagination borders :current-page="currentPage1" :last-page="5" @change="onChange1" />
-    </ComponentPageSection>
-    <ComponentPageSection title="No borders">
-      <BPagination :current-page="currentPage2" :last-page="5" orientation="vertical" @change="onChange2" />
-    </ComponentPageSection>
+    <BPagination borders :current-page="currentPage1" :last-page="5" @change="onChange1" />
   </ComponentPage>
 </template>

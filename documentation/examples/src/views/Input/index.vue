@@ -4,9 +4,6 @@ import { BFlexbox, BInput, BToggleButton, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  ComponentPageSection,
-  EventFlasher,
-  EventSection,
   PropControlBoolean,
   PropControlSelect,
   PropControlString,
@@ -22,15 +19,12 @@ const matchCase = ref(false);
 const matchDiacritics = ref(false);
 const matchFullWord = ref(false);
 
-const changeFlasher = ref<typeof EventFlasher>();
-const enterFlasher = ref<typeof EventFlasher>();
-const clearFlasher = ref<typeof EventFlasher>();
 const clearable = ref(false);
 </script>
 
 <template>
   <ComponentPage title="Input">
-    <ComponentPageSection title="Basic usage">
+    <template #default="{ print }">
       <BInput
         ref="inputRef"
         :value="str"
@@ -39,10 +33,10 @@ const clearable = ref(false);
         :clearable="clearable"
         @change="(newValue:string) => {
           str = newValue;
-          changeFlasher?.flash();
+          print('change: ' + newValue);
         }"
-        @enter="enterFlasher?.flash()"
-        @clear="clearFlasher?.flash()"
+        @enter="print('enter key')"
+        @clear="print('clear')"
       >
         <template #inline-controls>
           <BFlexbox class="gap-1">
@@ -52,16 +46,11 @@ const clearable = ref(false);
           </BFlexbox>
         </template>
       </BInput>
-      <template #controls>
-        <EventSection>
-          <EventFlasher ref="changeFlasher" name="change" />
-          <EventFlasher ref="enterFlasher" name="enter" />
-          <EventFlasher ref="clearFlasher" name="clear" />
-        </EventSection>
-        <PropControlString name="Placeholder" :value="placeholder" @change="(value:string) => placeholder = value" />
-        <PropControlSelect name="Icon" clearable :value="selectedIcon" :options="[...icons]" @select="(option:string|undefined) => selectedIcon = option" />
-        <PropControlBoolean name="Clearable" :value="clearable" @toggle="clearable = !clearable" />
-      </template>
-    </ComponentPageSection>
+    </template>
+    <template #controls>
+      <PropControlString name="Placeholder" :value="placeholder" @change="(value:string) => placeholder = value" />
+      <PropControlSelect name="Icon" clearable :value="selectedIcon" :options="[...icons]" @select="(option:string|undefined) => selectedIcon = option" />
+      <PropControlBoolean name="Clearable" :value="clearable" @toggle="clearable = !clearable" />
+    </template>
   </ComponentPage>
 </template>
