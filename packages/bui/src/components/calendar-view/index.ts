@@ -1,0 +1,1 @@
+export { default as BCalendarView } from './CalendarView.vue';

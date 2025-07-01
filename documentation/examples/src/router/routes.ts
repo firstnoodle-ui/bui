@@ -1,8 +1,19 @@
 export default [
   {
+    path: "/play",
+    name: "Playground",
+    component: () => import("../views/Playground/index.vue"),
+  },
+  {
     path: "/button",
     name: "Button",
     component: () => import("../views/Button/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
+    path: "/calendar-view",
+    name: "CalendarView",
+    component: () => import("../views/CalendarView/index.vue"),
     meta: { group: "Standard" },
   },
   {
