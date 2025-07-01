@@ -17,7 +17,7 @@ const props = withDefaults(
     draggable: false,
     visible: true,
     side: "left",
-    maxWidth: 500,
+    maxWidth: 1000,
     minWidth: 160,
     width: 256,
   },
