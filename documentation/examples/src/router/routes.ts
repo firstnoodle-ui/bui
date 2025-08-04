@@ -161,6 +161,12 @@ export default [
     meta: { group: "Standard" },
   },
   {
+    path: "/text-editor",
+    name: "TextEditor",
+    component: () => import("../views/TextEditor/index.vue"),
+    meta: { group: "Text" },
+  },
+  {
     path: "/text-highlight",
     name: "TextHighlight",
     component: () => import("../views/TextHighlight/index.vue"),
