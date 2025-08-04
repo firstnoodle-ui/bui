@@ -3,11 +3,12 @@ import type { SelectListOption, SelectOptionVariant } from "../../types";
 import { computed } from "vue";
 import { BButton, BCheckbox, BIcon, BTextHighlight } from "../../../";
 
-const { hoveredOption, selected, option, variant = "checkbox" } = defineProps<{
+const { hoveredOption, selected, option, variant = "checkbox", small = false } = defineProps<{
   hoveredOption?: SelectListOption | null;
   option: SelectListOption;
   selected: boolean;
   search?: string;
+  small?: boolean;
   variant?: SelectOptionVariant;
 }>();
 
@@ -31,10 +32,12 @@ const onToggle = () => emit("click");
   <li class="list-none flex items-center w-full overflow-hidden bg-primary">
     <component
       :is="isButton ? 'button' : 'div'"
-      class="cursor-pointer w-full overflow-hidden rounded-lg flex items-center h-9 px-2 py-1 gap-2 text-sm hover:bg-secondary active:bg-tertiary"
+      class="cursor-pointer w-full overflow-hidden rounded-lg flex items-center px-2 py-1 gap-2 hover:bg-secondary active:bg-tertiary"
       :class="{
         '': variant === 'checkbox',
         'bg-secondary': highlighted,
+        'h-6 text-xs': small,
+        'h-9 text-sm': !small,
       }"
       @click="onToggle"
       @mouseover="emit('hover', option)"
@@ -61,11 +64,13 @@ const onToggle = () => emit("click");
           :highlight="search"
           class="flex-1 pl-1 -ml-1 text-left min-w-0 truncate"
           :class="{
-            'text-action text-sm': selected && variant === 'single',
+            'text-action': selected && variant === 'single',
+            'text-xs': small,
+            'text-sm': !small
           }"
         />
       </main>
-      <span v-if="option.suffix" class="flex-0 text-sm text-secondary">{{ option.suffix }}</span>
+      <span v-if="option.suffix" class="flex-0 text-sm text-secondary" :class="{ 'text-xs': small, 'text-sm': !small }">{{ option.suffix }}</span>
       <BButton
         v-if="variant === 'deletable'"
         small

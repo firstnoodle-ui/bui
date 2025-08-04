@@ -45,4 +45,5 @@ export type SelectListProps = {
   selectAll?: boolean;
   selected: SelectListOption | null | SelectListOption[];
   showSelection?: boolean;
+  small?: boolean;
 };

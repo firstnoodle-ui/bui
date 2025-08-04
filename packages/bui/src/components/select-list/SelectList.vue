@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<SelectListProps>(), {
   identifier: "label",
   loading: false,
   placeholder: "Search",
+  small: false,
   remoteMethod: null,
 });
 
@@ -390,7 +391,15 @@ defineExpose({
         class="flex-1"
         show
       >
-        <ul ref="optionsRef" class="px-2" :class="{ 'py-4': isGrouped, 'py-2': !isGrouped }">
+        <ul
+          ref="optionsRef"
+          class="px-1"
+          :class="{
+            'py-2': small && isGrouped || !small && !isGrouped,
+            'py-1': small && !isGrouped,
+            'py-4': !small && isGrouped,
+          }"
+        >
           <slot
             name="options"
             :options="localOptions"
