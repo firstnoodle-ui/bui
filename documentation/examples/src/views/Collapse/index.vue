@@ -21,8 +21,14 @@ const onToggle = (id: string) => {
 
 <template>
   <ComponentPage title="Collapse">
-    <ComponentPageSection title="In this example only one child can be open">
-      <BCollapse :open="rootOpen" @toggle="rootOpen = !rootOpen">
+    <template #default="{ print }">
+      <BCollapse
+        :open="rootOpen"
+        @toggle="
+          rootOpen = !rootOpen;
+          print('@toggle')
+        "
+      >
         <template #header>
           <section class="flex items-center justify-between w-full h-full">
             <div class="font-medium">
@@ -40,7 +46,7 @@ const onToggle = (id: string) => {
               <template #header>
                 <section class="flex items-center justify-between w-full h-full">
                   <div class="font-medium">
-                    Arrow disappears if content slot is empty + header-bg-class
+                    Arrow disappears if content slot is empty
                   </div>
                   <div>
                     <BButton variant="textSubtle" icon="download" />
@@ -88,20 +94,20 @@ const onToggle = (id: string) => {
           </main>
         </template>
       </BCollapse>
-      <template #controls>
-        alignment?: "left" | "right";
-        borderClassOpen?: string;
-        borderClassClosed?: string;
-        headerBgClass?: string;
-        id?: string | number;
-        open?: boolean;
-        sticky?: boolean;
-        <!-- <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
-        <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
-        <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
-        <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
-        <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" /> -->
-      </template>
-    </ComponentPageSection>
+    </template>
+    <template #controls>
+      alignment?: "left" | "right";
+      borderClassOpen?: string;
+      borderClassClosed?: string;
+      headerBgClass?: string;
+      id?: string | number;
+      open?: boolean;
+      sticky?: boolean;
+      <!-- <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
+      <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
+      <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
+      <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
+      <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" /> -->
+    </template>
   </ComponentPage>
 </template>
