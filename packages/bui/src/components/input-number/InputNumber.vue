@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { InputTypeHTMLAttribute } from "vue";
 import type { TIcon } from "../types";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { BIcon } from "../";
 import { clamp } from "../../utils";
 import StepButton from "./StepButton.vue";
@@ -11,17 +11,27 @@ const {
   icon,
   placeholder = "Write",
   value,
-  min,
-  max,
+  min = Number.MIN_SAFE_INTEGER,
+  max = Number.MAX_SAFE_INTEGER,
+  float = false,
+  incrementAmount = 1,
+  decimals = 2,
+  separator = ".",
+  clearable = false,
 } = defineProps<{
   disabled?: boolean;
   icon?: TIcon;
   placeholder?: string;
-  value: number;
+  value: number | null;
   min?: number;
   max?: number;
   inputType?: InputTypeHTMLAttribute;
   autoFocus?: boolean;
+  float?: boolean;
+  incrementAmount?: number;
+  decimals?: number;
+  separator?: "." | ",";
+  clearable?: boolean;
 }>();
 
 const emit = defineEmits(["change", "enter"]);
@@ -29,14 +39,40 @@ const emit = defineEmits(["change", "enter"]);
 const inputRef = ref<HTMLInputElement>();
 const upButtonRef = ref<typeof StepButton>();
 const downButtonRef = ref<typeof StepButton>();
+const stepSize = computed<number>(() => float ? (1 / 10 ** decimals) : 1); // HTML elements step size (decimal count)
+
+const displayValue = computed(() => {
+  if (value === null || value === undefined) return "";
+  const str = float ? Number(value).toFixed(decimals) : String(value);
+  return separator === "," ? str.replace(".", ",") : str;
+});
 
 const focus = () => {
   (inputRef.value as HTMLInputElement).focus();
 };
 
+const calculateNewValue = (input: string): number => {
+  // Always replace the separator with a dot for parsing
+  const normalized = separator === "," ? input.replace(",", ".") : input;
+  let num = float ? Number.parseFloat(normalized) : Number.parseInt(normalized, 10);
+  if (Number.isNaN(num)) num = 0;
+  num = clamp(num, min, max);
+  if (float) num = Number(num.toFixed(decimals));
+  return num;
+};
+
 const onInput = (event: Event) => {
-  if (event.target) {
-    emit("change", Number.parseInt((event.target as HTMLInputElement).value));
+  const inputEl = event.target as HTMLInputElement;
+  const input = inputEl.value;
+
+  if (input === "") {
+    emit("change", clearable ? null : 0);
+    return;
+  }
+
+  // Allow incomplete numbers with separator while typing
+  if (/^-?\d*(?:[.,]\d*)?$/.test(input)) {
+    emit("change", calculateNewValue(input));
   }
 };
 
@@ -55,14 +91,26 @@ const onArrowKey = (direction: -1 | 1, active: boolean) => {
   }
 };
 
-const onStep = (direction: 1 | -1) => {
-  emit("change", clamp(value + direction, min ?? null, max ?? null));
+const onStep = (direction: number) => {
+  const newValue = calculateNewValue((value === null ? direction : (value + direction)).toString());
+
+  if (newValue !== value && !Number.isNaN(newValue))
+    emit("change", newValue);
 };
 
 const onBlur = (event: Event) => {
-  event.stopImmediatePropagation();
-  event.stopPropagation();
-  event.preventDefault();
+  const inputEl = event.target as HTMLInputElement;
+  const input = inputEl.value;
+
+  if (input === "") {
+    emit("change", clearable ? null : 0);
+    return;
+  }
+
+  const newValue = calculateNewValue(input);
+  // Set the formatted value with the correct separator
+  inputEl.value = separator === "," ? newValue.toFixed(decimals).replace(".", ",") : newValue.toFixed(decimals);
+  emit("change", newValue);
 };
 
 defineExpose({ focus });
@@ -91,8 +139,9 @@ defineExpose({ focus });
       :max="max"
       :auto-focus="autoFocus === true"
       :disabled="disabled"
-      :value="value"
+      :value="displayValue"
       :placeholder="placeholder"
+      :step="stepSize"
       class="flex-1 min-w-0 py-2 text-sm leading-tight bg-transparent focus:outline-hidden"
       @change.stop.prevent
       @keydown.enter.stop.prevent="onEnter"
@@ -105,8 +154,8 @@ defineExpose({ focus });
       @input.stop.prevent="onInput"
     >
     <section class="flex flex-col w-8 h-full -space-y-px -mt-px -mr-px">
-      <StepButton ref="upButtonRef" direction="up" @click="onStep(1)" />
-      <StepButton ref="downButtonRef" direction="down" @click="onStep(-1)" />
+      <StepButton ref="upButtonRef" direction="up" @click="onStep(Math.abs(incrementAmount))" />
+      <StepButton ref="downButtonRef" direction="down" @click="onStep(-Math.abs(incrementAmount))" />
     </section>
   </div>
 </template>

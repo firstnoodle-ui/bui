@@ -11,11 +11,14 @@ import {
   PropControlString,
 } from "../../components";
 
-const value = ref(0);
+const value = ref<number | null>(0.2);
 const placeholder = ref("Age");
 const selectedIcon = ref<string | undefined>();
 const min = ref(0);
 const max = ref(10);
+const incrementAmount = ref(0.8);
+const floatDecimals = ref(3);
+const isFloat = ref(true);
 
 const clearable = ref(false);
 </script>
@@ -30,9 +33,12 @@ const clearable = ref(false);
         :clearable="clearable"
         :min="min"
         :max="max"
+        :float="isFloat"
+        :increment-amount="incrementAmount"
+        :decimals="floatDecimals"
         class="w-30"
         @change="(newValue:number) => {
-          print('@change: ' + newValue);
+          print(`@change: ${newValue}`);
           value = newValue;
         }"
         @enter="print('@enter')"
@@ -43,8 +49,11 @@ const clearable = ref(false);
       <PropControlString name="Placeholder" :value="placeholder" @change="(value:string) => placeholder = value" />
       <PropControlNumber name="Min" :value="min" @change="(value:number) => min = value" />
       <PropControlNumber name="Max" :value="max" @change="(value:number) => max = value" />
+      <PropControlNumber float name="Increment amount" :value="incrementAmount" @change="(value:number) => incrementAmount = value" />
       <PropControlSelect name="Icon" clearable :value="selectedIcon" :options="[...icons]" @select="(option:string|undefined) => selectedIcon = option" />
       <PropControlBoolean name="Clearable" :value="clearable" @toggle="clearable = !clearable" />
+      <PropControlBoolean name="IsFloat" :value="isFloat" @toggle="isFloat = !isFloat" />
+      <PropControlNumber :disabled="!isFloat" name="Float decimals" :value="floatDecimals" @change="(value:number) => floatDecimals = value" />
     </template>
   </ComponentPage>
 </template>
