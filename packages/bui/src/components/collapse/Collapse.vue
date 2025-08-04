@@ -98,7 +98,7 @@ onBeforeUnmount(() => {
             v-if="$slots.content"
             small
             variant="textSubtle"
-            :icon="open ? 'chevron-down' : 'chevron-right'"
+            :icon="open ? 'chevron-down-small' : 'chevron-right-small'"
             @click="emit('toggle', id)"
           />
         </div>
