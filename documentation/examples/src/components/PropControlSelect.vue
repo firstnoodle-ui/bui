@@ -28,7 +28,7 @@ const onClear = () => emit("select", undefined);
             :label="value || 'Select'"
             :soft-focus="visible"
             variant="outlineSubtle"
-            icon-after="chevron-down"
+            icon-after="chevron-down-small"
           />
         </template>
       </BPopSelect>
