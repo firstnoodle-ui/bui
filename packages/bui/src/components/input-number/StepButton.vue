@@ -18,6 +18,6 @@ defineExpose({ setActive: (state: boolean) => active.value = state });
     }"
     @click="emit('click')"
   >
-    <BIcon :name="direction === 'up' ? 'chevron-up' : 'chevron-down'" />
+    <BIcon :name="direction === 'up' ? 'chevron-up-small' : 'chevron-down-small'" />
   </button>
 </template>
