@@ -2,6 +2,7 @@
 import type { TIcon } from "../types";
 import { ref } from "vue";
 import { BIcon } from "../../";
+import { BNotificationBadge } from "../../";
 
 const props = withDefaults(
   defineProps<{
@@ -57,8 +58,8 @@ const onSelect = () => {
     <BIcon v-if="icon && size === 'default'" :name="icon" />
     <span class="relative">
       {{ name }}
-      <div v-if="notification" class="absolute" style="top: 0.124em; right: -0.65em">
-        <div class="w-3 h-3 bg-orange-500 rounded-full border border-white" />
+      <div v-if="notification" class="absolute" style="top: 0em; right: -0.6em">
+        <BNotificationBadge />
       </div>
     </span>
   </button>

@@ -22,6 +22,7 @@ export * from "./load-spinner";
 export * from "./modal";
 export * from "./nav-item";
 export * from "./notification";
+export * from "./notification-badge";
 export * from "./pagination";
 export * from "./pop-confirm";
 export * from "./pop-select";
