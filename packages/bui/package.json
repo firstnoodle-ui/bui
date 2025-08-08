@@ -14,6 +14,9 @@
     },
     "./bui.css": {
       "default": "./dist/bui.css"
+    },
+    "./tailwind-preset": {
+      "default": "./dist/tailwind-preset.mjs"
     }
   },
   "main": "./dist/index.mjs",
