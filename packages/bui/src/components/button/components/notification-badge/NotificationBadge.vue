@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { BNotificationBadge } from '../../../notification-badge';
+import { BNotificationBadge } from "../../../notification-badge";
+
 defineProps<{ inside?: boolean }>();
 </script>
 

@@ -1,17 +1,16 @@
-<template>
-    <BButton
-        :icon="icon"
-        @click="emit('click')"
-        variant="textSubtle"
-    />
-</template>
-
 <script setup lang="ts">
-import { BIcon } from '../../icon';
-import { BButton } from '../../button';
-import { type TIcon } from '../../types';
+import type { TIcon } from "../../types";
+import { BButton } from "../../button";
 
-const emit = defineEmits(['click'])
+defineProps<{ icon: TIcon }>();
 
-defineProps<{ icon:TIcon }>()
+const emit = defineEmits(["click"]);
 </script>
+
+<template>
+  <BButton
+    :icon="icon"
+    variant="textSubtle"
+    @click="emit('click')"
+  />
+</template>

@@ -63,12 +63,12 @@ const selectedWidthClass = ref(widthClasses[5]);
         </template>
       </BModal>
     </template>
-      <template #controls>
-        <PropControlBoolean name="Closeable" :value="closeable" @toggle="closeable = !closeable" />
-        <PropControlBoolean name="Expand vertically" :value="expandVertically" @toggle="expandVertically = !expandVertically" />
-        <PropControlString name="Title" :value="title" @change="(value:string) => title = value" />
-        <PropControlSelect name="Overlay type" :value="selectedOverlayType" :options="overlayTypes" @select="(option:string) => selectedOverlayType = option" />
-        <PropControlSelect name="Width class" :value="selectedWidthClass" :options="widthClasses" @select="(option:string) => selectedWidthClass = option" />
-      </template>
+    <template #controls>
+      <PropControlBoolean name="Closeable" :value="closeable" @toggle="closeable = !closeable" />
+      <PropControlBoolean name="Expand vertically" :value="expandVertically" @toggle="expandVertically = !expandVertically" />
+      <PropControlString name="Title" :value="title" @change="(value:string) => title = value" />
+      <PropControlSelect name="Overlay type" :value="selectedOverlayType" :options="overlayTypes" @select="(option:string) => selectedOverlayType = option" />
+      <PropControlSelect name="Width class" :value="selectedWidthClass" :options="widthClasses" @select="(option:string) => selectedWidthClass = option" />
+    </template>
   </ComponentPage>
 </template>

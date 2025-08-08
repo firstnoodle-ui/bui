@@ -3,7 +3,6 @@ import { BButton, BCollapse } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  ComponentPageSection,
 } from "../../components";
 
 const rootOpen = ref(false);

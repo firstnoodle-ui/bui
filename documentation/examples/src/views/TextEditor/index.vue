@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import ComponentPage from "../../components/ComponentPage.vue";
 import { BTextEditor } from "@firstnoodle/bui";
-
+import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>

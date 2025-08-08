@@ -2,7 +2,6 @@
 import { BButton, BSideOver } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
-import ComponentPageSection from "../../components/ComponentPageSection.vue";
 
 const buttonRef = ref<typeof BButton>();
 const sideOverRef = ref<typeof BSideOver>();

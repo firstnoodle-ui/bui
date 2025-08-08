@@ -33,7 +33,7 @@ const clearable = ref(false);
         :clearable="clearable"
         @change="(newValue:string) => {
           str = newValue;
-          print('change: ' + newValue);
+          print(`change: ${newValue}`);
         }"
         @enter="print('enter key')"
         @clear="print('clear')"

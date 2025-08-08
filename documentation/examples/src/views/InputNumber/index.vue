@@ -32,7 +32,7 @@ const clearable = ref(false);
         :max="max"
         class="w-30"
         @change="(newValue:number) => {
-          print('@change: ' + newValue);
+          print(`@change: ${newValue}`);
           value = newValue;
         }"
         @enter="print('@enter')"

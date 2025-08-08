@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { small = false } = defineProps<{ label?: string, small?: boolean }>();
+const { small = false } = defineProps<{ label?: string; small?: boolean }>();
 </script>
 
 <template>
@@ -11,7 +11,7 @@ const { small = false } = defineProps<{ label?: string, small?: boolean }>();
       v-if="label"
       :style="{ top: small ? '-0.55rem' : '-0.63rem' }"
       class="absolute bg-primary px-2 font-medium text-tertiary"
-      :class="{ 'text-[10px]':small, 'text-xs': !small }"
+      :class="{ 'text-[10px]': small, 'text-xs': !small }"
     >
       {{ label }}
     </div>

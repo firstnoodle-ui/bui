@@ -66,7 +66,7 @@ const onToggle = () => emit("click");
           :class="{
             'text-action': selected && variant === 'single',
             'text-xs': small,
-            'text-sm': !small
+            'text-sm': !small,
           }"
         />
       </main>

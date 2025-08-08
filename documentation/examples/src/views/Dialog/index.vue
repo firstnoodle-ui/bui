@@ -3,7 +3,6 @@ import { BButton, BDialog } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  ComponentPageSection,
 } from "../../components";
 
 const show = ref(false);

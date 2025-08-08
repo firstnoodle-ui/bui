@@ -18,5 +18,6 @@ export default antfu({
     "style/indent": 2,
     "style/semi": ["error", "always"],
     "style/padded-blocks": "off",
+    "ts/prefer-literal-enum-member": "off",
   },
 });

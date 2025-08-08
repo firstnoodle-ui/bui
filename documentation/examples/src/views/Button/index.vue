@@ -4,7 +4,6 @@ import { BButton, icons } from "@firstnoodle/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  ComponentPageSection,
   PropControlBoolean,
   PropControlSelect,
   PropControlString,

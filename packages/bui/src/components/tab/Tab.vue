@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import type { TIcon } from "../types";
 import { ref } from "vue";
-import { BIcon } from "../../";
-import { BNotificationBadge } from "../../";
+import { BIcon, BNotificationBadge } from "../../";
 
 const props = withDefaults(
   defineProps<{
