@@ -123,7 +123,7 @@ const onQuery = async (query: string) => {
       label: o,
       value: o,
       disabled: o === "ten",
-      icon: "document",
+      icon: "page",
       meta: "test",
     }));
 

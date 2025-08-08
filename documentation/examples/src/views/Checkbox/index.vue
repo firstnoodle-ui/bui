@@ -4,7 +4,6 @@ import { BCheckbox, checkboxTypes } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  ComponentPageSection,
   PropControlBoolean,
   PropControlSelect,
   PropControlString,

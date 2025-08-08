@@ -34,7 +34,7 @@ const onToggle = () => {
         </BPopper>
       </section>
       <section class="w-1/3 flex items-center space-x-2">
-        <BCheckbox :value="showPopper" @click="onToggle" />
+        <BCheckbox :checked="showPopper === 1" @click="onToggle" />
         <BPopper trigger="manual" :show="Boolean(showPopper)" placement="bottom-start">
           <div class="cursor-default">
             Manual

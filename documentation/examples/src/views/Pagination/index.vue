@@ -8,12 +8,6 @@ const currentPage1 = ref(2);
 const onChange1 = (page: number) => {
   currentPage1.value = page;
 };
-
-const currentPage2 = ref(2);
-
-const onChange2 = (page: number) => {
-  currentPage2.value = page;
-};
 </script>
 
 <template>

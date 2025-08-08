@@ -32,6 +32,7 @@ const clearable = ref(false);
         :max="max"
         class="w-30"
         @change="(newValue:number) => {
+          // eslint-disable-next-line vue/prefer-template
           print('@change: ' + newValue);
           value = newValue;
         }"

@@ -11,7 +11,7 @@ const showPopper2 = ref(0);
   <ComponentPageSection title="Slot props">
     <main class="flex items-center">
       <section class="w-1/3 flex items-center space-x-2">
-        <BCheckbox :value="showPopper1" @click="showPopper1 = showPopper1 ? 0 : 1" />
+        <BCheckbox :checked="showPopper1 === 1" @click="showPopper1 = showPopper1 ? 0 : 1" />
         <BPopper
           trigger="manual"
           placement="bottom-start"

@@ -59,7 +59,7 @@ const options = [
   <ComponentPageSection title="PopOver with option groups">
     <BPopper trigger="click">
       <template #default="slotProps">
-        <BButton icon="index-finger-up" label="Choose an option" :soft-focus="slotProps && slotProps.visible" />
+        <BButton icon="point-up" label="Choose an option" :soft-focus="slotProps && slotProps.visible" />
       </template>
       <template #content>
         <BPopperContent>
