@@ -16,16 +16,17 @@ add this key to your VSCode settings.json (CTRL + P -> search for user settings 
 "tailwindCSS.experimental.configFile": "documentation/examples/src/assets/main.css"
 ```
 
-## Ensure to use source link to bui package from main project
+## Use in consuming project
 **src/assets/main.css**
 
-import tailwind because we need tilwind in our project
-set the source to the bui package, because tailwind will only add the classes,
-which are using the main project by default. It doesn't know about which classes are used in bui.
-By setting the source to the bui package, we instruct tailwind to also include the classes from the bui package into the final .css
-
 @import "tailwindcss";
-@source "../../../../packages/bui/src/**/*.{ts,vue}";
+
+**src/main.ts**
+import "../node_modules/@firstnoodle-ui/bui/dist/bui.css";
+
+Remember to set either "light" or "dark" as data-theme property in <html> tag e.g.
+
+<html data-theme="light" ... >
 
 # start scripts
 in the root repo:
