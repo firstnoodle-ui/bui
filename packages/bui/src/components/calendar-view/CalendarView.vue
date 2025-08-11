@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<{
   type?: "date" | "datetime";
   format?: ReadableDateFormat;
   weekStart?: number;
-  disabledDates?: Function[];
+  disabledDates?: ((date: Date) => boolean)[];
 }>(), {
   value: null,
   clearable: false,

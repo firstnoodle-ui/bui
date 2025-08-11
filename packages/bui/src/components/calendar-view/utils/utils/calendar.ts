@@ -42,7 +42,7 @@ export const getWeekdayIndex = (weekDayString: string): number => {
  * Premade disable-function to disable specific weekDay
  * Accepts both an integer 0-6 or a string fx 'monday'
  */
-export const disableWeekday = (weekDay: number | string): Function => {
+export const disableWeekday = (weekDay: number | string): (date: string | Date) => boolean | null => {
   let dayIndex: number | null;
 
   if (typeof weekDay === "string") {
