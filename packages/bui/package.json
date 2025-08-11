@@ -20,8 +20,7 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "dist/bui.css",
-    "src"
+    "dist/bui.css"
   ],
   "scripts": {
     "build": "vite build",
