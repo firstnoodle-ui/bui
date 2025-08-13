@@ -119,6 +119,7 @@ onUnmounted(() => {
 });
 
 const close = () => {
+  openPopperDebounce.clear();
   if (!isOpen.value) return;
   isOpen.value = false;
   emit("close");
