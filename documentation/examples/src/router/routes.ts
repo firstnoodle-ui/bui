@@ -179,6 +179,12 @@ export default [
     meta: { group: "Standard" },
   },
   {
+    path: "/tree-list",
+    name: "TreeList",
+    component: () => import("../views/TreeList/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/vertical-layout",
     name: "VerticalLayout",
     component: () => import("../views/VerticalLayout/index.vue"),

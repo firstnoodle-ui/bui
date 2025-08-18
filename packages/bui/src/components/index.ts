@@ -40,6 +40,7 @@ export * from "./text-highlight";
 export * from "./text-viewer";
 export * from "./toggle-button";
 export * from "./tooltip";
+export * from "./tree-list";
 export * from "./types";
 export * from "./vertical-layout";
 export * from "./window-frame";
