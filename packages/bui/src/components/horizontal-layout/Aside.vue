@@ -7,7 +7,6 @@ const props = withDefaults(
     width?: number;
     border?: boolean;
     draggable?: boolean;
-    visible?: boolean;
     side?: "left" | "right";
     maxWidth?: number;
     minWidth?: number;
@@ -15,7 +14,6 @@ const props = withDefaults(
   {
     border: false,
     draggable: false,
-    visible: true,
     side: "left",
     maxWidth: 1000,
     minWidth: 160,
@@ -23,7 +21,7 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(["resize-start", "resize", "resize-end", "transitioning"]);
+const emit = defineEmits(["resize-start", "resize", "resize-end"]);
 
 const aside = ref<HTMLElement>();
 const classes = computed(() => [
@@ -64,39 +62,17 @@ function endDrag() {
   window.removeEventListener("mousemove", onDrag);
   emit("resize-end");
 }
-
-function onTransition(transitionActive: boolean, focusAside: boolean) {
-  if (focusAside && aside.value) {
-    aside.value.focus();
-  }
-  transitioning.value = transitionActive;
-  emit("transitioning", transitioning.value);
-}
 </script>
 
 <template>
-  <transition
-    key="aside"
-    enter-active-class="transform"
-    :enter-from-class="enterClass"
-    enter-to-class=""
-    leave-active-class="transform"
-    leave-class="translate-x-0"
-    :leave-to-class="leaveToClass"
-    @before-leave="onTransition(true, false)"
-    @after-leave="onTransition(false, false)"
-    @before-enter="onTransition(true, false)"
-    @after-enter="onTransition(false, true)"
-  >
     <aside
-      v-show="visible"
       ref="aside"
       tabindex="0"
       :style="{
         width: `${width}px`,
         transitionProperty: dragging ? 'none' : 'transform, width',
       }"
-      class="absolute top-0 z-10 h-full overflow-x-hidden duration-500 ease-in-out bg-primary"
+      class="absolute top-0 z-10 h-full overflow-x-hidden bg-primary"
       :class="classes"
     >
       <slot />
@@ -110,5 +86,4 @@ function onTransition(transitionActive: boolean, focusAside: boolean) {
         @mousedown="startDrag"
       />
     </aside>
-  </transition>
 </template>

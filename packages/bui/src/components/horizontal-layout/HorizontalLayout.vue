@@ -79,11 +79,10 @@ onMounted(() => {
 <template>
   <div class="relative w-full h-full overflow-hidden bg-primary">
     <AsideComponent
-      v-if="slots['aside-left']"
+      v-if="slots['aside-left'] && asideLeftVisible"
       side="left"
       :border="props.borders"
       :draggable="asideLeftDraggable"
-      :visible="asideLeftVisible"
       :width="localAsideLeftWidth"
       @resize-start="resizing = true"
       @resize="onAsideLeftResize"
@@ -95,17 +94,16 @@ onMounted(() => {
     <!-- responsiveness: md and above -->
     <main
       class="relative z-0 h-full overflow-x-hidden overflow-y-auto"
-      :class="[props.mainBgColorClass, resizing ? null : 'transition-padding duration-500 ease-in-out']"
+      :class="[props.mainBgColorClass]"
       :style="mainStyle"
     >
       <slot name="main" />
     </main>
     <AsideComponent
-      v-if="slots['aside-right']"
+      v-if="slots['aside-right'] && asideRightVisible"
       side="right"
       :border="props.borders"
       :draggable="asideRightDraggable"
-      :visible="asideRightVisible"
       :width="localAsideRightWidth"
       @resize-start="resizing = true"
       @resize="onAsideRightResize"
