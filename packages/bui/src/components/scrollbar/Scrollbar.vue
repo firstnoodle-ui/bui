@@ -208,8 +208,8 @@ defineExpose({ handleScroll: onScroll, reset, jumpToPercentage, scrollToPercenta
 
 <template>
   <main class="scrollbar scroll-hidden" :class="[viewHeightClass, { show }]">
-    <div id="wrapRef" ref="wrapRef" :class="[wrapClasses]" :style="wrapStyle" @scroll="onScroll">
-      <component :is="props.tag" ref="contentRef" class="scrollbar__view" :class="[viewClass]">
+    <div id="wrapRef" ref="wrapRef" class="relative" :class="[wrapClasses]" :style="wrapStyle" @scroll="onScroll">
+      <component :is="props.tag" ref="contentRef" class="scrollbar__view relative" :class="[viewClass]">
         <slot />
       </component>
     </div>

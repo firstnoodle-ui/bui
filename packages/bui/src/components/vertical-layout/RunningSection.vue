@@ -45,7 +45,7 @@ const heightStyle = computed(() => {
   <component
     :is="type"
     ref="containerRef"
-    class="flex-none w-full overflow-hidden transition-height duration-500 ease-in-out"
+    class="relative flex-none w-full overflow-hidden transition-height duration-500 ease-in-out"
     :class="classes"
     :style="heightStyle"
   >
