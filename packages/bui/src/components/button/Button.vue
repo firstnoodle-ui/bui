@@ -180,7 +180,7 @@ const buttonClasses = computed(() => {
 
 const disabledStyle = computed(() => {
   if (props.disabled) {
-    return props.variant === "fill" || props.variant === "destructive" ? { filter: "grayscale(50%)" } : { background: "hsl(0 0% 90%)" };
+    return props.variant === "fill" || props.variant === "destructive" ? { filter: "grayscale(50%)" } : { opacity: "0.5" };
   }
   return {};
 });
