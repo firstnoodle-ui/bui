@@ -52,7 +52,7 @@ const triggerRef = ref<HTMLDivElement>();
 const isOpen = ref(false);
 
 const { mounted } = useMounted();
-// eslint-disable-next-line ts/no-use-before-define
+
 const { disableClickOutside, enableClickOutside, updateClickOutside } = useClickOutside(() => closePopper());
 
 const update = async () => {
@@ -102,14 +102,14 @@ onMounted(() => {
   }
 
   if (props.trigger === "manual" && props.show) {
-    // eslint-disable-next-line ts/no-use-before-define
+
     openPopperDebounce();
   }
 });
 
 onUnmounted(() => {
   // the openDelay might be triggered after the component is onUnmounted
-  // eslint-disable-next-line ts/no-use-before-define
+
   openPopperDebounce.clear();
 
   if (cleanup) {
@@ -161,7 +161,7 @@ const onClick = (e: MouseEvent) => {
   if (props.trigger === "click") {
     e.preventDefault();
     e.stopPropagation();
-    // eslint-disable-next-line ts/no-use-before-define
+
     togglePopper();
   }
 };

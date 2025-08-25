@@ -28,13 +28,13 @@ const classes = computed(() => [
   props.side === "left" ? "left-0" : "right-0",
   props.border ? (props.side === "left" ? "border-r border-default" : "border-l border-default") : "",
 ]);
-const enterClass = props.side === "left" ? "-translate-x-full" : "translate-x-full";
-const leaveToClass = props.side === "left" ? "-translate-x-full" : "translate-x-full";
+// const enterClass = props.side === "left" ? "-translate-x-full" : "translate-x-full";
+// const leaveToClass = props.side === "left" ? "-translate-x-full" : "translate-x-full";
 
 let startX: number;
 let startWidth: number;
 const dragging = ref(false);
-const transitioning = ref(false);
+// const transitioning = ref(false);
 
 function startDrag(event: MouseEvent) {
   startX = event.pageX;
@@ -65,25 +65,25 @@ function endDrag() {
 </script>
 
 <template>
-    <aside
-      ref="aside"
-      tabindex="0"
-      :style="{
-        width: `${width}px`,
-        transitionProperty: dragging ? 'none' : 'transform, width',
-      }"
-      class="absolute top-0 z-10 h-full overflow-x-hidden bg-primary"
-      :class="classes"
-    >
-      <slot />
-      <button
-        v-if="props.draggable"
-        class="absolute top-0 h-full w-1 hover:border-action hover:bg-tertiary cursor-ew-resize"
-        :class="[
-          props.side === 'left' ? 'right-0 border-r' : 'left-0 border-l',
-          dragging ? 'border-action bg-tertiary' : 'border-transparent bg-transparent',
-        ]"
-        @mousedown="startDrag"
-      />
-    </aside>
+  <aside
+    ref="aside"
+    tabindex="0"
+    :style="{
+      width: `${width}px`,
+      transitionProperty: dragging ? 'none' : 'transform, width',
+    }"
+    class="absolute top-0 z-10 h-full overflow-x-hidden bg-primary"
+    :class="classes"
+  >
+    <slot />
+    <button
+      v-if="props.draggable"
+      class="absolute top-0 h-full w-1 hover:border-action hover:bg-tertiary cursor-ew-resize"
+      :class="[
+        props.side === 'left' ? 'right-0 border-r' : 'left-0 border-l',
+        dragging ? 'border-action bg-tertiary' : 'border-transparent bg-transparent',
+      ]"
+      @mousedown="startDrag"
+    />
+  </aside>
 </template>

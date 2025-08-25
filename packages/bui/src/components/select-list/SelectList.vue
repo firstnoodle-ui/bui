@@ -102,12 +102,10 @@ watch(() => props.selected, (newValue: SelectListOption | SelectListOption[] | n
 });
 
 watch(() => props.options, (newValue: SelectListOption[] | SelectListOptionGroup[]) => {
-  // eslint-disable-next-line ts/no-use-before-define
   updateLocalOptions(newValue);
   hoveredOption.value = null;
 });
 
-// eslint-disable-next-line ts/no-use-before-define
 onBeforeMount(() => updateLocalOptions(props.options));
 onMounted(() => {
   if (!isMultiselect.value && props.selectAll) {
@@ -116,29 +114,28 @@ onMounted(() => {
 
   nextFrame(() => {
     if (scrollbarRef.value) scrollbarRef.value!.update();
-    // eslint-disable-next-line ts/no-use-before-define
+
     selectListRef.value!.addEventListener("keydown", onKeydown);
   });
   // focusSearch();
 });
 
-// eslint-disable-next-line ts/no-use-before-define
 onBeforeUnmount(() => selectListRef.value!.removeEventListener("keydown", onKeydown));
 
 const onKeydown = (event: KeyboardEvent) => {
   if (event.key === "Enter") {
-    // eslint-disable-next-line ts/no-use-before-define
+
     selectOption();
   }
   else if (event.key === "Escape") {
     emit("escape");
   }
   else if (event.key === "ArrowDown") {
-    // eslint-disable-next-line ts/no-use-before-define
+
     navigateOptions("next");
   }
   else if (event.key === "ArrowUp") {
-    // eslint-disable-next-line ts/no-use-before-define
+
     navigateOptions("prev");
   }
 };
@@ -269,7 +266,7 @@ const navigateOptions = async (direction: "next" | "prev") => {
     await nextTick();
 
     if (hoveredOption.value) {
-      // eslint-disable-next-line ts/no-use-before-define
+
       scrollToOption(hoveredOption.value);
     }
   }

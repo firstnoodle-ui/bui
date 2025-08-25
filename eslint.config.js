@@ -19,5 +19,6 @@ export default antfu({
     "style/semi": ["error", "always"],
     "style/padded-blocks": "off",
     "ts/prefer-literal-enum-member": "off",
+    "ts/no-use-before-define": "off",
   },
 });

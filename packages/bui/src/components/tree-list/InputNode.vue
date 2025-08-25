@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from "vue";
+import { useClickOutside } from "../../composables";
 import { BButton } from "../button";
 import { BFlexbox } from "../flexbox";
-import { useClickOutside } from "../../composables";
 
-defineProps<{ value: string, indentation: number, saving: boolean }>();
+defineProps<{ value: string; indentation: number; saving: boolean }>();
 
 const emit = defineEmits(["cancel", "change", "save"]);
 
 const inputRef = ref<HTMLInputElement>();
 const container = ref<typeof BFlexbox>();
-const { disableClickOutside, enableClickOutside } = useClickOutside(() => emit('cancel'));
+const { disableClickOutside, enableClickOutside } = useClickOutside(() => emit("cancel"));
 onMounted(() => {
   enableClickOutside([container.value!.$el]);
   inputRef.value?.focus();
@@ -44,16 +44,16 @@ const onBlur = (event: Event) => {
     <div class="w-4 h-4" />
     <section class="flex items-center w-full h-6 pl-2 px-1 border border-default rounded-sm">
       <input
-          ref="inputRef"
-          type="text"
-          :value="value"
-          placeholder="Enter name"
-          class="flex-1 min-w-0 text-xs leading-tight bg-transparent focus:outline-hidden"
-          @change.stop.prevent
-          @keydown.{esc}.stop.prevent="onBlur"
-          @keydown.enter.stop.prevent="onEnter"
-          @keyup.enter.stop.prevent
-          @input.stop.prevent="onInput"
+        ref="inputRef"
+        type="text"
+        :value="value"
+        placeholder="Enter name"
+        class="flex-1 min-w-0 text-xs leading-tight bg-transparent focus:outline-hidden"
+        @change.stop.prevent
+        @keydown.esc.stop.prevent="onBlur"
+        @keydown.enter.stop.prevent="onEnter"
+        @keyup.enter.stop.prevent
+        @input.stop.prevent="onInput"
       >
     </section>
     <aside class="flex items-center gap-1">
