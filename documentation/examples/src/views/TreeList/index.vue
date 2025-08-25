@@ -1,20 +1,24 @@
 <script setup lang="ts">
 import type { TreeNode, TreeNodeAction } from "@firstnoodle-ui/bui";
 import type { OrgUnit } from "./data";
-import { BTreeList } from "@firstnoodle-ui/bui";
-import { ref } from "vue";
+import { BFlexbox, BHorizontalLayout, BTreeList, BVerticalLayout } from "@firstnoodle-ui/bui";
+import { computed, ref } from "vue";
 import { ComponentPage } from "../../components";
 import { tree } from "./data";
 import { flattenTree, getNodeValueByPath, openPath, setNodeValueByPath } from "./utils";
 
-const createNewPath = ref<TreeNode<OrgUnit>[]>([]);
-const selection = ref<TreeNode<OrgUnit>[]>([]);
-const onSelect = (path: TreeNode<OrgUnit>[]) => selection.value = path;
+const pathToNewItem = ref<TreeNode<OrgUnit>[]>([]);
+const selectedPath = ref<TreeNode<OrgUnit>[]>([]);
+const selection = computed(() => {
+  if(selectedPath.value.length) return selectedPath.value[selectedPath.value.length-1];
+  return null;
+});
+const onSelect = (path: TreeNode<OrgUnit>[]) => selectedPath.value = path;
 
 const createNewItem = (path: TreeNode<OrgUnit>[]) => {
   // deselect selected item
   onSelect([]);
-  createNewPath.value = path;
+  pathToNewItem.value = path;
   openPath(path);
 };
 
@@ -27,7 +31,7 @@ const action: TreeNodeAction<OrgUnit> = {
 const treeData = ref<TreeNode<OrgUnit>>(tree);
 treeData.value.children?.forEach((node: TreeNode<OrgUnit>) => node.actions.push(action));
 
-const onCancelNewChild = () => createNewPath.value = [];
+const onCancelNewChild = () => pathToNewItem.value = [];
 const onSaveNewChild = async (name: string) => {
   await new Promise(resolve => setTimeout(resolve, 2000)); // 1 second delay
   const allIds = flattenTree(treeData.value).map(item => Number(item.node.id));
@@ -43,17 +47,17 @@ const onSaveNewChild = async (name: string) => {
     },
     actions: [],
   };
-  if (!createNewPath.value[createNewPath.value.length - 1].children) {
-    createNewPath.value[createNewPath.value.length - 1].children = [newChild];
+  if (!pathToNewItem.value[pathToNewItem.value.length - 1].children) {
+    pathToNewItem.value[pathToNewItem.value.length - 1].children = [newChild];
   }
   else {
-    createNewPath.value[createNewPath.value.length - 1].children?.push(newChild);
+    pathToNewItem.value[pathToNewItem.value.length - 1].children?.push(newChild);
   }
   onCancelNewChild();
-  onSelect([...createNewPath.value, newChild]);
+  onSelect([...pathToNewItem.value, newChild]);
 };
 
-// const { disableClickOutside, enableClickOutside } = useClickOutside(() => selection.value = []);
+// const { disableClickOutside, enableClickOutside } = useClickOutside(() => selectedPath.value = []);
 // const treeListRef = ref<typeof BTreeList>();
 // onMounted(() => enableClickOutside([treeListRef.value]));
 // onBeforeUnmount(() => disableClickOutside());
@@ -73,20 +77,40 @@ const onToggle = (path: TreeNode<OrgUnit>[]) => {
 <template>
   <ComponentPage title="Checkbox">
     <template #default="{ print }">
-      <BTreeList
-        :node="treeData"
-        :level="0"
-        :selection="selection"
-        :create-new-path="createNewPath"
-        @action="onAction"
-        @cancel-new-child="onCancelNewChild"
-        @save="onSaveNewChild"
-        @select="(path:TreeNode<OrgUnit>[]) => {
-          onSelect(path);
-          print(path.map(p => p.label).join(' / '));
-        }"
-        @toggle="onToggle"
-      />
+      <BHorizontalLayout borders aside-left-visible class="h-full border border-default">
+        <template #aside-left>
+          <main class="p-2">
+            <BTreeList
+              :node="treeData"
+              :level="0"
+              :selection="selectedPath"
+              :create-new-path="pathToNewItem"
+              @action="onAction"
+              @cancel-new-child="onCancelNewChild"
+              @save="onSaveNewChild"
+              @select="(path:TreeNode<OrgUnit>[]) => {
+                onSelect(path);
+                print(path.map(p => p.label).join(' / '));
+              }"
+              @toggle="onToggle"
+            />
+          </main>
+        </template>
+        <template #main>
+          <BVerticalLayout>
+            <template #header>
+              <header class="p-4">
+                <h2>{{ selection?.label || "Nothing selected" }}</h2>
+              </header>
+            </template>
+            <template #main>
+              <main class="p-4">
+                <div>{{ selection?.value.description || 'No description' }}</div>
+              </main>
+            </template>
+          </BVerticalLayout>
+        </template>
+      </BHorizontalLayout>
     </template>
   </ComponentPage>
 </template>
