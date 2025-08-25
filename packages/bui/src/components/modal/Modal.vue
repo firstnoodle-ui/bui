@@ -93,14 +93,14 @@ defineExpose({ close });
                 <h4>{{ props.title }}</h4>
                 <BButton v-if="closeable" icon="close" variant="textSubtle" @click="onClose" />
               </header>
-              <slot name="header" />
+              <slot name="header" :close="close" />
             </template>
             <template #main>
-              <slot name="main" />
+              <slot name="main" :close="close" />
             </template>
             <template v-if="$slots.footer" #footer>
               <footer class="flex items-center h-full">
-                <slot name="footer" />
+                <slot name="footer" :close="close" />
               </footer>
             </template>
           </BVerticalLayout>
