@@ -90,7 +90,7 @@ watch(
     <template v-if="segments.length === 0">
       {{ value }}
     </template>
-    <template v-for="segment in segments" v-else :key="segment">
+    <template v-for="(segment, index) in segments" v-else :key="`${segment}_${index}`">
       <span
         v-if="highlight && segment.toLowerCase() === highlight.toLowerCase()"
         class="relative z-0 rounded"
