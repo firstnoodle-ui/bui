@@ -6,9 +6,13 @@ import ComponentPage from "../../components/ComponentPage.vue";
 <template>
   <ComponentPage title="PopConfirm">
     <BPopConfirm
+
       title="Delete this?"
       description="This cannot be undone. Do you wish to continue? Long day at work?"
       placement="bottom-start"
+      @confirm="console.log('PopConfirm clicked confirm')"
+      @cancel="console.log('PopConfirm clicked cancel')"
+      @close="console.log('PopConfirm closed by clicking outside')"
     >
       <template #trigger="slotProps">
         <BButton
