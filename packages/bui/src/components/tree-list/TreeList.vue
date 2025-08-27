@@ -74,7 +74,7 @@ const handleToggle = (path: TreeNode<T>[]) => {
     @keydown.down.stop.prevent
     @keyup.down.stop.prevent="onKey('down')"
   >
-    <BFlexbox class="pl-1 gap-1">
+    <BFlexbox class="flex-1 min-w-0 pl-1 gap-1">
       <button
         v-if="node.children?.length || createNewChild"
         class="w-4 h-4 flex items-center justify-center rounded cursor-pointer"
@@ -82,10 +82,10 @@ const handleToggle = (path: TreeNode<T>[]) => {
       >
         <BIcon :name="node.open ? 'chevron-down-small' : 'chevron-right-small'" />
       </button>
-      <div v-else class="w-4 h-4" />
-      <span class="text-xs">{{ node.label }}</span>
+      <div v-else class="flex-none w-4 h-4" />
+      <span class="text-xs truncate">{{ node.label }}</span>
     </BFlexbox>
-    <BFlexbox if="node.actions.length">
+    <BFlexbox if="node.actions.length" class="flex-none">
       <BPopSelect
         :options="node.actions"
         placement="bottom-end"
