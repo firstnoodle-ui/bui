@@ -2,7 +2,6 @@
 import type { TColumnNavigationOption } from "@firstnoodle-ui/bui";
 import { BIcon, BPopper, BPopperContent } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-// eslint-disable-next-line import/no-self-import
 import CascaderOption from "./CascaderOption.vue";
 
 const { option } = defineProps<{ option: TColumnNavigationOption }>();

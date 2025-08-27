@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TreeNode, TreeNodeAction } from "@firstnoodle-ui/bui";
 import type { OrgUnit } from "./data";
-import { BFlexbox, BHorizontalLayout, BTreeList, BVerticalLayout } from "@firstnoodle-ui/bui";
+import { BHorizontalLayout, BTreeList, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { computed, ref } from "vue";
 import { ComponentPage } from "../../components";
 import { tree } from "./data";
@@ -10,7 +10,7 @@ import { flattenTree, getNodeValueByPath, openPath, setNodeValueByPath } from ".
 const pathToNewItem = ref<TreeNode<OrgUnit>[]>([]);
 const selectedPath = ref<TreeNode<OrgUnit>[]>([]);
 const selection = computed(() => {
-  if(selectedPath.value.length) return selectedPath.value[selectedPath.value.length-1];
+  if (selectedPath.value.length) return selectedPath.value[selectedPath.value.length - 1];
   return null;
 });
 const onSelect = (path: TreeNode<OrgUnit>[]) => selectedPath.value = path;
