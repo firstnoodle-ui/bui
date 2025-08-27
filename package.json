@@ -12,14 +12,14 @@
     "utilities"
   ],
   "scripts": {
-    "build-lib": "cd packages/bui && vite build",
+    "build-lib": "cd packages/bui && pnpm vite build",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "setup-1-root": "pnpm install",
     "setup-2-docs": "cd documentation/examples && pnpm install",
     "setup-3-bui": "cd packages/bui && pnpm install",
-    "start-lib": "cd packages/bui && vite build --watch",
-    "start-docs": "cd documentation/examples && vite",
+    "start-lib": "cd packages/bui && pnpm vite build --watch",
+    "start-docs": "cd documentation/examples && pnpm vite",
     "typecheck": "pnpm --filter './packages/**/*' run typecheck",
     "release": "pnpm run lint && pnpm run typecheck && changelogen --output CHANGELOG.md && jiti scripts/release.ts && pnpm -r run release:publish && git push --follow-tags"
   },

@@ -1,9 +1,8 @@
-<script setup lang="ts" generic="T">
+<script setup lang="ts" generic="T extends object">
 import type { TreeNode, TreeNodeAction } from "./types";
 import { computed, ref, watch } from "vue";
 import { BButton, BFlexbox, BIcon, BPopSelect } from "..";
 import InputNode from "./InputNode.vue";
-// eslint-disable-next-line import/no-self-import
 import TreeList from "./TreeList.vue";
 
 const { createNewPath = [], indentationAmount = 20, node, selection } = defineProps<{
@@ -37,6 +36,22 @@ const onCancelNewChild = () => {
 // eslint-disable-next-line no-console
 const onKey = (direction: "left" | "right" | "up" | "down") => console.log(node.label, direction);
 const onAction = (action: TreeNodeAction<T>) => emit("action", { path: [node], action });
+
+type ActionEvent<T> = { path: TreeNode<T>[]; action: TreeNodeAction<T> };
+
+const handleAction = (e: ActionEvent<T>) => {
+  emit("action", { path: [node, ...e.path], action: e.action });
+};
+
+const handleKey = (path: TreeNode<T>[]) => {
+  emit("key", [node, ...path]);
+};
+const handleSelect = (path: TreeNode<T>[]) => {
+  emit("select", [node, ...path]);
+};
+const handleToggle = (path: TreeNode<T>[]) => {
+  emit("toggle", [node, ...path]);
+};
 </script>
 
 <template>
@@ -105,12 +120,12 @@ const onAction = (action: TreeNodeAction<T>) => emit("action", { path: [node], a
       :node="child"
       :create-new-path="createNewPath"
       :selection="selection"
-      @action="(e:{path:TreeNode<T>[], action:TreeNodeAction<T>}) => emit('action', { path: [node, ...e.path], action: e.action })"
+      @action="handleAction"
       @cancel-new-child="emit('cancel-new-child')"
-      @key="(path:TreeNode<T>[]) => emit('key', [node, ...path])"
+      @key="handleKey"
       @save="(name:string) => emit('save', name)"
-      @select="(path:TreeNode<T>[]) => emit('select', [node, ...path])"
-      @toggle="(path:TreeNode<T>[]) => emit('toggle', [node, ...path])"
+      @select="handleSelect"
+      @toggle="handleToggle"
     />
   </main>
 </template>
