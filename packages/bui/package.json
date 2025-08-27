@@ -10,17 +10,29 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.mjs"
     },
-    "./bui.css": {
-      "default": "./dist/bui.css"
-    }
+    "./components/*": {
+      "types": "./dist/components/*/index.d.ts",
+      "import": "./dist/components/*/index.d.ts"
+    },
+    "./composables/*": {
+      "types": "./dist/composables/*.d.ts",
+      "import": "./dist/composables/*.d.ts"
+    },
+    "./utils/*": {
+      "types": "./dist/utils/*.d.ts",
+      "import": "./dist/utils/*.d.ts"
+    },
+    "./bui.css": "./dist/bui.css",
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.mjs",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "dist/bui.css"
+    "dist"
   ],
   "scripts": {
     "build": "vite build && vue-tsc --declaration --emitDeclarationOnly -p tsconfig.app.json",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BCollapse } from "@firstnoodle/bui";
+import { BCollapse } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 
 defineProps({ title: String });

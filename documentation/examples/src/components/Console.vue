@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BButton, BVerticalLayout } from "@firstnoodle/bui";
+import { BButton, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { nextTick, ref } from "vue";
 import LogItem from "./LogItem.vue";
 

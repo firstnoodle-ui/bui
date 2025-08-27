@@ -1,4 +1,4 @@
-import type { SelectListFilter, SelectListOption, SelectListOptionGroup } from "@firstnoodle/bui";
+import type { SelectListFilter, SelectListOption, SelectListOptionGroup } from "@firstnoodle-ui/bui";
 
 export const demoOptions: SelectListOption<string>[] = [
   { id: 1, icon: "box", label: "Apple", suffix: "green" },

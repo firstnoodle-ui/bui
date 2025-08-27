@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { ButtonVariant, TIcon } from "@firstnoodle/bui";
-import { BButton, icons } from "@firstnoodle/bui";
+import type { ButtonVariant, TIcon } from "@firstnoodle-ui/bui";
+import { BButton, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,

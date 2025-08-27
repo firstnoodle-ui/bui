@@ -1,4 +1,4 @@
-import type { TreeNode } from "@firstnoodle/bui";
+import type { TreeNode } from "@firstnoodle-ui/bui";
 
 export const openPath = <T>(path: TreeNode<T>[]) => {
   path.forEach(node => node.open = true);

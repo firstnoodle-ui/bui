@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BInputNumber } from "@firstnoodle/bui";
+import { BInputNumber } from "@firstnoodle-ui/bui";
 import PropControlBase from "./PropControlBase.vue";
 
 defineProps<{ value: number; name: string }>();

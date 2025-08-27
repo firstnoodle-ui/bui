@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BTab } from "@firstnoodle/bui";
+import { BTab } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 

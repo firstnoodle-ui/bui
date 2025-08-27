@@ -1,4 +1,4 @@
-import type { TreeNode } from "@firstnoodle/bui";
+import type { TreeNode } from "@firstnoodle-ui/bui";
 
 export type OrgUnit = {
   name: string;

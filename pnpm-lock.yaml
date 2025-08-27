@@ -32,7 +32,7 @@ importers:
 
   documentation/examples:
     dependencies:
-      '@firstnoodle/bui':
+      '@firstnoodle-ui/bui':
         specifier: link:..\..\packages\bui
         version: link:../../packages/bui
       vue:

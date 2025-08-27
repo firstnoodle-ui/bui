@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BFilterChip } from "@firstnoodle/bui";
+import { BFilterChip } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BApplicationWrapper, BButton, BHorizontalLayout, BNavItem, BVerticalLayout } from "@firstnoodle/bui";
+import { BApplicationWrapper, BButton, BHorizontalLayout, BNavItem, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import { RouterView, useRouter } from "vue-router";
 import routes from "./router/routes";

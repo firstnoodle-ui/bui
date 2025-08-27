@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BHorizontalLayout, BVerticalLayout } from "@firstnoodle/bui";
+import { BHorizontalLayout, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import Console from "./Console.vue";
 

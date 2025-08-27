@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BSwitch } from "@firstnoodle/bui";
+import { BSwitch } from "@firstnoodle-ui/bui";
 import PropControlBase from "./PropControlBase.vue";
 
 defineProps<{ value: boolean; name: string }>();

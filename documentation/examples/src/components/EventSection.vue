@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BIcon } from "@firstnoodle/bui";
+import { BIcon } from "@firstnoodle-ui/bui";
 </script>
 
 <template>

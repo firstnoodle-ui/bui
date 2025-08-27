@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TPopSelectOption } from "@firstnoodle/bui";
-import { BButton, BPopSelect } from "@firstnoodle/bui";
+import type { TPopSelectOption } from "@firstnoodle-ui/bui";
+import { BButton, BPopSelect } from "@firstnoodle-ui/bui";
 import { computed } from "vue";
 import PropControlBase from "./PropControlBase.vue";
 

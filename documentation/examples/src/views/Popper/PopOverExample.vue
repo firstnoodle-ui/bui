@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /*  eslint-disable no-console */
 
-import type { TIcon } from "@firstnoodle/bui";
+import type { TIcon } from "@firstnoodle-ui/bui";
 import { BButton, BIcon, BPopper, BPopperContent } from "@firstnoodle-ui/bui";
 import ComponentPageSection from "../../components/ComponentPageSection.vue";
 
