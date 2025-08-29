@@ -19,9 +19,9 @@ const icon = computed(() => {
 </script>
 
 <template>
-  <div data-theme="dark" class="inline-flex items-stretch h-10 px-1 rounded-xl bg-black shadow-xl pointer-events-auto">
+  <div data-theme="dark" class="inline-flex items-stretch h-10 px-1 rounded-xl bg-black shadow-xl pointer-events-auto justify-between">
     <BFlexbox
-      class="gap-2 px-3 rounded-l-lg"
+      class="gap-2 px-3 rounded-l-lg flex-1 overflow-hidden"
       :class="{
         'text-stone-300': type === 'default',
         'text-amber-300': type === 'warning',
@@ -30,24 +30,26 @@ const icon = computed(() => {
       }"
     >
       <BIcon :name="icon" />
-      <span class="text-sm cursor-default">{{ text }}</span>
+      <span class="text-sm cursor-default truncate min-w-0">{{ text }}</span>
     </BFlexbox>
-    <BFlexbox class="px-2">
-      <BButton
-        v-if="showDetailsButton"
-        small
-        variant="outline"
-        label="Details"
-        @click="emit('show-details')"
-      />
-    </BFlexbox>
-    <BFlexbox class="px-1">
-      <BButton
-        small
-        variant="textSubtle"
-        icon="close"
-        @click="emit('close')"
-      />
+    <BFlexbox>
+      <BFlexbox class="px-2">
+        <BButton
+          v-if="showDetailsButton"
+          small
+          variant="outline"
+          label="Details"
+          @click="emit('show-details')"
+        />
+      </BFlexbox>
+      <BFlexbox class="px-1">
+        <BButton
+          small
+          variant="textSubtle"
+          icon="close"
+          @click="emit('close')"
+        />
+      </BFlexbox>
     </BFlexbox>
   </div>
 </template>
