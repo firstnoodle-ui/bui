@@ -1,7 +1,7 @@
 {
   "name": "@firstnoodle-ui/bui",
   "type": "module",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "private": "false",
   "description": "A Vue 3 components and TypeScript utilities library.",
   "author": "sebastian",
