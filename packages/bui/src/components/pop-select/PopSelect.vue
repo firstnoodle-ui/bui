@@ -16,6 +16,7 @@ const props = withDefaults(
     disabled?: boolean;
     emptyStateIcon?: TIcon;
     emptyStateText?: string;
+    noMatchText?: string;
     filterable?: boolean;
     fixedHeight?: boolean;
     keepOpen?: boolean;
@@ -47,6 +48,7 @@ const props = withDefaults(
     loadingText: "Loading...",
     placeholder: "Search",
     placement: "bottom-start",
+    noMatchText: "Nothing matches your input",
     remoteMethod: null,
     sameWidthAsTrigger: false,
   },
@@ -301,7 +303,7 @@ defineExpose({ close, focus });
             <div class="w-4 h-4 text-center leading-none">
               ...
             </div>
-            <span class="italic leading-none text-sm">Nothing matches your input</span>
+            <span class="italic leading-none text-sm">{{ noMatchText }}</span>
           </div>
         </div>
         <div v-else-if="state === State.IDLE" class="flex-1">
