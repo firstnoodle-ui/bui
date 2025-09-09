@@ -1,0 +1,1 @@
+export { default as BTagInput } from "./TagInput.vue";
