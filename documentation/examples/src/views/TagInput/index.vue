@@ -5,7 +5,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 const validatedEmails = [
   {
     mail: "test@dtu.dk",
-    error: null
+    error: null,
   },
   {
     mail: "test@mail.dk",
@@ -20,14 +20,14 @@ const validatedEmails = [
     error: "Invalid format",
   },
 ];
-
-const onDelete = (obj) => console.log(obj);
 </script>
 
 <template>
   <ComponentPage title="Tag">
-    <BFlexbox class="gap-2">
-      <BTagInput v-for="mail in validatedEmails" :key="mail.mail" :label="mail.mail" :error="mail.error" @delete="onDelete(mail)" />
-    </BFlexbox>
+    <template #default="{ print }">
+      <BFlexbox class="gap-2">
+        <BTagInput v-for="mail in validatedEmails" :key="mail.mail" :label="mail.mail" :error="mail.error" @delete="print(mail.mail)" />
+      </BFlexbox>
+    </template>
   </ComponentPage>
 </template>

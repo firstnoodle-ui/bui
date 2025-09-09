@@ -10,7 +10,7 @@ const props = withDefaults(
     closeable?: boolean;
     overlayType?: TOverlayType;
     noScrollbar?: boolean;
-    placement?: "left"|"right";
+    placement?: "left" | "right";
     target?: string;
     title?: string;
   }>(),

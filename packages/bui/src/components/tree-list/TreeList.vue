@@ -3,7 +3,6 @@ import type { TreeNode, TreeNodeAction } from "./types";
 import { computed, ref, watch } from "vue";
 import { BButton, BFlexbox, BIcon, BPopSelect } from "..";
 import InputNode from "./InputNode.vue";
-import TreeList from "./TreeList.vue";
 
 const { createNewPath = [], indentationAmount = 20, node, selection } = defineProps<{
   indentationAmount?: number;

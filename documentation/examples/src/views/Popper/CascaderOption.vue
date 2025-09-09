@@ -2,7 +2,6 @@
 import type { TColumnNavigationOption } from "@firstnoodle-ui/bui";
 import { BIcon, BPopper, BPopperContent } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-import CascaderOption from "./CascaderOption.vue";
 
 const { option } = defineProps<{ option: TColumnNavigationOption }>();
 const emit = defineEmits(["updateTargets"]);
