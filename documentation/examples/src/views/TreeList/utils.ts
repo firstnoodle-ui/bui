@@ -58,7 +58,7 @@ export const setNodeObjectValueByPath = <T, K extends keyof T>(
     if (!currentNode) return false;
   }
 
-  currentNode.value[key] = newValue;
+  currentNode.data[key] = newValue;
   return true;
 };
 

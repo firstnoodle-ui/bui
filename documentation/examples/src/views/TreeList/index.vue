@@ -46,12 +46,12 @@ const onSaveNewChild = async (name: string) => {
     id: highestId + 1,
     label: name,
     open: false,
-    value: {
+    data: {
       name,
       timezone: "test",
     },
     actions: [],
-  };
+  } satisfies TreeNode<OrgUnit>;
   if (!pathToNewItem.value[pathToNewItem.value.length - 1].children) {
     pathToNewItem.value[pathToNewItem.value.length - 1].children = [newChild];
   }
@@ -90,6 +90,7 @@ const onToggle = (event: TreeNodeEvent<OrgUnit>) => {
               @cancel-new-child="onCancelNewChild"
               @save="onSaveNewChild"
               @select="(event: TreeNodeEvent<OrgUnit>) => {
+                console.log(event.targetNode.data)
                 onSelect(event.path);
                 print(event.path.map(p => p.label).join(' / '));
               }"
@@ -106,7 +107,7 @@ const onToggle = (event: TreeNodeEvent<OrgUnit>) => {
             </template>
             <template #main>
               <main class="p-4">
-                <div>{{ selection?.value.description || 'No description' }}</div>
+                <div>{{ selection?.data.description || 'No description' }}</div>
               </main>
             </template>
           </BVerticalLayout>

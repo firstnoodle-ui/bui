@@ -12,7 +12,7 @@ export const tree: TreeNode<OrgUnit> = {
   label: "DTU",
   open: true,
   actions: [],
-  value: {
+  data: {
     name: "Danmarks Tekniske Universitet",
     acronym: "DTU",
     description: "Lorem Ipsum",
@@ -24,7 +24,7 @@ export const tree: TreeNode<OrgUnit> = {
       label: "Aqua",
       open: false,
       actions: [],
-      value: {
+      data: {
         name: "Aqua",
         description: "National Institute of Aquatic Resources conducts research, provides advice, educates at university level and contributes to innovation in sustainable exploitation and management of aquatic resources. We investigate the biology and population ecology of aquatic organisms, aquatic physical and chemical processes and ecosystem structure and dynamics, taking account of all relevant natural and anthropogenic drivers.",
         timezone: "Central European Summer Time (CEST)",
@@ -35,7 +35,7 @@ export const tree: TreeNode<OrgUnit> = {
       label: "Bioengineering",
       open: false,
       actions: [],
-      value: {
+      data: {
         name: "Bioengineering",
         description: "The Department of Biotechnology and Biomedicine adresses important social and scientific challenges within biotechnology, biomedicine, food technology and human and animal health.",
         timezone: "Central European Summer Time (CEST)",
@@ -46,7 +46,7 @@ export const tree: TreeNode<OrgUnit> = {
       label: "Biosustain",
       open: true,
       actions: [],
-      value: {
+      data: {
         name: "Bioengineering",
         description: "The Novo Nordisk Foundation Center for Biosustainability at the Technical University of Denmark aims at developing new knowledge and technologies to help facilitate the transformation from the existing oil-based chemical industry to a more sustainable bio-based society in which chemicals are produced biologically.",
         timezone: "Central European Summer Time (CEST)",
@@ -57,7 +57,7 @@ export const tree: TreeNode<OrgUnit> = {
           label: "Natural Products",
           open: false,
           actions: [],
-          value: {
+          data: {
             name: "Natural Products",
             description: "Developing new microbial cell factories to sustainably produce natural and novel products",
             timezone: "Central European Summer Time (CEST)",
@@ -68,7 +68,7 @@ export const tree: TreeNode<OrgUnit> = {
           label: "Microbial Foods",
           open: false,
           actions: [],
-          value: {
+          data: {
             name: "Microbial Foods",
             description: "Rethinking food production for sustainable development of foods using microbes",
             timezone: "Central European Summer Time (CEST)",
@@ -79,7 +79,7 @@ export const tree: TreeNode<OrgUnit> = {
           label: "Sustainable Chemicals",
           open: false,
           actions: [],
-          value: {
+          data: {
             name: "Sustainable Chemicals",
             description: "Developing bioprocesses for a sustainable and scalable production of relevant chemicals",
             timezone: "Central European Summer Time (CEST)",
@@ -92,7 +92,7 @@ export const tree: TreeNode<OrgUnit> = {
       label: "Chemical Engineering",
       open: false,
       actions: [],
-      value: {
+      data: {
         name: "Chemical Engineering",
         description: "The main activities at Department of Chemical and Biochemical Engineering lie within the areas of product design, process design and production in the chemical, biotechnological, pharmaceutical, food technological and energy technological industries.",
         timezone: "Central European Summer Time (CEST)",
@@ -103,7 +103,7 @@ export const tree: TreeNode<OrgUnit> = {
       label: "Chemistry",
       open: false,
       actions: [],
-      value: {
+      data: {
         name: "Chemistry",
         description: "Department of Chemistry is a dynamic Department with a wide array of opportunities. The research is divided into two research areas each with underlying research groups.",
         timezone: "Central European Summer Time (CEST)",
@@ -114,7 +114,7 @@ export const tree: TreeNode<OrgUnit> = {
       label: "Compute",
       open: false,
       actions: [],
-      value: {
+      data: {
         name: "Compute",
         description: "Department of Applied Mathematics and Computer Science is an internationally unique academic environment spanning the scientific disciplines mathematics, statistics, computer science, and engineering. Our interdisciplinary research areas are big data and data science, artificial intelligence (AI), internet of things (IoT), smart and secure societies, smart manufacturing and life sciences.",
         timezone: "Central European Summer Time (CEST)",

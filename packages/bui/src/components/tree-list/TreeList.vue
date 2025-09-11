@@ -13,8 +13,18 @@ const { createNewPath = [], indentationAmount = 20, node, selection } = definePr
   createNewPath?: TreeNode<T>[];
 }>();
 
-// const emit = defineEmits(["action", "cancel-new-child", "key", "save", "select", "toggle"]);
 const emit = defineEmits<{
+  /**
+   * Fired when a tree node action is triggered.
+   * An action is a menu point in the dropdown.
+   * You define the actions when you implement TreeList,
+   * in the array of TreeNodeAction<T> on each node in the path
+   *
+   * The path is the list of nodes from the root (index 0) to the node you interacted with
+   * path[path.length - 1 ]
+   *
+   * For convenience a TreeNodeEvent includes a targetNode which is the node you interacted with.
+   */
   (e: "action", data: TreeNodeActionEvent<T>): void;
   (e: "key", data: TreeNodeEvent<T>): void;
   (e: "select", data: TreeNodeEvent<T>): void;
