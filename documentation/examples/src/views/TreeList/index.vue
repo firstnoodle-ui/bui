@@ -63,7 +63,7 @@ const onSaveNewChild = async (name: string) => {
 // onBeforeUnmount(() => disableClickOutside());
 
 const onAction = (e: { path: TreeNode<OrgUnit>[]; action: TreeNodeAction<OrgUnit> }) => {
-  action.handler(e.path);
+  // action.handler(e.path);
 };
 
 const onToggle = (path: TreeNode<OrgUnit>[]) => {

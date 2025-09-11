@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends object">
-import type { TreeNode, TreeNodeAction } from "./types";
+import type { TreeNode, TreeNodeAction, TreeNodeEvent } from "./types";
 import { computed, ref, watch } from "vue";
 import { BButton, BFlexbox, BIcon, BPopSelect } from "..";
 import InputNode from "./InputNode.vue";
@@ -13,7 +13,15 @@ const { createNewPath = [], indentationAmount = 20, node, selection } = definePr
   createNewPath?: TreeNode<T>[];
 }>();
 
-const emit = defineEmits(["action", "cancel-new-child", "key", "save", "select", "toggle"]);
+// const emit = defineEmits(["action", "cancel-new-child", "key", "save", "select", "toggle"]);
+const emit = defineEmits<{
+  (e: "action", data: TreeNodeEvent<T>): void;
+  (e: "key", data: TreeNodeEvent<T>): void;
+  (e: "select", data: TreeNodeEvent<T>): void;
+  (e: "toggle", data: TreeNodeEvent<T>): void;
+  (e: "cancel-new-child"): void;
+  (e: "save", name: string): void;
+}>();
 
 const selected = computed(() => selection.length > 0 && selection[selection.length - 1].id === node.id);
 // this could be more specific and check if we are at the same level as well...
@@ -35,22 +43,26 @@ const onCancelNewChild = () => {
 
 // eslint-disable-next-line no-console
 const onKey = (direction: "left" | "right" | "up" | "down") => console.log(node.label, direction);
-const onAction = (action: TreeNodeAction<T>) => emit("action", { path: [node], action });
+const onAction = () => emit("action", { path: [node], targetNode: node });
 
 type ActionEvent<T> = { path: TreeNode<T>[]; action: TreeNodeAction<T> };
 
 const handleAction = (e: ActionEvent<T>) => {
-  emit("action", { path: [node, ...e.path], action: e.action });
+  const newPath = [node, ...e.path];
+  emit("action", { path: newPath, targetNode: newPath[newPath.length - 1] });
+
+  e.action.handler([node, ...e.path]);
 };
 
 const handleKey = (path: TreeNode<T>[]) => {
-  emit("key", [node, ...path]);
+  const newPath = [node, ...path];
+  emit("key", { path: newPath, targetNode: newPath[newPath.length - 1] });
 };
 const handleSelect = (path: TreeNode<T>[]) => {
-  emit("select", [node, ...path]);
+  emit("select", { path: [node, ...path], targetNode: [node, ...path][[node, ...path].length - 1] });
 };
 const handleToggle = (path: TreeNode<T>[]) => {
-  emit("toggle", [node, ...path]);
+  emit("toggle", { path: [node, ...path], targetNode: [node, ...path][[node, ...path].length - 1] });
 };
 </script>
 
@@ -64,7 +76,7 @@ const handleToggle = (path: TreeNode<T>[]) => {
       'text-secondary hover:text-primary hover:bg-secondary': !selected,
     }"
     :style="{ paddingLeft: `${level * indentationAmount}px` }"
-    @click="emit('select', [node])"
+    @click="emit('select', { path: [node], targetNode: node })"
     @keydown.left.stop.prevent
     @keyup.left.stop.prevent="onKey('left')"
     @keydown.right.stop.prevent
@@ -78,14 +90,14 @@ const handleToggle = (path: TreeNode<T>[]) => {
       <button
         v-if="node.children?.length || createNewChild"
         class="w-4 h-4 flex items-center justify-center rounded cursor-pointer"
-        @click.stop.prevent="emit('toggle', [node])"
+        @click.stop.prevent="emit('toggle', { path: [node], targetNode: node })"
       >
         <BIcon :name="node.open ? 'chevron-down-small' : 'chevron-right-small'" />
       </button>
       <div v-else class="flex-none w-4 h-4" />
       <span class="text-xs truncate">{{ node.label }}</span>
     </BFlexbox>
-    <BFlexbox if="node.actions.length" class="flex-none">
+    <BFlexbox v-if="node.actions.length > 0" class="flex-none">
       <BPopSelect
         :options="node.actions"
         placement="bottom-end"
