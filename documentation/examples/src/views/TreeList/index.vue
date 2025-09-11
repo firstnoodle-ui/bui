@@ -28,7 +28,6 @@ const createNewItem = (path: TreeNode<OrgUnit>[]) => {
 };
 
 const action: TreeNodeAction<OrgUnit> = {
-  id: "add-new",
   label: "Add new",
   icon: "plus",
   handler: createNewItem,
