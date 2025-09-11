@@ -54,7 +54,7 @@ export const formatDate = {
   dbDateTime,
 };
 
-export const dateFormat = ["nnDate", "nnDateWithDay", "nnDateTime", "nnDateTimeWithDay", "dbDate", "dbDateTime"] as const;
+export const dateFormat = ["date", "dateWithDay", "dateTime", "dateTimeWithDay", "dbDate", "dbDateTime"] as const;
 export type DateFormat = (typeof dateFormat)[number];
 
 export const readableDateFormat = ["readableDate", "readableDateWithDay", "readableDateTime", "readableDateTimeWithDay"] as const;

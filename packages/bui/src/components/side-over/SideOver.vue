@@ -10,6 +10,7 @@ const props = withDefaults(
     closeable?: boolean;
     overlayType?: TOverlayType;
     noScrollbar?: boolean;
+    placement?: "left" | "right";
     target?: string;
     title?: string;
   }>(),
@@ -17,6 +18,7 @@ const props = withDefaults(
     closeable: true,
     overlayType: "default",
     noScrollbar: false,
+    placement: "right",
     target: "#modals",
   },
 );
@@ -49,19 +51,23 @@ defineExpose({ close });
     <BScreenOverlay :show="show" :type="overlayType" class="p-4" @click="onClose" @close="emit('close')">
       <transition
         enter-active-class="transform transition ease-in-out duration-500"
-        enter-from-class="translate-x-full"
+        :enter-from-class="placement === 'right' ? 'translate-x-full' : '-translate-x-full'"
         enter-to-class=""
         leave-active-class="transform transition ease-in-out duration-300"
         leave-class="translate-x-0"
-        leave-to-class="translate-x-full"
+        :leave-to-class="placement === 'right' ? 'translate-x-full' : '-translate-x-full'"
         @after-enter="onTransitionAfterEnter"
       >
         <div
           v-show="show"
           ref="panelRef"
           tabindex="0"
-          class="ml-auto flex flex-col bg-primary shadow-sm-xl rounded-xl overflow-hidden max-w-lg w-full h-full focus:outline-hidden"
-          :class="{ 'px-6 py-4': !slots.default }"
+          class="flex flex-col bg-primary shadow-xl rounded-xl overflow-hidden max-w-lg w-full h-full focus:outline-hidden"
+          :class="{
+            'px-6 py-4': !slots.default,
+            'ml-auto': placement === 'right',
+            'mr-auto': placement === 'left',
+          }"
           style="pointer-events: auto"
         >
           <slot v-if="$slots.default" />

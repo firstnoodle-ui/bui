@@ -107,6 +107,12 @@ export default [
     meta: { group: "Data" },
   },
   {
+    path: "/pop-calendar",
+    name: "PopCalendar",
+    component: () => import("../views/PopCalendar/index.vue"),
+    meta: { group: "Poppers" },
+  },
+  {
     path: "/pop-confirm",
     name: "PopConfirm",
     component: () => import("../views/PopConfirm/index.vue"),
@@ -158,6 +164,12 @@ export default [
     path: "/tag",
     name: "Tag",
     component: () => import("../views/Tag/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
+    path: "/tag-input",
+    name: "TagInput",
+    component: () => import("../views/TagInput/index.vue"),
     meta: { group: "Standard" },
   },
   {

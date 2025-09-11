@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CalendarGridItem } from "./utils/types.ts";
-import type { ReadableDateFormat } from "./utils/utils/format.ts";
+import type { DateFormat, ReadableDateFormat } from "./utils/utils/format.ts";
 import { ref, toRef, watch } from "vue";
 import { loopRange } from "../../utils/array.ts";
 import { BButton } from "../button/index.ts";
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<{
   value?: string | Date | null;
   clearable?: boolean;
   type?: "date" | "datetime";
-  format?: ReadableDateFormat;
+  format?: ReadableDateFormat | DateFormat;
   weekStart?: number;
   disabledDates?: ((date: Date) => boolean)[];
 }>(), {

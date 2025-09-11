@@ -25,7 +25,7 @@ const print = (msg: string) => consoleRef.value?.log(msg);
         </template>
         <template #main>
           <article class="relative h-full w-full bg-primary p-8">
-            <main class="w-full">
+            <main class="w-full h-full">
               <slot :print="print" />
             </main>
           </article>
