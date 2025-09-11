@@ -21,3 +21,7 @@ export type TreeNodeEvent<T> = {
   path: TreeNode<T>[];
   targetNode: TreeNode<T>;
 };
+
+export type TreeNodeActionEvent<T> = TreeNodeEvent<T> & {
+  action: TreeNodeAction<T>;
+};

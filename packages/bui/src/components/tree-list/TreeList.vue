@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends object">
-import type { TreeNode, TreeNodeAction, TreeNodeEvent } from "./types";
+import type { TreeNode, TreeNodeAction, TreeNodeActionEvent, TreeNodeEvent } from "./types";
 import { computed, ref, watch } from "vue";
 import { BButton, BFlexbox, BIcon, BPopSelect } from "..";
 import InputNode from "./InputNode.vue";
@@ -15,7 +15,7 @@ const { createNewPath = [], indentationAmount = 20, node, selection } = definePr
 
 // const emit = defineEmits(["action", "cancel-new-child", "key", "save", "select", "toggle"]);
 const emit = defineEmits<{
-  (e: "action", data: TreeNodeEvent<T>): void;
+  (e: "action", data: TreeNodeActionEvent<T>): void;
   (e: "key", data: TreeNodeEvent<T>): void;
   (e: "select", data: TreeNodeEvent<T>): void;
   (e: "toggle", data: TreeNodeEvent<T>): void;
@@ -43,15 +43,12 @@ const onCancelNewChild = () => {
 
 // eslint-disable-next-line no-console
 const onKey = (direction: "left" | "right" | "up" | "down") => console.log(node.label, direction);
-const onAction = () => emit("action", { path: [node], targetNode: node });
+const onAction = (action: TreeNodeAction<T>) => emit("action", { path: [node], targetNode: node, action });
 
-type ActionEvent<T> = { path: TreeNode<T>[]; action: TreeNodeAction<T> };
-
-const handleAction = (e: ActionEvent<T>) => {
+const handleAction = (e: TreeNodeActionEvent<T>) => {
   const newPath = [node, ...e.path];
-  emit("action", { path: newPath, targetNode: newPath[newPath.length - 1] });
-
-  e.action.handler([node, ...e.path]);
+  e.action.handler(newPath);
+  emit("action", { path: newPath, targetNode: newPath[newPath.length - 1], action: e.action });
 };
 
 const handleKey = (path: TreeNode<T>[]) => {
@@ -134,10 +131,10 @@ const handleToggle = (path: TreeNode<T>[]) => {
       :selection="selection"
       @action="handleAction"
       @cancel-new-child="emit('cancel-new-child')"
-      @key="handleKey"
       @save="(name:string) => emit('save', name)"
-      @select="handleSelect"
-      @toggle="handleToggle"
+      @key="(event: TreeNodeEvent<T>) => handleKey(event.path)"
+      @select="(event: TreeNodeEvent<T>) => handleSelect(event.path)"
+      @toggle="(event: TreeNodeEvent<T>) => handleToggle(event.path)"
     />
   </main>
 </template>

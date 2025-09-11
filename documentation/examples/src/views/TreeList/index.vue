@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import type { TreeNode, TreeNodeAction } from "@firstnoodle-ui/bui";
+import type { TreeNode, TreeNodeAction, TreeNodeActionEvent, TreeNodeEvent } from "@firstnoodle-ui/bui";
 import type { OrgUnit } from "./data";
 import { BHorizontalLayout, BTreeList, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { computed, ref } from "vue";
 import { ComponentPage } from "../../components";
 import { tree } from "./data";
 import { flattenTree, getNodeValueByPath, openPath, setNodeValueByPath } from "./utils";
+
+// const { disableClickOutside, enableClickOutside } = useClickOutside(() => selectedPath.value = []);
+// const treeListRef = ref<typeof BTreeList>();
+// onMounted(() => enableClickOutside([treeListRef.value]));
+// onBeforeUnmount(() => disableClickOutside());
 
 const pathToNewItem = ref<TreeNode<OrgUnit>[]>([]);
 const selectedPath = ref<TreeNode<OrgUnit>[]>([]);
@@ -57,16 +62,12 @@ const onSaveNewChild = async (name: string) => {
   onSelect([...pathToNewItem.value, newChild]);
 };
 
-// const { disableClickOutside, enableClickOutside } = useClickOutside(() => selectedPath.value = []);
-// const treeListRef = ref<typeof BTreeList>();
-// onMounted(() => enableClickOutside([treeListRef.value]));
-// onBeforeUnmount(() => disableClickOutside());
-
-const onAction = (e: { path: TreeNode<OrgUnit>[]; action: TreeNodeAction<OrgUnit> }) => {
-  // action.handler(e.path);
+const onAction = (e: TreeNodeActionEvent<OrgUnit>) => {
+  console.warn(e);
 };
 
-const onToggle = (path: TreeNode<OrgUnit>[]) => {
+const onToggle = (event: TreeNodeEvent<OrgUnit>) => {
+  const path = event.path;
   const currentValue = getNodeValueByPath(treeData.value, path, "open");
   setNodeValueByPath(treeData.value, path, "open", !currentValue);
 };
@@ -88,9 +89,9 @@ const onToggle = (path: TreeNode<OrgUnit>[]) => {
               @action="onAction"
               @cancel-new-child="onCancelNewChild"
               @save="onSaveNewChild"
-              @select="(path:TreeNode<OrgUnit>[]) => {
-                onSelect(path);
-                print(path.map(p => p.label).join(' / '));
+              @select="(event: TreeNodeEvent<OrgUnit>) => {
+                onSelect(event.path);
+                print(event.path.map(p => p.label).join(' / '));
               }"
               @toggle="onToggle"
             />
