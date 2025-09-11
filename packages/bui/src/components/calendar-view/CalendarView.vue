@@ -60,7 +60,7 @@ const onDateClick = (date: CalendarGridItem | null) => {
   if (date.disabled) return;
   if (!date.date) return;
 
-  emit("change", formatDate[props.format](date.date));
+  emit("change", formatDate[props.format as keyof typeof formatDate](date.date));
 };
 </script>
 
