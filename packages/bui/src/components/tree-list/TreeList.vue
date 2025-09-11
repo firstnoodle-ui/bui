@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends object">
-import type { TreeNode, TreeNodeAction, TreeNodeActionEvent, TreeNodeEvent } from "./types";
+import type { TreeNode, TreeNodeAction, TreeNodeActionEvent, TreeNodeEvent } from "./tree-list-types";
 import { computed, ref, watch } from "vue";
 import { BButton, BFlexbox, BIcon, BPopSelect } from "..";
 import InputNode from "./InputNode.vue";
@@ -10,6 +10,7 @@ const { createNewPath = [], indentationAmount = 20, node, selection } = definePr
   level: number;
   selection: TreeNode<T>[];
   createNewPath?: TreeNode<T>[];
+
 }>();
 
 const emit = defineEmits<{

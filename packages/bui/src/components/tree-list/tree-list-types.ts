@@ -25,3 +25,18 @@ export type TreeNodeEvent<T> = {
 export type TreeNodeActionEvent<T> = TreeNodeEvent<T> & {
   action: TreeNodeAction<T>;
 };
+
+export type TreeNodeIdKey<T> = {
+  // Ensure that the key is either a string or a number and is a keyof T
+  [K in keyof T]: T[K] extends number | string ? K : never;
+}[keyof T];
+
+export type TreeNodeParentIdKey<T> = {
+  // Ensure that the key is either a string or a number and is a keyof T
+  [K in keyof T]: T[K] extends number | string | null ? K : never;
+}[keyof T];
+
+export type TreeNodeLabelKey<T> = {
+  // Ensure that the key is a string and is a keyof T
+  [K in keyof T]: T[K] extends string ? K : never;
+}[keyof T];
