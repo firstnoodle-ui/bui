@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TreeNode, TreeNodeAction, TreeNodeActionEvent, TreeNodeEvent,  } from "@firstnoodle-ui/bui";
+import type { TreeNode, TreeNodeAction, TreeNodeActionEvent, TreeNodeEvent } from "@firstnoodle-ui/bui";
 import type { OrgUnit } from "./data";
 import { BHorizontalLayout, BTreeList, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { computed, ref } from "vue";

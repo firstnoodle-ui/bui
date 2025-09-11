@@ -12,7 +12,7 @@ export type TreeNode<T> = {
   id: string | number;
   label: string;
   open: boolean;
-  value: T;
+  data: T;
   children?: TreeNode<T>[];
   actions: TreeNodeAction<T>[];
 };

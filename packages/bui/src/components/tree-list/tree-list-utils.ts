@@ -58,7 +58,7 @@ export const setNodeObjectValueByPath = <T, K extends keyof T>(
     if (!currentNode) return false;
   }
 
-  currentNode.value[key] = newValue;
+  currentNode.data[key] = newValue;
   return true;
 };
 
@@ -128,7 +128,7 @@ export const buildTree = <T extends object>({
       id: item[itemIdField] as unknown as string | number,
       label: item[labelField] as unknown as string,
       open: treeIsOpen,
-      value: item,
+      data: item,
       actions,
       children: [],
     });
@@ -139,7 +139,7 @@ export const buildTree = <T extends object>({
     id: rootItem[itemIdField] as unknown as string | number,
     label: rootItem[labelField] as unknown as string,
     open: treeIsOpen,
-    value: rootItem,
+    data: rootItem,
     actions,
     children: [],
   };
