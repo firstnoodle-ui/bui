@@ -3,10 +3,24 @@ import { BButton, BCollapse } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
+  PropControlBoolean,
+  PropControlSelect,
 } from "../../components";
 
 const rootOpen = ref(false);
 const selectedId = ref<string | null>(null);
+
+// PropControl state
+const alignment = ref<"left" | "right">("right");
+const borderClassOpen = ref("border-strong");
+const borderClassClosed = ref("border-default");
+const headerBgClass = ref("bg-primary");
+const open = ref(false);
+const sticky = ref(false);
+
+const alignmentOptions = ["left", "right"];
+const borderClassOptions = ["border-weak", "border-default", "border-strong", "border-action"];
+const headerBgClassOptions = ["bg-primary", "bg-secondary", "bg-tertiary"];
 
 const onToggle = (id: string) => {
   if (selectedId.value === id) {
@@ -22,9 +36,14 @@ const onToggle = (id: string) => {
   <ComponentPage title="Collapse">
     <template #default="{ print }">
       <BCollapse
-        :open="rootOpen"
+        :open="open"
+        :alignment="alignment"
+        :border-class-open="borderClassOpen"
+        :border-class-closed="borderClassClosed"
+        :header-bg-class="headerBgClass"
+        :sticky="sticky"
         @toggle="
-          rootOpen = !rootOpen;
+          open = !open;
           print('@toggle')
         "
       >
@@ -95,18 +114,24 @@ const onToggle = (id: string) => {
       </BCollapse>
     </template>
     <template #controls>
-      alignment?: "left" | "right";
-      borderClassOpen?: string;
-      borderClassClosed?: string;
-      headerBgClass?: string;
-      id?: string | number;
-      open?: boolean;
-      sticky?: boolean;
-      <!-- <PropControlBoolean name="Checked" :value="checked" @toggle="checked = !checked" />
-      <PropControlBoolean name="Indeterminate" :value="indeterminate" @toggle="indeterminate = !indeterminate">Overrides <strong>Checked</strong> prop</PropControlBoolean>
-      <PropControlBoolean name="Disabled" :value="disabled" @toggle="disabled = !disabled" />
-      <PropControlString name="Label" :value="label" @change="(value:string) => label = value" />
-      <PropControlSelect name="Type" :value="selectedType" :options="[...checkboxTypes]" @select="(option:string) => selectedType = option" /> -->
+      <PropControlBoolean name="Open" :value="open" @toggle="open = !open">
+        Controls whether the collapse section is expanded
+      </PropControlBoolean>
+      <PropControlBoolean name="Sticky" :value="sticky" @toggle="sticky = !sticky">
+        Makes header sticky when scrolling within expanded content
+      </PropControlBoolean>
+      <PropControlSelect name="Alignment" :value="alignment" :options="alignmentOptions" @select="(option: 'left' | 'right') => alignment = option">
+        Position of header content relative to chevron icon
+      </PropControlSelect>
+      <PropControlSelect name="Border class (Open)" :value="borderClassOpen" :options="borderClassOptions" @select="(option: string) => borderClassOpen = option">
+        Border styling when collapse is open
+      </PropControlSelect>
+      <PropControlSelect name="Border class (Closed)" :value="borderClassClosed" :options="borderClassOptions" @select="(option: string) => borderClassClosed = option">
+        Border styling when collapse is closed
+      </PropControlSelect>
+      <PropControlSelect name="Header background" :value="headerBgClass" :options="headerBgClassOptions" @select="(option: string) => headerBgClass = option">
+        Background color class for the header
+      </PropControlSelect>
     </template>
   </ComponentPage>
 </template>
