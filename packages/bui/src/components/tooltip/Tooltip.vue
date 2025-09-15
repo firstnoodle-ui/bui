@@ -3,31 +3,26 @@ import type { Placement } from "@floating-ui/dom";
 import type { TPopperTrigger } from "../types";
 import { BPopper } from "../popper";
 
-withDefaults(
-  defineProps<{
-    bgColorClass?: string;
-    delay?: number;
-    forceShow?: boolean;
-    offsetMain?: number;
-    offsetCross?: number;
-    placement?: Placement;
-    text?: string;
-    textColorClass?: string;
-    trigger?: TPopperTrigger;
-    triggerFullWidth?: boolean;
-  }>(),
-  {
-    bgColorClass: "bg-black",
-    delay: 10,
-    forceShow: false,
-    offsetMain: 2,
-    offsetCross: 0,
-    placement: "top",
-    textColorClass: "text-white",
-    trigger: "hover",
-    triggerFullWidth: false,
-  },
-);
+const {
+  bgColorClass = "bg-black",
+  delay = 10,
+  offsetMain = 2,
+  offsetCross = 0,
+  placement = "top",
+  textColorClass = "text-white",
+  trigger = "hover",
+  triggerFullWidth = false,
+} = defineProps<{
+  bgColorClass?: string;
+  delay?: number;
+  offsetMain?: number;
+  offsetCross?: number;
+  placement?: Placement;
+  text?: string | null;
+  textColorClass?: string;
+  trigger?: TPopperTrigger;
+  triggerFullWidth?: boolean;
+}>();
 </script>
 
 <template>
