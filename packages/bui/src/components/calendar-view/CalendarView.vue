@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CalendarGridItem } from "./utils/types.ts";
-import type { DateFormat, ReadableDateFormat } from "./utils/utils/format.ts";
+import type { DateFormat } from "./utils/utils/format.ts";
 import { ref, toRef, watch } from "vue";
 import { loopRange } from "../../utils/array.ts";
 import { BButton } from "../button/index.ts";
@@ -12,22 +12,24 @@ import { useCalendar, ViewType } from "./composables/useCalendar.ts";
 import { Weekday } from "./utils/enums.ts";
 import { formatDate } from "./utils/utils/format.ts";
 
-const props = withDefaults(defineProps<{
+const {
+  value = null,
+  clearable = false,
+  format = "readableDateWithDay",
+  weekStart = 1,
+  disabledDates = [],
+} = defineProps<{
   value?: string | Date | null;
   clearable?: boolean;
-  type?: "date" | "datetime";
-  format?: ReadableDateFormat | DateFormat;
+  type?: DateFormat;
+  format?: DateFormat;
   weekStart?: number;
   disabledDates?: ((date: Date) => boolean)[];
-}>(), {
-  value: null,
-  clearable: false,
-  type: "date",
-  format: "readableDateWithDay",
-  weekStart: 1,
-});
+}>();
 
-const emit = defineEmits(["change"]);
+const emit = defineEmits<{
+  (e: "change", date: string|null): void
+}>();
 
 const {
   viewData,
@@ -38,16 +40,16 @@ const {
   moveViewDate,
   setSelectedDate,
   setViewDateAndChangeView,
-} = useCalendar(props.value, { weekStart: props.weekStart, disabledDates: props.disabledDates });
+} = useCalendar(value, { weekStart: weekStart, disabledDates: disabledDates });
 
-watch(() => props.value, newValue => setSelectedDate(newValue));
+watch(() => value, newValue => setSelectedDate(newValue));
 
 const currentMonth = toRef(viewMonth);
 
 // 'rotate' the weekdays to start on the weekStart day
 const weekdays = ref(Object.values(Weekday).map((_day, index) => {
   return Object.values(Weekday)[
-    loopRange(index + props.weekStart, Object.values(Weekday).length)
+    loopRange(index + weekStart, Object.values(Weekday).length)
   ];
 }));
 
@@ -60,7 +62,9 @@ const onDateClick = (date: CalendarGridItem | null) => {
   if (date.disabled) return;
   if (!date.date) return;
 
-  emit("change", formatDate[props.format as keyof typeof formatDate](date.date));
+  const dateFn = formatDate[format];
+  if(!dateFn) throw new Error(`dateFn for ${format} not found`);
+  emit("change", dateFn(date.date));
 };
 </script>
 

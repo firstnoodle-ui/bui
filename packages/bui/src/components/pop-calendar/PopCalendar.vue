@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { Placement } from "@floating-ui/dom";
-import type { DateFormat, ReadableDateFormat } from "../calendar-view/utils/utils/format";
+import type { DateFormat } from "../calendar-view/utils/utils/format";
 import { BButton } from "../button";
 import { BCalendarView } from "../calendar-view";
 import { BPopper, BPopperContent } from "../popper";
 
-const { value = null, format = "date", disabled = false, clearable = false } = defineProps<{
+const { value = null, format = "readableDate", disabled = false, clearable = false } = defineProps<{
   value?: string | Date | null;
-  format?: DateFormat | ReadableDateFormat;
+  format?: DateFormat;
   clearable?: boolean;
   disabled?: boolean;
   placement?: Placement;
@@ -16,7 +16,7 @@ const { value = null, format = "date", disabled = false, clearable = false } = d
 const emit = defineEmits<{
   (e: "change", value: string | Date | null): void;
   (e: "close"): void;
-  (e: "open", targets: any[]): void;
+  (e: "open", targets: HTMLElement[]): void;
 }>();
 </script>
 

@@ -45,7 +45,7 @@ const formatDateTimeDB = (value: string | Date, includeTime = false): string => 
 export const dbDate = (value: string | Date): string => formatDateTimeDB(value, false);
 export const dbDateTime = (value: string | Date): string => formatDateTimeDB(value, true);
 
-export const formatDate = {
+export const formatDate:Record<string, (value:string|Date) => string> = {
   readableDate,
   readableDateWithDay,
   readableDateTime,
@@ -54,8 +54,5 @@ export const formatDate = {
   dbDateTime,
 };
 
-export const dateFormat = ["date", "dateWithDay", "dateTime", "dateTimeWithDay", "dbDate", "dbDateTime"] as const;
+export const dateFormat = ["dbDate", "dbDateTime", "readableDate", "readableDateWithDay", "readableDateTime", "readableDateTimeWithDay"] as const;
 export type DateFormat = (typeof dateFormat)[number];
-
-export const readableDateFormat = ["readableDate", "readableDateWithDay", "readableDateTime", "readableDateTimeWithDay"] as const;
-export type ReadableDateFormat = (typeof readableDateFormat)[number];
