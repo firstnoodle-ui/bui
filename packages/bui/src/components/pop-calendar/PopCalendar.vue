@@ -13,7 +13,11 @@ const { value = null, format = "date", disabled = false, clearable = false } = d
   placement?: Placement;
 }>();
 
-const emit = defineEmits(["change", "close", "open"]);
+const emit = defineEmits<{
+  (e: "change", value: string | Date | null): void;
+  (e: "close"): void;
+  (e: "open", targets: any[]): void;
+}>();
 </script>
 
 <template>
