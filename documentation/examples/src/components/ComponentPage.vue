@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BHorizontalLayout, BVerticalLayout } from "@firstnoodle-ui/bui";
+import { BHorizontalLayout, BScrollbar, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import Console from "./Console.vue";
 
@@ -38,8 +38,12 @@ const print = (msg: string) => consoleRef.value?.log(msg);
       </BVerticalLayout>
     </template>
     <template #aside-right>
-      <aside class="w-full h-full border-l border-default p-8">
-        <slot name="controls" />
+      <aside class="w-full h-full border-l border-default">
+        <BScrollbar>
+          <div class="p-8">
+            <slot name="controls" />
+          </div>
+        </BScrollbar>
       </aside>
     </template>
   </BHorizontalLayout>
