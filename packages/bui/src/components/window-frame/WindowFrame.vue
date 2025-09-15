@@ -5,7 +5,9 @@ import { ref } from "vue";
 const windowRef = ref<HTMLDivElement>();
 // const { trapFocus } = useTrapFocus(windowRef);
 
-// defineExpose({
+defineExpose({
+  focus: windowRef.value?.focus()
+});
 //   trapFocus: () => {
 //     Boolean(windowRef.value) && windowRef.value!.focus();
 //     trapFocus();
@@ -14,7 +16,7 @@ const windowRef = ref<HTMLDivElement>();
 </script>
 
 <template>
-  <div ref="windowRef" tabindex="0" class="w-full flex flex-col bg-primary shadow-xl rounded-xl focus:outline-hidden">
+  <div ref="windowRef" tabindex="0" class="w-full flex flex-col bg-primary shadow-xl border border-default rounded-xl focus:outline-hidden">
     <slot />
   </div>
 </template>
