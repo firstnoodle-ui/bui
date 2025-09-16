@@ -1,32 +1,67 @@
 <script setup lang="ts">
-import { BFlexbox, BTagInput } from "@firstnoodle-ui/bui";
+import { BFlexbox, type TagInputEntry, type TagInputValidator } from "@firstnoodle-ui/bui";
+import { BButton, BTagInput } from "@firstnoodle-ui/bui";
+import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 
-const validatedEmails = [
+
+const validators:TagInputValidator[] = [
   {
-    mail: "test@dtu.dk",
-    error: null,
+    validate: (entry:string) => /^[\w.%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(entry),
+    errorMessage: () => 'Invalid format.'
   },
   {
-    mail: "test@mail.dk",
-    error: "Invalid domain",
-  },
-  {
-    mail: "test",
-    error: "Invalid format",
-  },
-  {
-    mail: "test",
-    error: "Invalid format",
-  },
+    validate: (entry:string) => entry.endsWith('@dtu.dk'),
+    errorMessage: () => 'Invalid domain. Only dtu.dk accepted.'
+  }
 ];
+
+const importStr = "mail@test.dk, yolo@mail.com, lego@land.dev, test@dtu.dk, mikkel@dtu.dk";
+
+// create ref and trigger import
+const tagInputRef = ref<typeof BTagInput>();
+
+const onInvite = () => {
+  console.log(tagInputRef.value?.entries);
+};
 </script>
 
 <template>
   <ComponentPage title="Tag">
     <template #default="{ print }">
-      <BFlexbox class="gap-2">
-        <BTagInput v-for="mail in validatedEmails" :key="mail.mail" :label="mail.mail" :error="mail.error" @delete="print(mail.mail)" />
+      <!-- <BButton label="import" @click="tagInputRef?.importEntries(importStr)" /> -->
+
+      <BFlexbox col class="gap-8">
+        <BFlexbox align="start" fullwidth class="gap-2">
+          <BFlexbox col align="start" class="flex-1 gap-2">
+            <BFlexbox justify="between" class="gap-2">
+              <BFlexbox class="gap-2">
+                <p class="text-sm text-primary">
+                  Role
+                </p>
+                <BButton small label="Teacher" icon-after="chevron-down-small" variant="outlineSubtle" />
+              </BFlexbox>
+              <BButton small label="Import" icon="download" variant="textSubtle" @click="tagInputRef?.importEntries(importStr)" />
+            </BFlexbox>
+            <BFlexbox align="start" class="gap-2">
+              <BTagInput ref="tagInputRef" :validators="validators" />
+            </BFlexbox>
+          </BFlexbox>
+          <BFlexbox col>
+            <div class="h-8" />
+            <BButton
+              icon="paper-plane"
+              label="Invite"
+              class="flex-none"
+              @click="print(tagInputRef?.entries)"
+            />
+          </BFlexbox>
+        </BFlexbox>
+        <BFlexbox col>
+          <h4 class="pb-1 border-b border-default">
+            Invited
+          </h4>
+        </BFlexbox>
       </BFlexbox>
     </template>
   </ComponentPage>

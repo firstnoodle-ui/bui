@@ -6,13 +6,10 @@ import { BFlexbox } from "../flexbox";
 import { EntryTag } from "./components";
 
 const { validators = [] } = defineProps<{ validators?: TagInputValidator[] }>();
-const emit = defineEmits<{ (e: "invite", entries: TagInputEntry[]): void }>();
 
 const inputRef = ref<HTMLInputElement>();
 const inputValue = ref("");
 const parsedEntries = ref<TagInputEntry[]>([]);
-
-const onInvite = () => emit("invite", parsedEntries.value);
 
 /**
  * Exposed method that allows consuming component to pass in input from fx a data import service
@@ -80,57 +77,26 @@ const onDeleteEntryById = (id: string) => {
   inputRef.value?.focus();
 };
 
-defineExpose({ importEntries });
+defineExpose({ entries: parsedEntries, importEntries });
 </script>
 
 <template>
-  <BFlexbox col class="gap-8">
-    <BFlexbox align="start" fullwidth class="gap-2">
-      <BFlexbox col align="start" class="flex-1 gap-2">
-        <BFlexbox justify="between" class="gap-2">
-          <BFlexbox class="gap-2">
-            <p class="text-sm text-primary">
-              Role
-            </p>
-            <BButton small label="Teacher" icon-after="chevron-down-small" variant="outlineSubtle" />
-          </BFlexbox>
-          <BButton small label="Import" icon="download" variant="textSubtle" />
-        </BFlexbox>
-        <BFlexbox align="start" class="gap-2">
-          <BFlexbox class="flex-1 flex-wrap gap-1 px-2 py-1 rounded-lg border border-default focus:border-action focus-within:border-action">
-            <EntryTag
-              v-for="entry in parsedEntries"
-              :key="entry.id"
-              :entry="entry"
-              @delete="onDeleteEntryById"
-            />
-            <input
-              ref="inputRef"
-              type="text"
-              :value="inputValue"
-              :placeholder="parsedEntries.length ? '' : 'Emails, comma separated'"
-              class="flex-1 min-w-0 h-6 text-xs leading-tight bg-transparent focus:outline-hidden"
-              @keyup.delete="onDeleteKeyUp"
-              @change.stop.prevent
-              @input.stop.prevent="onInput"
-            >
-          </BFlexbox>
-        </BFlexbox>
-      </BFlexbox>
-      <BFlexbox col>
-        <div class="h-8" />
-        <BButton
-          icon="paper-plane"
-          label="Invite"
-          class="flex-none"
-          @click="onInvite"
-        />
-      </BFlexbox>
-    </BFlexbox>
-    <BFlexbox col>
-      <h4 class="pb-1 border-b border-default">
-        Invited
-      </h4>
-    </BFlexbox>
+  <BFlexbox class="flex-1 flex-wrap gap-1 px-2 py-1 rounded-lg border border-default focus:border-action focus-within:border-action">
+    <EntryTag
+      v-for="entry in parsedEntries"
+      :key="entry.id"
+      :entry="entry"
+      @delete="onDeleteEntryById"
+    />
+    <input
+      ref="inputRef"
+      type="text"
+      :value="inputValue"
+      :placeholder="parsedEntries.length ? '' : 'Emails, comma separated'"
+      class="flex-1 min-w-0 h-6 text-xs leading-tight bg-transparent focus:outline-hidden"
+      @keyup.delete="onDeleteKeyUp"
+      @change.stop.prevent
+      @input.stop.prevent="onInput"
+    >
   </BFlexbox>
 </template>
