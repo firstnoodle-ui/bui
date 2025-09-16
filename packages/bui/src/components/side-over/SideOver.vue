@@ -3,7 +3,7 @@ import type { Slots } from "vue";
 import type { TOverlayType } from "../types";
 import { onMounted, ref, useSlots } from "vue";
 import { BButton, BScreenOverlay, BVerticalLayout } from "../";
-import { useEscapeKey, useTrapFocus } from "../../";
+import { useEscapeKey } from "../../";
 import WindowFrame from "../window-frame/WindowFrame.vue";
 
 const {
@@ -23,7 +23,6 @@ const emit = defineEmits(["close", "open"]);
 const slots: Slots = useSlots();
 const show = ref(false);
 const panelRef = ref<HTMLDivElement>();
-const { trapFocus } = useTrapFocus(panelRef);
 
 // when component is mounted start the transition
 onMounted(() => (show.value = true));

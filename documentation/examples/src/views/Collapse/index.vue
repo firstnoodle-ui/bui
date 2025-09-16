@@ -7,7 +7,6 @@ import {
   PropControlSelect,
 } from "../../components";
 
-const rootOpen = ref(false);
 const selectedId = ref<string | null>(null);
 
 // PropControl state
