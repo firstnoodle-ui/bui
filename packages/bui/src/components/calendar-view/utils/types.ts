@@ -1,6 +1,6 @@
 export type CalendarOptions = {
   weekStart?: number;
-  disabledDates?: ((date: Date) => boolean)[] | any[];
+  disabledDates?: ((date: Date) => boolean)[];
 };
 
 export type CalendarGridItem = {

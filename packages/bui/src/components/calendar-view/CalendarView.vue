@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { CalendarGridItem } from "./utils/types.ts";
-import type { DateFormat } from "./utils/utils/format.ts";
+import type { CalendarViewProps } from "./types.ts";
 import { ref, toRef, watch } from "vue";
 import { loopRange } from "../../utils/array.ts";
 import { BButton } from "../button/index.ts";
@@ -18,14 +18,7 @@ const {
   format = "readableDateWithDay",
   weekStart = 1,
   disabledDates = [],
-} = defineProps<{
-  value?: string | Date | null;
-  clearable?: boolean;
-  type?: DateFormat;
-  format?: DateFormat;
-  weekStart?: number;
-  disabledDates?: ((date: Date) => boolean)[];
-}>();
+} = defineProps<CalendarViewProps>();
 
 const emit = defineEmits<{
   (e: "change", date: string|null): void
@@ -40,7 +33,7 @@ const {
   moveViewDate,
   setSelectedDate,
   setViewDateAndChangeView,
-} = useCalendar(value, { weekStart: weekStart, disabledDates: disabledDates });
+} = useCalendar(value, { weekStart, disabledDates });
 
 watch(() => value, newValue => setSelectedDate(newValue));
 
