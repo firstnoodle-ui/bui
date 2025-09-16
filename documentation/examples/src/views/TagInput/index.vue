@@ -20,10 +20,6 @@ const importStr = "mail@test.dk, yolo@mail.com, lego@land.dev, test@dtu.dk, mikk
 
 // create ref and trigger import
 const tagInputRef = ref<typeof BTagInput>();
-
-const onInvite = () => {
-  console.log(tagInputRef.value?.entries);
-};
 </script>
 
 <template>
