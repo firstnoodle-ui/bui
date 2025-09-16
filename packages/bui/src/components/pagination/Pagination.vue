@@ -17,10 +17,10 @@ const navRef = ref<HTMLElement>();
 const pageOptions = computed((): TPopSelectOption[] => {
   return range(0, lastPage).map((num: number) => ({ label: `${num + 1}` }));
 });
-const prevStyle = borders ? { borderRadius: "8px 0 0 8px" } : undefined;
-const nextStyle = borders ? { borderRadius: "0px 8px 8px 0px" } : undefined;
-const midStyle = borders ? { borderRadius: "0" } : undefined;
-const variant = borders ? "outlineSubtle" : "textSubtle";
+const prevStyle = computed(() => borders ? { borderRadius: "8px 0 0 8px" } : undefined);
+const nextStyle = computed(() => borders ? { borderRadius: "0px 8px 8px 0px" } : undefined);
+const midStyle = computed(() => borders ? { borderRadius: "0" } : undefined);
+const variant = computed(() => borders ? "outlineSubtle" : "textSubtle");
 
 const onChange = (direction: -1 | 1) => {
   let targetPage = currentPage + direction;
