@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TIcon } from "@firstnoodle-ui/bui";
-import { BTab, BCollapse, icons } from "@firstnoodle-ui/bui";
+import { BCollapse, BTab, icons } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
@@ -55,49 +55,49 @@ const sizeOptions = ["small", "default"];
   <ComponentPage title="Tab">
     <template #default="{ print }">
       <nav class="flex items-center w-full">
-        <BTab 
-          :name="tab1Name" 
-          :icon="tab1Icon" 
+        <BTab
+          :name="tab1Name"
+          :icon="tab1Icon"
           :grow="globalGrow"
           :notification="tab1Notification"
           :type="globalType"
           :size="globalSize"
           :disabled="tab1Disabled"
-          :selected="selected === tab1Name" 
-          @select="selected = tab1Name; print(`Selected: ${tab1Name}`)" 
+          :selected="selected === tab1Name"
+          @select="selected = tab1Name; print(`Selected: ${tab1Name}`)"
         />
-        <BTab 
-          :name="tab2Name" 
-          :icon="tab2Icon" 
+        <BTab
+          :name="tab2Name"
+          :icon="tab2Icon"
           :grow="globalGrow"
           :notification="tab2Notification"
           :type="globalType"
           :size="globalSize"
           :disabled="tab2Disabled"
-          :selected="selected === tab2Name" 
-          @select="selected = tab2Name; print(`Selected: ${tab2Name}`)" 
+          :selected="selected === tab2Name"
+          @select="selected = tab2Name; print(`Selected: ${tab2Name}`)"
         />
-        <BTab 
-          :name="tab3Name" 
-          :icon="tab3Icon" 
+        <BTab
+          :name="tab3Name"
+          :icon="tab3Icon"
           :grow="globalGrow"
           :notification="tab3Notification"
           :type="globalType"
           :size="globalSize"
           :disabled="tab3Disabled"
-          :selected="selected === tab3Name" 
-          @select="selected = tab3Name; print(`Selected: ${tab3Name}`)" 
+          :selected="selected === tab3Name"
+          @select="selected = tab3Name; print(`Selected: ${tab3Name}`)"
         />
-        <BTab 
-          :name="tab4Name" 
-          :icon="tab4Icon" 
+        <BTab
+          :name="tab4Name"
+          :icon="tab4Icon"
           :grow="globalGrow"
           :notification="tab4Notification"
           :type="globalType"
           :size="globalSize"
           :disabled="tab4Disabled"
-          :selected="selected === tab4Name" 
-          @select="selected = tab4Name; print(`Selected: ${tab4Name}`)" 
+          :selected="selected === tab4Name"
+          @select="selected = tab4Name; print(`Selected: ${tab4Name}`)"
         />
       </nav>
     </template>
@@ -106,7 +106,9 @@ const sizeOptions = ["small", "default"];
         <!-- Global Controls -->
         <BCollapse :open="globalCollapseOpen" @toggle="globalCollapseOpen = !globalCollapseOpen">
           <template #header>
-            <h3 class="text-sm font-bold text-primary">Global Settings</h3>
+            <h3 class="text-sm font-bold text-primary">
+              Global Settings
+            </h3>
           </template>
           <template #content>
             <div class="space-y-2 p-4">
@@ -126,7 +128,9 @@ const sizeOptions = ["small", "default"];
         <!-- Tab 1 Controls -->
         <BCollapse :open="tab1CollapseOpen" @toggle="tab1CollapseOpen = !tab1CollapseOpen">
           <template #header>
-            <h3 class="text-sm font-bold text-primary">Tab 1</h3>
+            <h3 class="text-sm font-bold text-primary">
+              Tab 1
+            </h3>
           </template>
           <template #content>
             <div class="space-y-2 p-4">
@@ -145,7 +149,9 @@ const sizeOptions = ["small", "default"];
         <!-- Tab 2 Controls -->
         <BCollapse :open="tab2CollapseOpen" @toggle="tab2CollapseOpen = !tab2CollapseOpen">
           <template #header>
-            <h3 class="text-sm font-bold text-primary">Tab 2</h3>
+            <h3 class="text-sm font-bold text-primary">
+              Tab 2
+            </h3>
           </template>
           <template #content>
             <div class="space-y-2 p-4">
@@ -164,7 +170,9 @@ const sizeOptions = ["small", "default"];
         <!-- Tab 3 Controls -->
         <BCollapse :open="tab3CollapseOpen" @toggle="tab3CollapseOpen = !tab3CollapseOpen">
           <template #header>
-            <h3 class="text-sm font-bold text-primary">Tab 3</h3>
+            <h3 class="text-sm font-bold text-primary">
+              Tab 3
+            </h3>
           </template>
           <template #content>
             <div class="space-y-2 p-4">
@@ -183,7 +191,9 @@ const sizeOptions = ["small", "default"];
         <!-- Tab 4 Controls -->
         <BCollapse :open="tab4CollapseOpen" @toggle="tab4CollapseOpen = !tab4CollapseOpen">
           <template #header>
-            <h3 class="text-sm font-bold text-primary">Tab 4</h3>
+            <h3 class="text-sm font-bold text-primary">
+              Tab 4
+            </h3>
           </template>
           <template #content>
             <div class="space-y-2 p-4">

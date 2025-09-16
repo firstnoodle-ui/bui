@@ -6,7 +6,7 @@ const windowRef = ref<HTMLDivElement>();
 // const { trapFocus } = useTrapFocus(windowRef);
 
 defineExpose({
-  focus: windowRef.value?.focus()
+  focus: windowRef.value?.focus(),
 });
 //   trapFocus: () => {
 //     Boolean(windowRef.value) && windowRef.value!.focus();

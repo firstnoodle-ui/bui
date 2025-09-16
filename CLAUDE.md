@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 # Setup all packages (run in order)
 pnpm run setup-1-root
-pnpm run setup-2-docs  
+pnpm run setup-2-docs
 pnpm run setup-3-bui
 ```
 
@@ -80,7 +80,7 @@ The library requires consumers to:
 ### Dependencies
 Key dependencies include:
 - **Vue 3** (peer dependency)
-- **TailwindCSS v4** (peer dependency) 
+- **TailwindCSS v4** (peer dependency)
 - **@floating-ui/dom** for positioning
 - **Tiptap editor** extensions for rich text components
 - **debounce** for performance optimization

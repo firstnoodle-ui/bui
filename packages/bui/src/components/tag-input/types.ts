@@ -5,6 +5,6 @@ export type TagInputEntry = {
 };
 
 export type TagInputValidator = {
-  validate: (entry:string) => boolean;
-  errorMessage: (entry:string) => string;
+  validate: (entry: string) => boolean;
+  errorMessage: (entry: string) => string;
 };

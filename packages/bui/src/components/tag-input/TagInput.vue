@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { TagInputEntry, TagInputValidator } from "./types";
 import { ref } from "vue";
-import { BButton } from "../button";
 import { BFlexbox } from "../flexbox";
 import { EntryTag } from "./components";
 
@@ -13,7 +12,7 @@ const parsedEntries = ref<TagInputEntry[]>([]);
 
 /**
  * Exposed method that allows consuming component to pass in input from fx a data import service
- * @param importString 
+ * @param importString
  */
 const importEntries = (importString: string) => {
   parsedEntries.value = [...parsedEntries.value, ...parseInput(importString)];
@@ -39,9 +38,9 @@ const parseInput = (value: string) => {
     const trimmed = entry.trim();
 
     // copy array to enable 'early eject' without mutating original
-    const error = [...validators].reduce((result:string|null, validator, i, array) => {
+    const error = [...validators].reduce((result: string | null, validator, i, array) => {
       const passed = validator.validate(trimmed);
-      if(!passed) {
+      if (!passed) {
         result = validator.errorMessage(trimmed);
         array.splice(1);
       }
@@ -51,7 +50,7 @@ const parseInput = (value: string) => {
     return {
       id: index + trimmed + Date.now(),
       value: trimmed,
-      error
+      error,
     };
   });
 };
@@ -70,7 +69,7 @@ const onDeleteKeyUp = () => {
 
 /**
  * Delete an entry by id
- * @param id 
+ * @param id
  */
 const onDeleteEntryById = (id: string) => {
   parsedEntries.value = parsedEntries.value.filter(entry => entry.id !== id);

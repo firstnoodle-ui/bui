@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { CalendarGridItem } from "./utils/types.ts";
 import type { CalendarViewProps } from "./types.ts";
+import type { CalendarGridItem } from "./utils/types.ts";
 import { ref, toRef, watch } from "vue";
 import { loopRange } from "../../utils/array.ts";
 import { BButton } from "../button/index.ts";
@@ -21,7 +21,7 @@ const {
 } = defineProps<CalendarViewProps>();
 
 const emit = defineEmits<{
-  (e: "change", date: string|null): void
+  (e: "change", date: string | null): void;
 }>();
 
 const {
@@ -56,7 +56,7 @@ const onDateClick = (date: CalendarGridItem | null) => {
   if (!date.date) return;
 
   const dateFn = formatDate[format];
-  if(!dateFn) throw new Error(`dateFn for ${format} not found`);
+  if (!dateFn) throw new Error(`dateFn for ${format} not found`);
   emit("change", dateFn(date.date));
 };
 </script>

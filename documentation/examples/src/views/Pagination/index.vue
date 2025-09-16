@@ -24,15 +24,15 @@ const onChange = (page: number) => {
 <template>
   <ComponentPage title="Pagination">
     <template #default="{ print }">
-      <BPagination 
+      <BPagination
         :borders="borders"
-        :current-page="currentPage" 
-        :last-page="lastPage" 
+        :current-page="currentPage"
+        :last-page="lastPage"
         :orientation="orientation"
         @change="
           onChange($event);
           print(`Page changed to: ${$event}`)
-        " 
+        "
       />
     </template>
     <template #controls>

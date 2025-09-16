@@ -20,7 +20,7 @@ const onToggle = () => value.value = !value.value;
             onToggle();
             print(`@toggle: ${value ? 'on' : 'off'}`)
           "
-        /> 
+        />
         <span>red</span>
       </section>
     </template>

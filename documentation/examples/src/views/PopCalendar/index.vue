@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { DateFormat } from "@firstnoodle-ui/bui";
 import type { Placement } from "@floating-ui/dom";
-import { BButton, BPopCalendar, dateFormat } from "@firstnoodle-ui/bui";
+import { BButton, BPopCalendar, dateFormat, dateIsAfter } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
-import { dateIsAfter } from "@firstnoodle-ui/bui";
 import {
   ComponentPage,
   PropControlBoolean,
@@ -20,8 +19,8 @@ const clearable = ref(true);
 const disabled = ref(false);
 
 const disabledDates = [
-  (date:Date) => dateIsAfter('2025-09-11', date)
-]
+  (date: Date) => dateIsAfter("2025-09-11", date),
+];
 
 const modeOptions = ["immediate", "confirmation"];
 const placementOptions = ["top", "bottom", "left", "right", "top-start", "top-end", "bottom-start", "bottom-end", "left-start", "left-end", "right-start", "right-end"];
@@ -32,8 +31,8 @@ const onDateChange = (date: string | Date | null) => selectedDate.value = date;
 <template>
   <ComponentPage title="PopCalendar">
     <template #default="{ print }">
-      <BPopCalendar 
-        :value="selectedDate" 
+      <BPopCalendar
+        :value="selectedDate"
         :format="format"
         :mode="mode"
         :placement="placement"
@@ -48,13 +47,13 @@ const onDateChange = (date: string | Date | null) => selectedDate.value = date;
         @close="print('PopCalendar closed')"
       >
         <template #trigger="slotProps">
-          <BButton 
-            small 
-            icon="calendar" 
-            :label="selectedDate || 'Select Date'" 
-            :focus="slotProps.visible" 
+          <BButton
+            small
+            icon="calendar"
+            :label="selectedDate || 'Select Date'"
+            :focus="slotProps.visible"
             :disabled="disabled"
-            variant="outlineSubtle" 
+            variant="outlineSubtle"
           />
         </template>
       </BPopCalendar>

@@ -1,19 +1,18 @@
 <script setup lang="ts">
-import { BFlexbox, type TagInputEntry, type TagInputValidator } from "@firstnoodle-ui/bui";
-import { BButton, BTagInput } from "@firstnoodle-ui/bui";
+import type { TagInputValidator } from "@firstnoodle-ui/bui";
+import { BButton, BFlexbox, BTagInput } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
 
-
-const validators:TagInputValidator[] = [
+const validators: TagInputValidator[] = [
   {
-    validate: (entry:string) => /^[\w.%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(entry),
-    errorMessage: () => 'Invalid format.'
+    validate: (entry: string) => /^[\w.%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i.test(entry),
+    errorMessage: () => "Invalid format.",
   },
   {
-    validate: (entry:string) => entry.endsWith('@dtu.dk'),
-    errorMessage: () => 'Invalid domain. Only dtu.dk accepted.'
-  }
+    validate: (entry: string) => entry.endsWith("@dtu.dk"),
+    errorMessage: () => "Invalid domain. Only dtu.dk accepted.",
+  },
 ];
 
 const importStr = "mail@test.dk, yolo@mail.com, lego@land.dev, test@dtu.dk, mikkel@dtu.dk";
