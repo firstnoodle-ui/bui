@@ -330,7 +330,7 @@ defineExpose({ close, focus });
             >
               <div class="flex items-center space-x-2">
                 <BIcon v-if="option.icon" :name="option.icon" />
-                <BTextHighlight bold underline :value="option.label" :highlight="currentQuery" />
+                <BTextHighlight background-color="yellow" :value="option.label" :highlight="currentQuery" />
               </div>
               <div v-if="option.meta" class="text-secondary">
                 {{ option.meta }}
