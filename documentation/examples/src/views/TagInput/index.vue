@@ -39,7 +39,9 @@ const tagInputRef = ref<typeof BTagInput>();
               <BButton small label="Import" icon="download" variant="textSubtle" @click="tagInputRef?.importEntries(importStr)" />
             </BFlexbox>
             <BFlexbox align="start" class="gap-2">
-              <BTagInput ref="tagInputRef" :validators="validators" />
+              <div class="w-full overflow-hidden border border-default rounded-lg focus:border-action focus-within:border-action">
+                <BTagInput ref="tagInputRef" placeholder="Emails, comma separated" :validators="validators" />
+              </div>
             </BFlexbox>
           </BFlexbox>
           <BFlexbox col>

@@ -4,7 +4,7 @@ import { ref } from "vue";
 import { BFlexbox } from "../flexbox";
 import { EntryTag } from "./components";
 
-const { validators = [] } = defineProps<{ validators?: TagInputValidator[] }>();
+const { placeholder = "Enter value, comma separated", validators = [] } = defineProps<{ placeholder?: string; validators?: TagInputValidator[] }>();
 
 const inputRef = ref<HTMLInputElement>();
 const inputValue = ref("");
@@ -80,7 +80,7 @@ defineExpose({ entries: parsedEntries, importEntries });
 </script>
 
 <template>
-  <BFlexbox class="flex-1 flex-wrap gap-1 px-2 py-1 rounded-lg border border-default focus:border-action focus-within:border-action">
+  <BFlexbox class="flex-1 flex-wrap gap-1 px-2 py-1">
     <EntryTag
       v-for="entry in parsedEntries"
       :key="entry.id"
@@ -91,7 +91,7 @@ defineExpose({ entries: parsedEntries, importEntries });
       ref="inputRef"
       type="text"
       :value="inputValue"
-      :placeholder="parsedEntries.length ? '' : 'Emails, comma separated'"
+      :placeholder="parsedEntries.length ? '' : placeholder"
       class="flex-1 min-w-0 h-6 text-xs leading-tight bg-transparent focus:outline-hidden"
       @keyup.delete="onDeleteKeyUp"
       @change.stop.prevent
