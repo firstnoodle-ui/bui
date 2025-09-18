@@ -5,6 +5,7 @@ import { BFlexbox } from "../flexbox";
 import { EntryTag } from "./components";
 
 const { placeholder = "Enter value, comma separated", validators = [] } = defineProps<{ placeholder?: string; validators?: TagInputValidator[] }>();
+const emit = defineEmits<{ (e: "update:entries", entries: TagInputEntry[]): void }>();
 
 const inputRef = ref<HTMLInputElement>();
 const inputValue = ref("");
@@ -16,6 +17,7 @@ const parsedEntries = ref<TagInputEntry[]>([]);
  */
 const importEntries = (importString: string) => {
   parsedEntries.value = [...parsedEntries.value, ...parseInput(importString)];
+  emit("update:entries", parsedEntries.value);
 };
 
 /**
@@ -29,6 +31,7 @@ const onInput = (event: Event) => {
     if (char === "," || inputValue.value.includes(",")) {
       parsedEntries.value = [...parsedEntries.value, ...parseInput(inputValue.value)];
       inputValue.value = "";
+      emit("update:entries", parsedEntries.value);
     }
   }
 };
@@ -76,7 +79,7 @@ const onDeleteEntryById = (id: string) => {
   inputRef.value?.focus();
 };
 
-defineExpose({ entries: parsedEntries, importEntries });
+defineExpose({ importEntries });
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TagInputValidator } from "@firstnoodle-ui/bui";
+import type { TagInputEntry, TagInputValidator } from "@firstnoodle-ui/bui";
 import { BButton, BFlexbox, BTagInput } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import ComponentPage from "../../components/ComponentPage.vue";
@@ -40,7 +40,7 @@ const tagInputRef = ref<typeof BTagInput>();
             </BFlexbox>
             <BFlexbox align="start" class="gap-2">
               <div class="w-full overflow-hidden border border-default rounded-lg focus:border-action focus-within:border-action">
-                <BTagInput ref="tagInputRef" placeholder="Emails, comma separated" :validators="validators" />
+                <BTagInput ref="tagInputRef" placeholder="Emails, comma separated" :validators="validators" @update:entries="(value:TagInputEntry[]) => print(JSON.stringify(value))" />
               </div>
             </BFlexbox>
           </BFlexbox>
