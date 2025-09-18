@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v0.0.35...main
+
+[compare changes](https://github.com/firstnoodle-ui/bui/compare/v0.0.35...main)
+
 ## v0.0.35...v0.0.35
 This is where you would 'manually' write what has changed..?
 
