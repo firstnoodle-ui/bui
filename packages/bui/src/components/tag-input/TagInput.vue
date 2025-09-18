@@ -76,6 +76,7 @@ const onDeleteKeyUp = () => {
  */
 const onDeleteEntryById = (id: string) => {
   parsedEntries.value = parsedEntries.value.filter(entry => entry.id !== id);
+  emit("update:entries", parsedEntries.value);
   inputRef.value?.focus();
 };
 
