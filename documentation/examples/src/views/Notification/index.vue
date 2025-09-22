@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="Notification">
+  <ComponentPage>
     <template #default="{ print }">
       <div
         class="flex w-96 flex-col gap-2"

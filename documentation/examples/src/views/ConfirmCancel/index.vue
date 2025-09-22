@@ -31,7 +31,7 @@ const small = ref(false);
 </script>
 
 <template>
-  <ComponentPage title="ConfirmCancel">
+  <ComponentPage>
     <template #default="{ print }">
       <BConfirmCancel
         :vertical="vertical"

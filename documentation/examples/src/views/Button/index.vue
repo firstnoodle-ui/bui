@@ -27,7 +27,7 @@ const selectedIconAfter = ref<string | undefined>();
 </script>
 
 <template>
-  <ComponentPage title="Button">
+  <ComponentPage>
     <BButton
       :small="isSmall"
       :variant="(selectedVariant as ButtonVariant)"

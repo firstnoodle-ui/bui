@@ -9,7 +9,7 @@ import TriggerExample from "./TriggerExample.vue";
 </script>
 
 <template>
-  <ComponentPage title="Popper">
+  <ComponentPage>
     <CascaderExample />
     <TriggerExample />
     <PlacementExample />

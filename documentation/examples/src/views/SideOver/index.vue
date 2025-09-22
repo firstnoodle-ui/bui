@@ -28,7 +28,7 @@ const onClose = () => {
 </script>
 
 <template>
-  <ComponentPage title="SideOver">
+  <ComponentPage>
     <template #default="{ print }">
       <BButton ref="buttonRef" bordered label="Show" @click="show = true" />
       <BSideOver

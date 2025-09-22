@@ -27,7 +27,7 @@ const onToggleBorders = () => {
 </script>
 
 <template>
-  <ComponentPage title="HorizontalLayout">
+  <ComponentPage>
     <ComponentPageSection title="Description">
       <section class="css-rich-text text-sm mb-4">
         <p>

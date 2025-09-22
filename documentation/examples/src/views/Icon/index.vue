@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="Icon">
+  <ComponentPage>
     <section class="w-full flex flex-wrap items-center justify-center">
       <div
         v-for="icon in icons"

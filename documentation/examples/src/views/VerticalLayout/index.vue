@@ -17,7 +17,7 @@ const resizeHeader = () => {
 </script>
 
 <template>
-  <ComponentPage title="Dialog">
+  <ComponentPage>
     <ComponentPageSection title="Basic usage">
       <section class="css-rich-text text-sm mb-4">
         <p>

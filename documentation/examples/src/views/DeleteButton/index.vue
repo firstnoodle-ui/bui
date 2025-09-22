@@ -6,7 +6,7 @@ import {
 </script>
 
 <template>
-  <ComponentPage title="Dialog">
+  <ComponentPage>
     <template #default="{ print }">
       <BDeleteButton @click="print('@click')" />
     </template>

@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="TextHighlight">
+  <ComponentPage>
     <BTextEditor />
   </ComponentPage>
 </template>

@@ -18,7 +18,7 @@ const selectedType = ref<string>(checkboxTypes[0]);
 </script>
 
 <template>
-  <ComponentPage title="Checkbox">
+  <ComponentPage>
     <template #default="{ print }">
       <BCheckbox
         :type="(selectedType as TCheckboxType)"

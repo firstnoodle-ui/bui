@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="First paint">
+  <ComponentPage>
     <section class="space-y-2">
       <BFirstPaint :delay-index="1" class="w-full" />
       <BFirstPaint :delay-index="2" class="w-3/4" />

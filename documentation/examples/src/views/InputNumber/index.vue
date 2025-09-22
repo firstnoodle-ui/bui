@@ -21,7 +21,7 @@ const clearable = ref(false);
 </script>
 
 <template>
-  <ComponentPage title="InputNumber">
+  <ComponentPage>
     <template #default="{ print }">
       <BInputNumber
         :value="value"

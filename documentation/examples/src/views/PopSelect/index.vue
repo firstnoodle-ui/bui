@@ -8,7 +8,7 @@ import PopSelectRemoteErrorExample from "./PopSelectRemoteErrorExample.vue";
 </script>
 
 <template>
-  <ComponentPage title="PopSelect">
+  <ComponentPage>
     <ComponentPageSection title="Basic">
       <PopSelectBasicExample />
     </ComponentPageSection>

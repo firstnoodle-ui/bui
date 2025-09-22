@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { BHorizontalLayout, BScrollbar, BVerticalLayout } from "@firstnoodle-ui/bui";
+import { useRoute } from "vue-router";
 import { ref } from "vue";
 import Console from "./Console.vue";
 
-defineProps({ title: String });
 const consoleRef = ref<typeof Console>();
 const print = (msg: string) => consoleRef.value?.log(msg);
+
+const route = useRoute();
 </script>
 
 <template>
@@ -19,7 +21,7 @@ const print = (msg: string) => consoleRef.value?.log(msg);
         <template #header>
           <header class="w-full h-12 flex items-center px-4 border-b border-default ">
             <h5 class="text-primary">
-              {{ title }}
+              {{ route.name || "No title" }}
             </h5>
           </header>
         </template>

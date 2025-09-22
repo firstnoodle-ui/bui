@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="PopConfirm">
+  <ComponentPage>
     <BPopConfirm
 
       title="Delete this?"

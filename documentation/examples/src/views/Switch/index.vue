@@ -9,7 +9,7 @@ const onToggle = () => value.value = !value.value;
 </script>
 
 <template>
-  <ComponentPage title="Switch">
+  <ComponentPage>
     <template #default="{ print }">
       <section class="flex items-center space-x-2">
         <span>blue</span>

@@ -35,7 +35,7 @@ const selectedWidthClass = ref(widthClasses[5]);
 </script>
 
 <template>
-  <ComponentPage title="Modal">
+  <ComponentPage>
     <template #default="{ print }">
       <BButton ref="triggerRef" bordered icon="popup" label="Open modal" @click="show = true" />
       <BModal

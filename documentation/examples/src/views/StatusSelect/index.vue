@@ -20,7 +20,7 @@ const onStatusChange = async (status: TStatusSelectStatus | null) => {
 </script>
 
 <template>
-  <ComponentPage title="StatusSelect">
+  <ComponentPage>
     <ComponentPageSection title="Basic usage">
       <div class="flex items-center space-x-2">
         <BTooltip text="Test tip">

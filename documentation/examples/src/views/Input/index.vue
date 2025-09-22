@@ -23,7 +23,7 @@ const clearable = ref(false);
 </script>
 
 <template>
-  <ComponentPage title="Input">
+  <ComponentPage>
     <template #default="{ print }">
       <BInput
         ref="inputRef"

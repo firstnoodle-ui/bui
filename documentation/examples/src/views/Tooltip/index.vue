@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="Tooltip">
+  <ComponentPage>
     <BTooltip text="And you'll see" placement="right">
       <div class="inline text-sm text-primary cursor-pointer">
         Hover me

@@ -76,7 +76,7 @@ const onToggle = (event: TreeNodeEvent<OrgUnit>) => {
 </script>
 
 <template>
-  <ComponentPage title="Checkbox">
+  <ComponentPage>
     <template #default="{ print }">
       <BHorizontalLayout borders aside-left-visible class="h-full border border-default">
         <template #aside-left>

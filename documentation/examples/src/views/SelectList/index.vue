@@ -62,7 +62,7 @@ const hasSelectAll = ref(false);
 </script>
 
 <template>
-  <ComponentPage title="SelectList">
+  <ComponentPage>
     <template #default="{ print }">
       <BSelectList
         :select-all="hasSelectAll"

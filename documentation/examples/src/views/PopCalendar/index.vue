@@ -29,7 +29,7 @@ const onDateChange = (date: string | Date | null) => selectedDate.value = date;
 </script>
 
 <template>
-  <ComponentPage title="PopCalendar">
+  <ComponentPage>
     <template #default="{ print }">
       <BPopCalendar
         :value="selectedDate"

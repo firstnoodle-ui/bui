@@ -22,7 +22,7 @@ const tagInputRef = ref<typeof BTagInput>();
 </script>
 
 <template>
-  <ComponentPage title="Tag">
+  <ComponentPage>
     <template #default="{ print }">
       <!-- <BButton label="import" @click="tagInputRef?.importEntries(importStr)" /> -->
 

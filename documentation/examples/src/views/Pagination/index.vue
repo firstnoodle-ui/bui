@@ -22,7 +22,7 @@ const onChange = (page: number) => {
 </script>
 
 <template>
-  <ComponentPage title="Pagination">
+  <ComponentPage>
     <template #default="{ print }">
       <BPagination
         :borders="borders"

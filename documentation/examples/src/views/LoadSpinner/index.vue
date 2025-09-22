@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="LoadSpinner">
+  <ComponentPage>
     <BLoadSpinner class="w-4 h-4" />
   </ComponentPage>
 </template>

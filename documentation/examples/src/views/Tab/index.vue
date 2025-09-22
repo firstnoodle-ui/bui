@@ -52,7 +52,7 @@ const sizeOptions = ["small", "default"];
 </script>
 
 <template>
-  <ComponentPage title="Tab">
+  <ComponentPage>
     <template #default="{ print }">
       <nav class="flex items-center w-full">
         <BTab

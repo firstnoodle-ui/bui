@@ -26,7 +26,7 @@ const onClose = () => {
 </script>
 
 <template>
-  <ComponentPage title="Dialog">
+  <ComponentPage>
     <template #default="{ print }">
       <BButton ref="buttonRef" icon="popup" label="Show dialog" @click="show = true" />
       <BDialog

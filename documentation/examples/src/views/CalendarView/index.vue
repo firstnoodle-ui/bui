@@ -9,7 +9,7 @@ const selectedDate = ref("2025-06-18");
 </script>
 
 <template>
-  <ComponentPage title="Checkbox">
+  <ComponentPage>
     <template #default="{ print }">
       <BCalendarView
         :value="selectedDate" @change="

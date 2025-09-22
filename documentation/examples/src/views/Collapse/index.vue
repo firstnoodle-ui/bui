@@ -32,7 +32,7 @@ const onToggle = (id: string) => {
 </script>
 
 <template>
-  <ComponentPage title="Collapse">
+  <ComponentPage>
     <template #default="{ print }">
       <BCollapse
         :open="open"

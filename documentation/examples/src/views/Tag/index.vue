@@ -4,7 +4,7 @@ import ComponentPage from "../../components/ComponentPage.vue";
 </script>
 
 <template>
-  <ComponentPage title="Tag">
+  <ComponentPage>
     <BFlexbox class="gap-2">
       <BTag label="ChatGPT 40." @delete="console.log('delete!')" />
       <BTag icon="venn" label="Mixed" @delete="console.log('delete!')" />

@@ -15,7 +15,7 @@ const count = ref(0);
 </script>
 
 <template>
-  <ComponentPage title="FilterChip">
+  <ComponentPage>
     <template #default="{ print }">
       <BFilterChip
         :active="isActive"
