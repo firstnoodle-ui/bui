@@ -7,7 +7,7 @@ import { EntryTag } from "./components";
 const { placeholder = "Enter value, comma separated", validators = [] } = defineProps<{ placeholder?: string; validators?: TagInputValidator[] }>();
 const emit = defineEmits<{ (e: "update:entries", entries: TagInputEntry[]): void }>();
 
-const inputRef = ref<HTMLInputElement>();
+const inputElement = ref<HTMLInputElement>();
 const inputValue = ref("");
 const parsedEntries = ref<TagInputEntry[]>([]);
 
@@ -77,10 +77,10 @@ const onDeleteKeyUp = () => {
 const onDeleteEntryById = (id: string) => {
   parsedEntries.value = parsedEntries.value.filter(entry => entry.id !== id);
   emit("update:entries", parsedEntries.value);
-  inputRef.value?.focus();
+  inputElement.value?.focus();
 };
 
-defineExpose({ importEntries });
+defineExpose({ importEntries, inputElement });
 </script>
 
 <template>
@@ -92,7 +92,7 @@ defineExpose({ importEntries });
       @delete="onDeleteEntryById"
     />
     <input
-      ref="inputRef"
+      ref="inputElement"
       type="text"
       :value="inputValue"
       :placeholder="parsedEntries.length ? '' : placeholder"
