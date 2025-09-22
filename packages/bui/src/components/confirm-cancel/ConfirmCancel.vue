@@ -3,27 +3,23 @@ import type { ConfirmCancelProps } from "./types";
 import { computed } from "vue";
 import { BButton, BFlexbox } from "../";
 
-const props = withDefaults(
-  defineProps<ConfirmCancelProps>(),
-  {
-    order: "confirm-first",
-    cancelButtonIsText: false,
-    cancelDisabled: false,
-    cancelLabel: "Cancel",
-    cancelVariant: "outline",
-    confirmDisabled: false,
-    confirmLabel: "Confirm",
-    confirmVariant: "fill",
-    fillContainer: false,
-    loading: false,
-    small: false,
-    vertical: false,
-  },
-);
+const {
+  order = "confirm-first",
+  cancelDisabled = false,
+  cancelLabel = "Cancel",
+  cancelVariant = "outline",
+  confirmDisabled = false,
+  confirmLabel = "Confirm",
+  confirmVariant = "fill",
+  fillContainer = false,
+  loading = false,
+  small = false,
+  vertical = false,
+} = defineProps<ConfirmCancelProps>();
 
 const emit = defineEmits(["confirm", "cancel"]);
 
-const confirmFirst = computed(() => props.order === "confirm-first");
+const confirmFirst = computed(() => order === "confirm-first");
 </script>
 
 <template>
