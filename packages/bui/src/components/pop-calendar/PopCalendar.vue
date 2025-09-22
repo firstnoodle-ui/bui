@@ -15,15 +15,15 @@ type PopCalendarProps = {
 const { value = null, format = "readableDate", disabled = false, clearable = false, mode = "immediate" } = defineProps<PopCalendarProps>();
 
 const emit = defineEmits<{
-  (e: "change", value: string | Date | null): void;
+  (e: "change", value: Date | null): void;
   (e: "close"): void;
   (e: "open", targets: HTMLElement[]): void;
 }>();
 
 const popperRef = ref<typeof BPopper>();
-const selectedDate = ref<string | Date | null>(null);
+const selectedDate = ref< Date | null>(null);
 
-const onChange = (date: string | null) => {
+const onChange = (date: Date | null) => {
   if (mode === "immediate") {
     // Immediate mode: emit change and close popper
     emit("change", date);

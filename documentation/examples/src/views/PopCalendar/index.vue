@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { DateFormat } from "@firstnoodle-ui/bui";
 import type { Placement } from "@floating-ui/dom";
-import { BButton, BPopCalendar, dateFormat, dateIsAfter } from "@firstnoodle-ui/bui";
-import { ref } from "vue";
+import { BButton, BPopCalendar, formatDate, dateFormat, dateIsAfter } from "@firstnoodle-ui/bui";
+import { computed, ref } from "vue";
 import {
   ComponentPage,
   PropControlBoolean,
   PropControlSelect,
 } from "../../components";
 
-const selectedDate = ref<string | Date | null>(null);
+const selectedDate = ref<Date | null>(null);
 
 // PropControl state
 const format = ref<DateFormat>("readableDate");
@@ -25,7 +25,9 @@ const disabledDates = [
 const modeOptions = ["immediate", "confirmation"];
 const placementOptions = ["top", "bottom", "left", "right", "top-start", "top-end", "bottom-start", "bottom-end", "left-start", "left-end", "right-start", "right-end"];
 
-const onDateChange = (date: string | Date | null) => selectedDate.value = date;
+const buttonLabel = computed(() => selectedDate.value ? formatDate[format.value](selectedDate.value) : "Select date");
+
+const onDateChange = (date: Date | null) => selectedDate.value = date;
 </script>
 
 <template>
@@ -50,7 +52,7 @@ const onDateChange = (date: string | Date | null) => selectedDate.value = date;
           <BButton
             small
             icon="calendar"
-            :label="selectedDate || 'Select Date'"
+            :label="buttonLabel"
             :focus="slotProps.visible"
             :disabled="disabled"
             variant="outlineSubtle"
