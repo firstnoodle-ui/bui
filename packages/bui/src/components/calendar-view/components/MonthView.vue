@@ -63,7 +63,7 @@ const emit = defineEmits(["move", "change-view", "select"]);
     <main class="w-56 grid grid-cols-7">
       <DateButton
         v-for="dateItem in viewData"
-        :key="dateItem.date"
+        :key="dateItem.date?.toISOString()"
         :date="dateItem"
         @click="emit('select', dateItem)"
       />

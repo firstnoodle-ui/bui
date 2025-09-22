@@ -6,7 +6,7 @@ export type CalendarOptions = {
 export type CalendarGridItem = {
   label: number | string;
   current: boolean;
-  date?: string;
+  date?: Date;
   disabled?: boolean;
   inactive?: boolean;
   selected?: boolean;

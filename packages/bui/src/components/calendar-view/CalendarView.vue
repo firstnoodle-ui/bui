@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { CalendarViewProps } from "./types.ts";
 import type { CalendarGridItem } from "./utils/types.ts";
-import { ref, toRef, watch } from "vue";
+import { onMounted, onUnmounted, ref, toRef, watch } from "vue";
 import { loopRange } from "../../utils/array.ts";
 import { BButton } from "../button/index.ts";
 import DecadeView from "./components/DecadeView.vue";
@@ -9,19 +9,17 @@ import MonthView from "./components/MonthView.vue";
 import YearView from "./components/YearView.vue";
 import { useCalendar, ViewType } from "./composables/useCalendar.ts";
 
-import { Weekday } from "./utils/enums.ts";
-import { formatDate } from "./utils/utils/format.ts";
+import { Direction, Weekday } from "./utils/enums.ts";
 
 const {
   value = null,
   clearable = false,
-  format = "readableDateWithDay",
   weekStart = 1,
   disabledDates = [],
 } = defineProps<CalendarViewProps>();
 
 const emit = defineEmits<{
-  (e: "change", date: string | null): void;
+  (e: "change", date: Date | null): void;
 }>();
 
 const {
@@ -31,6 +29,7 @@ const {
   viewYear,
   changeView,
   moveViewDate,
+  moveRequest,
   setSelectedDate,
   setViewDateAndChangeView,
 } = useCalendar(value, { weekStart, disabledDates });
@@ -55,10 +54,39 @@ const onDateClick = (date: CalendarGridItem | null) => {
   if (date.disabled) return;
   if (!date.date) return;
 
-  const dateFn = formatDate[format];
-  if (!dateFn) throw new Error(`dateFn for ${format} not found`);
-  emit("change", dateFn(date.date));
+  emit("change", date.date);
 };
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (!["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].includes(event.key)) {
+    return;
+  }
+
+  event.preventDefault();
+
+  switch (event.key) {
+    case "ArrowUp":
+      moveRequest(Direction.UP, true);
+      break;
+    case "ArrowDown":
+      moveRequest(Direction.DOWN, true);
+      break;
+    case "ArrowLeft":
+      moveRequest(Direction.LEFT, true);
+      break;
+    case "ArrowRight":
+      moveRequest(Direction.RIGHT, true);
+      break;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("keydown", handleKeydown);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", handleKeydown);
+});
 </script>
 
 <template>

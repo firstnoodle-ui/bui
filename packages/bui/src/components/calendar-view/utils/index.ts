@@ -94,7 +94,7 @@ export class Calendar {
     for (let row = 0; row < CELL_COUNT; row++) {
       dates.push({
         label: cursor.getUTCDate(),
-        date: cursor.toUTCString(),
+        date: new Date(cursor),
         disabled: this.options.disabledDates
           ? this.options.disabledDates.some(fn => fn(cursor))
           : false,
@@ -127,7 +127,7 @@ export class Calendar {
     for (let i = 0; i < 7; i++) {
       dates.push({
         label: cursor.getUTCDate(),
-        date: cursor.toUTCString(),
+        date: new Date(cursor),
         disabled: this.options.disabledDates
           ? this.options.disabledDates.some(fn => fn(cursor))
           : false,

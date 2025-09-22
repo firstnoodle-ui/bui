@@ -12,7 +12,7 @@ export enum ViewType {
   DECADE = TimeUnit.DECADE,
 }
 
-export const useCalendar = (value: string | Date | null = null, options: CalendarOptions) => {
+export const useCalendar = (value: Date | null = null, options: CalendarOptions) => {
 
   const calendar = new Calendar(options, value);
   const viewData = ref<CalendarGridItem[] | []>([]);

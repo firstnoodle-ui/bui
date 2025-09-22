@@ -1,7 +1,7 @@
 import type { DateFormat } from "./utils/utils/format";
 
 export type CalendarViewProps = {
-  value?: string | Date | null;
+  value?: Date | null;
   clearable?: boolean;
   type?: DateFormat;
   format?: DateFormat;
