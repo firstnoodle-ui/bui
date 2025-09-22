@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { BButton, BFlexbox, BIcon, BPopCalendar } from "@firstnoodle-ui/bui";
+import { ref } from "vue";
 
 const { startDate, endDate } = defineProps<{
   startDate?: string;
@@ -9,7 +9,7 @@ const { startDate, endDate } = defineProps<{
 
 const emit = defineEmits<{
   (e: "update:startDate", date: string | Date | null): void;
-  (e: "update:endDate", date: string | Date|  null): void;
+  (e: "update:endDate", date: string | Date | null): void;
 }>();
 
 const startDateButton = ref<typeof BButton>();
@@ -20,11 +20,11 @@ const endDateButton = ref<typeof BButton>();
   <BFlexbox class="gap-1 px-2 py-2">
     <BPopCalendar
       clearable
+      :value="startDate"
       @change="
         emit('update:startDate', $event);
         startDateButton?.$el.focus();
       "
-      :value="startDate"
     >
       <template #trigger="{ visible }">
         <BButton
@@ -40,11 +40,11 @@ const endDateButton = ref<typeof BButton>();
     <BIcon name="arrow-right" class="text-tertiary" />
     <BPopCalendar
       clearable
+      :value="endDate"
       @change="
         emit('update:endDate', $event);
         endDateButton?.$el.focus();
       "
-      :value="endDate"
     >
       <template #trigger>
         <BButton

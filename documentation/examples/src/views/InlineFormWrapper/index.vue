@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
 import { BFlexbox, BInlineFormWrapper, BTag } from "@firstnoodle-ui/bui";
+import { computed, onMounted, ref } from "vue";
 import { ComponentPage } from "../../components";
 import DateRange from "./DateRange.vue";
 

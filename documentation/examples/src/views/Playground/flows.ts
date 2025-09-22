@@ -8,7 +8,7 @@ export type InstaceFlow = {
   message: string;
   publishAt: Date;
   deadlineAt: Date;
-}
+};
 
 export type Flow = {
   title: string;
@@ -25,8 +25,8 @@ export type FlowStep = {
 /**
  * In the UI
  * Flow title in header editable
- * 
+ *
  * Each flow has an index number and can be dragged
  * Collapsable with the title as header
- * 
+ *
  */

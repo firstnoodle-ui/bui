@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { BHorizontalLayout, BScrollbar, BVerticalLayout } from "@firstnoodle-ui/bui";
-import { useRoute } from "vue-router";
 import { ref } from "vue";
+import { useRoute } from "vue-router";
 import Console from "./Console.vue";
 
 const consoleRef = ref<typeof Console>();
