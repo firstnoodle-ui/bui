@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DateFormat } from "@firstnoodle-ui/bui";
 import type { Placement } from "@floating-ui/dom";
-import { BButton, BPopCalendar, formatDate, dateFormat, dateIsAfter } from "@firstnoodle-ui/bui";
+import { BButton, BPopCalendar, dateFormat, dateIsAfter, formatDate } from "@firstnoodle-ui/bui";
 import { computed, ref } from "vue";
 import {
   ComponentPage,

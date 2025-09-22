@@ -21,7 +21,7 @@ const emit = defineEmits<{
 }>();
 
 const popperRef = ref<typeof BPopper>();
-const selectedDate = ref< Date | null>(null);
+const selectedDate = ref<Date | null>(null);
 
 const onChange = (date: Date | null) => {
   if (mode === "immediate") {
