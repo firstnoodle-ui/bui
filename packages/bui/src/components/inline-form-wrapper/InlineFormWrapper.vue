@@ -20,7 +20,7 @@ const emit = defineEmits<{
   <BFlexbox
     col
     tabindex="0"
-    class="border bg-primary rounded-lg focus:outline-none focus-within:shadow-sm focus-within:border-action"
+    class="border border-default bg-primary rounded-lg focus:outline-none focus-within:shadow-sm focus-within:border-action"
   >
     <slot />
     <BFlexbox tag="footer" justify="between" class="gap-2 px-2 py-2 border-t border-default">
