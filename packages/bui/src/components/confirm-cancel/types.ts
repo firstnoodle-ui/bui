@@ -2,7 +2,6 @@ import type { ButtonVariant, TIcon } from "../types";
 
 export type ConfirmCancelProps = {
   order?: "confirm-first" | "confirm-last";
-  cancelButtonIsText?: boolean;
   cancelDisabled?: boolean;
   cancelIcon?: TIcon;
   cancelLabel?: string;
