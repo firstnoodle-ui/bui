@@ -16,6 +16,7 @@ export * from "./first-paint";
 export * from "./flexbox";
 export * from "./horizontal-layout";
 export * from "./icon";
+export * from "./inline-form-wrapper";
 export * from "./input";
 export * from "./input-number";
 export * from "./load-spinner";

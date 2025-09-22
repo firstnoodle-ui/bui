@@ -83,6 +83,12 @@ export default [
     meta: { group: "Standard" },
   },
   {
+    path: "/inline-form-wrapper",
+    name: "InlineFormWrapper",
+    component: () => import("../views/InlineFormWrapper/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/load-spinner",
     name: "LoadSpinner",
     component: () => import("../views/LoadSpinner/index.vue"),
