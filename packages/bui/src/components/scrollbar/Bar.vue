@@ -3,13 +3,13 @@ import type { ThumbDragEvent } from "./types";
 import { ref } from "vue";
 import { horizontalProperties, verticalProperties } from "./enums";
 
-const props = defineProps({
-  vertical: Boolean,
-  size: String,
-  move: Number,
-});
+const props = defineProps<{
+  vertical?: boolean,
+  size: string,
+  move: number,
+}>();
 
-const emit = defineEmits(["update"]);
+const emit = defineEmits(["move", "update"]);
 
 const scrollbarRef = ref<HTMLDivElement>();
 const thumbRef = ref<HTMLDivElement>();
@@ -97,10 +97,50 @@ const renderThumbStyle = () => {
     webkitTransform: translate,
   };
 };
+
+const onThumbKeydown = (event: KeyboardEvent) => {
+  if (props.vertical) {
+    if (event.key === "ArrowUp") {
+      emit("move", -1);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    else if (event.key === "ArrowDown") {
+      emit("move", 1);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+  else {
+    if (event.key === "ArrowLeft") {
+      emit("move", -1);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    else if (event.key === "ArrowRight") {
+      emit("move", 1);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  }
+};
 </script>
 
 <template>
   <div ref="scrollbarRef" :class="`scrollbar__bar is-${bar.key}`" @click.stop.prevent @mousedown.stop.prevent="onTrackClick">
-    <div ref="thumbRef" :style="renderThumbStyle()" class="scrollbar__thumb" @click.stop.prevent @mousedown.stop.prevent="onThumbClick" />
+    <div
+      ref="thumbRef"
+      :style="renderThumbStyle()"
+      class="scrollbar__thumb"
+      tabindex="0"
+      role="slider"
+      :aria-label="`${props.vertical ? 'Vertical' : 'Horizontal'} scrollbar thumb`"
+      :aria-valuenow="props.move || 0"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      @click.stop.prevent
+      @mousedown.stop.prevent="onThumbClick"
+      @keydown="onThumbKeydown"
+    />
   </div>
 </template>
