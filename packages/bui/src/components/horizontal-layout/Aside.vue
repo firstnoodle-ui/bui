@@ -62,6 +62,36 @@ function endDrag() {
   window.removeEventListener("mousemove", onDrag);
   emit("resize-end");
 }
+
+function onKeyDown(event: KeyboardEvent) {
+  const resizeStep = 30; // pixels to resize per arrow key press
+  let newWidth = props.width;
+
+  if (props.side === "left") {
+    if (event.key === "ArrowLeft") {
+      newWidth = props.width - resizeStep;
+    }
+    else if (event.key === "ArrowRight") {
+      newWidth = props.width + resizeStep;
+    }
+  }
+  else { // side === "right"
+    if (event.key === "ArrowLeft") {
+      newWidth = props.width + resizeStep;
+    }
+    else if (event.key === "ArrowRight") {
+      newWidth = props.width - resizeStep;
+    }
+  }
+
+  if (newWidth !== props.width) {
+    event.preventDefault();
+    const clampedWidth = clamp(newWidth, props.minWidth, props.maxWidth);
+    if (clampedWidth !== props.width) {
+      emit("resize", clampedWidth);
+    }
+  }
+}
 </script>
 
 <template>
@@ -78,12 +108,15 @@ function endDrag() {
     <slot />
     <button
       v-if="props.draggable"
-      class="absolute top-0 h-full w-1 hover:border-action hover:bg-tertiary cursor-ew-resize"
+      tabindex="0"
+      :aria-label="`Resize ${props.side} panel`"
+      class="absolute top-0 h-full w-1 hover:border-action hover:bg-tertiary cursor-ew-resize focus:outline-none focus:border-action focus:bg-tertiary"
       :class="[
         props.side === 'left' ? 'right-0 border-r' : 'left-0 border-l',
         dragging ? 'border-action bg-tertiary' : 'border-transparent bg-transparent',
       ]"
       @mousedown="startDrag"
+      @keydown="onKeyDown"
     />
   </aside>
 </template>
