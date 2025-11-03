@@ -4,9 +4,9 @@ import { ref } from "vue";
 import { horizontalProperties, verticalProperties } from "./enums";
 
 const props = defineProps<{
-  vertical?: boolean,
-  size: string,
-  move: number,
+  vertical?: boolean;
+  size: string;
+  move: number;
 }>();
 
 const emit = defineEmits(["move", "update"]);
