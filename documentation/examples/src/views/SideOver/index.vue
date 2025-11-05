@@ -18,8 +18,10 @@ const closeable = ref(true);
 const overlayType = ref<TOverlayType>("default");
 const placement = ref<"left" | "right">("right");
 const title = ref("The Title");
+const widthClass = ref<"max-w-xs" | "max-w-sm" | "max-w-md" | "max-w-lg" | "max-w-xl" | "max-w-2xl" | "max-w-3xl" | "max-w-4xl" | "max-w-5xl" | "max-w-6xl" | "max-w-7xl" | "max-w-8xl" | "max-w-full">("max-w-lg");
 
 const placementOptions = ["left", "right"];
+const widthClassOptions = ["max-w-xs", "max-w-sm", "max-w-md", "max-w-lg", "max-w-xl", "max-w-2xl", "max-w-3xl", "max-w-4xl", "max-w-5xl", "max-w-6xl", "max-w-7xl", "max-w-8xl", "max-w-full"];
 
 const onClose = () => {
   show.value = false;
@@ -38,6 +40,7 @@ const onClose = () => {
         :placement="placement"
         :closeable="closeable"
         :overlay-type="overlayType"
+        :width-class="widthClass"
         @open="print('@open')"
         @close="
           onClose();
@@ -74,6 +77,9 @@ const onClose = () => {
       <PropControlString name="Title" :value="title" @change="(value: string) => title = value">
         Header title text
       </PropControlString>
+      <PropControlSelect name="Width class" :value="widthClass" :options="widthClassOptions" @select="(option: typeof widthClass) => widthClass = option">
+        Maximum width constraint for the SideOver panel
+      </PropControlSelect>
     </template>
   </ComponentPage>
 </template>

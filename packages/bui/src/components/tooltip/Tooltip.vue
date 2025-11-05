@@ -32,8 +32,7 @@ const {
     :trigger="trigger"
     :open-delay="delay"
     disable-click-outside
-    :offset-main="offsetMain"
-    :offset-cross="offsetCross"
+    :offset-options="{ offsetMain, offsetCross }"
     :root-class="triggerFullWidth ? 'w-full flex' : 'inline-flex'"
     :trigger-class="triggerFullWidth ? 'w-full flex' : 'inline-flex'"
     :placement="placement"

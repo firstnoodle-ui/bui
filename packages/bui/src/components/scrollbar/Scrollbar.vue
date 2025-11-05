@@ -178,6 +178,16 @@ const onBarUpdate = (event: ThumbDragEvent) => {
   wrapRef.value[event.scrollReference] = (event.positionPercentage * wrapRef.value[event.scrollSize]) / 100;
 };
 
+const scrollBy = (axis: "x" | "y", distance: number) => {
+  if (axis === "x") {
+    wrapRef.value.scrollBy({ left: distance, behavior: "smooth" });
+  }
+  else {
+    wrapRef.value.scrollBy({ top: distance, behavior: "smooth" });
+  }
+  onScroll();
+};
+
 const scrollToPercentage = (axis: "x" | "y", percentage: number) => {
   if (axis === "x") {
     wrapRef.value.scrollTo({ left: (wrapRef.value.scrollWidth * percentage) / 100, behavior: "smooth" });
@@ -213,7 +223,20 @@ defineExpose({ handleScroll: onScroll, reset, jumpToPercentage, scrollToPercenta
         <slot />
       </component>
     </div>
-    <Bar v-if="!disableX" :move="moveX" :size="sizeWidth" @update="onBarUpdate" />
-    <Bar v-if="!disableY" :move="moveY" :size="sizeHeight" vertical @update="onBarUpdate" />
+    <Bar
+      v-if="!disableX"
+      :move="moveX"
+      :size="sizeWidth"
+      @move="scrollBy('x', $event * 40)"
+      @update="onBarUpdate"
+    />
+    <Bar
+      v-if="!disableY"
+      vertical
+      :move="moveY"
+      :size="sizeHeight"
+      @move="scrollBy('y', $event * 40)"
+      @update="onBarUpdate"
+    />
   </main>
 </template>

@@ -11,12 +11,27 @@ const {
   overlayType = "default",
   placement = "right",
   target = "#modals",
+  widthClass = "max-w-lg",
 } = defineProps<{
   closeable?: boolean;
   overlayType?: TOverlayType;
   placement?: "left" | "right";
   target?: string;
   title?: string;
+  widthClass?:
+    | "max-w-xs"
+    | "max-w-sm"
+    | "max-w-md"
+    | "max-w-lg"
+    | "max-w-xl"
+    | "max-w-2xl"
+    | "max-w-3xl"
+    | "max-w-4xl"
+    | "max-w-5xl"
+    | "max-w-6xl"
+    | "max-w-7xl"
+    | "max-w-8xl"
+    | "max-w-full";
 }>();
 
 const emit = defineEmits(["close", "open"]);
@@ -59,12 +74,12 @@ defineExpose({ close });
         <WindowFrame
           v-show="show"
           ref="panelRef"
-          class="flex flex-col overflow-hidden max-w-lg w-full h-full focus:outline-hidden"
-          :class="{
+          class="flex flex-col overflow-hidden w-full h-full focus:outline-hidden"
+          :class="[widthClass, {
             'py-4': !slots.default,
             'ml-auto': placement === 'right',
             'mr-auto': placement === 'left',
-          }"
+          }]"
           style="pointer-events: auto"
         >
           <slot v-if="$slots.default" />

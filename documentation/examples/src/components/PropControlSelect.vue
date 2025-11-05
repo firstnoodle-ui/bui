@@ -26,7 +26,7 @@ const onClear = () => emit("select", undefined);
         <template #trigger="{ visible }">
           <BButton
             :label="value || 'Select'"
-            :soft-focus="visible"
+            :focus="visible"
             variant="outlineSubtle"
             icon-after="chevron-down-small"
           />

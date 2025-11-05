@@ -28,13 +28,10 @@ const classes = computed(() => [
   props.side === "left" ? "left-0" : "right-0",
   props.border ? (props.side === "left" ? "border-r border-default" : "border-l border-default") : "",
 ]);
-// const enterClass = props.side === "left" ? "-translate-x-full" : "translate-x-full";
-// const leaveToClass = props.side === "left" ? "-translate-x-full" : "translate-x-full";
 
 let startX: number;
 let startWidth: number;
 const dragging = ref(false);
-// const transitioning = ref(false);
 
 function startDrag(event: MouseEvent) {
   startX = event.pageX;
@@ -62,6 +59,36 @@ function endDrag() {
   window.removeEventListener("mousemove", onDrag);
   emit("resize-end");
 }
+
+function onKeyDown(event: KeyboardEvent) {
+  const resizeStep = 30; // pixels to resize per arrow key press
+  let newWidth = props.width;
+
+  if (props.side === "left") {
+    if (event.key === "ArrowLeft") {
+      newWidth = props.width - resizeStep;
+    }
+    else if (event.key === "ArrowRight") {
+      newWidth = props.width + resizeStep;
+    }
+  }
+  else { // side === "right"
+    if (event.key === "ArrowLeft") {
+      newWidth = props.width + resizeStep;
+    }
+    else if (event.key === "ArrowRight") {
+      newWidth = props.width - resizeStep;
+    }
+  }
+
+  if (newWidth !== props.width) {
+    event.preventDefault();
+    const clampedWidth = clamp(newWidth, props.minWidth, props.maxWidth);
+    if (clampedWidth !== props.width) {
+      emit("resize", clampedWidth);
+    }
+  }
+}
 </script>
 
 <template>
@@ -78,12 +105,15 @@ function endDrag() {
     <slot />
     <button
       v-if="props.draggable"
-      class="absolute top-0 h-full w-1 hover:border-action hover:bg-tertiary cursor-ew-resize"
+      tabindex="0"
+      :aria-label="`Resize ${props.side} panel`"
+      class="absolute top-0 h-full w-1 hover:border-action cursor-ew-resize"
       :class="[
         props.side === 'left' ? 'right-0 border-r' : 'left-0 border-l',
-        dragging ? 'border-action bg-tertiary' : 'border-transparent bg-transparent',
+        dragging ? 'border-action bg-action' : 'border-transparent bg-transparent hover:bg-tertiary focus:outline-none focus:border-action focus:bg-tertiary',
       ]"
       @mousedown="startDrag"
+      @keydown="onKeyDown"
     />
   </aside>
 </template>
