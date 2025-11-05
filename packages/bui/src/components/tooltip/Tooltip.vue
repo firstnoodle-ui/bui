@@ -3,16 +3,7 @@ import type { Placement } from "@floating-ui/dom";
 import type { TPopperTrigger } from "../types";
 import { BPopper } from "../popper";
 
-const {
-  bgColorClass = "bg-black",
-  delay = 10,
-  offsetMain = 2,
-  offsetCross = 0,
-  placement = "top",
-  textColorClass = "text-white",
-  trigger = "hover",
-  triggerFullWidth = false,
-} = defineProps<{
+const props = defineProps<{
   bgColorClass?: string;
   delay?: number;
   offsetMain?: number;
@@ -23,6 +14,17 @@ const {
   trigger?: TPopperTrigger;
   triggerFullWidth?: boolean;
 }>();
+
+const {
+  bgColorClass = "bg-black",
+  delay = 10,
+  offsetMain = 2,
+  offsetCross = 0,
+  placement = "top" as Placement,
+  textColorClass = "text-white",
+  trigger = "hover",
+  triggerFullWidth = false,
+} = props;
 </script>
 
 <template>
