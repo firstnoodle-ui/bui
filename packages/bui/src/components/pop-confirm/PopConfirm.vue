@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Placement } from "@floating-ui/dom";
+import type { Placement } from "@floating-ui/vue";
 import type { ConfirmCancelProps } from "../confirm-cancel/types";
 import type { ButtonVariant, TIcon } from "../types";
 import { nextTick, ref } from "vue";

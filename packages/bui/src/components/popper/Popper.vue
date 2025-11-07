@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { FlipOptions, LimitShiftOptions, OffsetOptions, Placement, ShiftOptions } from "@floating-ui/dom";
+import type { FlipOptions, OffsetOptions, Placement, ShiftOptions } from "@floating-ui/vue";
 import type { TPopperTrigger } from "../types";
-import { autoUpdate, computePosition, flip, limitShift, offset, shift } from "@floating-ui/dom";
+import { autoUpdate, computePosition, flip, limitShift, offset, shift } from "@floating-ui/vue";
 import debounce from "debounce";
 import { nextTick, onMounted, onUnmounted, ref, useSlots, watch } from "vue";
 import { useClickOutside, useMounted } from "../../composables";
@@ -11,7 +11,7 @@ const {
   closeDelay = 20,
   disabled = false,
   flipOptions = {},
-  limitShiftOptions,
+  // limitShiftOptions,
   offsetOptions = {},
   shiftOptions = {},
   openDelay = 0,
@@ -28,7 +28,7 @@ const {
   closeDelay?: number;
   disabled?: boolean;
   flipOptions?: Partial<FlipOptions>;
-  limitShiftOptions?: Partial<LimitShiftOptions>;
+  // limitShiftOptions?: Partial<LimitShiftOptions>;
   offsetOptions?: Partial<OffsetOptions>;
   shiftOptions?: Partial<ShiftOptions>;
   openDelay?: number;
@@ -62,17 +62,21 @@ const update = async () => {
   if (triggerRef.value && popperRef.value) {
     const middleware = [];
 
-    if (offsetOptions) middleware.push(offset(offsetOptions));
-    if (flipOptions) middleware.push(flip(flipOptions));
-
-    if (limitShiftOptions) {
-      middleware.push(
-        shift({
-          ...shiftOptions,
-          limiter: limitShift(limitShiftOptions),
-        }),
-      );
+    if (offsetOptions) {
+      middleware.push(offset(offsetOptions));
     }
+    if (flipOptions) {
+      middleware.push(flip(flipOptions));
+    }
+
+    // if (limitShiftOptions) {
+    //   middleware.push(
+    //     shift({
+    //       ...shiftOptions,
+    //       limiter: limitShift(limitShiftOptions),
+    //     }),
+    //   );
+    // }
     else if (shiftOptions) {
       middleware.push(shift(shiftOptions));
     }

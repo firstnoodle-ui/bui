@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Placement } from "@floating-ui/dom";
+import type { Placement } from "@floating-ui/vue";
 import type { CalendarViewProps } from "../calendar-view/types";
 import { ref } from "vue";
 import { BButton } from "../button";

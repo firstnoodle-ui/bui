@@ -1,5 +1,5 @@
 <script setup lang="ts" generic="T extends TPopSelectOption">
-import type { Placement } from "@floating-ui/dom";
+import type { Placement } from "@floating-ui/vue";
 import type { TIcon, TPopSelectOption, TPopSelectResultFilter } from "../types";
 import { computed, nextTick, onBeforeMount, ref, useSlots, watch } from "vue";
 import { BIcon, BLoadSpinner, BPopper, BPopperContent, BScrollbar, BTextHighlight } from "../";

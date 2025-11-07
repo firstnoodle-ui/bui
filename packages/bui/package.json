@@ -50,7 +50,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.7.4",
+    "@floating-ui/vue": "^1.1.9",
     "@tiptap/extension-bold": "^2.11.7",
     "@tiptap/extension-bullet-list": "^2.11.7",
     "@tiptap/extension-document": "^2.11.7",

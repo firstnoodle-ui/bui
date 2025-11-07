@@ -1,4 +1,4 @@
-import { size } from "@floating-ui/dom";
+import { size } from "@floating-ui/vue";
 
 export const sameWidthAsTriggerMiddleware = size({
   apply({ rects, elements }) {
