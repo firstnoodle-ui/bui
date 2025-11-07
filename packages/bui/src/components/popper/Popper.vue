@@ -7,7 +7,24 @@ import { nextTick, onMounted, onUnmounted, ref, useSlots, watch } from "vue";
 import { useClickOutside, useMounted } from "../../composables";
 import { sameWidthAsElementMiddleware, sameWidthAsTriggerMiddleware } from "./middleware";
 
-const props = defineProps<{
+const {
+  closeDelay = 20,
+  disabled = false,
+  flipOptions = {},
+  limitShiftOptions,
+  offsetOptions = {},
+  shiftOptions = {},
+  openDelay = 0,
+  placement = "bottom-start",
+  popperWidthClass,
+  rootClass = "inline-flex",
+  sameWidthAsElement,
+  sameWidthAsTrigger = false,
+  show = false,
+  trigger = "hover",
+  triggerClass = "flex",
+  useOverlay = false,
+} = defineProps<{
   closeDelay?: number;
   disabled?: boolean;
   flipOptions?: Partial<FlipOptions>;
@@ -27,25 +44,6 @@ const props = defineProps<{
 }>();
 
 const emit = defineEmits(["open", "close", "updateClickOutside"]);
-
-const {
-  closeDelay = 20,
-  disabled = false,
-  flipOptions = {},
-  limitShiftOptions,
-  offsetOptions = {},
-  shiftOptions = {},
-  openDelay = 0,
-  placement = "bottom-start",
-  popperWidthClass,
-  rootClass = "inline-flex",
-  sameWidthAsElement,
-  sameWidthAsTrigger = false,
-  show = false,
-  trigger = "hover",
-  triggerClass = "flex",
-  useOverlay = false,
-} = props;
 
 const slots = useSlots();
 
