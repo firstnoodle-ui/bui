@@ -62,7 +62,7 @@ If you get errors like floating-ui is not hosted on github, then you have to ins
 
 the current packages and versions are
 
-``` "@floating-ui/dom": "^1.6.13",
+``` "@floating-ui/vue": "^1.6.13",
     "@tiptap/extension-bold": "^2.11.7",
     "@tiptap/extension-bullet-list": "^2.11.7",
     "@tiptap/extension-document": "^2.11.7",
