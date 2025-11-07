@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { FlipOptions, LimitShiftOptions, OffsetOptions, Placement, ShiftOptions } from "@floating-ui/dom";
+import type { FlipOptions, LimitShiftOptions, OffsetOptions, Placement, ShiftOptions } from "../../types/floating-ui";
 import type { TPopperTrigger } from "../types";
 import { autoUpdate, computePosition, flip, limitShift, offset, shift } from "@floating-ui/dom";
 import debounce from "debounce";

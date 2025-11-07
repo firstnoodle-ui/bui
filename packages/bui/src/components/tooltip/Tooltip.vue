@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Placement } from "@floating-ui/dom";
+import type { Placement } from "../../types/floating-ui";
 import type { TPopperTrigger } from "../types";
 import { BPopper } from "../popper";
 
