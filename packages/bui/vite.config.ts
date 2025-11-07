@@ -8,7 +8,11 @@ import Dts from "vite-plugin-dts";
 export default defineConfig({
   plugins: [
     vue(),
-    Dts({ tsconfigPath: resolve(__dirname, "tsconfig.app.json") }),
+    Dts({
+      tsconfigPath: resolve(__dirname, "tsconfig.app.json"),
+      outDir: "dist",
+      insertTypesEntry: true,
+    }),
     tailwindcss(),
   ],
   build: {

@@ -7,41 +7,41 @@ import { nextTick, onMounted, onUnmounted, ref, useSlots, watch } from "vue";
 import { useClickOutside, useMounted } from "../../composables";
 import { sameWidthAsElementMiddleware, sameWidthAsTriggerMiddleware } from "./middleware";
 
-const {
-  closeDelay = 20,
-  disabled = false,
-  flipOptions = {},
-  limitShiftOptions,
-  offsetOptions = {},
-  shiftOptions = {},
-  openDelay = 0,
-  placement = "bottom-start",
-  popperWidthClass,
-  rootClass = "inline-flex",
-  sameWidthAsElement,
-  sameWidthAsTrigger = false,
-  show = false,
-  trigger = "hover",
-  triggerClass = "flex",
-  useOverlay = false,
-} = defineProps<{
-  closeDelay?: number;
-  disabled?: boolean;
-  flipOptions?: Partial<FlipOptions>;
-  limitShiftOptions?: Partial<LimitShiftOptions>;
-  offsetOptions?: Partial<OffsetOptions>;
-  shiftOptions?: Partial<ShiftOptions>;
-  openDelay?: number;
-  placement?: Placement;
-  popperWidthClass?: string;
-  rootClass?: string | string[];
-  sameWidthAsElement?: HTMLElement;
-  sameWidthAsTrigger?: boolean;
-  show?: boolean;
-  trigger?: TPopperTrigger;
-  triggerClass?: string | string[];
-  useOverlay?: boolean;
-}>();
+const props = withDefaults(
+  defineProps<{
+    closeDelay?: number;
+    disabled?: boolean;
+    flipOptions?: Partial<FlipOptions>;
+    limitShiftOptions?: Partial<LimitShiftOptions>;
+    offsetOptions?: Partial<OffsetOptions>;
+    shiftOptions?: Partial<ShiftOptions>;
+    openDelay?: number;
+    placement?: Placement;
+    popperWidthClass?: string;
+    rootClass?: string | string[];
+    sameWidthAsElement?: HTMLElement;
+    sameWidthAsTrigger?: boolean;
+    show?: boolean;
+    trigger?: TPopperTrigger;
+    triggerClass?: string | string[];
+    useOverlay?: boolean;
+  }>(),
+  {
+    closeDelay: 20,
+    disabled: false,
+    flipOptions: () => ({}),
+    offsetOptions: () => ({}),
+    shiftOptions: () => ({}),
+    openDelay: 0,
+    placement: "bottom-start",
+    rootClass: "inline-flex",
+    sameWidthAsTrigger: false,
+    show: false,
+    trigger: "hover",
+    triggerClass: "flex",
+    useOverlay: false,
+  },
+);
 
 const emit = defineEmits(["open", "close", "updateClickOutside"]);
 
@@ -63,32 +63,32 @@ const update = async () => {
   if (triggerRef.value && popperRef.value) {
     const middleware = [];
 
-    if (offsetOptions) middleware.push(offset(offsetOptions));
-    if (flipOptions) middleware.push(flip(flipOptions));
+    if (props.offsetOptions) middleware.push(offset(props.offsetOptions));
+    if (props.flipOptions) middleware.push(flip(props.flipOptions));
 
-    if (limitShiftOptions) {
+    if (props.limitShiftOptions) {
       middleware.push(
         shift({
-          ...shiftOptions,
-          limiter: limitShift(limitShiftOptions),
+          ...props.shiftOptions,
+          limiter: limitShift(props.limitShiftOptions),
         }),
       );
     }
-    else if (shiftOptions) {
-      middleware.push(shift(shiftOptions));
+    else if (props.shiftOptions) {
+      middleware.push(shift(props.shiftOptions));
     }
 
-    if (!popperWidthClass) {
-      if (sameWidthAsTrigger) {
+    if (!props.popperWidthClass) {
+      if (props.sameWidthAsTrigger) {
         middleware.push(sameWidthAsTriggerMiddleware);
       }
-      else if (sameWidthAsElement) {
-        middleware.push(sameWidthAsElementMiddleware(sameWidthAsElement));
+      else if (props.sameWidthAsElement) {
+        middleware.push(sameWidthAsElementMiddleware(props.sameWidthAsElement));
       }
     }
 
     const position = await computePosition(triggerRef.value, popperRef.value, {
-      placement: placement as Placement,
+      placement: props.placement as Placement,
       middleware,
     });
 
@@ -104,16 +104,16 @@ onMounted(() => {
     return console.error(`[Popper]: The <Popper> component expects only one child element at its root. You passed ${children.length} child nodes.`);
   }
 
-  if (!popperWidthClass) {
-    if (sameWidthAsElement && sameWidthAsTrigger) {
+  if (!props.popperWidthClass) {
+    if (props.sameWidthAsElement && props.sameWidthAsTrigger) {
       console.warn(`[Popper]: The 'sameWidthAsElement' prop will be ignored because 'sameWidthAsTrigger' is set to true`);
     }
   }
-  else if (sameWidthAsElement || sameWidthAsTrigger) {
+  else if (props.sameWidthAsElement || props.sameWidthAsTrigger) {
     console.warn(`[Popper]: The props 'sameWidthAsElement' or 'sameWidthAsTrigger' will be ignored because the 'popperWidthClass' is set`);
   }
 
-  if (trigger === "manual" && show) {
+  if (props.trigger === "manual" && props.show) {
 
     openPopperDebounce();
   }
@@ -136,7 +136,7 @@ const close = () => {
   isOpen.value = false;
   emit("close");
 
-  !useOverlay && disableClickOutside();
+  !props.useOverlay && disableClickOutside();
 
   if (cleanup) {
     cleanup();
@@ -152,14 +152,14 @@ const open = async () => {
   emit("open", [triggerRef.value, popperRef.value]);
   cleanup = autoUpdate(triggerRef.value as HTMLElement, popperRef.value as HTMLElement, update);
 
-  !useOverlay && popperRef.value && triggerRef.value && enableClickOutside([popperRef.value, triggerRef.value]);
+  !props.useOverlay && popperRef.value && triggerRef.value && enableClickOutside([popperRef.value, triggerRef.value]);
 };
 
-const openPopperDebounce = debounce(open, openDelay);
-const closePopperDebounce = debounce(close, closeDelay);
+const openPopperDebounce = debounce(open, props.openDelay);
+const closePopperDebounce = debounce(close, props.closeDelay);
 
 const openPopper = async () => {
-  if (disabled) return;
+  if (props.disabled) return;
   closePopperDebounce.clear();
   openPopperDebounce();
 };
@@ -170,7 +170,7 @@ const closePopper = async () => {
 };
 
 const onClick = (e: MouseEvent) => {
-  if (trigger === "click") {
+  if (props.trigger === "click") {
     e.preventDefault();
     e.stopPropagation();
 
@@ -188,15 +188,15 @@ const togglePopper = () => (isOpen.value ? closePopper() : openPopper());
 
 /** If Popper is open, we automatically close it if if becomes disabled */
 watch(
-  () => disabled,
+  () => props.disabled,
   (newValue: boolean) => isOpen.value && newValue && close(),
 );
 
 /** If trigger is manual, we open/close popper when prop.show changes */
 watch(
-  () => show,
+  () => props.show,
   (newValue: boolean) => {
-    if (trigger === "manual") {
+    if (props.trigger === "manual") {
       newValue ? openPopperDebounce() : closePopperDebounce();
     }
     else {

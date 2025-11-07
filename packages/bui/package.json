@@ -1,7 +1,7 @@
 {
   "name": "@firstnoodle-ui/bui",
   "type": "module",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "private": false,
   "repository": {
     "type": "git",
@@ -35,13 +35,14 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && vue-tsc --declaration --emitDeclarationOnly -p tsconfig.app.json",
+    "build": "vite build",
     "typecheck": "vue-tsc -p tsconfig.app.json --noEmit",
     "watch": "vite build --watch",
     "prepack": "pnpm run build",
-    "release:publish": "pnpm publish --access public --otp=307794 --no-git-checks"
+    "release:publish": "pnpm publish --access public --otp=162609 --no-git-checks"
   },
   "peerDependencies": {
+    "@floating-ui/core": "^1.7.3",
     "tailwindcss": "^4.1.1",
     "vue": "^3.5.13"
   },
@@ -50,6 +51,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@floating-ui/core": "^1.7.3",
     "@floating-ui/dom": "^1.6.13",
     "@tiptap/extension-bold": "^2.11.7",
     "@tiptap/extension-bullet-list": "^2.11.7",
