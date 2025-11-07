@@ -1,7 +1,7 @@
 {
   "name": "@firstnoodle-ui/bui",
   "type": "module",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "private": false,
   "repository": {
     "type": "git",
@@ -39,7 +39,7 @@
     "typecheck": "vue-tsc -p tsconfig.app.json --noEmit",
     "watch": "vite build --watch",
     "prepack": "pnpm run build",
-    "release:publish": "pnpm publish --access public --otp=436644 --no-git-checks"
+    "release:publish": "pnpm publish --access public --otp=307794 --no-git-checks"
   },
   "peerDependencies": {
     "tailwindcss": "^4.1.1",
