@@ -9,6 +9,7 @@ import { sameWidthAsElementMiddleware, sameWidthAsTriggerMiddleware } from "./mi
 
 const props = withDefaults(defineProps<{
   closeDelay?: number;
+  closeOnClickOutside?: boolean;
   disabled?: boolean;
   flipOptions?: Partial<FlipOptions>;
   limitShiftOptions?: Partial<LimitShiftOptions>;
@@ -21,11 +22,12 @@ const props = withDefaults(defineProps<{
   sameWidthAsElement?: HTMLElement;
   sameWidthAsTrigger?: boolean;
   show?: boolean;
+  teleportTarget?: string;
   trigger?: TPopperTrigger;
   triggerClass?: string | string[];
-  useOverlay?: boolean;
 }>(), {
   closeDelay: 20,
+  closeOnClickOutside: true,
   disabled: false,
   flipOptions: () => ({}),
   offsetOptions: () => ({}),
@@ -35,9 +37,9 @@ const props = withDefaults(defineProps<{
   rootClass: "inline-flex",
   sameWidthAsTrigger: false,
   show: false,
+  teleportTarget: "#poppers",
   trigger: "hover",
   triggerClass: "flex",
-  useOverlay: false,
 });
 
 const emit = defineEmits(["open", "close", "updateClickOutside"]);
@@ -132,7 +134,7 @@ const close = () => {
   isOpen.value = false;
   emit("close");
 
-  !props.useOverlay && disableClickOutside();
+  props.closeOnClickOutside && disableClickOutside();
 
   if (cleanup) {
     cleanup();
@@ -148,7 +150,7 @@ const open = async () => {
   emit("open", [triggerRef.value, popperRef.value]);
   cleanup = autoUpdate(triggerRef.value as HTMLElement, popperRef.value as HTMLElement, update);
 
-  !props.useOverlay && popperRef.value && triggerRef.value && enableClickOutside([popperRef.value, triggerRef.value]);
+  props.closeOnClickOutside && popperRef.value && triggerRef.value && enableClickOutside([popperRef.value, triggerRef.value]);
 };
 
 const openPopperDebounce = debounce(open, props.openDelay);
@@ -221,19 +223,9 @@ defineExpose({
     >
       <slot :visible="isOpen" />
     </div>
-    <Teleport v-if="mounted" to="#poppers">
+    <Teleport v-if="mounted" :to="teleportTarget">
       <template v-if="!props.disabled && isOpen">
         <div
-          v-if="props.useOverlay && props.trigger !== 'hover' && props.trigger !== 'manual'"
-          class="pointer-events-auto absolute w-screen h-screen top-0 left-0 bg-transparent"
-          @click="closePopper()"
-        >
-          <div v-show="!props.disabled && isOpen" ref="popperRef" class="absolute" :class="props.popperWidthClass">
-            <slot name="content" :close="close" :is-open="isOpen" />
-          </div>
-        </div>
-        <div
-          v-else
           ref="popperRef"
           class="absolute"
           :class="props.popperWidthClass"
