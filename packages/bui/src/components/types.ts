@@ -128,6 +128,7 @@ export const icons = [
   "delta",
   "download",
   "drag",
+  "drag-vertical",
   "drilldown",
   "edit",
   "envelope",
