@@ -13,6 +13,9 @@ const {
   value,
   min,
   max,
+  showSteppers = true,
+  size = "default",
+  variant = "border",
 } = defineProps<{
   disabled?: boolean;
   icon?: TIcon;
@@ -20,8 +23,11 @@ const {
   value: number;
   min?: number;
   max?: number;
+  size?: "default" | "small";
+  variant?: "border" | "fill";
   inputType?: InputTypeHTMLAttribute;
   autoFocus?: boolean;
+  showSteppers?: boolean;
 }>();
 
 const emit = defineEmits(["change", "enter"]);
@@ -70,19 +76,28 @@ defineExpose({ focus });
 
 <template>
   <div
-    class="relative overflow-hidden inline-flex items-center h-8 text-sm leading-tight rounded-lg border focus:shadow-sm-inner focus:outline-hidden focus-within:border-blue-500"
+    class="relative flex-1 w-full overflow-hidden overscroll-none inline-flex items-center pr-0 rounded-lg border focus:shadow-sm-inner focus:outline-hidden focus-within:border-action"
     :class="{
-      'bg-secondary border-weak text-secondary': disabled,
-      'bg-primary border-default text-primary shadow-sm-inner-sm': !disabled,
-      'pl-8': icon,
-      'pl-3': !icon,
+      'bg-primary border-default text-primary': variant === 'border' && !disabled,
+      'bg-secondary border-weak text-secondary': variant === 'border' && disabled,
+      'bg-tertiary border-transparent text-primary': variant === 'fill' && !disabled,
+      'bg-tertiary border-weak text-secondary': variant === 'fill' && disabled,
+      'h-8': size === 'default',
+      'pl-2': size === 'default' && !icon,
+      'h-6': size === 'small',
+      'pl-1.5': size === 'small' && !icon,
+      'pl-0': icon,
     }"
   >
     <div
       v-if="icon"
-      class="absolute top-0 left-0 pr-1 pl-2 h-full flex items-center rounded-lg bg-transparent cursor-pointer"
+      class="flex-none flex rounded-lg bg-transparent cursor-pointer"
+      :class="{
+        'px-2': size === 'default',
+        'px-1.5': size === 'small',
+      }"
     >
-      <BIcon :name="icon" class="text-tertiary" />
+      <BIcon :name="icon" class="text-secondary" />
     </div>
     <input
       ref="inputRef"
@@ -93,7 +108,11 @@ defineExpose({ focus });
       :disabled="disabled"
       :value="value"
       :placeholder="placeholder"
-      class="flex-1 min-w-0 py-2 text-sm leading-tight bg-transparent focus:outline-hidden"
+      class="flex-1 min-w-0 bg-transparent focus:outline-hidden"
+      :class="{
+        'text-xs': size === 'small',
+        'text-sm': size === 'default',
+      }"
       @change.stop.prevent
       @keydown.enter.stop.prevent="onEnter"
       @keyup.enter.stop.prevent
@@ -104,9 +123,16 @@ defineExpose({ focus });
       @blur="onBlur"
       @input.stop.prevent="onInput"
     >
-    <section class="flex flex-col w-8 h-full -space-y-px -mt-px -mr-px">
-      <StepButton ref="upButtonRef" direction="up" @click="onStep(1)" />
-      <StepButton ref="downButtonRef" direction="down" @click="onStep(-1)" />
+    <section
+      v-if="showSteppers"
+      class="top-0 flex flex-col h-full -space-y-px -mt-[2px] -mr-px"
+      :class="{
+        'w-8': size === 'default',
+        'w-6': size === 'small',
+      }"
+    >
+      <StepButton ref="upButtonRef" direction="up" :size="size" @click="onStep(1)" />
+      <StepButton ref="downButtonRef" direction="down" :size="size" @click="onStep(-1)" />
     </section>
   </div>
 </template>
