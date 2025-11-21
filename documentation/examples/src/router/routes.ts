@@ -113,6 +113,12 @@ export default [
     meta: { group: "Data" },
   },
   {
+    path: "/panel-layout",
+    name: "PanelLayout",
+    component: () => import("../views/PanelLayout/index.vue"),
+    meta: { group: "Standrad" },
+  },
+  {
     path: "/pop-calendar",
     name: "PopCalendar",
     component: () => import("../views/PopCalendar/index.vue"),
