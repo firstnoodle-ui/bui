@@ -25,6 +25,7 @@ export * from "./nav-item";
 export * from "./notification";
 export * from "./notification-badge";
 export * from "./pagination";
+export * from "./panel-layout";
 export * from "./pop-calendar";
 export * from "./pop-confirm";
 export * from "./pop-select";
