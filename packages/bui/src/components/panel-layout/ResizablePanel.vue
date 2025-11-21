@@ -56,10 +56,6 @@ const borderClasses = computed(() => {
     classes.push('left-0 w-full h-1 cursor-ns-resize');
   }
 
-  classes.push( 
-    
-  );
-
   return classes;
 });
 
@@ -139,9 +135,9 @@ function onKeyDown(event: KeyboardEvent) {
 
   if (newSize !== props.size) {
     event.preventDefault();
-    const clampedWidth = clamp(newSize, props.minSize, props.maxSize);
-    if (clampedWidth !== props.size) {
-      emit("resize", clampedWidth);
+    const clampedSize = clamp(newSize, props.minSize, props.maxSize);
+    if (clampedSize !== props.size) {
+      emit("resize", clampedSize);
     }
   }
 }
