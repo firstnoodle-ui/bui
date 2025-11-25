@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import type { Placement } from "../../types/floating-ui";
 import type { TPopperTrigger } from "../types";
 import { BPopper } from "../popper";
+import { hide } from "@floating-ui/core";
 
 const props = withDefaults(defineProps<{
   bgColorClass?: string;
@@ -23,16 +25,24 @@ const props = withDefaults(defineProps<{
   trigger: "hover",
   triggerFullWidth: false,
 });
+
+const popperRef = ref<typeof BPopper>();
+defineExpose({ hide: () => {
+  if (popperRef.value) {
+    popperRef.value.close();
+  }
+} });
 </script>
 
 <template>
   <BPopper
+    ref="popperRef"
+    disable-click-outside
     :trigger="props.trigger"
     :open-delay="props.delay"
-    disable-click-outside
     :offset-options="{ offsetMain: props.offsetMain, offsetCross: props.offsetCross }"
-    :root-class="props.triggerFullWidth ? 'w-full flex' : 'inline-flex'"
-    :trigger-class="props.triggerFullWidth ? 'w-full flex' : 'inline-flex'"
+    :root-class="props.triggerFullWidth ? 'w-full flex overflow-hidden' : 'inline-flex overflow-hidden'"
+    :trigger-class="props.triggerFullWidth ? 'w-full flex overflow-hidden' : 'inline-flex overflow-hidden'"
     :placement="props.placement"
   >
     <slot />
