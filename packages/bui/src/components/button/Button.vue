@@ -49,9 +49,10 @@ const emit = defineEmits(["click", "blur"]);
 
 const component = ref<string>(props.routerLinkTo ? "router-link" : "button");
 const buttonRef = ref<HTMLButtonElement>();
+const tooltipRef = ref<typeof BTooltip>();
 
 const loadSpinnerClass = computed(() => {
-  const classes = ["w-4 h-4"];
+  const classes = ["flex-none size-4"];
   if (props.variant === "fill" || props.variant === "destructive") {
     classes.push("text-light");
   }
@@ -65,7 +66,10 @@ const loadSpinnerClass = computed(() => {
 });
 
 const buttonClasses = computed(() => {
-  const result = ["z-0 relative inline-flex items-center gap-1 leading-none border focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"];
+  const result = [
+    "z-0 relative overflow-hidden min-w-0 inline-flex items-center gap-1 border",
+    "focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+  ];
 
   // Set padding x.
   // Add extra if rounded and there is a label
@@ -193,6 +197,7 @@ const onClick = (event: MouseEvent) => {
       window.open(props.href, "_blank");
     }
     if (props.mailto) window.open(`mailto:${props.mailto}`);
+    if(props.tooltip) tooltipRef.value?.hide();
     emit("click");
   }
 };
@@ -203,7 +208,14 @@ defineExpose({ focus });
 </script>
 
 <template>
-  <BTooltip v-if="tooltip" hover :text="tooltip" :delay="tooltipDelay" :placement="tooltipPlacement" :trigger-full-width="fullwidth">
+  <BTooltip
+    v-if="tooltip"
+    ref="tooltipRef"
+    :text="tooltip"
+    :delay="tooltipDelay"
+    :placement="tooltipPlacement"
+    :trigger-full-width="fullwidth"
+  >
     <component
       :is="component"
       ref="buttonRef"
