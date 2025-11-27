@@ -19,7 +19,7 @@ const props = withDefaults(
     borders: false,
     startPanelDraggable: false,
     startPanelVisible: false,
-    startPanelSize: 256,
+    startPanelSize: 48,
     endPanelBgColorClass: "",
     endPanelDraggable: false,
     endPanelVisible: false,
@@ -95,7 +95,7 @@ onMounted(() => {
       <slot name="start-panel" />
     </ResizablePanel>
     <main
-      class="relative z-0 h-full overflow-x-hidden overflow-y-auto"
+      class="relative z-0 h-full overflow-hidden"
       :class="[props.mainPanelBgColorClass]"
       :style="mainPanelStyle"
     >
