@@ -28,20 +28,22 @@ const selectedIconAfter = ref<string | undefined>();
 
 <template>
   <ComponentPage>
-    <BButton
-      :small="isSmall"
-      :variant="(selectedVariant as ButtonVariant)"
-      :loading="isLoading"
-      :disabled="isDisabled"
-      :fullwidth="isFullwidth"
-      :space-between="isSpaceBetween"
-      :rounded="isRounded"
-      :focus="isFocused"
-      :notification="hasNotification"
-      :icon="(selectedIcon as TIcon)"
-      :icon-after="(selectedIconAfter as TIcon)"
-      :label="label"
-    />
+    <div class="w-40 overflow-hidden flex">
+      <BButton
+        :small="isSmall"
+        :variant="(selectedVariant as ButtonVariant)"
+        :loading="isLoading"
+        :disabled="isDisabled"
+        :fullwidth="isFullwidth"
+        :space-between="isSpaceBetween"
+        :rounded="isRounded"
+        :focus="isFocused"
+        :notification="hasNotification"
+        :icon="(selectedIcon as TIcon)"
+        :icon-after="(selectedIconAfter as TIcon)"
+        :label="label"
+      />
+    </div>
     <template #controls>
       <PropControlBoolean name="Small" :value="isSmall" @toggle="isSmall = !isSmall" />
       <PropControlBoolean name="Rounded" :value="isRounded" @toggle="isRounded = !isRounded" />
