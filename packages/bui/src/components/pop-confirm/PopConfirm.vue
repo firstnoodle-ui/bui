@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Placement } from "../../types/floating-ui";
+import type { OffsetOptions, Placement } from "../../types/floating-ui";
 import type { ConfirmCancelProps } from "../confirm-cancel/types";
 import type { ButtonVariant, TIcon } from "../types";
 import { nextTick, ref } from "vue";
@@ -10,6 +10,7 @@ withDefaults(
   defineProps<ConfirmCancelProps & {
     title?: string;
     description?: string;
+    offsetOptions?: Partial<OffsetOptions>;
     placement?: Placement;
     tagName?: string;
   }>(),
@@ -44,7 +45,14 @@ const onConfirm = () => {
 </script>
 
 <template>
-  <BPopper ref="popperRef" trigger="click" :placement="placement" @open="onOpen" @close="close">
+  <BPopper
+    ref="popperRef"
+    trigger="click"
+    :placement="placement"
+    :offset-options="offsetOptions || { mainAxis: 4 }"
+    @open="onOpen"
+    @close="close"
+  >
     <template #default="slotProps">
       <div class="inline-flex">
         <slot name="trigger" :visible="slotProps && slotProps.visible" />
