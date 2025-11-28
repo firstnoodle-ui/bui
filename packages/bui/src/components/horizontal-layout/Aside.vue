@@ -107,7 +107,7 @@ function onKeyDown(event: KeyboardEvent) {
       v-if="props.draggable"
       tabindex="0"
       :aria-label="`Resize ${props.side} panel`"
-      class="absolute top-0 h-full w-1 hover:border-action cursor-ew-resize"
+      class="absolute z-10 top-0 h-full w-1 hover:border-action cursor-ew-resize"
       :class="[
         props.side === 'left' ? 'right-0 border-r' : 'left-0 border-l',
         dragging ? 'border-action bg-action' : 'border-transparent bg-transparent hover:bg-tertiary focus:outline-none focus:border-action focus:bg-tertiary',

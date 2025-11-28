@@ -146,7 +146,6 @@ function onKeyDown(event: KeyboardEvent) {
 <template>
   <aside
     ref="aside"
-    tabindex="0"
     :style="{
       [orientation === 'horizontal' ? 'width' : 'height']: `${size}px`,
       transitionProperty: dragging ? 'none' : `transform, ${['left', 'right'].includes(placement) ? 'width' : 'height'}`,
@@ -159,7 +158,7 @@ function onKeyDown(event: KeyboardEvent) {
       v-if="props.draggable"
       tabindex="0"
       :aria-label="`Resize ${props.placement} panel`"
-      class="absolute hover:border-action"
+      class="absolute z-10 hover:border-action"
       :class="[
         borderClasses,
         dragging ? 'border-action bg-action' : 'border-transparent bg-transparent hover:bg-tertiary focus:outline-none focus:border-action focus:bg-tertiary',
