@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BHorizontalLayout, BPanelLayout, BScrollbar, BVerticalLayout } from "@firstnoodle-ui/bui";
+import { BHorizontalLayout, BPanelLayout, BScrollbar } from "@firstnoodle-ui/bui";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
 import Console from "./Console.vue";
@@ -29,32 +29,32 @@ const route = useRoute();
     </template>
     <template #aside-right>
       <aside class="w-full h-full border-l border-default">
-      <BPanelLayout
-        orientation="vertical"
-        start-panel-visible
-        end-panel-visible
-        end-panel-draggable
-        :end-panel-size="endPanelHeight"
-      >
-        <template #start-panel>
-          <header class="w-full h-12 flex items-center gap-1 px-4 border-b border-default ">
-            <span class="text-lg">❖</span>
-            <h5 class="text-primary">
-              {{ route.name || "No title" }}
-            </h5>
-          </header>
-        </template>
-        <template #main>
-          <BScrollbar disable-x>
-            <div class="p-8">
-              <slot name="controls" />
-            </div>
-          </BScrollbar>
-        </template>
-        <template #end-panel>
-          <Console ref="consoleRef" :visible="endPanelVisible" @toggle-visibility="endPanelVisible = !endPanelVisible" />
-        </template>
-      </BPanelLayout>
+        <BPanelLayout
+          orientation="vertical"
+          start-panel-visible
+          end-panel-visible
+          end-panel-draggable
+          :end-panel-size="endPanelHeight"
+        >
+          <template #start-panel>
+            <header class="w-full h-12 flex items-center gap-1 px-4 border-b border-default ">
+              <span class="text-lg">❖</span>
+              <h5 class="text-primary">
+                {{ route.name || "No title" }}
+              </h5>
+            </header>
+          </template>
+          <template #main>
+            <BScrollbar disable-x>
+              <div class="p-8">
+                <slot name="controls" />
+              </div>
+            </BScrollbar>
+          </template>
+          <template #end-panel>
+            <Console ref="consoleRef" :visible="endPanelVisible" @toggle-visibility="endPanelVisible = !endPanelVisible" />
+          </template>
+        </BPanelLayout>
       </aside>
     </template>
   </BHorizontalLayout>

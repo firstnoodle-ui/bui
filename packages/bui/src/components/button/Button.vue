@@ -68,7 +68,7 @@ const loadSpinnerClass = computed(() => {
 const buttonClasses = computed(() => {
   const result = [
     "z-0 relative overflow-hidden min-w-0 inline-flex items-center gap-1 border",
-    "focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white"
+    "focus:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-black dark:focus-visible:outline-white",
   ];
 
   // Set padding x.
@@ -197,7 +197,7 @@ const onClick = (event: MouseEvent) => {
       window.open(props.href, "_blank");
     }
     if (props.mailto) window.open(`mailto:${props.mailto}`);
-    if(props.tooltip) tooltipRef.value?.hide();
+    if (props.tooltip) tooltipRef.value?.hide();
     emit("click");
   }
 };

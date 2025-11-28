@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import type { Placement } from "../../types/floating-ui";
 import type { TPopperTrigger } from "../types";
+import { ref } from "vue";
 import { BPopper } from "../popper";
-import { hide } from "@floating-ui/core";
 
 const props = withDefaults(defineProps<{
   bgColorClass?: string;

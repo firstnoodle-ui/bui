@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BApplicationWrapper, BButton, BHorizontalLayout, BInput, BSideOver, BNavItem, BVerticalLayout, BFlexbox } from "@firstnoodle-ui/bui";
+import { BApplicationWrapper, BButton, BFlexbox, BHorizontalLayout, BInput, BNavItem, BSideOver, BVerticalLayout } from "@firstnoodle-ui/bui";
 import { computed, ref } from "vue";
 import { RouterView, useRouter } from "vue-router";
 import { useSearchShortcut } from "./composables/useSearchShortcut";
@@ -16,7 +16,7 @@ const filteredRoutes = computed(() => {
     return routes;
   }
   return routes.filter(route =>
-    route.name?.toLowerCase().includes(currentQuery.value.toLowerCase())
+    route.name?.toLowerCase().includes(currentQuery.value.toLowerCase()),
   );
 });
 const sideOverRef = ref<typeof BSideOver>();

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BButton, BVerticalLayout } from "@firstnoodle-ui/bui";
+import { BButton } from "@firstnoodle-ui/bui";
 import { nextTick, ref } from "vue";
 import LogItem from "./LogItem.vue";
 
@@ -7,7 +7,7 @@ defineProps<{
   visible: boolean;
 }>();
 
-const emits = defineEmits<{
+const emit = defineEmits<{
   (e: "toggle-visibility"): void;
 }>();
 
@@ -34,7 +34,7 @@ defineExpose({ log });
       </div>
       <div class="flex items-center gap-2">
         <BButton icon="trash" variant="outlineSubtle" @click="clear" />
-        <BButton :icon="visible ? 'chevron-down' : 'chevron-up'" variant="outlineSubtle" @click="$emit('toggle-visibility')" />
+        <BButton :icon="visible ? 'chevron-down' : 'chevron-up'" variant="outlineSubtle" @click="emit('toggle-visibility')" />
       </div>
     </section>
     <div class="w-full bg-primary text-primary font-mono text-xs p-3">

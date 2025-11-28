@@ -30,11 +30,12 @@ const rootClasses = computed(() => {
   let placementClass;
   let borderClass;
 
-  if(orientation.value === "horizontal") {
+  if (orientation.value === "horizontal") {
     placementClass = props.placement === "left" ? "left-0" : "right-0";
     placementClass += " top-0 h-full overflow-x-hidden";
     borderClass = props.border ? (props.placement === "left" ? "border-r border-default" : "border-l border-default") : "";
-  } else {
+  }
+  else {
     placementClass = props.placement === "top" ? "top-0" : "bottom-0";
     placementClass += " left-0 w-full overflow-y-hidden";
     borderClass = props.border ? (props.placement === "top" ? "border-b border-default" : "border-t border-default") : "";
@@ -46,14 +47,15 @@ const rootClasses = computed(() => {
 });
 
 const borderClasses = computed(() => {
-  let classes = [];
+  const classes = [];
 
-  if(orientation.value === "horizontal") {
+  if (orientation.value === "horizontal") {
     classes.push(props.placement === "left" ? "right-0 border-r" : "left-0 border-l");
-    classes.push('top-0 h-full w-1 cursor-ew-resize');
-  } else {
+    classes.push("top-0 h-full w-1 cursor-ew-resize");
+  }
+  else {
     classes.push(props.placement === "top" ? "bottom-0 border-b" : "top-0 border-t");
-    classes.push('left-0 w-full h-1 cursor-ns-resize');
+    classes.push("left-0 w-full h-1 cursor-ns-resize");
   }
 
   return classes;
@@ -64,7 +66,7 @@ let startSize: number;
 const dragging = ref(false);
 
 function startDrag(event: MouseEvent) {
-  const targetAxis = props.placement === "left" || props.placement === "right" ? "pageX" : "pageY"; 
+  const targetAxis = props.placement === "left" || props.placement === "right" ? "pageX" : "pageY";
   startPos = event[targetAxis];
   startSize = props.size;
   dragging.value = true;
@@ -76,9 +78,10 @@ function startDrag(event: MouseEvent) {
 function onDrag(event: MouseEvent) {
   let delta: number;
 
-  if(orientation.value === "vertical") {
+  if (orientation.value === "vertical") {
     delta = props.placement === "top" ? event.pageY - startPos : startPos - event.pageY;
-  } else {
+  }
+  else {
     delta = props.placement === "left" ? event.pageX - startPos : startPos - event.pageX;
   }
 
@@ -116,7 +119,8 @@ function onKeyDown(event: KeyboardEvent) {
     else if (event.key === "ArrowRight") {
       newSize = props.size - resizeStep;
     }
-  } else if (props.placement === "top") {
+  }
+  else if (props.placement === "top") {
     if (event.key === "ArrowUp") {
       newSize = props.size - resizeStep;
     }

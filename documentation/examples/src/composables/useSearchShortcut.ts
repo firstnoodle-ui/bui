@@ -1,19 +1,20 @@
-import { onMounted, onUnmounted, type Ref } from 'vue'
+import type { Ref } from "vue";
+import { onMounted, onUnmounted } from "vue";
 
 export function useSearchShortcut(showSearch: Ref<boolean>) {
   const handleKeydown = (event: KeyboardEvent) => {
     // Check for Cmd+K (Mac) or Ctrl+K (Windows/Linux)
-    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-      event.preventDefault()
-      showSearch.value = true
+    if ((event.metaKey || event.ctrlKey) && event.key === "k") {
+      event.preventDefault();
+      showSearch.value = true;
     }
-  }
+  };
 
   onMounted(() => {
-    window.addEventListener('keydown', handleKeydown)
-  })
+    window.addEventListener("keydown", handleKeydown);
+  });
 
   onUnmounted(() => {
-    window.removeEventListener('keydown', handleKeydown)
-  })
+    window.removeEventListener("keydown", handleKeydown);
+  });
 }

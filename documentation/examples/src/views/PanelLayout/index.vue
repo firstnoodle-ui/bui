@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { BPanelLayout } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
   PropControlBoolean,
-  PropControlNumber,
   PropControlSelect,
 } from "../../components";
-import { BPanelLayout } from "@firstnoodle-ui/bui";
 
 // PropControl state
 const borders = ref(true);
@@ -20,34 +19,39 @@ const startPanelDraggable = ref(true);
 const endPanelSize = ref(80);
 const endPanelVisible = ref(true);
 const endPanelDraggable = ref(true);
-
 </script>
 
 <template>
   <ComponentPage>
-    <template #default="{ print }">
-    <div style="height: 500px" class="flex-1 w-full border border-default">
-      <BPanelLayout
-        borders
-        :orientation="orientation"
-        :start-panel-size="startPanelSize"
-        :end-panel-size="endPanelSize"
-        :start-panel-visible="startPanelVisible"
-        :end-panel-visible="endPanelVisible"
-        :start-panel-draggable="startPanelDraggable"
-        :end-panel-draggable="endPanelDraggable"
+    <template #default>
+      <div style="height: 500px" class="flex-1 w-full border border-default">
+        <BPanelLayout
+          borders
+          :orientation="orientation"
+          :start-panel-size="startPanelSize"
+          :end-panel-size="endPanelSize"
+          :start-panel-visible="startPanelVisible"
+          :end-panel-visible="endPanelVisible"
+          :start-panel-draggable="startPanelDraggable"
+          :end-panel-draggable="endPanelDraggable"
         >
-        <template #start-panel>
-            <div class="p-4">Start</div>
-        </template>
-        <template #main>
-            <div class="p-4">Main Content Area</div>
-        </template>
-        <template #end-panel>
-            <div class="p-4">End</div>
-        </template>
-      </BPanelLayout>
-    </div>
+          <template #start-panel>
+            <div class="p-4">
+              Start
+            </div>
+          </template>
+          <template #main>
+            <div class="p-4">
+              Main Content Area
+            </div>
+          </template>
+          <template #end-panel>
+            <div class="p-4">
+              End
+            </div>
+          </template>
+        </BPanelLayout>
+      </div>
     </template>
     <template #controls>
       <PropControlBoolean name="Borders" :value="borders" @toggle="borders = !borders">

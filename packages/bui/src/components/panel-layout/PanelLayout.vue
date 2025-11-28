@@ -13,7 +13,7 @@ const props = withDefaults(
     endPanelVisible?: boolean;
     endPanelSize?: number;
     mainPanelBgColorClass?: string;
-    orientation: "horizontal" | "vertical";
+    orientation?: "horizontal" | "vertical";
   }>(),
   {
     borders: false,
@@ -42,8 +42,8 @@ const paddingEnd = ref(props.endPanelSize);
 
 // handle both horizontal and vertical layouts
 const mainPanelStyle = computed(() => ({
-  [(props.orientation === 'horizontal' ? 'paddingLeft' : 'paddingTop')]: `${paddingStart.value}px`,
-  [(props.orientation === 'horizontal' ? 'paddingRight' : 'paddingBottom')]: `${paddingEnd.value}px`,
+  [(props.orientation === "horizontal" ? "paddingLeft" : "paddingTop")]: `${paddingStart.value}px`,
+  [(props.orientation === "horizontal" ? "paddingRight" : "paddingBottom")]: `${paddingEnd.value}px`,
 }));
 
 const onFirstPanelResize = (size: number) => (localStartPanelSize.value = paddingStart.value = size);

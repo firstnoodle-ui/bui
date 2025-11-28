@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    TreeDiagram
+  TreeDiagram
 </template>
