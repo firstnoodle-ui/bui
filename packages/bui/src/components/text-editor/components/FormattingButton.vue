@@ -29,15 +29,15 @@ const emit = defineEmits(["click"]);
       justify="center"
       class="h-8 gap-2 rounded-lg border border-transparent focus:outline-hidden focus:border-strong"
       :class="{
-        'bg-4 text-primary font-bold': active && !highlight,
-        'bg-4 text-action border border-subtle': highlight,
+        'bg-tertiary text-primary font-bold': active && !highlight,
+        'bg-tertiary text-action border border-default': highlight,
         'text-tertiary bg-transparent': !active && !disabled && !highlight,
-        'hover:bg-5': !disabled,
+        'hover:bg-secondary': !disabled,
         'text-muted': disabled && !highlight,
         'w-8': icon && !label,
         'px-2': label,
       }"
-      @click.stop.prevent="!disabled && emit('click')"
+      @click="!disabled && emit('click')"
     >
       <BIcon v-if="icon" :name="icon" />
       <span v-if="label" class="text-xs leading-none">{{ label }}</span>
