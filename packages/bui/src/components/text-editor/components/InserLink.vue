@@ -1,77 +1,79 @@
 <script setup lang="ts">
+import type { Mark } from "prosemirror-model";
 import { computed, ref } from "vue";
-import { type Mark } from 'prosemirror-model';
-import FormattingButton from './FormattingButton.vue';
-import { BPopper, BPopperContent } from '../../popper';
-import { BConfirmCancel } from '../../confirm-cancel';
-import { BInput } from '../../input';
+import { BConfirmCancel } from "../../confirm-cancel";
+import { BInput } from "../../input";
+import { BPopper, BPopperContent } from "../../popper";
 import { getCurrentWord, replaceCurrentWord } from "../utils.ts";
+import FormattingButton from "./FormattingButton.vue";
 
 const props = defineProps<{ editor: any }>();
 const emit = defineEmits<{
-  (e: "cancel"): void, 
-  (e: "inserted"): void,
-  (e: "updateTargets", elements: HTMLElement[]): void,
+  (e: "cancel"): void;
+  (e: "inserted"): void;
+  (e: "updateTargets", elements: HTMLElement[]): void;
 }>();
 
 const popperRef = ref<typeof BPopper>();
 
 const displayNameRef = ref<typeof BInput>();
-const displayName = ref('');
+const displayName = ref("");
 const onDisplayNameChange = (value: string) => (displayName.value = value);
 const onDisplayNameEnter = () => {
-  if(inputsAreValid.value) onInsertLink();
+  if (inputsAreValid.value) onInsertLink();
   else linkAddressRef.value?.focus();
 };
 
-const linkAddress = ref('');
+const linkAddress = ref("");
 const linkAddressRef = ref<typeof BInput>();
 const onLinkAddressChange = (value: string) => (linkAddress.value = value);
 const onLinkAddressEnter = () => {
-  if(inputsAreValid.value) onInsertLink();
+  if (inputsAreValid.value) onInsertLink();
 };
 
 const inputsAreValid = computed(() => {
-  if(!linkAddress.value || !displayName.value) return false;
+  if (!linkAddress.value || !displayName.value) return false;
   return linkAddress.value?.trim().length > 0 && displayName.value?.trim().length > 0;
 });
 
 const wordFromCursor = ref(false);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const onOpen = ([_trigger, popper]: [HTMLElement, HTMLElement]) => {
 
   const { state, view } = props.editor;
   const { empty, from } = state.selection;
 
   const $pos = state.doc.resolve(from);
-  const link = $pos.marks().find((mark:Mark) => mark.type.name === 'link')
-  if(link) {
+  const link = $pos.marks().find((mark: Mark) => mark.type.name === "link");
+  if (link) {
     linkAddress.value = link.attrs.href;
-  } else if(!empty) {
+  }
+  else if (!empty) {
     const { from, to } = view.state.selection;
     displayName.value = state.doc.textBetween(from, to, "");
-  } else {
+  }
+  else {
     displayName.value = getCurrentWord(props.editor) || "";
     wordFromCursor.value = true;
   }
 
-  if(!!displayName.value.trim().length) {
+  if (displayName.value.trim().length) {
     linkAddressRef.value?.focus();
-  } else {
+  }
+  else {
     displayNameRef.value?.focus();
   }
 
   // make sure clickoutside is updated on parent popper
   emit("updateTargets", [popper]);
-}
+};
 
-// update parents popper targets for clickOutside 
+// update parents popper targets for clickOutside
 const onClose = () => emit("updateTargets", []);
 
 const reset = () => {
-  linkAddress.value = '';
-  displayName.value = '';
+  linkAddress.value = "";
+  displayName.value = "";
 };
 
 const onInsertLink = () => {
@@ -81,11 +83,11 @@ const onInsertLink = () => {
 
   if (linkAddress.value) {
 
-
     props.editor.chain().focus().extendMarkRange("link").setLink({ href: linkAddress.value }).run();
-    if(wordFromCursor.value) {
+    if (wordFromCursor.value) {
       replaceCurrentWord(props.editor, displayName.value);
-    } else {
+    }
+    else {
       const transaction = props.editor.state.tr.insertText(displayName.value);
       props.editor.view.dispatch(transaction);
     }
@@ -103,7 +105,9 @@ const onInsertLink = () => {
     </template>
     <template #content="{ close }">
       <BPopperContent class="p-4 flex flex-col gap-4">
-        <p class="text-sm">Insert link</p>
+        <p class="text-sm">
+          Insert link
+        </p>
         <section class="space-y-1">
           <div style="font-size: 11px;" class="text-secondary font-medium">
             Text to display
@@ -134,7 +138,7 @@ const onInsertLink = () => {
           confirm-label="Insert"
           :confirm-disabled="!inputsAreValid"
           @confirm="onInsertLink"
-          @cancel="reset();close()" 
+          @cancel="reset();close()"
         />
       </BPopperContent>
     </template>

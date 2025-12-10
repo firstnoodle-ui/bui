@@ -22,10 +22,10 @@ const { content, placeholder = "Write text.." } = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "blur"): void,
-  (e: "change", value:string): void,
-  (e: "editor-ready"): void,
-  (e: "focus"): void
+  (e: "blur"): void;
+  (e: "change", value: string): void;
+  (e: "editor-ready"): void;
+  (e: "focus"): void;
 }>();
 
 const editorFocussed = ref(false);

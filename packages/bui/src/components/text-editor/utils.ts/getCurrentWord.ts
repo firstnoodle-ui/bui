@@ -23,4 +23,4 @@ export const getCurrentWord = (editor: any): string | null => {
 
   const word = text.slice(start + 1, end);
   return word || null;
-}
+};

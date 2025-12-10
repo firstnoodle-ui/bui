@@ -1,4 +1,4 @@
-import { Transaction } from 'prosemirror-state';
+import type { Transaction } from "prosemirror-state";
 
 export const replaceCurrentWord = (editor: any, replacement: string) => {
   const { state } = editor;
@@ -26,9 +26,9 @@ export const replaceCurrentWord = (editor: any, replacement: string) => {
   editor
     .chain()
     .focus()
-    .command(({ tr }:{ tr:Transaction }) => {
+    .command(({ tr }: { tr: Transaction }) => {
       tr.insertText(replacement, wordStart, wordEnd);
       return true;
     })
     .run();
-}
+};

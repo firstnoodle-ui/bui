@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted } from "vue";
-import { type ScrollIntersectionEvent, BButton, BFormattingButton, BFormattingMenuDivider, BInsertLink, BScrollbar, BTiptapEditor } from "@firstnoodle-ui/bui";
-import { useClickOutside } from "@firstnoodle-ui/bui";
-import { ref } from "vue";
+import type { ScrollIntersectionEvent } from "@firstnoodle-ui/bui";
+import { BButton, BFormattingButton, BFormattingMenuDivider, BInsertLink, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const content = ref("");
 const editorRef = ref<typeof BTiptapEditor>();
@@ -15,20 +14,20 @@ onMounted(() => enableClickOutside([inputRef.value!]));
 onBeforeUnmount(() => disableClickOutside());
 
 const scrollYActive = ref(false);
-const onScrollYActive = (active:boolean) => scrollYActive.value = active;
+const onScrollYActive = (active: boolean) => scrollYActive.value = active;
 const touchingBottom = ref(false);
 const touchingTop = ref(false);
-const onIntersect = (e:ScrollIntersectionEvent) => {
-  if(e.edge === "top") touchingTop.value = e.hit;
-  if(e.edge === "bottom") touchingBottom.value = e.hit;
-}
+const onIntersect = (e: ScrollIntersectionEvent) => {
+  if (e.edge === "top") touchingTop.value = e.hit;
+  if (e.edge === "bottom") touchingBottom.value = e.hit;
+};
 </script>
 
 <template>
   <section class="h-full w-full p-16">
     <main class="max-w-3xl mx-auto">
-      <div ref="inputRef" @click="focussed = true" class="border rounded-xl overflow-hidden" :class="{ 'border-default': !focussed, 'border-action shadow-sm': focussed }">
-        <header class="flex items-center justify-between border-b p-1" :class="{ 'border-transparent': !scrollYActive, 'border-default': scrollYActive}">
+      <div ref="inputRef" class="border rounded-xl overflow-hidden" :class="{ 'border-default': !focussed, 'border-action shadow-sm': focussed }" @click="focussed = true">
+        <header class="flex items-center justify-between border-b p-1" :class="{ 'border-transparent': !scrollYActive, 'border-default': scrollYActive }">
           <nav class="flex items-center gap-0.5">
             <BFormattingButton icon="bold" :active="editorRef?.editor.isActive('bold')" @click="editorRef?.toggleBold" />
             <BFormattingButton icon="italics" :active="editorRef?.editor.isActive('italic')" @click="editorRef?.toggleItalic" />
@@ -39,7 +38,7 @@ const onIntersect = (e:ScrollIntersectionEvent) => {
             <BFormattingButton icon="bullet-list" :active="editorRef?.editor.isActive('bulletList')" @click="editorRef?.toggleBulletList" />
             <BFormattingButton icon="numbered-list" :active="editorRef?.editor.isActive('orderedList')" @click="editorRef?.toggleOrderedList" />
             <BFormattingButton icon="indent-left" :disabled="Boolean(!editorRef?.editor.can().liftListItem('listItem'))" @click="editorRef?.indentLeft" />
-            <BFormattingButton  icon="indent-right" :disabled="Boolean(!editorRef?.editor.can().sinkListItem('listItem'))" @click="editorRef?.indentRight" />
+            <BFormattingButton icon="indent-right" :disabled="Boolean(!editorRef?.editor.can().sinkListItem('listItem'))" @click="editorRef?.indentRight" />
             <BFormattingMenuDivider />
             <BInsertLink v-if="editorRef" :editor="editorRef.editor" @update-targets="updateClickOutside" />
           </nav>
@@ -49,16 +48,17 @@ const onIntersect = (e:ScrollIntersectionEvent) => {
             show
             disable-x
             class="max-h-30"
-            @scroll-y-active="onScrollYActive"
-            @intersect="onIntersect"
             :class="{
               'shadow-[inset_0_-10px_10px_-10px_rgba(0,0,0,0.05)]': scrollYActive && !touchingBottom,
               'shadow-[inset_0_10px_10px_-10px_rgba(0,0,0,0.05)]': scrollYActive && !touchingTop,
-            }">
+            }"
+            @scroll-y-active="onScrollYActive"
+            @intersect="onIntersect"
+          >
             <BTiptapEditor ref="editorRef" :content="content" placeholder="Description" class="text-sm px-3 py-2" @focus="editorFocussed = true" @blur="editorFocussed = false" />
           </BScrollbar>
         </main>
-        <footer class="flex items-center justify-between border-t p-1" :class="{ 'border-transparent': !scrollYActive, 'border-default': scrollYActive}">
+        <footer class="flex items-center justify-between border-t p-1" :class="{ 'border-transparent': !scrollYActive, 'border-default': scrollYActive }">
           <section class="flex px-1 items-center gap-2">
             <BButton
               small
@@ -85,13 +85,14 @@ const onIntersect = (e:ScrollIntersectionEvent) => {
             />
             <BButton
               :variant="focussed ? 'fill' : 'outlineSubtle'"
-              rounded icon="arrow-up" />
+              rounded icon="arrow-up"
+            />
           </section>
         </footer>
       </div>
       <footer style="font-size: 11px" class="h-6 pl-4 flex items-center text-red-500">
         <span>Please give your question a title</span>
-      </footer> 
+      </footer>
     </main>
   </section>
 </template>
