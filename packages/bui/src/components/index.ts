@@ -42,6 +42,7 @@ export * from "./tag-input";
 export * from "./text-editor";
 export * from "./text-highlight";
 export * from "./text-viewer";
+export * from "./tiptap-editor";
 export * from "./toggle-button";
 export * from "./tooltip";
 export * from "./tree-list";
