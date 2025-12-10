@@ -1,4 +1,3 @@
-export { default as Editor } from "./Editor.vue";
 export { default as FormattingButton } from "./FormattingButton.vue";
 export { default as FormattingMenuDivider } from "./FormattingMenuDivider.vue";
 export { default as InsertLink } from "./InserLink.vue";
