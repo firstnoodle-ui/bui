@@ -32,6 +32,7 @@ export * from "./pop-select";
 export * from "./popper";
 export * from "./screen-overlay";
 export * from "./scrollbar";
+export * from "./segmented-controls";
 export * from "./select-list";
 export * from "./side-over";
 export * from "./status-select";

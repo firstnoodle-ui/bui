@@ -143,6 +143,12 @@ export default [
     meta: { group: "Poppers" },
   },
   {
+    path: "/segmented-controls",
+    name: "SegmentedControls",
+    component: () => import("../views/SegmentedControls/index.vue"),
+    meta: { group: "Not sure" },
+  },
+  {
     path: "/select-list",
     name: "SelectList",
     component: () => import("../views/SelectList/index.vue"),

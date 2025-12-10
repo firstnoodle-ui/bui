@@ -1,18 +1,29 @@
+<script setup lang="ts">
+import { type Segment } from './types';
+import { BFlexbox } from '../flexbox';
+import SegmentButton from './SegmentButton.vue';
+
+
+const { selectedSegment } = defineProps<{
+  segments: Segment[];
+  selectedSegment: Segment;
+}>();
+
+const emit = defineEmits<{
+  (e: "select", segment: Segment): void
+}>();
+
+const getSegmentActiveState = (segment:Segment) => segment.label === selectedSegment.label;
+</script>
+
 <template>
-  TODO
-  <!-- From CT -->
-  <!-- <BFlexbox class="gap-0.5 p-1 rounded-lg bg-secondary">
-    <button
-    class="cursor-pointer h-6 px-2 flex items-center gap-2 rounded"
-    :class="{
-    'text-muted bg-pink-400 hover:bg-white hover:text-tertiary':
-    userSettings.themeId !== ThemeEnum.LIGHT,
-    'bg-primary shadow-xs text-primary': userSettings.themeId === ThemeEnum.LIGHT,
-    }"
-    @click="setUserSetting({ themeId: ThemeEnum.LIGHT })"
-    >
-    <BIcon name="sun" />
-    <p class="text-xs">Light</p>
-    </button>
-  </BFlexbox> -->
+  <BFlexbox class="gap-0.5 p-1 rounded-lg bg-secondary">
+    <SegmentButton
+      v-for="segment in segments"
+      :key="segment.label"
+      :segment="segment"
+      :active="getSegmentActiveState(segment)"
+      @click="emit('select', segment)"
+    />
+  </BFlexbox>
 </template>
