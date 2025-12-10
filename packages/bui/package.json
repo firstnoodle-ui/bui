@@ -68,6 +68,8 @@
     "@tiptap/extension-underline": "^2.11.7",
     "@tiptap/vue-3": "^2.11.7",
     "debounce": "^2.2.0",
+    "prosemirror-model": "^1.25.4",
+    "prosemirror-state": "^1.4.4",
     "vue-router": "4"
   },
   "devDependencies": {
