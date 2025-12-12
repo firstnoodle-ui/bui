@@ -8,7 +8,6 @@ const fileInputRef = ref<HTMLInputElement>();
 
 const handleFileSelect = (event: Event) => {
   const file = (event.target as HTMLInputElement).files?.[0];
-  console.log(event);
   if (!file) return;
 
   const reader = new FileReader();

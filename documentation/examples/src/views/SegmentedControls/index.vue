@@ -25,7 +25,14 @@ const onSelect = (segment: Segment) => selectedSegment.value = segment;
   <ComponentPage>
     <template #default="{ print }">
       <section class="flex items-center space-x-2">
-        <BSegmentedControls :segments="segments" :selected-segment="selectedSegment" @select="onSelect" />
+        <BSegmentedControls
+          :segments="segments"
+          :selected-segment="selectedSegment"
+          @select="(segment) => {
+            print(segment.label!)
+            onSelect(segment);
+          }"
+        />
       </section>
     </template>
     <template #controls>
