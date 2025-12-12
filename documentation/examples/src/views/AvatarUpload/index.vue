@@ -12,7 +12,6 @@ const avatarUrl = ref<string | null>(null);
 const size = ref(120);
 const cropShape = ref<"circle" | "square">("circle");
 const disabled = ref(false);
-const placeholder = ref("Upload Avatar");
 </script>
 
 <template>
@@ -24,7 +23,6 @@ const placeholder = ref("Upload Avatar");
           :size="size"
           :crop-shape="cropShape"
           :disabled="disabled"
-          :placeholder="placeholder"
           @change="(value: string | null) => {
             print(`Avatar changed: ${value ? 'Image uploaded' : 'Image removed'}`);
           }"
@@ -48,11 +46,6 @@ const placeholder = ref("Upload Avatar");
         name="Disabled"
         :value="disabled"
         @toggle="disabled = !disabled"
-      />
-      <PropControlString
-        name="Placeholder"
-        :value="placeholder"
-        @change="(value: string) => placeholder = value"
       />
     </template>
   </ComponentPage>

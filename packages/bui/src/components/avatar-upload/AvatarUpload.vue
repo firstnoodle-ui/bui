@@ -7,17 +7,13 @@ const props = withDefaults(
     modelValue?: string | null;
     size?: number;
     disabled?: boolean;
-    placeholder?: string;
     cropShape?: "circle" | "square";
-    aspectRatio?: number;
   }>(),
   {
     modelValue: null,
     size: 120,
     disabled: false,
-    placeholder: "Upload Avatar",
     cropShape: "circle",
-    aspectRatio: 1,
   },
 );
 
@@ -258,8 +254,8 @@ const handleZoom = (delta: number) => {
   }
 };
 
-const zoomIn = () => handleZoom(0.2);
-const zoomOut = () => handleZoom(-0.2);
+const zoomIn = () => handleZoom(0.1);
+const zoomOut = () => handleZoom(-0.1);
 
 const cropImage = () => {
   if (!originalImage.value || !canvasRef.value) return;
@@ -353,28 +349,8 @@ const cancelCrop = () => {
         v-if="!disabled"
         class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
       >
-        <BIcon name="camera" class="text-white size-8" />
+        <BIcon name="edit" class="text-white size-8" />
       </div>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="flex gap-2">
-      <BButton
-        :disabled="disabled"
-        variant="outline"
-        small
-        label="Upload"
-        icon="photo"
-        @click="openFileDialog"
-      />
-      <BButton
-        v-if="previewUrl"
-        :disabled="disabled"
-        variant="textSubtle"
-        small
-        icon="close"
-        @click="removeAvatar"
-      />
     </div>
 
     <!-- Hidden File Input -->
@@ -457,29 +433,40 @@ const cancelCrop = () => {
                 }"
               />
             </div>
+            <div class="absolute top-4 left-0 w-full flex justify-center">
+              <div class="flex items-center h-8 px-3 rounded-full bg-primary text-sm text-primary">Drag to reposition</div> 
+            </div>
+            <div class="absolute bottom-4 left-0 w-full flex justify-center gap-1">
+              <section class="bg-primary rounded-lg overflow-hidden">
+                <BButton
+                  variant="outlineSubtle"
+                  class="z-0 hover:z-10 focus:z-10 active:z-10 "
+                  :style="{ borderRadius: '8px 0 0 8px' }"
+                  icon="dash"
+                  :disabled="scale <= minScale"
+                  @click="zoomOut"
+                />
+                <BButton
+                  variant="outlineSubtle"
+                  class="z-0 hover:z-10 focus:z-10 active:z-10 -ml-px"
+                  :style="{ borderRadius: '0px 8px 8px 0px' }"
+                  icon="plus"
+                  :disabled="scale >= 3"
+                  @click="zoomIn"
+                />
+              </section>
+            </div>
           </div>
 
           <!-- Zoom Controls -->
           <div class="flex items-center gap-3">
-            <p class="text-sm text-secondary">
-              Drag to reposition
-            </p>
-            <div class="flex gap-1">
               <BButton
-                variant="outline"
-                small
-                icon="dash"
-                :disabled="scale <= minScale"
-                @click="zoomOut"
+                :disabled="disabled"
+                variant="outlineSubtle"
+                label="Upload"
+                icon="photo"
+                @click="openFileDialog"
               />
-              <BButton
-                variant="outline"
-                small
-                icon="plus"
-                :disabled="scale >= 3"
-                @click="zoomIn"
-              />
-            </div>
           </div>
 
           <!-- Hidden canvas for processing -->
@@ -490,7 +477,7 @@ const cancelCrop = () => {
       <template #footer>
         <div class="flex items-center justify-end gap-2 w-full">
           <BButton variant="textSubtle" label="Cancel" @click="cancelCrop" />
-          <BButton variant="fill" label="Apply" @click="cropImage" />
+          <BButton variant="fill" label="Save" @click="cropImage" />
         </div>
       </template>
     </BModal>
