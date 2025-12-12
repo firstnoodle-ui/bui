@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { ScrollIntersectionEvent } from "@firstnoodle-ui/bui";
-import { BButton, BFormattingButton, BFormattingMenuDivider, BInsertLink, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
+import { BButton, BFormattingButton, BFormattingMenuDivider, BInsertLink, BInsertImage, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
-const content = ref("");
+const content = ref("### Hello");
 const editorRef = ref<typeof BTiptapEditor>();
 
 const inputRef = ref<HTMLDivElement>();
@@ -21,6 +21,7 @@ const onIntersect = (e: ScrollIntersectionEvent) => {
   if (e.edge === "top") touchingTop.value = e.hit;
   if (e.edge === "bottom") touchingBottom.value = e.hit;
 };
+const onChange = (content:string) => console.log(content);
 </script>
 
 <template>
@@ -41,13 +42,14 @@ const onIntersect = (e: ScrollIntersectionEvent) => {
             <BFormattingButton icon="indent-right" :disabled="Boolean(!editorRef?.editor.can().sinkListItem('listItem'))" @click="editorRef?.indentRight" />
             <BFormattingMenuDivider />
             <BInsertLink v-if="editorRef" :editor="editorRef.editor" @update-targets="updateClickOutside" />
+            <BInsertImage v-if="editorRef" :editor="editorRef.editor" />
           </nav>
         </header>
-        <main class="max-h-30">
+        <main class="">
           <BScrollbar
             show
             disable-x
-            class="max-h-30"
+            class="max-h-96"
             :class="{
               'shadow-[inset_0_-10px_10px_-10px_rgba(0,0,0,0.05)]': scrollYActive && !touchingBottom,
               'shadow-[inset_0_10px_10px_-10px_rgba(0,0,0,0.05)]': scrollYActive && !touchingTop,
@@ -55,7 +57,15 @@ const onIntersect = (e: ScrollIntersectionEvent) => {
             @scroll-y-active="onScrollYActive"
             @intersect="onIntersect"
           >
-            <BTiptapEditor ref="editorRef" :content="content" placeholder="Description" class="text-sm px-3 py-2" @focus="editorFocussed = true" @blur="editorFocussed = false" />
+            <BTiptapEditor
+              ref="editorRef"
+              :content="content"
+              placeholder="Description"
+              class="text-sm px-3 py-2"
+              @focus="editorFocussed = true"
+              @blur="editorFocussed = false"
+              @change="onChange"
+            />
           </BScrollbar>
         </main>
         <footer class="flex items-center justify-between border-t p-1" :class="{ 'border-transparent': !scrollYActive, 'border-default': scrollYActive }">
@@ -81,7 +91,7 @@ const onIntersect = (e: ScrollIntersectionEvent) => {
             <BButton
               rounded
               icon="agent-message"
-              variant="text"
+              :variant="focussed ? 'text' : 'textSubtle'"
             />
             <BButton
               :variant="focussed ? 'fill' : 'outlineSubtle'"

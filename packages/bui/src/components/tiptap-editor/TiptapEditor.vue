@@ -5,6 +5,7 @@ import Document from "@tiptap/extension-document";
 import heading from "@tiptap/extension-heading";
 import highlight from "@tiptap/extension-highlight";
 import history from "@tiptap/extension-history";
+import image from "@tiptap/extension-image";
 import italic from "@tiptap/extension-italic";
 import link from "@tiptap/extension-link";
 import listItem from "@tiptap/extension-list-item";
@@ -13,7 +14,9 @@ import Paragraph from "@tiptap/extension-paragraph";
 import Placeholder from "@tiptap/extension-placeholder";
 import Text from "@tiptap/extension-text";
 import underline from "@tiptap/extension-underline";
+import { Markdown } from '@tiptap/markdown';
 import { EditorContent, useEditor } from "@tiptap/vue-3";
+import { PasteImage } from "../text-editor/utils.ts";
 import { ref } from "vue";
 
 const { content, placeholder = "Write text.." } = defineProps<{
@@ -38,6 +41,7 @@ const editor = useEditor({
     heading,
     highlight,
     history,
+    image,
     italic,
     link,
     listItem,
@@ -45,11 +49,13 @@ const editor = useEditor({
     underline,
     Document,
     Paragraph,
+    PasteImage,
     Text,
+    Markdown,
     Placeholder.configure({ placeholder }),
   ],
   onCreate: () => emit("editor-ready"),
-  onUpdate: ({ editor }) => emit("change", editor.getHTML()),
+  onUpdate: ({ editor }) => emit("change", editor.getMarkdown()),
   onFocus: () => {
     editorFocussed.value = true;
     emit("focus");
@@ -58,6 +64,7 @@ const editor = useEditor({
     editorFocussed.value = false;
     emit("blur");
   },
+  contentType: 'markdown',
 });
 
 const focusPositions = ["start", "end", "all"] as const;
