@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ScrollIntersectionEvent } from "@firstnoodle-ui/bui";
-import { BButton, BFormattingButton, BFormattingMenuDivider, BInsertLink, BInsertImage, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
+import { BButton, BFormattingButton, BFormattingMenuDivider, BInsertImage, BInsertLink, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const content = ref("### Hello");
@@ -21,7 +21,7 @@ const onIntersect = (e: ScrollIntersectionEvent) => {
   if (e.edge === "top") touchingTop.value = e.hit;
   if (e.edge === "bottom") touchingBottom.value = e.hit;
 };
-const onChange = (content:string) => console.log(content);
+const onChange = (content: string) => console.log(content);
 </script>
 
 <template>

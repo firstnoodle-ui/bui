@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { type Segment } from './types';
-import { BFlexbox } from '../flexbox';
-import SegmentButton from './SegmentButton.vue';
-
+import type { Segment } from "./types";
+import { BFlexbox } from "../flexbox";
+import SegmentButton from "./SegmentButton.vue";
 
 const { selectedSegment } = defineProps<{
   segments: Segment[];
@@ -10,10 +9,10 @@ const { selectedSegment } = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "select", segment: Segment): void
+  (e: "select", segment: Segment): void;
 }>();
 
-const getSegmentActiveState = (segment:Segment) => segment.label === selectedSegment.label;
+const getSegmentActiveState = (segment: Segment) => segment.label === selectedSegment.label;
 </script>
 
 <template>

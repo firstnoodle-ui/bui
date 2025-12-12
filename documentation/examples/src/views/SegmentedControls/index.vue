@@ -1,26 +1,24 @@
 <script setup lang="ts">
-import { BSegmentedControls, type Segment } from "@firstnoodle-ui/bui";
+import type { Segment } from "@firstnoodle-ui/bui";
+import { BSegmentedControls } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
-  PropControlBoolean,
-  PropControlSelect,
 } from "../../components";
 
-const segments:Segment[] = [
-    {
-        icon: "agent",
-        label: "Agents"
-    },
-    {
-        icon: "box",
-        label: "Products"
-    },
+const segments: Segment[] = [
+  {
+    icon: "agent",
+    label: "Agents",
+  },
+  {
+    icon: "box",
+    label: "Products",
+  },
 ];
 
 const selectedSegment = ref<Segment>(segments[0]);
-const onSelect = (segment:Segment) => selectedSegment.value = segment;
-
+const onSelect = (segment: Segment) => selectedSegment.value = segment;
 </script>
 
 <template>
@@ -28,7 +26,6 @@ const onSelect = (segment:Segment) => selectedSegment.value = segment;
     <template #default="{ print }">
       <section class="flex items-center space-x-2">
         <BSegmentedControls :segments="segments" :selected-segment="selectedSegment" @select="onSelect" />
-
       </section>
     </template>
     <template #controls>

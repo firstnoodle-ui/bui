@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import FormattingButton from './FormattingButton.vue';
+import FormattingButton from "./FormattingButton.vue";
 
 const { editor } = defineProps<{ editor: any }>();
 
@@ -31,10 +31,10 @@ const onOpenFilebrowser = () => {
     @click="onOpenFilebrowser"
   />
   <input
+    ref="fileInputRef"
     type="file"
     accept="image/*"
-    ref="fileInputRef"
     style="display: none"
     @change="handleFileSelect"
-  />
+  >
 </template>

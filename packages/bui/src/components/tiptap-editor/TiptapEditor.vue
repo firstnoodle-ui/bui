@@ -14,10 +14,10 @@ import Paragraph from "@tiptap/extension-paragraph";
 import Placeholder from "@tiptap/extension-placeholder";
 import Text from "@tiptap/extension-text";
 import underline from "@tiptap/extension-underline";
-import { Markdown } from '@tiptap/markdown';
+import { Markdown } from "@tiptap/markdown";
 import { EditorContent, useEditor } from "@tiptap/vue-3";
-import { PasteImage } from "../text-editor/utils.ts";
 import { ref } from "vue";
+import { PasteImage } from "../text-editor/utils.ts";
 
 const { content, placeholder = "Write text.." } = defineProps<{
   content: string;
@@ -64,7 +64,7 @@ const editor = useEditor({
     editorFocussed.value = false;
     emit("blur");
   },
-  contentType: 'markdown',
+  contentType: "markdown",
 });
 
 const focusPositions = ["start", "end", "all"] as const;
