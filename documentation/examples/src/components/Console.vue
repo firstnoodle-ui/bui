@@ -37,7 +37,7 @@ defineExpose({ log });
         <BButton :icon="visible ? 'chevron-down' : 'chevron-up'" variant="outlineSubtle" @click="emit('toggle-visibility')" />
       </div>
     </section>
-    <div class="w-full bg-primary text-primary font-mono text-xs p-3">
+    <div class="w-full overflow-hidden text-wrap bg-primary text-primary font-mono text-xs p-3">
       <LogItem v-for="(entry, index) in logs" :key="index" :data="entry" />
     </div>
   </footer>

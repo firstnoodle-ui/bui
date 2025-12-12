@@ -25,6 +25,7 @@ const disabled = ref(false);
           :disabled="disabled"
           @change="(value: string | null) => {
             print(`Avatar changed: ${value ? 'Image uploaded' : 'Image removed'}`);
+            print(value || '...');
           }"
         />
       </div>

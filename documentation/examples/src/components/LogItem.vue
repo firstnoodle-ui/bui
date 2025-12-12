@@ -31,7 +31,7 @@ function toggle() {
     </div>
 
     <div v-else>
-      <span class="text-yellow-400">{{ formattedValue }}</span>
+      <span class="text-yellow-400 w-full text-wrap whitespace-normal">{{ formattedValue }}</span>
     </div>
 
     <div v-if="expanded && isObject" class="pl-4 border-l border-green-600 mt-1">
