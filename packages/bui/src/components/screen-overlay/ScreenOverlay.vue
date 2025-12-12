@@ -42,7 +42,7 @@ onBeforeMount(() => {
   >
     <div
       v-show="show"
-      class="z-40 fixed w-screen h-screen top-0 left-0 flex items-start justify-center pointer-events-auto"
+      class="z-40 fixed w-screen h-screen top-0 left-0 flex items-center justify-center pointer-events-auto p-4"
       :class="classes"
       :style="styles"
       @mousedown.self="emit('click')"

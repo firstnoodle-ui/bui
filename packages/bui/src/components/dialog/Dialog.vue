@@ -32,7 +32,7 @@ defineExpose({ close });
 
 <template>
   <Teleport :to="target">
-    <BScreenOverlay :show="show" :type="overlayType" class="p-2 md:pt-32" @click="onClose" @close="emit('close')">
+    <BScreenOverlay :show="show" :type="overlayType" @click="onClose" @close="emit('close')">
       <BFadeInUp @transition-after-enter="emit('open')">
         <BWindowFrame v-show="show" ref="windowRef" class="h-64 max-w-2xl md:w-1/2 md:max-w-lg p-4 md:px-8">
           <BVerticalLayout>

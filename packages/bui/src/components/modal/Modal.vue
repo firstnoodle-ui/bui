@@ -69,7 +69,6 @@ defineExpose({ close });
     <BScreenOverlay
       :show="show"
       :type="overlayType"
-      :class="props.expandVertically ? 'p-2 md:p-12' : 'p-2 md:pt-32'"
       @click="onClose"
       @close="emit('close')"
     >
