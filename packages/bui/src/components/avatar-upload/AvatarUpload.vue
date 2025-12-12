@@ -152,9 +152,7 @@ const handleMouseUp = () => {
   window.removeEventListener('mouseup', handleMouseUp);
 };
 
-const handleWheel = (event: WheelEvent) => {
-  event.preventDefault();
-  const delta = event.deltaY * -0.001;
+const handleZoom = (delta: number) => {
   const newScale = Math.max(minScale.value, Math.min(scale.value + delta, 3));
 
   if (newScale !== scale.value) {
@@ -192,6 +190,9 @@ const handleWheel = (event: WheelEvent) => {
     imageY.value = newY;
   }
 };
+
+const zoomIn = () => handleZoom(0.2);
+const zoomOut = () => handleZoom(-0.2);
 
 const cropImage = () => {
   if (!originalImage.value || !canvasRef.value) return;
@@ -327,7 +328,6 @@ const cancelCrop = () => {
             :class="{ 'cursor-grabbing': isDragging, 'cursor-grab': !isDragging }"
             :style="{ width: `${containerSize}px`, height: `${containerSize}px` }"
             @mousedown="handleMouseDown"
-            @wheel="handleWheel"
           >
             <!-- Image -->
             <img
@@ -386,10 +386,28 @@ const cancelCrop = () => {
             </div>
           </div>
 
-          <!-- Instructions -->
-          <p class="text-sm text-secondary text-center">
-            Drag to reposition • Scroll to zoom
-          </p>
+          <!-- Zoom Controls -->
+          <div class="flex items-center gap-3">
+            <p class="text-sm text-secondary">
+              Drag to reposition
+            </p>
+            <div class="flex gap-1">
+              <BButton
+                variant="outline"
+                small
+                icon="dash"
+                :disabled="scale <= minScale"
+                @click="zoomOut"
+              />
+              <BButton
+                variant="outline"
+                small
+                icon="plus"
+                :disabled="scale >= 3"
+                @click="zoomIn"
+              />
+            </div>
+          </div>
 
           <!-- Hidden canvas for processing -->
           <canvas ref="canvasRef" class="hidden" />
