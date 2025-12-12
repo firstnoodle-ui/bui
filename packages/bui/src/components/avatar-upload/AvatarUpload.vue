@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { BButton, BIcon, BModal } from "../";
+import { BButton, BFlexbox, BIcon, BModal } from "../";
 
 const props = withDefaults(
   defineProps<{
@@ -43,7 +43,7 @@ const imageWidth = ref(0);
 const imageHeight = ref(0);
 const imageX = ref(0); // Image position relative to container
 const imageY = ref(0);
-const containerSize = 500;
+const containerSize = 510;
 
 watch(
   () => props.modelValue,
@@ -363,7 +363,13 @@ const cancelCrop = () => {
     >
 
     <!-- Crop Modal -->
-    <BModal v-if="originalImage" ref="cropModalRef" title="Crop Avatar" @close="cancelCrop">
+    <BModal
+      v-if="originalImage"
+      ref="cropModalRef"
+      title="Crop Avatar"
+      width-class="max-w-xl"
+      @close="cancelCrop"
+    >
       <template #main>
         <div class="flex flex-col items-center gap-4 p-4">
           <!-- Crop Canvas -->
@@ -458,27 +464,25 @@ const cancelCrop = () => {
             </div>
           </div>
 
-          <!-- Zoom Controls -->
-          <div class="flex items-center gap-3">
-              <BButton
-                :disabled="disabled"
-                variant="outlineSubtle"
-                label="Upload"
-                icon="photo"
-                @click="openFileDialog"
-              />
-          </div>
-
           <!-- Hidden canvas for processing -->
           <canvas ref="canvasRef" class="hidden" />
         </div>
       </template>
 
       <template #footer>
-        <div class="flex items-center justify-end gap-2 w-full">
-          <BButton variant="textSubtle" label="Cancel" @click="cancelCrop" />
-          <BButton variant="fill" label="Save" @click="cropImage" />
-        </div>
+        <BFlexbox class="w-full" justify="between">
+          <BButton
+            :disabled="disabled"
+            variant="outlineSubtle"
+            label="Upload"
+            icon="photo"
+            @click="openFileDialog"
+          />
+          <div class="flex items-center gap-2">
+            <BButton variant="textSubtle" label="Cancel" @click="cancelCrop" />
+            <BButton variant="fill" label="Save" @click="cropImage" />
+          </div>
+        </BFlexbox>
       </template>
     </BModal>
   </div>
