@@ -371,7 +371,7 @@ const cancelCrop = () => {
       @close="cancelCrop"
     >
       <template #main>
-        <div class="flex flex-col items-center gap-4 p-4">
+        <div class="flex flex-col items-center gap-4 pb-8">
           <!-- Crop Canvas -->
           <div
             class="relative bg-slate-100 dark:bg-slate-800 overflow-hidden select-none"
@@ -445,20 +445,20 @@ const cancelCrop = () => {
             <div class="absolute bottom-4 left-0 w-full flex justify-center gap-1">
               <section class="bg-primary rounded-lg overflow-hidden">
                 <BButton
+                  icon="plus"
                   variant="outlineSubtle"
                   class="z-0 hover:z-10 focus:z-10 active:z-10 "
+                  :disabled="scale >= 3"
                   :style="{ borderRadius: '8px 0 0 8px' }"
-                  icon="dash"
-                  :disabled="scale <= minScale"
-                  @click="zoomOut"
+                  @click="zoomIn"
                 />
                 <BButton
+                  icon="dash"
                   variant="outlineSubtle"
                   class="z-0 hover:z-10 focus:z-10 active:z-10 -ml-px"
+                  :disabled="scale <= minScale"
                   :style="{ borderRadius: '0px 8px 8px 0px' }"
-                  icon="plus"
-                  :disabled="scale >= 3"
-                  @click="zoomIn"
+                  @click="zoomOut"
                 />
               </section>
             </div>
