@@ -1,5 +1,6 @@
 export * from "./application-wrapper";
 export * from "./aside-section-label";
+export * from "./avatar-upload";
 export * from "./button";
 export * from "./button-group";
 export * from "./calendar-view";

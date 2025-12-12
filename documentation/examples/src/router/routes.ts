@@ -5,6 +5,12 @@ export default [
     component: () => import("../views/Playground/index.vue"),
   },
   {
+    path: "/avatar-upload",
+    name: "AvatarUpload",
+    component: () => import("../views/AvatarUpload/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/button",
     name: "Button",
     component: () => import("../views/Button/index.vue"),
