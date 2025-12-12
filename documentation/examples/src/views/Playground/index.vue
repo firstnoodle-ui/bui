@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ScrollIntersectionEvent } from "@firstnoodle-ui/bui";
-import { BButton, BFormattingButton, BFormattingMenuDivider, BInsertLink, BInsertImage, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
+import { BButton, BFormattingButton, BFormattingMenuDivider, BInsertImage, BInsertLink, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const content = ref("### Hello");
