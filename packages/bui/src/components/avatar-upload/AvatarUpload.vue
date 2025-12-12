@@ -112,6 +112,9 @@ const handleMouseDown = (event: MouseEvent) => {
   isDragging.value = true;
   dragStartX.value = event.clientX - imageX.value;
   dragStartY.value = event.clientY - imageY.value;
+
+  window.addEventListener('mousemove', handleMouseMove);
+  window.addEventListener('mouseup', handleMouseUp);
 };
 
 const handleMouseMove = (event: MouseEvent) => {
@@ -145,6 +148,8 @@ const handleMouseMove = (event: MouseEvent) => {
 
 const handleMouseUp = () => {
   isDragging.value = false;
+  window.removeEventListener('mousemove', handleMouseMove);
+  window.removeEventListener('mouseup', handleMouseUp);
 };
 
 const handleWheel = (event: WheelEvent) => {
@@ -322,9 +327,6 @@ const cancelCrop = () => {
             :class="{ 'cursor-grabbing': isDragging, 'cursor-grab': !isDragging }"
             :style="{ width: `${containerSize}px`, height: `${containerSize}px` }"
             @mousedown="handleMouseDown"
-            @mousemove="handleMouseMove"
-            @mouseup="handleMouseUp"
-            @mouseleave="handleMouseUp"
             @wheel="handleWheel"
           >
             <!-- Image -->
