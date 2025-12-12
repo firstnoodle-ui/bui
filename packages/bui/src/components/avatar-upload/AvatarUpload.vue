@@ -35,7 +35,7 @@ const originalImageDataUrl = ref<string | null>(null); // Store the original unc
 const previewUrl = ref<string | null>(props.modelValue);
 
 // Crop state (crop area stays centered and fixed)
-const cropSize = ref(200);
+const cropSize = ref(100);
 const isDragging = ref(false);
 const dragStartX = ref(0);
 const dragStartY = ref(0);
@@ -47,7 +47,7 @@ const imageWidth = ref(0);
 const imageHeight = ref(0);
 const imageX = ref(0); // Image position relative to container
 const imageY = ref(0);
-const containerSize = 400;
+const containerSize = 500;
 
 watch(
   () => props.modelValue,
@@ -79,17 +79,20 @@ const handleAvatarClick = () => {
       imageWidth.value = img.width;
       imageHeight.value = img.height;
 
-      // Calculate initial scale to fit container
-      const scaleToFit = Math.min(containerSize / img.width, containerSize / img.height);
-      minScale.value = scaleToFit;
-      scale.value = scaleToFit;
+      // Set crop size (70% of container)
+      cropSize.value = containerSize * 0.5;
 
-      // Set crop size (70% of the smaller dimension)
-      const displayWidth = img.width * scale.value;
-      const displayHeight = img.height * scale.value;
-      cropSize.value = Math.min(displayWidth, displayHeight) * 0.7;
+      // Calculate minimum scale to ensure image can cover the crop area
+      const minScaleForCrop = Math.max(cropSize.value / img.width, cropSize.value / img.height);
+      minScale.value = minScaleForCrop;
+
+      // Start with a scale that fits the image in container but not smaller than minScale
+      const scaleToFit = Math.min(containerSize / img.width, containerSize / img.height);
+      scale.value = Math.max(scaleToFit, minScaleForCrop);
 
       // Center the image
+      const displayWidth = img.width * scale.value;
+      const displayHeight = img.height * scale.value;
       imageX.value = (containerSize - displayWidth) / 2;
       imageY.value = (containerSize - displayHeight) / 2;
     };
@@ -117,17 +120,25 @@ const handleFileSelect = (event: Event) => {
         imageWidth.value = img.width;
         imageHeight.value = img.height;
 
-        // Calculate initial scale to fit container
-        const scaleToFit = Math.min(containerSize / img.width, containerSize / img.height);
-        minScale.value = scaleToFit;
-        scale.value = scaleToFit;
+        console.log(imageWidth.value, imageHeight.value);
+        console.log('aspect ratio: ', imageWidth.value/imageHeight.value);
 
-        // Set crop size (70% of the smaller dimension)
-        const displayWidth = img.width * scale.value;
-        const displayHeight = img.height * scale.value;
-        cropSize.value = Math.min(displayWidth, displayHeight) * 0.7;
+        // Set crop size (70% of container)
+        cropSize.value = containerSize * 0.7;
+
+        // Calculate minimum scale to ensure image can cover the crop area
+        const minScaleForCrop = Math.max(cropSize.value / img.width, cropSize.value / img.height);
+        minScale.value = minScaleForCrop;
+
+        // Start with a scale that fits the image in container but not smaller than minScale
+        const scaleToFit = Math.min(containerSize / img.width, containerSize / img.height);
+        scale.value = Math.max(scaleToFit, minScaleForCrop);
 
         // Center the image
+        const displayWidth = img.width * scale.value;
+        const displayHeight = img.height * scale.value;
+
+        console.log('new aspect ratio: ', displayWidth/displayHeight);
         imageX.value = (containerSize - displayWidth) / 2;
         imageY.value = (containerSize - displayHeight) / 2;
 
@@ -168,9 +179,19 @@ const handleMouseMove = (event: MouseEvent) => {
     const cropTop = cropCenterY - cropSize.value / 2;
     const cropBottom = cropCenterY + cropSize.value / 2;
 
+    // console.group('crop');
+    // console.log(cropCenterX);
+    // console.log(cropCenterY);
+    // console.log(cropLeft);
+    // console.log(cropRight);
+    // console.log(cropTop);
+    // console.log(cropBottom);
+    // console.groupEnd();
+
     // Constrain image so crop area never goes outside image bounds
     const displayWidth = imageWidth.value * scale.value;
     const displayHeight = imageHeight.value * scale.value;
+
 
     // The image must always cover the crop area
     newX = Math.min(newX, cropLeft); // Image can't be too far right
@@ -180,6 +201,15 @@ const handleMouseMove = (event: MouseEvent) => {
 
     imageX.value = newX;
     imageY.value = newY;
+
+    console.table([
+      { field: "cropLeft", value: cropLeft },
+      { field: "cropRight", value: cropRight },
+      { field: "scaled imageWidth", value: imageWidth.value * scale.value },
+      { field: "scaled imageHeight", value: imageHeight.value * scale.value },
+      { field: "imageX", value: imageX.value },
+      { field: "imageY", value: imageY.value },
+    ]);
   }
 };
 
@@ -197,34 +227,34 @@ const handleZoom = (delta: number) => {
     scale.value = newScale;
 
     // Calculate the center of the crop area
-    const cropCenterX = containerSize / 2;
-    const cropCenterY = containerSize / 2;
+    // const cropCenterX = containerSize / 2;
+    // const cropCenterY = containerSize / 2;
 
     // Adjust image position to keep the crop area centered on the same part of the image
     const newDisplayWidth = imageWidth.value * newScale;
     const newDisplayHeight = imageHeight.value * newScale;
 
     // Calculate where the crop center was in the old image coordinates
-    const cropCenterInImageX = (cropCenterX - imageX.value) / oldScale;
-    const cropCenterInImageY = (cropCenterY - imageY.value) / oldScale;
+    // const cropCenterInImageX = (cropCenterX - imageX.value) / oldScale;
+    // const cropCenterInImageY = (cropCenterY - imageY.value) / oldScale;
 
     // Calculate new image position to keep the same point under the crop center
-    let newX = cropCenterX - (cropCenterInImageX * newScale);
-    let newY = cropCenterY - (cropCenterInImageY * newScale);
+    // let newX = cropCenterX - (cropCenterInImageX * newScale);
+    // let newY = cropCenterY - (cropCenterInImageY * newScale);
 
     // Constrain image position
-    const cropLeft = cropCenterX - cropSize.value / 2;
-    const cropRight = cropCenterX + cropSize.value / 2;
-    const cropTop = cropCenterY - cropSize.value / 2;
-    const cropBottom = cropCenterY + cropSize.value / 2;
+    // const cropLeft = cropCenterX - cropSize.value / 2;
+    // const cropRight = cropCenterX + cropSize.value / 2;
+    // const cropTop = cropCenterY - cropSize.value / 2;
+    // const cropBottom = cropCenterY + cropSize.value / 2;
 
-    newX = Math.min(newX, cropLeft);
-    newX = Math.max(newX, cropRight - newDisplayWidth);
-    newY = Math.min(newY, cropTop);
-    newY = Math.max(newY, cropBottom - newDisplayHeight);
+    // newX = Math.min(newX, cropLeft);
+    // newX = Math.max(newX, cropRight - newDisplayWidth);
+    // newY = Math.min(newY, cropTop);
+    // newY = Math.max(newY, cropBottom - newDisplayHeight);
 
-    imageX.value = newX;
-    imageY.value = newY;
+    // imageX.value = newX;
+    // imageY.value = newY;
   }
 };
 
@@ -368,12 +398,9 @@ const cancelCrop = () => {
             @mousedown="handleMouseDown"
           >
             <!-- Image -->
-            <img
+            <div
               v-if="originalImage"
-              ref="imageRef"
-              :src="originalImage.src"
-              alt="Original"
-              class="absolute pointer-events-none"
+              class="absolute border border-yellow-300 pointer-events-none"
               :style="{
                 width: `${imageWidth * scale}px`,
                 height: `${imageHeight * scale}px`,
@@ -381,6 +408,14 @@ const cancelCrop = () => {
                 top: `${imageY}px`,
               }"
             >
+              <img
+                v-if="originalImage"
+                ref="imageRef"
+                :src="originalImage.src"
+                alt="Original"
+                class="w-full h-full"
+              />
+            </div>
 
             <!-- Crop Overlay -->
             <div class="absolute inset-0 pointer-events-none">
