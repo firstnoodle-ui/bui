@@ -31,6 +31,7 @@ const canvasRef = ref<HTMLCanvasElement>();
 const imageRef = ref<HTMLImageElement>();
 const cropModalRef = ref<typeof BModal>();
 const originalImage = ref<HTMLImageElement | null>(null);
+const originalImageDataUrl = ref<string | null>(null); // Store the original uncropped image
 const previewUrl = ref<string | null>(props.modelValue);
 
 // Crop state (crop area stays centered and fixed)
@@ -67,6 +68,38 @@ const openFileDialog = () => {
   }
 };
 
+const handleAvatarClick = () => {
+  if (props.disabled) return;
+
+  // If there's already an image and we have the original, open crop modal with original image
+  if (previewUrl.value && originalImageDataUrl.value) {
+    const img = new Image();
+    img.onload = () => {
+      originalImage.value = img;
+      imageWidth.value = img.width;
+      imageHeight.value = img.height;
+
+      // Calculate initial scale to fit container
+      const scaleToFit = Math.min(containerSize / img.width, containerSize / img.height);
+      minScale.value = scaleToFit;
+      scale.value = scaleToFit;
+
+      // Set crop size (70% of the smaller dimension)
+      const displayWidth = img.width * scale.value;
+      const displayHeight = img.height * scale.value;
+      cropSize.value = Math.min(displayWidth, displayHeight) * 0.7;
+
+      // Center the image
+      imageX.value = (containerSize - displayWidth) / 2;
+      imageY.value = (containerSize - displayHeight) / 2;
+    };
+    img.src = originalImageDataUrl.value;
+  } else {
+    // No image yet, open file dialog
+    openFileDialog();
+  }
+};
+
 const handleFileSelect = (event: Event) => {
   const target = event.target as HTMLInputElement;
   const file = target.files?.[0];
@@ -74,6 +107,10 @@ const handleFileSelect = (event: Event) => {
   if (file && file.type.startsWith("image/")) {
     const reader = new FileReader();
     reader.onload = (e) => {
+      const dataUrl = e.target?.result as string;
+      // Store the original image data URL
+      originalImageDataUrl.value = dataUrl;
+
       const img = new Image();
       img.onload = () => {
         originalImage.value = img;
@@ -99,7 +136,7 @@ const handleFileSelect = (event: Event) => {
           // Modal component will be rendered
         }, 10);
       };
-      img.src = e.target?.result as string;
+      img.src = dataUrl;
     };
     reader.readAsDataURL(file);
   }
@@ -256,6 +293,7 @@ const cropImage = () => {
 
 const removeAvatar = () => {
   previewUrl.value = null;
+  originalImageDataUrl.value = null;
   emit("update:modelValue", null);
   emit("change", null);
 };
@@ -273,7 +311,7 @@ const cancelCrop = () => {
       :style="avatarStyle"
       class="relative overflow-hidden bg-tertiary border border-default flex items-center justify-center cursor-pointer group"
       :class="{ 'opacity-50 cursor-not-allowed': disabled }"
-      @click="openFileDialog"
+      @click="handleAvatarClick"
     >
       <img v-if="previewUrl" :src="previewUrl" alt="Avatar" class="w-full h-full object-cover">
       <div v-else class="text-secondary">
