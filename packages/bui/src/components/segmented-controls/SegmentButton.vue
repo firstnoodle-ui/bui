@@ -14,8 +14,8 @@ const emit = defineEmits<{ (e: "click"): void }>();
   <button
     class="cursor-pointer h-6 px-2 flex items-center gap-2 rounded"
     :class="{
-      'text-muted bg-secondary hover:bg-tertiary hover:text-tertiary': !active,
-      'bg-tertiary shadow-xs text-primary': active,
+      'text-tertiary dark:text-muted bg-secondary hover:bg-tertiary hover:text-tertiary': !active,
+      'bg-primary dark:bg-tertiary shadow-xs text-primary': active,
     }"
     @click="emit('click')"
   >
