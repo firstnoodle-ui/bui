@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { BButton, BFlexbox, BIcon, BModal } from "../";
+import { BButton, BConfirmCancel, BFlexbox, BIcon, BModal } from "../";
 
 const props = withDefaults(
   defineProps<{
@@ -221,36 +221,6 @@ const handleZoom = (delta: number) => {
   if (newScale !== scale.value) {
     const oldScale = scale.value;
     scale.value = newScale;
-
-    // Calculate the center of the crop area
-    // const cropCenterX = containerSize / 2;
-    // const cropCenterY = containerSize / 2;
-
-    // Adjust image position to keep the crop area centered on the same part of the image
-    const newDisplayWidth = imageWidth.value * newScale;
-    const newDisplayHeight = imageHeight.value * newScale;
-
-    // Calculate where the crop center was in the old image coordinates
-    // const cropCenterInImageX = (cropCenterX - imageX.value) / oldScale;
-    // const cropCenterInImageY = (cropCenterY - imageY.value) / oldScale;
-
-    // Calculate new image position to keep the same point under the crop center
-    // let newX = cropCenterX - (cropCenterInImageX * newScale);
-    // let newY = cropCenterY - (cropCenterInImageY * newScale);
-
-    // Constrain image position
-    // const cropLeft = cropCenterX - cropSize.value / 2;
-    // const cropRight = cropCenterX + cropSize.value / 2;
-    // const cropTop = cropCenterY - cropSize.value / 2;
-    // const cropBottom = cropCenterY + cropSize.value / 2;
-
-    // newX = Math.min(newX, cropLeft);
-    // newX = Math.max(newX, cropRight - newDisplayWidth);
-    // newY = Math.min(newY, cropTop);
-    // newY = Math.max(newY, cropBottom - newDisplayHeight);
-
-    // imageX.value = newX;
-    // imageY.value = newY;
   }
 };
 
@@ -340,8 +310,9 @@ const cancelCrop = () => {
       @click="handleAvatarClick"
     >
       <img v-if="previewUrl" :src="previewUrl" alt="Avatar" class="w-full h-full object-cover">
-      <div v-else class="text-secondary">
-        <BIcon name="user" :class="`size-[${size * 0.4}px]`" />
+      <div v-else class="flex flex-col items-center gap-2 text-xs italic text-secondary">
+        <BIcon name="user" />
+        <span class="text-center">Click to add an avatar</span>
       </div>
 
       <!-- Hover Overlay -->
@@ -374,7 +345,7 @@ const cancelCrop = () => {
         <div class="flex flex-col items-center gap-4 pb-8">
           <!-- Crop Canvas -->
           <div
-            class="relative bg-slate-100 dark:bg-slate-800 overflow-hidden select-none"
+            class="relative bg-slate-100 dark:bg-slate-800 overflow-hidden select-none transition-all"
             :class="{ 'cursor-grabbing': isDragging, 'cursor-grab': !isDragging }"
             :style="{ width: `${containerSize}px`, height: `${containerSize}px` }"
             @mousedown="handleMouseDown"
@@ -479,8 +450,14 @@ const cancelCrop = () => {
             @click="openFileDialog"
           />
           <div class="flex items-center gap-2">
-            <BButton variant="textSubtle" label="Cancel" @click="cancelCrop" />
-            <BButton variant="fill" label="Save" @click="cropImage" />
+            <BConfirmCancel
+              order="confirm-last"
+              confirm-icon="check"
+              confirm-label="Save"
+              cancel-variant="text"
+              @cancel="cancelCrop"
+              @confirm="cropImage"
+            />
           </div>
         </BFlexbox>
       </template>
