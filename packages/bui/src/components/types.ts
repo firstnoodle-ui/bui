@@ -161,6 +161,7 @@ export const icons = [
   "italics",
   "itenary",
   "keyboard",
+  "key-return",
   "lightning",
   "link",
   "list-collapse",

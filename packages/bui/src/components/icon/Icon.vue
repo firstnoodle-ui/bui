@@ -565,6 +565,10 @@ defineProps<{ name: TIcon }>();
       <path fill-rule="evenodd" clip-rule="evenodd" d="M13 7H16V10H13V7ZM14 8H15V9H14V8Z" />
     </template>
 
+    <template v-else-if="name === 'key-return'">
+      <path d="M11.5 4C12.3284 4 13 4.67157 13 5.5V8.5C13 9.32843 12.3284 10 11.5 10H4.20703L6.35352 12.1465L5.64648 12.8535L2.29297 9.5L5.64648 6.14648L6.35352 6.85352L4.20703 9H11.5C11.7761 9 12 8.77614 12 8.5V5.5C12 5.22386 11.7761 5 11.5 5H8V4H11.5Z" />
+    </template>
+
     <template v-else-if="name === 'lightning'">
       <g clip-path="url(#clip0_1_808)">
         <!-- <mask id="mask0_1_808" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" :width="16" :height="16">
