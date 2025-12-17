@@ -55,6 +55,7 @@
     "@tiptap/extension-bold": "^3.13.0",
     "@tiptap/extension-bullet-list": "^3.13.0",
     "@tiptap/extension-document": "^3.13.0",
+    "@tiptap/extension-hard-break": "^3.13.0",
     "@tiptap/extension-heading": "^3.13.0",
     "@tiptap/extension-highlight": "^3.13.0",
     "@tiptap/extension-history": "^3.13.0",
