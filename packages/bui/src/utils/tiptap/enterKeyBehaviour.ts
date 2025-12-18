@@ -5,6 +5,7 @@ export const enterKeyBehaviour = Extension.create<{
   onEnter?: (content: string) => void;
 }>({
       name: "enterKeyBehaviour",
+      priority: 1000,
       addOptions() {
         return {
           onEnter: undefined,
@@ -40,8 +41,42 @@ export const enterKeyBehaviour = Extension.create<{
             }
           },
           "Shift-Enter": () => {
-            this.storage.hasUsedNewline = true;
-            return this.editor.commands.setHardBreak();
+            // this.storage.hasUsedNewline = true;
+            (this.editor.commands as any).setHasUsedNewline(true);
+            // if (this.editor.isActive('heading')) {
+            //   return this.editor.commands.splitBlock();
+            // }
+            // return false;
+
+            const editor = this.editor;
+
+            // 1️⃣ Heading → exit heading
+            if (editor.isActive("heading")) {
+              return editor.commands.splitBlock();
+            }
+
+            // 2️⃣ List → let ProseMirror handle it
+            if (
+              editor.isActive("bulletList") ||
+              editor.isActive("orderedList") ||
+              editor.isActive("listItem")
+            ) {
+              return false;
+            }
+
+            // 3️⃣ Code block → newline
+            if (editor.isActive("codeBlock")) {
+              return editor.commands.insertContent("\n");
+            }
+
+            // 4️⃣ Paragraph → hard break
+            if (editor.isActive("paragraph")) {
+              return editor.commands.splitBlock();
+              // return editor.commands.setHardBreak();
+            }
+
+            // 5️⃣ Fallback → default
+            return false;
           },
           "Mod-Enter": () => {
             this.options.onEnter?.(this.editor.getMarkdown());
@@ -51,7 +86,7 @@ export const enterKeyBehaviour = Extension.create<{
         };
       },
       onUpdate({ editor }) {
-        if (this.storage.hasUsedNewLine) return;
+        if (this.storage.hasUsedNewline) return;
 
         // Check if cursor is inside a list
         this.storage.isInList =
