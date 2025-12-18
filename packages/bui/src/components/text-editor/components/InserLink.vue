@@ -4,7 +4,7 @@ import { computed, ref } from "vue";
 import { BConfirmCancel } from "../../confirm-cancel";
 import { BInput } from "../../input";
 import { BPopper, BPopperContent } from "../../popper";
-import { getCurrentWord, replaceCurrentWord } from "../utils.ts";
+import { getCurrentWord, replaceCurrentWord } from "../../../utils/tiptap";
 import FormattingButton from "./FormattingButton.vue";
 
 const props = defineProps<{ editor: any }>();
