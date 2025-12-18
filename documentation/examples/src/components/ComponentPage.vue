@@ -10,14 +10,6 @@ const endPanelVisible = ref(true);
 const endPanelHeight = computed(() => endPanelVisible.value ? 200 : 48);
 
 const route = useRoute();
-
-const onResize = (size: number) => console.log("Aside left resize:", size);
-const onResizeStart = () => console.log("Aside left resize start");
-const onResizeEnd = () => console.log("Aside left resize end");
-
-const onEndPanelResize = (size: number) => console.log("Console panel resize:", size);
-const onEndPanelResizeStart = () => console.log("Console panel resize start");
-const onEndPanelResizeEnd = () => console.log("Console panel resize end");
 </script>
 
 <template>
@@ -25,9 +17,6 @@ const onEndPanelResizeEnd = () => console.log("Console panel resize end");
     aside-right-visible
     aside-right-draggable
     :aside-right-width="700"
-    @aside-right-resize-start="onResizeStart"
-    @aside-right-resize="onResize"
-    @aside-right-resize-end="onResizeEnd"
   >
     <template #main>
       <BScrollbar disable-x>
@@ -46,9 +35,6 @@ const onEndPanelResizeEnd = () => console.log("Console panel resize end");
           end-panel-visible
           end-panel-draggable
           :end-panel-size="endPanelHeight"
-          @end-panel-resize="onEndPanelResize"
-          @end-panel-resize-end="onEndPanelResizeEnd"
-          @end-panel-resize-start="onEndPanelResizeStart"
         >
           <template #start-panel>
             <header class="w-full h-12 flex items-center gap-1 px-4 border-b border-default ">
