@@ -29,7 +29,16 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(["start-panel-transition-end", "end-panel-transition-end"]);
+const emit = defineEmits<{
+  (e: "start-panel-resize", size: number): void;
+  (e: "start-panel-resize-end"): void;
+  (e: "start-panel-resize-start"): void;
+  (e: "start-panel-transition-end"): void;
+  (e: "end-panel-resize", size: number): void;
+  (e: "end-panel-resize-end"): void;
+  (e: "end-panel-resize-start"): void;
+  (e: "end-panel-transition-end"): void;
+}>();
 
 // Resizing is when one of the asides is resized by dragging - then we remove transition classes
 const resizing = ref(false);
@@ -46,10 +55,35 @@ const mainPanelStyle = computed(() => ({
   [(props.orientation === "horizontal" ? "paddingRight" : "paddingBottom")]: `${paddingEnd.value}px`,
 }));
 
-const onFirstPanelResize = (size: number) => (localStartPanelSize.value = paddingStart.value = size);
-const onFirstPanelTransition = (transitioning: boolean) => !transitioning && emit("start-panel-transition-end");
-const onLastPanelResize = (size: number) => (localEndPanelSize.value = paddingEnd.value = size);
-const onLastPanelTransition = (transitioning: boolean) => !transitioning && emit("end-panel-transition-end");
+// Start panel events
+const onStartPanelResizeEnd = () => {
+  resizing.value = false;
+  emit("start-panel-resize-end");
+};
+const onStartPanelResizeStart = () => {
+  resizing.value = true;
+  emit("start-panel-resize-start");
+};
+const onStartPanelResize = (size: number) => {
+  localStartPanelSize.value = paddingStart.value = size;
+  emit("start-panel-resize", size);
+};
+const onStartPanelTransitionEnd = (transitioning: boolean) => !transitioning && emit("start-panel-transition-end");
+
+// End panel events 
+const onEndPanelResizeEnd = () => {
+  resizing.value = false;
+  emit("end-panel-resize-end");
+};
+const onEndPanelResizeStart = () => {
+  resizing.value = true;
+  emit("end-panel-resize-start");
+};
+const onEndPanelResize = (size: number) => {
+  localEndPanelSize.value = paddingEnd.value = size;
+  emit("end-panel-resize", size);
+};
+const onEndPanelTransitionEnd = (transitioning: boolean) => !transitioning && emit("end-panel-transition-end");
 
 // For transitioning the padding on <main>
 watch(
@@ -87,10 +121,10 @@ onMounted(() => {
       :border="props.borders"
       :draggable="startPanelDraggable"
       :size="localStartPanelSize"
-      @resize-start="resizing = true"
-      @resize="onFirstPanelResize"
-      @resize-end="resizing = false"
-      @transitioning="onFirstPanelTransition"
+      @resize-start="onStartPanelResizeStart"
+      @resize="onStartPanelResize"
+      @resize-end="onStartPanelResizeEnd"
+      @transitioning="onStartPanelTransitionEnd"
     >
       <slot name="start-panel" />
     </ResizablePanel>
@@ -107,10 +141,10 @@ onMounted(() => {
       :border="props.borders"
       :draggable="endPanelDraggable"
       :size="localEndPanelSize"
-      @resize-start="resizing = true"
-      @resize="onLastPanelResize"
-      @resize-end="resizing = false"
-      @transitioning="onLastPanelTransition"
+      @resize-start="onEndPanelResizeStart"
+      @resize="onEndPanelResize"
+      @resize-end="onEndPanelResizeEnd"
+      @transitioning="onEndPanelTransitionEnd"
     >
       <slot name="end-panel" />
     </ResizablePanel>

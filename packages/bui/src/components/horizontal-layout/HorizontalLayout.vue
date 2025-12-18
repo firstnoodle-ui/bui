@@ -29,7 +29,16 @@ const props = withDefaults(
   },
 );
 
-const emit = defineEmits(["aside-left-transition-end", "aside-right-transition-end"]);
+const emit = defineEmits<{
+  (e: "aside-left-resize", size: number): void;
+  (e: "aside-left-resize-end"): void;
+  (e: "aside-left-resize-start"): void;
+  (e: "aside-left-transition-end"): void;
+  (e: "aside-right-resize", size: number): void;
+  (e: "aside-right-resize-end"): void;
+  (e: "aside-right-resize-start"): void;
+  (e: "aside-right-transition-end"): void;
+}>();
 
 // Resizing is when one of the asides is resized by dragging - then we remove transition classes
 const resizing = ref(false);
@@ -43,9 +52,31 @@ const mainStyle = computed(() => ({
   paddingLeft: `${paddingLeft.value}px`,
   paddingRight: `${paddingRight.value}px`,
 }));
-const onAsideLeftResize = (size: number) => (localAsideLeftWidth.value = paddingLeft.value = size);
+const onAsideLeftResizeEnd = () => {
+  resizing.value = false;
+  emit("aside-left-resize-end");
+};
+const onAsideLeftResizeStart = () => {
+  resizing.value = true;
+  emit("aside-left-resize-start");
+};
+const onAsideLeftResize = (size: number) => {
+  localAsideLeftWidth.value = paddingLeft.value = size;
+  emit("aside-left-resize", size);
+};
 const onAsideLeftTransition = (transitioning: boolean) => !transitioning && emit("aside-left-transition-end");
-const onAsideRightResize = (size: number) => (localAsideRightWidth.value = paddingRight.value = size);
+const onAsideRightResizeEnd = () => {
+  resizing.value = false;
+  emit("aside-right-resize-end");
+};
+const onAsideRightResizeStart = () => {
+  resizing.value = true;
+  emit("aside-right-resize-start");
+};
+const onAsideRightResize = (size: number) => {
+  localAsideRightWidth.value = paddingRight.value = size;
+  emit("aside-right-resize", size);
+};
 const onAsideRightTransition = (transitioning: boolean) => !transitioning && emit("aside-right-transition-end");
 
 // For transitioning the padding on <main>
@@ -84,9 +115,9 @@ onMounted(() => {
       :border="props.borders"
       :draggable="asideLeftDraggable"
       :width="localAsideLeftWidth"
-      @resize-start="resizing = true"
+      @resize-start="onAsideLeftResizeStart"
       @resize="onAsideLeftResize"
-      @resize-end="resizing = false"
+      @resize-end="onAsideLeftResizeEnd"
       @transitioning="onAsideLeftTransition"
     >
       <slot name="aside-left" />
@@ -105,9 +136,9 @@ onMounted(() => {
       :border="props.borders"
       :draggable="asideRightDraggable"
       :width="localAsideRightWidth"
-      @resize-start="resizing = true"
+      @resize-start="onAsideRightResizeStart"
       @resize="onAsideRightResize"
-      @resize-end="resizing = false"
+      @resize-end="onAsideRightResizeEnd"
       @transitioning="onAsideRightTransition"
     >
       <slot name="aside-right" />
