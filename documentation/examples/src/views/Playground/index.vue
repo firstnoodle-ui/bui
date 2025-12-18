@@ -35,9 +35,6 @@ const onSendMessage = () => {
 <template>
   <section class="flex flex-col justify-end items-stretch h-full w-full p-16 pb-56">
     <main class="max-w-3xl mx-auto">
-      <!-- <label for="prompt">
-        <div class="text-xs font-bold text-secondary p-2">Greeting</div>
-      </label> -->
       <div ref="inputRef" class="border rounded-xl overflow-hidden" :class="{ 'border-default': !focussed, 'border-action shadow-sm': focussed }" @click="focussed = true">
         <header class="flex items-center justify-between border-b p-1" :class="{ 'border-transparent': !scrollYActive, 'border-default': scrollYActive }">
           <nav class="flex items-center gap-0.5">
