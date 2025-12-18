@@ -25,9 +25,9 @@ const onIntersect = (e: ScrollIntersectionEvent) => {
 const newLineState = ref<boolean>(false);
 const onContentChange = (markDown: string) => content.value = markDown;
 const onSendMessage = () => {
-  console.group("Send message:");
-  console.log(content.value);
-  console.groupEnd();
+  // console.group("Send message:");
+  // console.log(content.value);
+  // console.groupEnd();
   editorRef.value?.reset();
 };
 </script>
