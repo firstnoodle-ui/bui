@@ -5,7 +5,6 @@ import {
   ComponentPage,
   PropControlBoolean,
   PropControlSelect,
-  PropControlString,
 } from "../../components";
 
 const avatarUrl = ref<string | null>(null);

@@ -19,7 +19,7 @@ const props = withDefaults(
 
 const emit = defineEmits<{
   "update:modelValue": [value: string | null];
-  change: [value: string | null];
+  "change": [value: string | null];
 }>();
 
 const fileInputRef = ref<HTMLInputElement>();
@@ -93,7 +93,8 @@ const handleAvatarClick = () => {
       imageY.value = (containerSize - displayHeight) / 2;
     };
     img.src = originalImageDataUrl.value;
-  } else {
+  }
+  else {
     // No image yet, open file dialog
     openFileDialog();
   }
@@ -116,9 +117,6 @@ const handleFileSelect = (event: Event) => {
         imageWidth.value = img.width;
         imageHeight.value = img.height;
 
-        console.log(imageWidth.value, imageHeight.value);
-        console.log('aspect ratio: ', imageWidth.value/imageHeight.value);
-
         // Set crop size (70% of container)
         cropSize.value = containerSize * 0.7;
 
@@ -134,7 +132,6 @@ const handleFileSelect = (event: Event) => {
         const displayWidth = img.width * scale.value;
         const displayHeight = img.height * scale.value;
 
-        console.log('new aspect ratio: ', displayWidth/displayHeight);
         imageX.value = (containerSize - displayWidth) / 2;
         imageY.value = (containerSize - displayHeight) / 2;
 
@@ -157,8 +154,8 @@ const handleMouseDown = (event: MouseEvent) => {
   dragStartX.value = event.clientX - imageX.value;
   dragStartY.value = event.clientY - imageY.value;
 
-  window.addEventListener('mousemove', handleMouseMove);
-  window.addEventListener('mouseup', handleMouseUp);
+  window.addEventListener("mousemove", handleMouseMove);
+  window.addEventListener("mouseup", handleMouseUp);
 };
 
 const handleMouseMove = (event: MouseEvent) => {
@@ -175,19 +172,9 @@ const handleMouseMove = (event: MouseEvent) => {
     const cropTop = cropCenterY - cropSize.value / 2;
     const cropBottom = cropCenterY + cropSize.value / 2;
 
-    // console.group('crop');
-    // console.log(cropCenterX);
-    // console.log(cropCenterY);
-    // console.log(cropLeft);
-    // console.log(cropRight);
-    // console.log(cropTop);
-    // console.log(cropBottom);
-    // console.groupEnd();
-
     // Constrain image so crop area never goes outside image bounds
     const displayWidth = imageWidth.value * scale.value;
     const displayHeight = imageHeight.value * scale.value;
-
 
     // The image must always cover the crop area
     newX = Math.min(newX, cropLeft); // Image can't be too far right
@@ -197,29 +184,19 @@ const handleMouseMove = (event: MouseEvent) => {
 
     imageX.value = newX;
     imageY.value = newY;
-
-    console.table([
-      { field: "cropLeft", value: cropLeft },
-      { field: "cropRight", value: cropRight },
-      { field: "scaled imageWidth", value: imageWidth.value * scale.value },
-      { field: "scaled imageHeight", value: imageHeight.value * scale.value },
-      { field: "imageX", value: imageX.value },
-      { field: "imageY", value: imageY.value },
-    ]);
   }
 };
 
 const handleMouseUp = () => {
   isDragging.value = false;
-  window.removeEventListener('mousemove', handleMouseMove);
-  window.removeEventListener('mouseup', handleMouseUp);
+  window.removeEventListener("mousemove", handleMouseMove);
+  window.removeEventListener("mouseup", handleMouseUp);
 };
 
 const handleZoom = (delta: number) => {
   const newScale = Math.max(minScale.value, Math.min(scale.value + delta, 3));
 
   if (newScale !== scale.value) {
-    const oldScale = scale.value;
     scale.value = newScale;
   }
 };
@@ -287,12 +264,13 @@ const cropImage = () => {
   cropModalRef.value?.close();
 };
 
-const removeAvatar = () => {
-  previewUrl.value = null;
-  originalImageDataUrl.value = null;
-  emit("update:modelValue", null);
-  emit("change", null);
-};
+// save for later
+// const removeAvatar = () => {
+//   previewUrl.value = null;
+//   originalImageDataUrl.value = null;
+//   emit("update:modelValue", null);
+//   emit("change", null);
+// };
 
 const cancelCrop = () => {
   cropModalRef.value?.close();
@@ -367,7 +345,7 @@ const cancelCrop = () => {
                 :src="originalImage.src"
                 alt="Original"
                 class="w-full h-full"
-              />
+              >
             </div>
 
             <!-- Crop Overlay -->
@@ -411,7 +389,9 @@ const cancelCrop = () => {
               />
             </div>
             <div class="absolute top-4 left-0 w-full flex justify-center">
-              <div class="flex items-center h-8 px-3 rounded-full bg-primary text-sm text-primary">Drag to reposition</div> 
+              <div class="flex items-center h-8 px-3 rounded-full bg-primary text-sm text-primary">
+                Drag to reposition
+              </div>
             </div>
             <div class="absolute bottom-4 left-0 w-full flex justify-center gap-1">
               <section class="bg-primary rounded-lg overflow-hidden">

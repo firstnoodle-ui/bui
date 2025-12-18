@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { Mark } from "prosemirror-model";
 import { computed, ref } from "vue";
+import { getCurrentWord, replaceCurrentWord } from "../../../utils/tiptap";
 import { BConfirmCancel } from "../../confirm-cancel";
 import { BInput } from "../../input";
 import { BPopper, BPopperContent } from "../../popper";
-import { getCurrentWord, replaceCurrentWord } from "../../../utils/tiptap";
 import FormattingButton from "./FormattingButton.vue";
 
 const props = defineProps<{ editor: any }>();

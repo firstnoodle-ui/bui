@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ScrollIntersectionEvent } from "@firstnoodle-ui/bui";
-import { BButton, BFormattingButton, BFormattingMenuDivider, BIcon, BInsertImage, BInsertLink, BPopper, BPopperContent, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
+import { BButton, BFormattingButton, BFormattingMenuDivider, BIcon, BInsertImage, BInsertLink, BScrollbar, BTiptapEditor, useClickOutside } from "@firstnoodle-ui/bui";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const content = ref("<p></p>");
@@ -29,7 +29,7 @@ const onSendMessage = () => {
   console.log(content.value);
   console.groupEnd();
   editorRef.value?.reset();
-}
+};
 </script>
 
 <template>
@@ -136,31 +136,31 @@ const onSendMessage = () => {
         </footer>
       </div>
       <footer class="h-8 flex items-center">
-          <section class="flex items-center gap-2 px-2">
-            <!-- <BIcon name="keyboard" class="text-secondary" /> -->
-            <div class="flex items-center gap-0.5 h-5 px-1 rounded-md border border-default text-xs text-secondary">
-              <template v-if="!newLineState">
-                <BIcon name="key-shift" />
-                <!-- <span>SHIFT</span>
+        <section class="flex items-center gap-2 px-2">
+          <!-- <BIcon name="keyboard" class="text-secondary" /> -->
+          <div class="flex items-center gap-0.5 h-5 px-1 rounded-md border border-default text-xs text-secondary">
+            <template v-if="!newLineState">
+              <BIcon name="key-shift" />
+              <!-- <span>SHIFT</span>
                 <span>+</span> -->
-              </template>
-              <BIcon name="key-return" />
-            </div>
-            <span class="text-xs text-tertiary">New line</span>
-          </section>
-          <section class="flex items-center gap-2 px-2">
-            <!-- <BIcon name="keyboard" class="text-secondary" /> -->
-            <div class="flex items-center gap-0.5 h-5 px-1 rounded-md border border-default text-xs text-secondary">
-              <template v-if="newLineState">
-                <BIcon name="key-cmd" />
-                <!-- <span>SHIFT</span>
+            </template>
+            <BIcon name="key-return" />
+          </div>
+          <span class="text-xs text-tertiary">New line</span>
+        </section>
+        <section class="flex items-center gap-2 px-2">
+          <!-- <BIcon name="keyboard" class="text-secondary" /> -->
+          <div class="flex items-center gap-0.5 h-5 px-1 rounded-md border border-default text-xs text-secondary">
+            <template v-if="newLineState">
+              <BIcon name="key-cmd" />
+              <!-- <span>SHIFT</span>
                 <span>+</span> -->
-              </template>
-              <BIcon name="key-return" />
-            </div>
-            <span class="text-xs text-tertiary">Send</span>
-          </section>
-          <!-- <section class="flex items-center gap-2">
+            </template>
+            <BIcon name="key-return" />
+          </div>
+          <span class="text-xs text-tertiary">Send</span>
+        </section>
+        <!-- <section class="flex items-center gap-2">
             <div class="flex items-center gap-0.5 h-5 px-1 rounded-md border border-default text-xs text-secondary">
               <template v-if="newLineState">
                 <span>⌘</span>
@@ -169,7 +169,7 @@ const onSendMessage = () => {
             </div>
             <span class="text-xs text-tertiary">Send message</span>
           </section> -->
-        </footer>
+      </footer>
       <!-- <footer style="font-size: 11px" class="h-6 pl-4 flex items-center text-red-500">
 
         <span>Please give your question a title</span>
