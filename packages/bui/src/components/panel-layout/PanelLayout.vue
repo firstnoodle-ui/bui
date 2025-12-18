@@ -70,7 +70,7 @@ const onStartPanelResize = (size: number) => {
 };
 const onStartPanelTransitionEnd = (transitioning: boolean) => !transitioning && emit("start-panel-transition-end");
 
-// End panel events 
+// End panel events
 const onEndPanelResizeEnd = () => {
   resizing.value = false;
   emit("end-panel-resize-end");
