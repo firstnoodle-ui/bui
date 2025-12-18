@@ -2,6 +2,7 @@
 import bold from "@tiptap/extension-bold";
 import bulletList from "@tiptap/extension-bullet-list";
 import Document from "@tiptap/extension-document";
+import HardBreak from "@tiptap/extension-hard-break";
 import heading from "@tiptap/extension-heading";
 import highlight from "@tiptap/extension-highlight";
 import history from "@tiptap/extension-history";
@@ -16,8 +17,8 @@ import Text from "@tiptap/extension-text";
 import underline from "@tiptap/extension-underline";
 import { Markdown } from "@tiptap/markdown";
 import { EditorContent, useEditor } from "@tiptap/vue-3";
-import { ref } from "vue";
-import { PasteImage } from "../text-editor/utils.ts";
+import { ref, watch } from "vue";
+import { enterKeyBehaviour, PasteImage, useExtensionStorage } from "../../utils/tiptap";
 
 const { content, placeholder = "Write text.." } = defineProps<{
   content: string;
@@ -28,7 +29,9 @@ const emit = defineEmits<{
   (e: "blur"): void;
   (e: "change", value: string): void;
   (e: "editor-ready"): void;
+  (e: "new-line-state-changed", state: boolean): void;
   (e: "focus"): void;
+  (e: "enter-key"): void;
 }>();
 
 const editorFocussed = ref(false);
@@ -36,9 +39,17 @@ const editorFocussed = ref(false);
 const editor = useEditor({
   content,
   extensions: [
+    HardBreak.configure({
+      keepMarks: false,
+    }),
+    enterKeyBehaviour.configure({
+      onEnter: () => emit("enter-key"),
+    }),
     bold,
     bulletList,
-    heading,
+    heading.configure({
+      levels: [1, 2, 3],
+    }),
     highlight,
     history,
     image,
@@ -67,6 +78,16 @@ const editor = useEditor({
   contentType: "markdown",
 });
 
+const hasUsedNewline = useExtensionStorage<boolean>(
+  editor,
+  enterKeyBehaviour.name,
+  "hasUsedNewline",
+);
+
+watch(hasUsedNewline, (newVal) => {
+  emit("new-line-state-changed", newVal || false);
+});
+
 const focusPositions = ["start", "end", "all"] as const;
 type FocusPosition = (typeof focusPositions)[number];
 
@@ -84,6 +105,10 @@ defineExpose({
   indentLeft: () => editor.value!.chain().focus().liftListItem("listItem").run(),
   indentRight: () => editor.value!.chain().focus().sinkListItem("listItem").run(),
   redo: () => editor.value!.chain().focus().redo().run(),
+  reset: () => {
+    editor.value!.commands.clearContent();
+    (editor.value!.commands as any).setHasUsedNewline(false);
+  },
   toggleBold: () => editor.value!.chain().focus().toggleBold().run(),
   toggleBulletList: () => editor.value!.chain().focus().toggleBulletList().run(),
   toggleItalic: () => editor.value!.chain().focus().toggleItalic().run(),
