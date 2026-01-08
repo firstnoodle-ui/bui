@@ -45,7 +45,7 @@ const editor = useEditor({
     }),
     enterKeyBehaviour.configure({
       onEnter: () => emit("enter-key"),
-      modEnterOnly: !shiftEnterCreatesNewLine
+      modEnterOnly: !shiftEnterCreatesNewLine,
     }),
     bold,
     bulletList,
