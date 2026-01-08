@@ -364,7 +364,7 @@ defineExpose({
 
       <button
         v-if="selectAll"
-        class="cursor-pointer flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-secondary active:bg-tertiary"
+        class="cursor-pointer flex items-center gap-2 p-1 rounded-lg hover:bg-secondary active:bg-tertiary"
         @click="onToggleAll"
       >
         <BCheckbox
