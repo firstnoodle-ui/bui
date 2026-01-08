@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<SelectListProps>(), {
   loading: false,
   placeholder: "Search",
   small: false,
-  remoteMethod: null,
 });
 
 // TODO:
@@ -410,7 +409,7 @@ defineExpose({
     </main>
 
     <template v-if="$slots.footer">
-      <footer class="flex-initial max-h-72 flex flex-col border-t-1 border-default">
+      <footer class="flex-initial max-h-72 flex flex-col border-t border-default">
         <template v-if="showSelection">
           <header class="flex-none flex items-center justify-between gap-1 px-4 py-1">
             <BButton
@@ -427,7 +426,7 @@ defineExpose({
             ref="selectionScrollbarRef"
             show
             tag="ul"
-            class="border-y-1"
+            class="border-y"
             :class="selectionClassesComputed"
             :view-height-class="selectionOpen ? 'flex-1 max-h-72' : 'flex-none h-0'"
             @scroll-y-active="onScrollYActive"
