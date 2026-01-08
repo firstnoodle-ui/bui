@@ -68,6 +68,7 @@ const onSendMessage = () => {
             <BTiptapEditor
               ref="editorRef"
               :content="content"
+              :shift-enter-creates-new-line="true"
               placeholder="Ask anything"
               class="text-sm px-3 py-2"
               @editor-ready="editorRef?.focus()"

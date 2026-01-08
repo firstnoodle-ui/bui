@@ -2,12 +2,14 @@ import { Extension } from "@tiptap/core";
 
 export const enterKeyBehaviour = Extension.create<{
   onEnter?: (content: string) => void;
+  modEnterOnly?: boolean;
 }>({
       name: "enterKeyBehaviour",
       priority: 1000,
       addOptions() {
         return {
           onEnter: undefined,
+          modEnterOnly: false,
         };
       },
       addStorage() {
@@ -28,6 +30,11 @@ export const enterKeyBehaviour = Extension.create<{
       addKeyboardShortcuts() {
         return {
           "Enter": () => {
+            // If modEnterOnly is true, use default Enter behavior
+            if (this.options.modEnterOnly) {
+              return false;
+            }
+
             if (this.storage.isInList) return false;
 
             if (this.storage.hasUsedNewline) {
@@ -40,6 +47,11 @@ export const enterKeyBehaviour = Extension.create<{
             }
           },
           "Shift-Enter": () => {
+            // If modEnterOnly is true, use default Shift-Enter behavior
+            if (this.options.modEnterOnly) {
+              return false;
+            }
+
             // this.storage.hasUsedNewline = true;
             (this.editor.commands as any).setHasUsedNewline(true);
             // if (this.editor.isActive('heading')) {
@@ -85,6 +97,9 @@ export const enterKeyBehaviour = Extension.create<{
         };
       },
       onUpdate({ editor }) {
+        // Skip storage updates if modEnterOnly is true
+        if (this.options.modEnterOnly) return;
+
         if (this.storage.hasUsedNewline) return;
 
         // Check if cursor is inside a list

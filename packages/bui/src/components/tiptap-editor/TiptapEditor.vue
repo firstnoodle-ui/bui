@@ -20,9 +20,10 @@ import { EditorContent, useEditor } from "@tiptap/vue-3";
 import { ref, watch } from "vue";
 import { enterKeyBehaviour, PasteImage, useExtensionStorage } from "../../utils/tiptap";
 
-const { content, placeholder = "Write text.." } = defineProps<{
+const { content, placeholder = "Write text..", shiftEnterCreatesNewLine = true } = defineProps<{
   content: string;
   placeholder?: string;
+  shiftEnterCreatesNewLine?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -44,6 +45,7 @@ const editor = useEditor({
     }),
     enterKeyBehaviour.configure({
       onEnter: () => emit("enter-key"),
+      modEnterOnly: !shiftEnterCreatesNewLine
     }),
     bold,
     bulletList,
