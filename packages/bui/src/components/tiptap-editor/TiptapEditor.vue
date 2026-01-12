@@ -90,6 +90,15 @@ watch(hasUsedNewline, (newVal) => {
   emit("new-line-state-changed", newVal || false);
 });
 
+watch(
+  () => placeholder,
+  (newPlaceholder) => {
+    editor.value?.extensionManager.extensions
+      .find((ext) => ext.name === "placeholder")
+      ?.options.configure({ placeholder: newPlaceholder });
+  },
+);
+
 const focusPositions = ["start", "end", "all"] as const;
 type FocusPosition = (typeof focusPositions)[number];
 
