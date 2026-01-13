@@ -4,3 +4,4 @@ export * from "./debounce";
 export * from "./getModifierKeyIcon";
 export * from "./scrollbarWidth";
 export * from "./scrollIntoView";
+export * from "./type-utils";

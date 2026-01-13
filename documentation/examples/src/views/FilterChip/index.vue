@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { BFilterChip } from "@firstnoodle-ui/bui";
+import type { Restaurant } from "./data";
+import { useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
@@ -7,24 +8,36 @@ import {
   PropControlNumber,
   PropControlString,
 } from "../../components";
+import { restaurants } from "./data";
+import { restaurantFilters } from "./filters";
 
 const isActive = ref(false);
 const isDeletable = ref(false);
 const label = ref("Category");
 const count = ref(0);
+
+const rest = ref<Restaurant[]>(restaurants);
+
+const groupId = "restaurants";
+const { availableFilters, filteredItems, updateFilters } = useFilters<Restaurant>(groupId, restaurantFilters, rest);
+useMountedAndRouterUpdate(updateFilters);
 </script>
 
 <template>
   <ComponentPage>
     <template #default="{ print }">
-      <BFilterChip
-        :active="isActive"
-        :deletable="isDeletable"
-        :label="label"
-        :count="count"
-        @click="print('click')"
-        @delete="print('delete')"
+      <component
+        :is="filter.component"
+        v-for="filter in availableFilters"
+        :key="filter.data.id"
+        :filter="filter.data"
+        :group-id="groupId"
       />
+      <section class="flex flex-col gap-2 py-8">
+        <div v-for="restaurant in filteredItems" :key="restaurant.id">
+          {{ restaurant.name }}
+        </div>
+      </section>
     </template>
     <template #controls>
       <PropControlBoolean name="Active" :value="isActive" @toggle="isActive = !isActive" />

@@ -6,7 +6,7 @@ export function useExtensionStorage<T>(
   extensionName: string,
   key: string,
 ) {
-  const value = ref<T | null>(null);
+  const value = ref<T | null>(null) as Ref<T | null>;
 
   const sync = () => {
     const newValue = editor.value?.storage?.[extensionName]?.[key] ?? null;

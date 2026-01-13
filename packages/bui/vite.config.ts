@@ -21,7 +21,16 @@ export default defineConfig({
       },
     },
     rollupOptions: {
-      external: ["vue", "tailwindcss"],
+      external: [
+        "vue",
+        "vue-router",
+        "tailwindcss",
+        /^@tiptap\/.*/,
+        /^@floating-ui\/.*/,
+        "debounce",
+        "prosemirror-model",
+        "prosemirror-state",
+      ],
     },
   },
 });

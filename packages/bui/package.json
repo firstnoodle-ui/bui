@@ -44,7 +44,8 @@
   "peerDependencies": {
     "@floating-ui/core": "^1.7.3",
     "tailwindcss": "^4.1.1",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-router": "^4.0.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -73,12 +74,12 @@
     "@tiptap/vue-3": "^3.13.0",
     "debounce": "^2.2.0",
     "prosemirror-model": "^1.25.4",
-    "prosemirror-state": "^1.4.4",
-    "vue-router": "4"
+    "prosemirror-state": "^1.4.4"
   },
   "devDependencies": {
     "@floating-ui/core": "^1.7.3",
     "@tailwindcss/vite": "^4.1.1",
+    "@tiptap/core": "^3.13.0",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
@@ -88,6 +89,7 @@
     "vite": "^6.2.4",
     "vite-plugin-dts": "^4.5.4",
     "vue": "^3.5.13",
+    "vue-router": "^4.0.0",
     "vue-tsc": "^2.2.8"
   }
 }
