@@ -13,11 +13,7 @@ export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<
   const router = useRouter();
 
   const availableFilters = ref<Filter<T>[]>(filters);
-
-  const activeFilters = computed(() =>
-    availableFilters.value.filter(filter => Boolean(filter.value)),
-  );
-
+  const activeFilters = computed(() => availableFilters.value.filter(filter => Boolean(filter.value)));
   const filteringActive = computed(() => !!activeFilters.value.length);
 
   const filteredItems = computed(() => {

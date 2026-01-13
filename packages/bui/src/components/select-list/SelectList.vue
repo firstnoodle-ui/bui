@@ -376,7 +376,7 @@ defineExpose({
       </button>
     </header>
 
-    <main class="flex-1 h-full overflow-hidden flex flex-col">
+    <main class="flex-1 max-h-72 h-full overflow-hidden flex flex-col">
       <BErrorCard v-if="state === 'error'" :message="errorMessage as string" />
       <BLoadingCard v-else-if="state === 'loading'" />
       <BNoMatchCard v-else-if="state === 'no match'" />
@@ -391,9 +391,8 @@ defineExpose({
           ref="optionsRef"
           class="px-1"
           :class="{
-            'py-2': small && isGrouped || !small && !isGrouped,
-            'py-1': small && !isGrouped,
-            'py-4': !small && isGrouped,
+            'py-1': small && isGrouped || !small && !isGrouped,
+            'py-2': !small && isGrouped,
           }"
         >
           <slot
@@ -463,7 +462,7 @@ defineExpose({
             </template>
           </BScrollbar>
         </template>
-        <footer class="flex-0 px-6 py-4">
+        <footer class="flex-0">
           <slot name="footer" />
         </footer>
       </footer>
