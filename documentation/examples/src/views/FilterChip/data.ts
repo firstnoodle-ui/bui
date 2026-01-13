@@ -1,3 +1,5 @@
+import type { Filter } from "@firstnoodle-ui/bui";
+
 export type Restaurant = {
   id: number;
   name: string;
@@ -500,3 +502,19 @@ export const dietaryOptions: DietaryOption[] = [
   { id: 2, name: "Vegan" },
   { id: 3, name: "Vegetarian" },
 ];
+
+/**
+ * Mock API call to fetch restaurants
+ * @param delay - Delay in milliseconds (default: 500ms)
+ * @returns Promise resolving to the list of restaurants
+ */
+export async function fetchRestaurants(filters: Filter<Restaurant>[]): Promise<Restaurant[]> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const result = restaurants.filter(restaurant =>
+        filters.every(f => f.execute(f.value, f.operator, restaurant)),
+      );
+      resolve(result);
+    }, 500);
+  });
+}

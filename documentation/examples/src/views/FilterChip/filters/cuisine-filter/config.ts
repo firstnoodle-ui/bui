@@ -5,7 +5,7 @@ import { getFilterValues, hasValue } from "@firstnoodle-ui/bui";
 // import { cuisines } from "../../data";
 
 export const cuisineFilter: Filter<Restaurant> = {
-  id: "cuisine",
+  id: "cuisineId",
   name: "Cuisine",
   component: "CuisineFilter",
   tooltip: "Filter restaurants by cuisine",
