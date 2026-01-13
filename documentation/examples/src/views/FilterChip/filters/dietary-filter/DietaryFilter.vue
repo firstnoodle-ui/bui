@@ -1,32 +1,31 @@
 <script setup lang="ts">
 import type { Filter, SelectListOption } from "@firstnoodle-ui/bui";
-import type { Cuisine, Restaurant } from "../../data";
+import type { DietaryOption, Restaurant } from "../../data";
 import { BFilterChip, BPopper, BPopperContent, BSelectList, BSelectListOption, useFilterComponent } from "@firstnoodle-ui/bui";
 import { computed } from "vue";
-import { cuisines } from "../../data";
+import { dietaryOptions } from "../../data";
 
 const { filter, groupId } = defineProps<{ filter: Filter<Restaurant>; groupId: string }>();
 
-const cuisineOptions: SelectListOption[] = cuisines.map((cuisine: Cuisine) => {
+const selectListOptions: SelectListOption[] = dietaryOptions.map((option: DietaryOption) => {
   return {
-    id: cuisine.id,
-    label: cuisine.name,
-    value: cuisine,
+    id: option.id,
+    label: option.name,
+    value: option,
   };
 });
 
+// key point for retrieving selection
+const selectedOptions = computed(() => {
+  // return cuisineOptions.filter(option => values.value.includes(option.value.label));
+  return selectListOptions.filter(option => values.value.includes(option.value.id.toString()));
+});
 const { clearFilter, isActive, updateFilter, values } = useFilterComponent(groupId, filter);
 
-// key point for handling what field is used in url
-const selectedOptions = computed(() => {
-  return cuisineOptions.filter(option => values.value.includes(option.value.id.toString()));
-  // return cuisineOptions.filter(option => values.value.includes(option.value.label));
-});
-
-// key point for selecing what field goes in the url
+// key point for selecing what goes in the url
 const onSelectionChange = (selection: SelectListOption[]) => {
-  updateFilter(selection.map(o => o.value.id));
   // updateFilter(selection.map(o => o.value.label));
+  updateFilter(selection.map(o => o.value.id));
 };
 </script>
 
@@ -44,7 +43,7 @@ const onSelectionChange = (selection: SelectListOption[]) => {
     <template #content>
       <BPopperContent class="p-2 max-h-72">
         <BSelectList
-          :options="cuisineOptions"
+          :options="selectListOptions"
           :selected="selectedOptions"
           @select="onSelectionChange"
         >

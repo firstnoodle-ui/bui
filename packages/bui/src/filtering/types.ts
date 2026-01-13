@@ -1,5 +1,3 @@
-import type { ComponentPublicInstance } from "vue";
-
 export const operators = ["=", "!=", "<", "<=", ">", ">="] as const;
 export type Operator = (typeof operators)[number];
 
@@ -9,17 +7,12 @@ export type OperatorLetters = (typeof operatorLetters)[number];
 export type FilterValue = string | null;
 
 export type Filter<FilteredEntity> = {
-  component: ComponentPublicInstance;
-  data: FilterData<FilteredEntity>;
-};
-
-export type FilterData<FilteredEntity> = {
-  name: string;
   id: string;
+  name: string;
+  component: string;
   tooltip: string;
   disabled?: boolean;
   allowedOperators: Operator[];
-  field: keyof FilteredEntity;
   operator: Operator;
   value: FilterValue;
   execute: (value: FilterValue, operator: Operator, entity: FilteredEntity) => boolean;

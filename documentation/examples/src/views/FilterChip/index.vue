@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Restaurant } from "./data";
-import { useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
+import { BFlexbox, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
@@ -9,30 +9,32 @@ import {
   PropControlString,
 } from "../../components";
 import { restaurants } from "./data";
-import { restaurantFilters } from "./filters";
+import { restaurantFilterComponents, restaurantFilters } from "./filters";
 
 const isActive = ref(false);
 const isDeletable = ref(false);
 const label = ref("Category");
 const count = ref(0);
 
-const rest = ref<Restaurant[]>(restaurants);
+const restaurantData = ref<Restaurant[]>(restaurants);
 
 const groupId = "restaurants";
-const { availableFilters, filteredItems, updateFilters } = useFilters<Restaurant>(groupId, restaurantFilters, rest);
+const { availableFilters, filteredItems, updateFilters } = useFilters<Restaurant>(groupId, restaurantFilters, restaurantData);
 useMountedAndRouterUpdate(updateFilters);
 </script>
 
 <template>
   <ComponentPage>
-    <template #default="{ print }">
-      <component
-        :is="filter.component"
-        v-for="filter in availableFilters"
-        :key="filter.data.id"
-        :filter="filter.data"
-        :group-id="groupId"
-      />
+    <template #default>
+      <BFlexbox class="gap-2">
+        <component
+          :is="restaurantFilterComponents[filter.component]"
+          v-for="filter in availableFilters"
+          :key="filter.id"
+          :filter="filter"
+          :group-id="groupId"
+        />
+      </BFlexbox>
       <section class="flex flex-col gap-2 py-8">
         <div v-for="restaurant in filteredItems" :key="restaurant.id">
           {{ restaurant.name }}

@@ -15,20 +15,28 @@ export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<
   const availableFilters = ref<Filter<T>[]>(filters);
 
   const activeFilters = computed(() =>
-    availableFilters.value.filter(filter => Boolean(filter.data.value)),
+    availableFilters.value.filter(filter => Boolean(filter.value)),
   );
+
+  const filteringActive = computed(() => !!activeFilters.value.length);
+
+  const filteredItems = computed(() => {
+    return items.value.filter(item =>
+      activeFilters.value.every(f => f.execute(f.value, f.operator, item)),
+    );
+  });
 
   const updateFilters = (routeQuery: LocationQuery) => {
     const filtersToBeUpdated = getFiltersFromQuery(routeQuery, groupId);
     (availableFilters.value as Filter<T>[]).forEach((filter) => {
-      const updatedFilter = filtersToBeUpdated.find(f => f.id === filter.data.id);
+      const updatedFilter = filtersToBeUpdated.find(f => f.id === filter.id);
       if (updatedFilter) {
-        filter.data.operator = updatedFilter.operator;
-        filter.data.value = updatedFilter.value;
+        filter.operator = updatedFilter.operator;
+        filter.value = updatedFilter.value;
       }
       else {
-        filter.data.operator = "=";
-        filter.data.value = null;
+        filter.operator = "=";
+        filter.value = null;
       }
     });
   };
@@ -37,13 +45,6 @@ export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<
     const newQuery = removeFiltersFromQuery(route.query, groupId);
     await router.push({ query: newQuery });
   };
-
-  const filteringActive = computed(() => !!activeFilters.value.length);
-  const filteredItems = computed(() => {
-    return items.value.filter(item =>
-      activeFilters.value.every(f => f.data.execute(f.data.value, f.data.operator, item)),
-    );
-  });
 
   return {
     activeFilters,

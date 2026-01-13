@@ -1,12 +1,11 @@
-import type { SelectListOption } from "../../components";
-import type { FilterData, FilterValue } from "../types";
+import type { Filter, FilterValue } from "../types";
 import { computed, getCurrentInstance } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { filterValueSeparator } from "../config";
 import { addFilterToQuery, removeFilterFromQuery } from "../utils/queryFilters";
 
 // Composable with generic methods to be used across all filter components
-export const useFilterComponent = <T>(groupId: string, filterData: FilterData<T>) => {
+export const useFilterComponent = <T>(groupId: string, filter: Filter<T>) => {
   const route = useRoute();
   const router = useRouter();
 
@@ -17,21 +16,21 @@ export const useFilterComponent = <T>(groupId: string, filterData: FilterData<T>
 
   const clearFilter = () => handleFilterChange(null);
 
-  const isActive = computed(() => Boolean(filterData.value) && !!filterData.value!.split(filterValueSeparator).length);
-  const values = computed(() => filterData.value ? filterData.value.split(filterValueSeparator) : []);
+  const isActive = computed(() => Boolean(filter.value) && !!filter.value!.split(filterValueSeparator).length);
+  const values = computed(() => filter.value ? filter.value.split(filterValueSeparator) : []);
 
-  const updateFilter = (selection: SelectListOption[]) => {
+  const updateFilter = (selection: string[]) => {
     if (selection.length === 0) {
       clearFilter();
       return;
     }
-    const newSelection = selection.map(o => o.id).join(filterValueSeparator);
+    const newSelection = selection.join(filterValueSeparator);
     handleFilterChange(newSelection);
   };
 
   const handleFilterChange = async (value: FilterValue) => {
-    let newQuery = removeFilterFromQuery(route.query, groupId, filterData.id);
-    if (value) newQuery = addFilterToQuery(newQuery, groupId, filterData.id, filterData.operator, value);
+    let newQuery = removeFilterFromQuery(route.query, groupId, filter.id);
+    if (value) newQuery = addFilterToQuery(newQuery, groupId, filter.id, filter.operator, value);
     await router.push({ query: newQuery });
   };
 
