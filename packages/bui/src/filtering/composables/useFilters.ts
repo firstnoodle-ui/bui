@@ -8,7 +8,7 @@ import {
   removeFiltersFromQuery,
 } from "../utils/queryFilters";
 
-export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<T[]>, filterMethod: ((filters: Filter<T>[]) => Promise<T[]>) | null = null) => {
+export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<T[]>, remoteFilterMethod: ((filters: Filter<T>[]) => Promise<T[]>) | null = null) => {
   const route = useRoute();
   const router = useRouter();
 
@@ -20,10 +20,10 @@ export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<
   const filteredItems = ref<T[]>([]);
 
   const applyFilters = async () => {
-    if (filterMethod) {
+    if (remoteFilterMethod) {
       try {
         loadingItems.value = true;
-        const result = await filterMethod(activeFilters.value);
+        const result = await remoteFilterMethod(activeFilters.value);
         filteredItems.value = result;
         loadingItems.value = false;
       }
