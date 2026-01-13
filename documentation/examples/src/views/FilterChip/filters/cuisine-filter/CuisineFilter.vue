@@ -24,10 +24,10 @@ const { clearFilter, isActive, updateFilter, values } = useFilterComponent(group
   <BPopper trigger="click">
     <template #default>
       <BFilterChip
-        :active="isActive.value"
-        deletable
-        :label="filter.name"
+        :active="isActive"
         :count="selectedOptions.length"
+        :label="filter.name"
+        deletable
         @delete="clearFilter"
       />
     </template>
