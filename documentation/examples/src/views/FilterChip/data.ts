@@ -505,7 +505,6 @@ export const dietaryOptions: DietaryOption[] = [
 
 /**
  * Mock API call to fetch restaurants
- * @param delay - Delay in milliseconds (default: 500ms)
  * @returns Promise resolving to the list of restaurants
  */
 export async function fetchRestaurants(filters: Filter<Restaurant>[]): Promise<Restaurant[]> {
