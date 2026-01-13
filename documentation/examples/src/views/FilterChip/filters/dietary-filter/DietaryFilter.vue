@@ -15,17 +15,22 @@ const selectListOptions: SelectListOption[] = dietaryOptions.map((option: Dietar
   };
 });
 
-// key point for retrieving selection
-const selectedOptions = computed(() => {
-  // return cuisineOptions.filter(option => values.value.includes(option.value.label));
-  return selectListOptions.filter(option => values.value.includes(option.value.id.toString()));
-});
 const { clearFilter, isActive, updateFilter, values } = useFilterComponent(groupId, filter);
 
-// key point for selecing what goes in the url
+const selectedOptions = computed(() => {
+  // when using "name" as identifier in url
+  return selectListOptions.filter(option => values.value.includes(option.value.name));
+
+  // when using "id" as identifier in url
+  // return selectListOptions.filter(option => values.value.includes(option.value.id.toString()));
+});
+
 const onSelectionChange = (selection: SelectListOption[]) => {
-  // updateFilter(selection.map(o => o.value.label));
-  updateFilter(selection.map(o => o.value.id));
+  // when using "name" as identifier in url
+  updateFilter(selection.map(o => o.value.name));
+
+  // when using "id" as identifier in url
+  // updateFilter(selection.map(o => o.value.id));
 };
 </script>
 

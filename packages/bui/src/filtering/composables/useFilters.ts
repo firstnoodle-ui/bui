@@ -8,7 +8,7 @@ import {
   removeFiltersFromQuery,
 } from "../utils/queryFilters";
 
-export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<T[]>) => {
+export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<T[]>, filterMethod: ((filters: Filter<T>[]) => T[]) | null = null) => {
   const route = useRoute();
   const router = useRouter();
 
@@ -21,6 +21,10 @@ export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<
   const filteringActive = computed(() => !!activeFilters.value.length);
 
   const filteredItems = computed(() => {
+    if (filterMethod) {
+      const result = filterMethod(activeFilters.value);
+      return result;
+    }
     return items.value.filter(item =>
       activeFilters.value.every(f => f.execute(f.value, f.operator, item)),
     );

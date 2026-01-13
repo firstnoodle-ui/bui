@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import type { Filter } from "@firstnoodle-ui/bui";
 import type { Restaurant } from "./data";
-import { BFlexbox, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
+import { BFlexbox, filterValueSeparator, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
 import { ref } from "vue";
 import {
   ComponentPage,
@@ -17,6 +18,12 @@ const label = ref("Category");
 const count = ref(0);
 
 const restaurantData = ref<Restaurant[]>(restaurants);
+
+// Custom filter function that can be passed as 4th param in useFilters - will be called automatically when filters change
+// const customFilter = (filters: Filter<Restaurant>[]) => {
+//   // call API
+//   return [] as Restaurant[];
+// };
 
 const groupId = "restaurants";
 const { availableFilters, filteredItems, updateFilters } = useFilters<Restaurant>(groupId, restaurantFilters, restaurantData);

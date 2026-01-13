@@ -16,18 +16,8 @@ const cuisineOptions: SelectListOption[] = cuisines.map((cuisine: Cuisine) => {
 });
 
 const { clearFilter, isActive, updateFilter, values } = useFilterComponent(groupId, filter);
-
-// key point for handling what field is used in url
-const selectedOptions = computed(() => {
-  return cuisineOptions.filter(option => values.value.includes(option.value.id.toString()));
-  // return cuisineOptions.filter(option => values.value.includes(option.value.label));
-});
-
-// key point for selecing what field goes in the url
-const onSelectionChange = (selection: SelectListOption[]) => {
-  updateFilter(selection.map(o => o.value.id));
-  // updateFilter(selection.map(o => o.value.label));
-};
+const selectedOptions = computed(() => cuisineOptions.filter(option => values.value.includes(option.value.id.toString())));
+const onSelectionChange = (selection: SelectListOption[]) => updateFilter(selection.map(o => o.value.id));
 </script>
 
 <template>
