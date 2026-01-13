@@ -94,8 +94,9 @@ watch(
   () => placeholder,
   (newPlaceholder) => {
     editor.value?.extensionManager.extensions
-      .find((ext) => ext.name === "placeholder")
-      ?.options.configure({ placeholder: newPlaceholder });
+      .find(ext => ext.name === "placeholder")
+      ?.options
+      .configure({ placeholder: newPlaceholder });
   },
 );
 

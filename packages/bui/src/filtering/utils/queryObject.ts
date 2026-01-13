@@ -1,4 +1,4 @@
-import { type LocationQuery } from "vue-router";
+import type { LocationQuery } from "vue-router";
 
 /**
  * Query Object is a special type of query that is used to store complex objects in the query string.
@@ -14,8 +14,8 @@ const queryObjectContentStart = "[";
 const queryObjectContentEnd = "]";
 
 const isIdentifiedObject = (queryKey: string, identifier: string) =>
-  queryKey.startsWith(identifier + queryObjectContentStart) &&
-  queryKey.endsWith(queryObjectContentEnd);
+  queryKey.startsWith(identifier + queryObjectContentStart)
+  && queryKey.endsWith(queryObjectContentEnd);
 export const renderQueryObject = (identifier: string, content: string) =>
   `${identifier}${queryObjectContentStart}${content}${queryObjectContentEnd}`;
 
@@ -38,7 +38,7 @@ export const getQueryObjectFromQuery = (
   query: LocationQuery,
   identifier: string,
 ): ParsedQueryObject | null => {
-  const match = Object.keys(query).find((key) => isIdentifiedObject(key, identifier));
+  const match = Object.keys(query).find(key => isIdentifiedObject(key, identifier));
   if (match) {
     return {
       content: getQueryObjectContent(match, identifier),
@@ -74,7 +74,8 @@ export const removeQueryObjectFromQuery = (
       if (content !== getQueryObjectContent(key, identifier)) {
         result[key] = query[key];
       }
-    } else {
+    }
+    else {
       result[key] = query[key];
     }
     return result;

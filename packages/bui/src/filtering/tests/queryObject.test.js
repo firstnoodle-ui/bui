@@ -1,59 +1,59 @@
-import { expect, test } from 'vitest'
-import { getQueryObjectsFromQuery, removeQueryObjectFromQuery, removeQueryObjectsFromQuery, renderQueryObject } from '@/filtering/utils/queryObject';
+import { expect } from "vitest";
+import { getQueryObjectsFromQuery, removeQueryObjectFromQuery, removeQueryObjectsFromQuery, renderQueryObject } from "@/filtering/utils/queryObject";
 
-test('renderQueryObject', () => {
-    expect(renderQueryObject('foo', 'bar')).toBe('foo[bar]');
+it("renderQueryObject", () => {
+  expect(renderQueryObject("foo", "bar")).toBe("foo[bar]");
 });
 
-test('getQueryObjectsFromQuery', () => {
-    const filterScope = 'foo';
-    const query = {
-        'foo[bar]': 'baz',
-        'foo[qux]': 'quux',
-    };
+it("getQueryObjectsFromQuery", () => {
+  const filterScope = "foo";
+  const query = {
+    "foo[bar]": "baz",
+    "foo[qux]": "quux",
+  };
 
-    const queryObjects = getQueryObjectsFromQuery(query, filterScope);
+  const queryObjects = getQueryObjectsFromQuery(query, filterScope);
 
-    expect(queryObjects).toEqual(
-        expect.arrayContaining([
-            expect.objectContaining({
-                content: expect.any(String),
-                value: expect.any(String),
-            })
-        ])
-    );
+  expect(queryObjects).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        content: expect.any(String),
+        value: expect.any(String),
+      }),
+    ]),
+  );
 
-    expect(queryObjects[0].content).toBe('bar');
-    expect(queryObjects[0].value).toBe('baz');
+  expect(queryObjects[0].content).toBe("bar");
+  expect(queryObjects[0].value).toBe("baz");
 
-    expect(queryObjects[1].content).toBe('qux');
-    expect(queryObjects[1].value).toBe('quux');
+  expect(queryObjects[1].content).toBe("qux");
+  expect(queryObjects[1].value).toBe("quux");
 });
 
-test('removeQueryObjectFromQuery', () => {
-    const filterScope = 'foo';
-    const query = {
-        'foo[bar]': 'baz',
-        'foo[qux]': 'quux',
-        page: 1
-    };
+it("removeQueryObjectFromQuery", () => {
+  const filterScope = "foo";
+  const query = {
+    "foo[bar]": "baz",
+    "foo[qux]": "quux",
+    "page": 1,
+  };
 
-    const queryObjects = removeQueryObjectFromQuery(query, filterScope, 'bar');
+  const queryObjects = removeQueryObjectFromQuery(query, filterScope, "bar");
 
-    expect(Object.keys(queryObjects).length).toBe(2);
-    expect(Object.keys(queryObjects)[0]).toBe('foo[qux]');
-    expect(Object.keys(queryObjects)[1]).toBe('page');
+  expect(Object.keys(queryObjects).length).toBe(2);
+  expect(Object.keys(queryObjects)[0]).toBe("foo[qux]");
+  expect(Object.keys(queryObjects)[1]).toBe("page");
 });
 
-test('removeQueryObjectsFromQuery', () => {
-    const filterScope = 'foo';
-    const query = {
-        'foo[bar]': 'baz',
-        'foo[qux]': 'quux',
-        page: 1
-    };
+it("removeQueryObjectsFromQuery", () => {
+  const filterScope = "foo";
+  const query = {
+    "foo[bar]": "baz",
+    "foo[qux]": "quux",
+    "page": 1,
+  };
 
-    expect(Object.keys(query).length).toBe(3);
-    const queryObjects = removeQueryObjectsFromQuery(query, filterScope);
-    expect(Object.keys(queryObjects).length).toBe(1);
+  expect(Object.keys(query).length).toBe(3);
+  const queryObjects = removeQueryObjectsFromQuery(query, filterScope);
+  expect(Object.keys(queryObjects).length).toBe(1);
 });
