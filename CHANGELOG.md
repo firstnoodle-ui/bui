@@ -1,6 +1,10 @@
 # Changelog
 
 
+## v0.0.61...main
+
+[compare changes](https://github.com/firstnoodle-ui/bui/compare/v0.0.61...main)
+
 ## v0.0.60...main
 
 [compare changes](https://github.com/firstnoodle-ui/bui/compare/v0.0.60...main)

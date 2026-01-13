@@ -1,5 +1,5 @@
-import { expect } from "vitest";
-import { getQueryObjectsFromQuery, removeQueryObjectFromQuery, removeQueryObjectsFromQuery, renderQueryObject } from "@/filtering/utils/queryObject";
+import { expect, it } from "vitest";
+import { getQueryObjectsFromQuery, removeQueryObjectFromQuery, removeQueryObjectsFromQuery, renderQueryObject } from "../utils/queryObject";
 
 it("renderQueryObject", () => {
   expect(renderQueryObject("foo", "bar")).toBe("foo[bar]");
