@@ -63,7 +63,8 @@ const onClose = async () => {
     if (shouldClose) {
       close();
     }
-  } else {
+  }
+  else {
     close();
   }
 };
