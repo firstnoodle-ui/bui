@@ -32,16 +32,23 @@ const widthClasses: string[] = [
   "max-w-full",
 ];
 const selectedWidthClass = ref(widthClasses[5]);
+
+const componentPageRef = ref<typeof ComponentPage>();
+const closeInterceptor = (): boolean => {
+  componentPageRef.value?.print("Intercepted close - use this to prevent closing when there is unsaved data");
+  return true;
+};
 </script>
 
 <template>
-  <ComponentPage>
+  <ComponentPage ref="componentPageRef">
     <template #default="{ print }">
       <BButton ref="triggerRef" bordered icon="popup" label="Open modal" @click="show = true" />
       <BModal
         v-if="show"
         ref="modalRef"
         :closeable="closeable"
+        :intercept-close="closeInterceptor"
         :title="title"
         :overlay-type="(selectedOverlayType as TOverlayType)"
         :expand-vertically="expandVertically"

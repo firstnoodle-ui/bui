@@ -27,10 +27,16 @@ const onClose = () => {
   show.value = false;
   buttonRef.value!.focus();
 };
+
+const componentPageRef = ref<typeof ComponentPage>();
+const closeInterceptor = (): boolean => {
+  componentPageRef.value?.print("Intercepted close - use this to prevent closing when there is unsaved data");
+  return true;
+};
 </script>
 
 <template>
-  <ComponentPage>
+  <ComponentPage ref="componentPageRef">
     <template #default="{ print }">
       <BButton ref="buttonRef" bordered label="Show" @click="show = true" />
       <BSideOver
@@ -39,6 +45,7 @@ const onClose = () => {
         :title="title"
         :placement="placement"
         :closeable="closeable"
+        :intercept-close="closeInterceptor"
         :overlay-type="overlayType"
         :width-class="widthClass"
         @open="print('@open')"

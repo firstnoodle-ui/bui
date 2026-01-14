@@ -10,6 +10,8 @@ const endPanelVisible = ref(true);
 const endPanelHeight = computed(() => endPanelVisible.value ? 200 : 48);
 
 const route = useRoute();
+
+defineExpose({ print });
 </script>
 
 <template>

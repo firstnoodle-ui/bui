@@ -9,6 +9,7 @@ const props = withDefaults(
   defineProps<{
     closeable?: boolean;
     expandVertically?: boolean;
+    interceptClose?: () => boolean | Promise<boolean>;
     overlayType?: TOverlayType;
     target?: string;
     title?: string;
@@ -53,7 +54,20 @@ onMounted(() => {
 });
 
 const close = () => (show.value = false);
-const onClose = () => props.closeable && close();
+
+const onClose = async () => {
+  if (!props.closeable) return;
+
+  if (props.interceptClose) {
+    const shouldClose = await props.interceptClose();
+    if (shouldClose) {
+      close();
+    }
+  } else {
+    close();
+  }
+};
+
 props.closeable && useEscapeKey(onClose);
 
 const onTransitionAfterEnter = () => {

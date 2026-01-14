@@ -8,12 +8,14 @@ import WindowFrame from "../window-frame/WindowFrame.vue";
 
 const {
   closeable = true,
+  interceptClose,
   overlayType = "default",
   placement = "right",
   target = "#modals",
   widthClass = "max-w-lg",
 } = defineProps<{
   closeable?: boolean;
+  interceptClose?: () => boolean | Promise<boolean>;
   overlayType?: TOverlayType;
   placement?: "left" | "right";
   target?: string;
@@ -43,7 +45,21 @@ const panelRef = ref<HTMLDivElement>();
 onMounted(() => (show.value = true));
 
 const close = () => (show.value = false);
-const onClose = () => closeable && close();
+
+const onClose = async () => {
+  if (!closeable) return;
+
+  if (interceptClose) {
+    const shouldClose = await interceptClose();
+    if (shouldClose) {
+      close();
+    }
+  }
+  else {
+    close();
+  }
+};
+
 closeable && useEscapeKey(onClose);
 
 // afterTransition -> start trapFocus
