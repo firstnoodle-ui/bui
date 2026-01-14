@@ -18,7 +18,6 @@ const {
 const emit = defineEmits(["close", "open"]);
 
 const show = ref(false);
-const windowRef = ref<typeof BWindowFrame>();
 
 // when component is mounted start the transition
 onMounted(() => (show.value = true));
@@ -34,7 +33,7 @@ defineExpose({ close });
   <Teleport :to="target">
     <BScreenOverlay :show="show" :type="overlayType" @click="onClose" @close="emit('close')">
       <BFadeInUp @transition-after-enter="emit('open')">
-        <BWindowFrame v-show="show" ref="windowRef" class="h-64 max-w-2xl md:w-1/2 md:max-w-lg p-4 md:px-8">
+        <BWindowFrame v-show="show" class="h-64 max-w-2xl md:w-1/2 md:max-w-lg p-4 md:px-8">
           <BVerticalLayout>
             <template #header>
               <header class="flex items-center justify-between w-full h-12">
@@ -42,17 +41,17 @@ defineExpose({ close });
                   {{ title }}
                 </h4>
                 <h4 v-else>
-                  <slot name="title" />
+                  <slot name="title" :close="close" />
                 </h4>
                 <BButton v-if="closeable" small icon="close" variant="textSubtle" @click="onClose" />
               </header>
             </template>
             <template #main>
-              <slot name="main" />
+              <slot name="main" :close="close" />
             </template>
             <template #footer>
               <footer class="flex items-center h-12">
-                <slot name="footer" />
+                <slot name="footer" :close="close" />
               </footer>
             </template>
           </BVerticalLayout>
