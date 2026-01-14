@@ -138,3 +138,6 @@ body {
 @utility text-action {
   color: var(--color-action);
 }
+@utility text-destructive {
+  color: var(--color-destructive);
+}
