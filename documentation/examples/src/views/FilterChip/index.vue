@@ -2,12 +2,12 @@
 import type { Filter } from "@firstnoodle-ui/bui";
 import type { Restaurant } from "./data";
 import { BFlexbox, BLoadSpinner, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { ComponentPage } from "../../components";
-import { fetchRestaurants, restaurants } from "./data";
+import { fetchRestaurants } from "./data";
 import { restaurantFilterComponents, restaurantFilters } from "./filters";
 
-const restaurantData = ref<Restaurant[]>(restaurants);
+const groupId = "restaurants";
 
 const customFilterMethod = async (filters: Filter<Restaurant>[]) => {
   try {
@@ -19,15 +19,32 @@ const customFilterMethod = async (filters: Filter<Restaurant>[]) => {
   }
 };
 
-const groupId = "restaurants";
+// Frontend filtering
+// using the customFilterMethod in onMounted to simulate a scenario where the restaurants initially are loaded from an API,
+// but subsequently filtered in the frontend. Thus the restaurants are passed in the 'items' field of the FilterOptions for useFilters
+const restaurantData = ref<Restaurant[]>([]);
+onMounted(async () => {
+  try {
+    restaurantData.value = await customFilterMethod([]);
+  }
+  catch {}
+});
 
+// 1. Frontend filtering: uncomment "items"
+// 2. Backend filtering: uncomment "remoteFilterMethod"
 const {
   availableFilters,
   filteredItems,
   loadingItems,
   updateFilters,
-} = useFilters<Restaurant>(groupId, restaurantFilters, restaurantData, customFilterMethod);
+} = useFilters<Restaurant>({
+  groupId,
+  filters: restaurantFilters,
+  items: restaurantData,
+  // remoteFilterMethod: customFilterMethod,
+});
 
+// this is needed to sync router changes with the filters
 useMountedAndRouterUpdate(updateFilters);
 </script>
 

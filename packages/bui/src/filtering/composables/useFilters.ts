@@ -8,7 +8,14 @@ import {
   removeFiltersFromQuery,
 } from "../utils/queryFilters";
 
-export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<T[]>, remoteFilterMethod: ((filters: Filter<T>[]) => Promise<T[]>) | null = null) => {
+type FilterOptions<T> = {
+  groupId: string;
+  filters: Filter<T>[];
+  items?: Ref<T[]>;
+  remoteFilterMethod?: (filters: Filter<T>[]) => Promise<T[]>;
+};
+
+export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod }: FilterOptions<T>) => {
   const route = useRoute();
   const router = useRouter();
 
@@ -20,6 +27,13 @@ export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<
   const filteredItems = ref<T[]>([]);
 
   const applyFilters = async () => {
+    if (remoteFilterMethod && items) {
+      throw new Error("You should only pass either 'items' (frontend filtering) or 'remoteFilterMethod' (backend filtering). You passed both.");
+    }
+    else if (!remoteFilterMethod && !items) {
+      throw new Error("Filters have to have either items or remoteFilterMethod to work. None was provided.");
+    }
+
     if (remoteFilterMethod) {
       try {
         loadingItems.value = true;
@@ -31,15 +45,16 @@ export const useFilters = <T>(groupId: string, filters: Filter<T>[], items: Ref<
         loadingItems.value = false;
       }
     }
-    else {
+    else if (items) {
       filteredItems.value = items.value.filter(item =>
         activeFilters.value.every(f => f.execute(f.value, f.operator, item)),
       );
     }
   };
 
-  // Watch for changes in active filters and reapply filtering
-  watch(activeFilters, () => applyFilters(), { immediate: true, deep: true });
+  // Watch for changes in active filters and items, then reapply filtering
+  const watchSources = items ? [activeFilters, items] : [activeFilters];
+  watch(watchSources, () => applyFilters(), { immediate: true, deep: true });
 
   const updateFilters = (routeQuery: LocationQuery) => {
     const filtersToBeUpdated = getFiltersFromQuery(routeQuery, groupId);
