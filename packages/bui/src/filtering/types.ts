@@ -1,3 +1,6 @@
+export const sortingDirections = ["asc", "desc"] as const;
+export type SortingDirection = (typeof sortingDirections)[number];
+
 export const operators = ["=", "!=", "<", "<=", ">", ">="] as const;
 export type Operator = (typeof operators)[number];
 
@@ -27,4 +30,19 @@ export type ParsedFilterQuery = {
   id: string;
   operator: Operator;
   value: string;
+};
+
+export type ParsedSortingQuery = {
+  direction: SortingDirection;
+  field: string;
+};
+
+export type TypedSorting<T> = {
+  direction: SortingDirection;
+  field: keyof T;
+};
+
+export type ParsedFiltersAndSorting = {
+  sorting: ParsedSortingQuery | undefined;
+  filters: ParsedFilterQuery[];
 };

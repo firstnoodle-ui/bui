@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import type { Filter } from "@firstnoodle-ui/bui";
+import type { Filter, TypedSorting } from "@firstnoodle-ui/bui";
 import type { Restaurant } from "./data";
-import { BFlexbox, BLoadSpinner, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
+import { BFlexbox, BIcon, BLoadSpinner, sortByField, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
 import { onMounted, ref } from "vue";
 import { ComponentPage } from "../../components";
 import { fetchRestaurants } from "./data";
 import { restaurantFilterComponents, restaurantFilters } from "./filters";
+import SortItems from "./filters/sort-items/SortItems.vue";
 
-const groupId = "restaurants";
+const groupId = "restaurants" as const;
 
-const customFilterMethod = async (filters: Filter<Restaurant>[]) => {
+const customFilterMethod = async (sorting: TypedSorting<Restaurant> | undefined, filters: Filter<Restaurant>[]) => {
   try {
     const response = await fetchRestaurants(filters);
     return response;
@@ -22,10 +23,11 @@ const customFilterMethod = async (filters: Filter<Restaurant>[]) => {
 // Frontend filtering
 // using the customFilterMethod in onMounted to simulate a scenario where the restaurants initially are loaded from an API,
 // but subsequently filtered in the frontend. Thus the restaurants are passed in the 'items' field of the FilterOptions for useFilters
+
 const restaurantData = ref<Restaurant[]>([]);
 onMounted(async () => {
   try {
-    restaurantData.value = await customFilterMethod([]);
+    restaurantData.value = await customFilterMethod({ field: "rating", direction: "asc" }, []);
   }
   catch {}
 });
@@ -34,12 +36,23 @@ onMounted(async () => {
 // 2. Backend filtering: uncomment "remoteFilterMethod"
 const {
   availableFilters,
+  activeSorting,
   filteredItems,
   loadingItems,
   updateFilters,
 } = useFilters<Restaurant>({
   groupId,
   filters: restaurantFilters,
+  defaultSorting: { field: "rating", direction: "desc" },
+  sortingMethod: (sorting, items) => {
+    if (sorting.field === "priceRange") {
+      const sorted = [...items].sort((a, b) => {
+        return a.priceRange.length - b.priceRange.length;
+      });
+      return sorting.direction === "desc" ? sorted.reverse() : sorted;
+    }
+    return sortByField<Restaurant>(sorting, items);
+  },
   items: restaurantData,
   // remoteFilterMethod: customFilterMethod,
 });
@@ -51,21 +64,39 @@ useMountedAndRouterUpdate(updateFilters);
 <template>
   <ComponentPage>
     <template #default>
-      <BFlexbox class="gap-2">
-        <component
-          :is="restaurantFilterComponents[filter.component]"
-          v-for="filter in availableFilters"
-          :key="filter.id"
-          :filter="filter"
-          :group-id="groupId"
-        />
+      <BFlexbox class="gap-2" justify="between">
+        <BFlexbox class="gap-2">
+          <div class="text-sm text-tertiary">
+            Filters
+          </div>
+          <component
+            :is="restaurantFilterComponents[filter.component]"
+            v-for="filter in availableFilters"
+            :key="filter.id"
+            :filter="filter"
+            :group-id="groupId"
+          />
+        </BFlexbox>
+        <BFlexbox class="gap-2">
+          <div class="text-sm text-tertiary">
+            Sort by
+          </div>
+          <SortItems :group-id="groupId" :sorting="activeSorting" />
+        </BFlexbox>
       </BFlexbox>
       <section class="flex flex-col gap-2 py-8">
         <BLoadSpinner v-if="loadingItems" class="size-4" />
         <template v-else>
-          <div v-for="restaurant in filteredItems" :key="restaurant.id">
-            {{ restaurant.name }}
-          </div>
+          <BFlexbox v-for="restaurant in filteredItems" :key="restaurant.id" justify="between" class="w-full">
+            <span class="font-bold text-secondary">{{ restaurant.name }}</span>
+            <BFlexbox class="gap-8">
+              <span class="text-xs text-amber-500">{{ restaurant.priceRange }}</span>
+              <BFlexbox class="w-10 gap-1">
+                <BIcon name="star" class="text-muted" />
+                <span class="text-right text-sm">{{ restaurant.rating.toFixed(1) }}</span>
+              </BFlexbox>
+            </BFlexbox>
+          </BFlexbox>
         </template>
         <div v-if="!loadingItems && !filteredItems.length" class="italic text-tertiary text-sm">
           No restaurants matches filters

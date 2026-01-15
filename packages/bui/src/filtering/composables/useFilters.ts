@@ -1,24 +1,27 @@
 import type { Ref } from "vue";
 import type { LocationQuery } from "vue-router";
-import type { Filter } from "../types";
+import type { Filter, ParsedSortingQuery, TypedSorting } from "../types";
 import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
-  getFiltersFromQuery,
+  getFiltersAndSortingFromQuery,
   removeFiltersFromQuery,
 } from "../utils/queryFilters";
 
 type FilterOptions<T> = {
   groupId: string;
   filters: Filter<T>[];
+  defaultSorting: TypedSorting<T>;
+  sortingMethod?: (sorting: TypedSorting<T>, items: T[]) => T[];
   items?: Ref<T[]>;
-  remoteFilterMethod?: (filters: Filter<T>[]) => Promise<T[]>;
+  remoteFilterMethod?: (sorting: TypedSorting<T>, filters: Filter<T>[]) => Promise<T[]>;
 };
 
-export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod }: FilterOptions<T>) => {
+export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod, defaultSorting, sortingMethod }: FilterOptions<T>) => {
   const route = useRoute();
   const router = useRouter();
 
+  const activeSorting = ref<TypedSorting<T>>(defaultSorting);
   const availableFilters = ref<Filter<T>[]>(filters);
   const activeFilters = computed(() => availableFilters.value.filter(filter => Boolean(filter.value)));
   const filteringActive = computed(() => !!activeFilters.value.length);
@@ -37,7 +40,7 @@ export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod }: F
     if (remoteFilterMethod) {
       try {
         loadingItems.value = true;
-        const result = await remoteFilterMethod(activeFilters.value);
+        const result = await remoteFilterMethod(activeSorting.value as TypedSorting<T>, activeFilters.value);
         filteredItems.value = result;
         loadingItems.value = false;
       }
@@ -46,18 +49,24 @@ export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod }: F
       }
     }
     else if (items) {
-      filteredItems.value = items.value.filter(item =>
-        activeFilters.value.every(f => f.execute(f.value, f.operator, item)),
-      );
+      filteredItems.value = sortingMethod
+        ? sortingMethod(
+            activeSorting.value as TypedSorting<T>,
+            items.value.filter(item => activeFilters.value.every(f => f.execute(f.value, f.operator, item))),
+          )
+        : items.value.filter(item => activeFilters.value.every(f => f.execute(f.value, f.operator, item)));
     }
   };
 
   // Watch for changes in active filters and items, then reapply filtering
-  const watchSources = items ? [activeFilters, items] : [activeFilters];
+  const watchSources = items ? [activeSorting, activeFilters, items] : [activeSorting, activeFilters];
   watch(watchSources, () => applyFilters(), { immediate: true, deep: true });
 
   const updateFilters = (routeQuery: LocationQuery) => {
-    const filtersToBeUpdated = getFiltersFromQuery(routeQuery, groupId);
+    const { filters: filtersToBeUpdated, sorting } = getFiltersAndSortingFromQuery(routeQuery, groupId);
+
+    activeSorting.value = sorting ? sortingQueryToTypedSorting(sorting) : defaultSorting;
+
     (availableFilters.value as Filter<T>[]).forEach((filter) => {
       const updatedFilter = filtersToBeUpdated.find(f => f.id === filter.id);
       if (updatedFilter) {
@@ -76,8 +85,16 @@ export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod }: F
     await router.push({ query: newQuery });
   };
 
+  const sortingQueryToTypedSorting = (query: ParsedSortingQuery): TypedSorting<T> => {
+    return {
+      direction: query.direction,
+      field: query.field as keyof T,
+    };
+  };
+
   return {
     activeFilters,
+    activeSorting,
     availableFilters,
     filteringActive,
     filteredItems,
