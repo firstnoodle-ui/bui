@@ -22,10 +22,11 @@ const onSelectionChange = (selection: SelectListOption[]) => updateFilter(select
 
 <template>
   <BPopper trigger="click">
-    <template #default>
+    <template #default="{ visible }">
       <BFilterChip
         :active="isActive"
         :count="selectedOptions.length"
+        :focus="visible"
         :label="filter.name"
         deletable
         @delete="clearFilter"

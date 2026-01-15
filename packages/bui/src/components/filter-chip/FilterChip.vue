@@ -6,6 +6,7 @@ const { count = 0, deletable = false } = defineProps<{
   active: boolean;
   deletable?: boolean;
   count?: number;
+  focus?: boolean;
 }>();
 defineEmits(["click", "delete"]);
 </script>
@@ -14,7 +15,10 @@ defineEmits(["click", "delete"]);
   <button
     class="h-6 py-2 rounded-md flex items-center gap-1 cursor-pointer hover:bg-secondary active:bg-tertiary"
     :class="{
-      'px-2 border border-default text-tertiary hover:text-secondary hover:border-strong active:text-primary active:border-strong': !active,
+      'border-action bg-secondary': focus && !active,
+      'border-default hover:border-strong active:border-strong': !focus && !active,
+      'px-2 border text-secondary hover:text-tertiary active:text-primary': !active,
+      'bg-secondary': focus && active,
       'border border-action text-action': active,
       'pl-2 pr-1': active && deletable,
       'px-2': active && !deletable,
