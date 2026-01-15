@@ -12,17 +12,17 @@ defineEmits(["click", "delete"]);
 
 <template>
   <button
-    class="h-6 py-2 rounded-md flex items-center gap-1 cursor-pointer"
+    class="h-6 py-2 rounded-md flex items-center gap-1 cursor-pointer hover:bg-secondary active:bg-tertiary"
     :class="{
-      'px-2 border border-default text-tertiary hover:bg-secondary hover:text-secondary hover:border-strong active:bg-tertiary active:text-primary active:border-strong': !active,
-      'border border-transparent text-white bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800': active,
+      'px-2 border border-default text-tertiary hover:text-secondary hover:border-strong active:text-primary active:border-strong': !active,
+      'border border-action text-action': active,
       'pl-2 pr-1': active && deletable,
       'px-2': active && !deletable,
     }"
     @click="$emit('click')"
   >
     <span class="text-sm">{{ label }}</span>
-    <span v-if="active && count" class="h-4 px-1 min-w-4 flex items-center justify-center rounded-full text-xs font-medium bg-black/15 ">{{ count }}</span>
-    <BDeleteButton v-if="deletable && active" data-theme="dark" @click="$emit('delete')" />
+    <span v-if="active && count" class="h-4 px-1 min-w-4 flex items-center justify-center rounded-full text-xs font-medium bg-tertiary ">{{ count }}</span>
+    <BDeleteButton v-if="deletable && active" @click="$emit('delete')" />
   </button>
 </template>

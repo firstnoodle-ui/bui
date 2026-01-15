@@ -10,7 +10,7 @@ defineEmits(["click"]);
         flex items-center justify-center w-4 h-4 rounded-full
         hover:bg-black/15 focus-visible:bg-black/15 active:bg-black/25
         dark:hover:bg-white/15 dark:focus-visible:bg-white/15 dark:active:bg-white/25
-        text-primary
+        text-tertiary hover:text-secondary active:text-tertiary
         cursor-pointer"
     @click.stop.prevent="$emit('click')"
   >
