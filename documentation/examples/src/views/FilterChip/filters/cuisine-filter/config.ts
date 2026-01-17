@@ -1,10 +1,10 @@
 import type { Filter } from "@firstnoodle-ui/bui";
-import type { Restaurant } from "../../data";
+import type { RestaurantDto } from "../../data";
 import { getFilterValues, hasValue } from "@firstnoodle-ui/bui";
 
 // import { cuisines } from "../../data";
 
-export const cuisineFilter: Filter<Restaurant> = {
+export const cuisineFilter: Filter<RestaurantDto> = {
   id: "cuisineId",
   name: "Cuisine",
   component: "CuisineFilter",
@@ -14,7 +14,7 @@ export const cuisineFilter: Filter<Restaurant> = {
   operator: "=",
   value: null,
   execute: (value, _operator, entity) => {
-    if (typeof value !== "string" || !hasValue(entity.cuisineId)) {
+    if (typeof value !== "string" || !hasValue(entity.cuisine)) {
       throw new Error(`Invalid filter value ${value} [${typeof value}]`);
     };
 
@@ -25,6 +25,6 @@ export const cuisineFilter: Filter<Restaurant> = {
 
     // for filtering by cuisine id
     const cuisineIds = getFilterValues(value);
-    return cuisineIds.includes(entity.cuisineId.toString());
+    return cuisineIds.includes(entity.cuisine.id.toString());
   },
 };

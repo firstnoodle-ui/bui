@@ -37,9 +37,17 @@ export type ParsedSortingQuery = {
   field: string;
 };
 
-export type TypedSorting<T> = {
+export type NestedKeyOf<T> = T extends object
+  ? {
+      [K in keyof T & string]: T[K] extends object
+        ? K | `${K}.${NestedKeyOf<T[K]>}`
+        : K;
+    }[keyof T & string]
+  : never;
+
+export type TypedSorting<T, AllowedFields extends NestedKeyOf<T>> = {
   direction: SortingDirection;
-  field: keyof T;
+  field: AllowedFields;
 };
 
 export type ParsedFiltersAndSorting = {

@@ -11,6 +11,7 @@ const options: SelectListOption[] = [
   { label: "Rating", value: "rating" },
   { label: "Name", value: "name" },
   { label: "Price range", value: "priceRange" },
+  { label: "Cuisine", value: "cuisine.name" },
 ];
 const selectedFieldOption = computed(() => {
   return options.find(option => option.value === (sorting || defaultSorting).field) || options[0];

@@ -25,7 +25,7 @@ defineEmits(["click", "delete"]);
     }"
     @click="$emit('click')"
   >
-    <span class="text-sm">{{ label }}</span>
+    <span class="text-xs">{{ label }}</span>
     <span v-if="active && count" class="h-4 px-1 min-w-4 flex items-center justify-center rounded-full text-xs font-medium bg-tertiary ">{{ count }}</span>
     <BDeleteButton v-if="deletable && active" @click="$emit('delete')" />
   </button>

@@ -1,4 +1,6 @@
-import type { Filter } from "@firstnoodle-ui/bui";
+import type { Filter, TypedSorting } from "@firstnoodle-ui/bui";
+import type { AllowedSortingFields } from "./filters/sort-items/config";
+import { sortRestaurants } from "./filters/sort-items/config";
 
 export type Restaurant = {
   id: number;
@@ -507,13 +509,43 @@ export const dietaryOptions: DietaryOption[] = [
  * Mock API call to fetch restaurants
  * @returns Promise resolving to the list of restaurants
  */
-export async function fetchRestaurants(filters: Filter<Restaurant>[]): Promise<Restaurant[]> {
+export async function fetchRestaurants(sorting: TypedSorting<RestaurantDto, AllowedSortingFields> | undefined, filters: Filter<RestaurantDto>[]): Promise<RestaurantDto[]> {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const result = restaurants.filter(restaurant =>
-        filters.every(f => f.execute(f.value, f.operator, restaurant)),
-      );
+      const result = sorting
+        ? sortRestaurants(
+            sorting,
+            restaurants.map(r => restaurantDto(r))
+              .filter(restaurant =>
+                filters.every(f => f.execute(f.value, f.operator, restaurant)),
+              ),
+          )
+        : restaurants.map(r => restaurantDto(r))
+            .filter(restaurant =>
+              filters.every(f => f.execute(f.value, f.operator, restaurant)),
+            );
+
       resolve(result);
     }, 500);
   });
 }
+
+export type RestaurantDto = {
+  cuisine: Cuisine;
+  dietaryOptions: DietaryOption[];
+} & Omit<Restaurant, "cuisineId" | "dietaryOptionIds">;
+
+/**
+ * Creating this to simulate a common scenario where relationships are included in an entity sent from an API
+ * Doing this to build sorting and filtering that works on 'nested' fields
+ * - eg. sort restaurants by "cuisine.name"
+ */
+export const restaurantDto = (restaruant: Restaurant): RestaurantDto => {
+  const cuisine = cuisines.find(cuisine => cuisine.id === restaruant.cuisineId);
+  if (!cuisine) throw new Error(`No cuisine found for restaurant: ${restaruant.id}`);
+  return {
+    ...restaruant,
+    cuisine,
+    dietaryOptions: dietaryOptions.filter(option => restaruant.dietaryOptionIds.includes(option.id)),
+  };
+};

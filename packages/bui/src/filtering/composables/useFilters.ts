@@ -1,6 +1,6 @@
 import type { Ref } from "vue";
 import type { LocationQuery } from "vue-router";
-import type { Filter, ParsedSortingQuery, TypedSorting } from "../types";
+import type { Filter, NestedKeyOf, ParsedSortingQuery, TypedSorting } from "../types";
 import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
@@ -8,20 +8,20 @@ import {
   removeFiltersFromQuery,
 } from "../utils/queryFilters";
 
-type FilterOptions<T> = {
+type FilterOptions<T, AllowedSortingFields extends NestedKeyOf<T>> = {
   groupId: string;
   filters: Filter<T>[];
-  defaultSorting: TypedSorting<T>;
-  sortingMethod?: (sorting: TypedSorting<T>, items: T[]) => T[];
+  defaultSorting: TypedSorting<T, AllowedSortingFields>;
+  sortingMethod?: (sorting: TypedSorting<T, AllowedSortingFields>, items: T[]) => T[];
   items?: Ref<T[]>;
-  remoteFilterMethod?: (sorting: TypedSorting<T>, filters: Filter<T>[]) => Promise<T[]>;
+  remoteFilterMethod?: (sorting: TypedSorting<T, AllowedSortingFields> | undefined, filters: Filter<T>[]) => Promise<T[]>;
 };
 
-export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod, defaultSorting, sortingMethod }: FilterOptions<T>) => {
+export const useFilters = <T, AllowedSortingFields extends NestedKeyOf<T>>({ filters, groupId, items, remoteFilterMethod, defaultSorting, sortingMethod }: FilterOptions<T, AllowedSortingFields>) => {
   const route = useRoute();
   const router = useRouter();
 
-  const activeSorting = ref<TypedSorting<T>>(defaultSorting);
+  const activeSorting = ref<TypedSorting<T, AllowedSortingFields>>(defaultSorting);
   const availableFilters = ref<Filter<T>[]>(filters);
   const activeFilters = computed(() => availableFilters.value.filter(filter => Boolean(filter.value)));
   const filteringActive = computed(() => !!activeFilters.value.length);
@@ -40,7 +40,7 @@ export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod, def
     if (remoteFilterMethod) {
       try {
         loadingItems.value = true;
-        const result = await remoteFilterMethod(activeSorting.value as TypedSorting<T>, activeFilters.value);
+        const result = await remoteFilterMethod(activeSorting.value as TypedSorting<T, AllowedSortingFields>, activeFilters.value);
         filteredItems.value = result;
         loadingItems.value = false;
       }
@@ -51,7 +51,7 @@ export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod, def
     else if (items) {
       filteredItems.value = sortingMethod
         ? sortingMethod(
-            activeSorting.value as TypedSorting<T>,
+            activeSorting.value as TypedSorting<T, AllowedSortingFields>,
             items.value.filter(item => activeFilters.value.every(f => f.execute(f.value, f.operator, item))),
           )
         : items.value.filter(item => activeFilters.value.every(f => f.execute(f.value, f.operator, item)));
@@ -85,10 +85,10 @@ export const useFilters = <T>({ filters, groupId, items, remoteFilterMethod, def
     await router.push({ query: newQuery });
   };
 
-  const sortingQueryToTypedSorting = (query: ParsedSortingQuery): TypedSorting<T> => {
+  const sortingQueryToTypedSorting = (query: ParsedSortingQuery): TypedSorting<T, AllowedSortingFields> => {
     return {
       direction: query.direction,
-      field: query.field as keyof T,
+      field: query.field as AllowedSortingFields,
     };
   };
 

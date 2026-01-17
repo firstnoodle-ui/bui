@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import type { Filter, TypedSorting } from "@firstnoodle-ui/bui";
-import type { Restaurant } from "./data";
-import { BFlexbox, BIcon, BLoadSpinner, sortByField, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
+import type { RestaurantDto } from "./data";
+import type { AllowedSortingFields } from "./filters/sort-items/config";
+import { BFlexbox, BIcon, BLoadSpinner, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
 import { onMounted, ref } from "vue";
 import { ComponentPage } from "../../components";
 import { fetchRestaurants } from "./data";
 import { restaurantFilterComponents, restaurantFilters } from "./filters";
+import { sortRestaurants } from "./filters/sort-items/config";
 import SortItems from "./filters/sort-items/SortItems.vue";
 
 const groupId = "restaurants" as const;
 
-const customFilterMethod = async (sorting: TypedSorting<Restaurant> | undefined, filters: Filter<Restaurant>[]) => {
+const customFilterMethod = async (sorting: TypedSorting<RestaurantDto, AllowedSortingFields> | undefined, filters: Filter<RestaurantDto>[]) => {
   try {
-    const response = await fetchRestaurants(filters);
+    const response = await fetchRestaurants(sorting, filters);
     return response;
   }
   catch {
@@ -24,7 +26,7 @@ const customFilterMethod = async (sorting: TypedSorting<Restaurant> | undefined,
 // using the customFilterMethod in onMounted to simulate a scenario where the restaurants initially are loaded from an API,
 // but subsequently filtered in the frontend. Thus the restaurants are passed in the 'items' field of the FilterOptions for useFilters
 
-const restaurantData = ref<Restaurant[]>([]);
+const restaurantData = ref<RestaurantDto[]>([]);
 onMounted(async () => {
   try {
     restaurantData.value = await customFilterMethod({ field: "rating", direction: "asc" }, []);
@@ -40,19 +42,11 @@ const {
   filteredItems,
   loadingItems,
   updateFilters,
-} = useFilters<Restaurant>({
+} = useFilters<RestaurantDto, AllowedSortingFields>({
   groupId,
   filters: restaurantFilters,
   defaultSorting: { field: "rating", direction: "desc" },
-  sortingMethod: (sorting, items) => {
-    if (sorting.field === "priceRange") {
-      const sorted = [...items].sort((a, b) => {
-        return a.priceRange.length - b.priceRange.length;
-      });
-      return sorting.direction === "desc" ? sorted.reverse() : sorted;
-    }
-    return sortByField<Restaurant>(sorting, items);
-  },
+  sortingMethod: sortRestaurants,
   items: restaurantData,
   // remoteFilterMethod: customFilterMethod,
 });
@@ -88,7 +82,10 @@ useMountedAndRouterUpdate(updateFilters);
         <BLoadSpinner v-if="loadingItems" class="size-4" />
         <template v-else>
           <BFlexbox v-for="restaurant in filteredItems" :key="restaurant.id" justify="between" class="w-full">
-            <span class="font-bold text-secondary">{{ restaurant.name }}</span>
+            <BFlexbox class="">
+              <span class="font-bold text-secondary w-56">{{ restaurant.name }}</span>
+              <span class="font-light text-tertiary">{{ restaurant.cuisine.name }}</span>
+            </BFlexbox>
             <BFlexbox class="gap-8">
               <span class="text-xs text-amber-500">{{ restaurant.priceRange }}</span>
               <BFlexbox class="w-10 gap-1">
