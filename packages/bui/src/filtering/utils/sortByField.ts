@@ -1,9 +1,9 @@
-import type { TypedSorting } from "../types";
+import type { NestedKeyOf, TypedSorting } from "../types";
 /**
  * Sorts an array of objects by a given field, automatically detecting the field type (string, number, or date)
  */
-export function sortByField<T extends Record<string, any>>(
-  sorting: TypedSorting<T>,
+export function sortByField<T extends Record<string, any>, AllowedSortingFields extends NestedKeyOf<T>>(
+  sorting: TypedSorting<T, AllowedSortingFields>,
   items: T[],
 ): T[] {
   if (!items || items.length === 0) {

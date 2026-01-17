@@ -1,6 +1,6 @@
 import type { Filter, TypedSorting } from "@firstnoodle-ui/bui";
 import type { AllowedSortingFields } from "./filters/sort-items/config";
-import { sortRestaurants } from "./filters/sort-items/config";
+import { sortingConfig } from "./filters/sort-items/config";
 
 export type Restaurant = {
   id: number;
@@ -513,7 +513,7 @@ export async function fetchRestaurants(sorting: TypedSorting<RestaurantDto, Allo
   return new Promise((resolve) => {
     setTimeout(() => {
       const result = sorting
-        ? sortRestaurants(
+        ? sortingConfig.sortingMethod(
             sorting,
             restaurants.map(r => restaurantDto(r))
               .filter(restaurant =>

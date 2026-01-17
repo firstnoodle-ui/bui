@@ -2,12 +2,12 @@
 import type { Filter, TypedSorting } from "@firstnoodle-ui/bui";
 import type { RestaurantDto } from "./data";
 import type { AllowedSortingFields } from "./filters/sort-items/config";
-import { BFlexbox, BIcon, BLoadSpinner, useFilters, useMountedAndRouterUpdate } from "@firstnoodle-ui/bui";
+import { BFlexbox, BIcon, BLoadSpinner, useFilters } from "@firstnoodle-ui/bui";
 import { onMounted, ref } from "vue";
 import { ComponentPage } from "../../components";
 import { fetchRestaurants } from "./data";
 import { restaurantFilterComponents, restaurantFilters } from "./filters";
-import { sortRestaurants } from "./filters/sort-items/config";
+import { sortingConfig } from "./filters/sort-items/config";
 import SortItems from "./filters/sort-items/SortItems.vue";
 
 const groupId = "restaurants" as const;
@@ -41,18 +41,13 @@ const {
   activeSorting,
   filteredItems,
   loadingItems,
-  updateFilters,
 } = useFilters<RestaurantDto, AllowedSortingFields>({
   groupId,
   filters: restaurantFilters,
-  defaultSorting: { field: "rating", direction: "desc" },
-  sortingMethod: sortRestaurants,
+  sorting: sortingConfig,
   items: restaurantData,
   // remoteFilterMethod: customFilterMethod,
 });
-
-// this is needed to sync router changes with the filters
-useMountedAndRouterUpdate(updateFilters);
 </script>
 
 <template>
