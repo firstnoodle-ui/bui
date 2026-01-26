@@ -1,4 +1,5 @@
 {
+  "window.title": "🚨 BUI — ${activeEditorShort}${separator}${rootName}",
   "workbench.colorCustomizations": {
     "titleBar.activeBackground": "#661D1D"
   },
