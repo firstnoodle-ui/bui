@@ -16,6 +16,7 @@ const queryObjectContentEnd = "]";
 const isIdentifiedObject = (queryKey: string, identifier: string) =>
   queryKey.startsWith(identifier + queryObjectContentStart)
   && queryKey.endsWith(queryObjectContentEnd);
+
 export const renderQueryObject = (identifier: string, content: string) =>
   `${identifier}${queryObjectContentStart}${content}${queryObjectContentEnd}`;
 
