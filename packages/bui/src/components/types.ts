@@ -76,6 +76,7 @@ export type TTreeListNode = {
 export const icons = [
   "admin",
   "agent",
+  "agent-flow",
   "agent-message",
   "agent-reply",
   "arrow-deviate",
