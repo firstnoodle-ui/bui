@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Placement } from "../../types/floating-ui";
+import type { OffsetOptions, Placement } from "../../types/floating-ui";
 import type { TPopperTrigger } from "../types";
 import { ref } from "vue";
 import { BPopper } from "../popper";
@@ -7,8 +7,7 @@ import { BPopper } from "../popper";
 const props = withDefaults(defineProps<{
   bgColorClass?: string;
   delay?: number;
-  offsetMain?: number;
-  offsetCross?: number;
+  offsetOptions?: Partial<OffsetOptions>;
   placement?: Placement;
   text?: string | null;
   textColorClass?: string;
@@ -39,7 +38,7 @@ defineExpose({ hide: () => {
     disable-click-outside
     :trigger="props.trigger"
     :open-delay="props.delay"
-    :offset-options="{ offsetMain: props.offsetMain, offsetCross: props.offsetCross }"
+    :offset-options="offsetOptions"
     :root-class="props.triggerFullWidth ? 'w-full flex overflow-hidden' : 'inline-flex overflow-hidden'"
     :trigger-class="props.triggerFullWidth ? 'w-full flex overflow-hidden' : 'inline-flex overflow-hidden'"
     :placement="props.placement"
