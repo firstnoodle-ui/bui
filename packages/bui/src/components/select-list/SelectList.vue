@@ -221,6 +221,11 @@ const onToggleAll = () => {
   // need to do a different check if selectedOptionFilter has a value
   // then check if "allFilteredOptionsSelected"
   if (selectedCount.value === 0 || Boolean(selectedCount.value && !allOptionsSelected.value)) {
+    // TODO - handle if options are disabled
+    // the commented code below will select all except the disabled, but deselcting all doesn't work
+
+    // const options = selectedOptionFilter.value ? flattenedOptions.value.filter(selectedOptionFilter.value.execute) : flattenedOptions.value;
+    // emit("select", options.filter(option => !option.disabled));
     emit("select", selectedOptionFilter.value ? flattenedOptions.value.filter(selectedOptionFilter.value.execute) : flattenedOptions.value);
   }
   else {

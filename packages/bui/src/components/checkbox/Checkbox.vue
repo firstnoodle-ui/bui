@@ -21,7 +21,6 @@ const emit = defineEmits(["click"]);
       'border-action': checked && !disabled,
       'border-default': !checked && !disabled,
       'border-subtle cursor-default': disabled,
-      'cursor-pointer': !disabled,
     }"
     @click.stop.prevent="!disabled && emit('click')"
   >

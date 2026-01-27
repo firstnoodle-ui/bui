@@ -8,7 +8,7 @@ const { value, disabled = false, indeterminate = false } = defineProps<{ value: 
     :class="{
       'border-action bg-action hover:bg-action-hover hover:border-action-hover cursor-pointer': (value || indeterminate) && !disabled,
       'bg-primary border-default hover:border-strong hover:bg-secondary cursor-pointer': !value && !indeterminate && !disabled,
-      'cursor-default border-default bg-tertiary': disabled,
+      'cursor-not-allowed border-default bg-tertiary': disabled,
     }"
   >
     <div v-if="indeterminate" class="w-2 bg-white" style="height: 2px" />

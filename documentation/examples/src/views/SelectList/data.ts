@@ -1,7 +1,7 @@
 import type { SelectListFilter, SelectListOption, SelectListOptionGroup } from "@firstnoodle-ui/bui";
 
 export const demoOptions: SelectListOption[] = [
-  { id: 1, icon: "box", label: "Apple", suffix: "green" },
+  { id: 1, icon: "box", label: "Apple", suffix: "green", disabled: true },
   { id: 2, icon: "box", label: "Orange", suffix: "orange" },
   { id: 3, icon: "box", label: "Pineapple", suffix: "yellow" },
   { id: 4, icon: "box", label: "Pear", suffix: "green" },

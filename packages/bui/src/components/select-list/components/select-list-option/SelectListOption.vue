@@ -32,12 +32,15 @@ const onToggle = () => emit("click");
   <li class="list-none flex items-center w-full overflow-hidden bg-primary">
     <component
       :is="isButton ? 'button' : 'div'"
-      class="cursor-pointer w-full overflow-hidden rounded-lg flex items-center px-2 py-1 gap-2 hover:bg-secondary active:bg-tertiary"
+      :disabled="option.disabled"
+      class="w-full overflow-hidden rounded-lg flex items-center px-2 py-1 gap-2"
       :class="{
         '': variant === 'checkbox',
         'bg-secondary': highlighted,
         'h-6 text-xs': small,
         'h-9 text-sm': !small,
+        'cursor-pointer hover:bg-secondary active:bg-tertiary': !option.disabled,
+        'cursor-not-allowed': option.disabled,
       }"
       @click="onToggle"
       @mouseover="emit('hover', option)"
@@ -46,6 +49,7 @@ const onToggle = () => emit("click");
       <main class="flex-1 w-full overflow-hidden flex items-center gap-2">
         <BCheckbox
           v-if="variant === 'checkbox'"
+          :disabled="option.disabled"
           :checked="selected"
           class="flex-0"
           @click="onToggle"
@@ -56,6 +60,8 @@ const onToggle = () => emit("click");
           class="w-4 h-4 flex-0"
           :class="{
             'text-action': selected && variant === 'single',
+            'text-tertiary': variant !== 'single' && option.disabled,
+            'text-primary': variant !== 'single' && !option.disabled,
           }"
         />
         <BTextHighlight
@@ -65,12 +71,23 @@ const onToggle = () => emit("click");
           class="flex-1 pl-1 -ml-1 text-left min-w-0 truncate"
           :class="{
             'text-action': selected && variant === 'single',
+            'text-tertiary': variant !== 'single' && option.disabled,
+            'text-primary': variant !== 'single' && !option.disabled,
             'text-xs': small,
             'text-sm': !small,
           }"
         />
       </main>
-      <span v-if="option.suffix" class="flex-0 text-sm text-secondary" :class="{ 'text-xs': small, 'text-sm': !small }">{{ option.suffix }}</span>
+      <span
+        v-if="option.suffix"
+        class="flex-0 text-sm text-secondary"
+        :class="{
+          'text-xs': small,
+          'text-sm': !small,
+          'text-secondary': !option.disabled,
+          'text-tertiary': option.disabled,
+        }"
+      >{{ option.suffix }}</span>
       <BButton
         v-if="variant === 'deletable'"
         small
