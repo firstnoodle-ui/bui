@@ -12,7 +12,9 @@ import { BErrorCard, BIdleCard, BLoadingCard, BNoMatchCard } from "./components/
 const props = withDefaults(defineProps<SelectListProps>(), {
   identifier: "label",
   loading: false,
+  nothingSelectedLabel: "Nothing selected",
   placeholder: "Search",
+  selectAllLabel: "Select/deselect all",
   small: false,
 });
 
@@ -372,7 +374,7 @@ defineExpose({
           :checked="allOptionsSelected"
           @click="onToggleAll"
         />
-        <span class="text-sm text-muted italic">Select/deselect all</span>
+        <span class="text-sm text-muted italic">{{ selectAllLabel }}</span>
       </button>
     </header>
 
@@ -432,7 +434,7 @@ defineExpose({
             @intersect="onSelectionFooterIntersect"
           >
             <template v-if="selectionOpen">
-              <span v-if="noSelection" class="px-4 h-8 flex items-center text-ui-label-14-regular text-disabled-font">Nothing selected</span>
+              <span v-if="noSelection" class="px-4 h-8 flex items-center text-ui-label-14-regular text-disabled-font">{{ nothingSelectedLabel }}</span>
               <section class="w-full px-4 flex flex-wrap items-center gap-2">
                 <!-- <NInputChip
                                     ref="selectedOptionsRef"
