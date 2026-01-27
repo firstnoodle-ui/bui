@@ -1,7 +1,7 @@
 {
   "name": "@firstnoodle-ui/bui",
   "type": "module",
-  "version": "0.0.67",
+  "version": "0.0.68",
   "private": false,
   "repository": {
     "type": "git",
@@ -42,7 +42,7 @@
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "prepack": "pnpm run build",
-    "release:publish": "pnpm publish --access public --otp=308851 --no-git-checks"
+    "release:publish": "pnpm publish --access public --otp=943269 --no-git-checks"
   },
   "peerDependencies": {
     "@floating-ui/core": "^1.7.3",
