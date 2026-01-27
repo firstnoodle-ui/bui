@@ -36,6 +36,7 @@ export type SelectListProps = {
   errorMessage?: string;
   filters?: SelectListFilter[];
   loading?: boolean;
+  nothingSelectedLabel?: string;
   options: SelectListOption[] | SelectListOptionGroup[];
   placeholder?: string;
   rootClass?: string;
@@ -43,6 +44,7 @@ export type SelectListProps = {
   searchDebounce?: number;
   searchFunction?: (query: string) => SelectListOption[] | null;
   selectAll?: boolean;
+  selectAllLabel?: string;
   selected: SelectListOption | null | SelectListOption[];
   showSelection?: boolean;
   small?: boolean;
