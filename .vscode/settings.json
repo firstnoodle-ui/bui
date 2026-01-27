@@ -1,7 +1,7 @@
 {
   "window.title": "🚨 BUI — ${activeEditorShort}${separator}${rootName}",
   "workbench.colorCustomizations": {
-    "titleBar.activeBackground": "#661D1D"
+    "titleBar.activeBackground": "#1C745F"
   },
   // Disable the default formatter, use eslint instead
   "prettier.enable": false,
