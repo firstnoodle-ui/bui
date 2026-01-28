@@ -175,8 +175,8 @@ const onQuery = async (event: Event) => {
 
 const debounceOnQuery = debounce(onQuery, props.debounceMs);
 
-const onOptionHover = (label: string) => {
-  hoveredOption.value = localOptions.value.find(o => o.label === label) || null;
+const onOptionHover = (id: string | number) => {
+  hoveredOption.value = localOptions.value.find(o => o.id === id) || null;
 };
 
 const scrollToOption = (option: TPopSelectOption) => {
@@ -319,9 +319,8 @@ defineExpose({ close, focus });
             <PopSelectOption
               v-for="option in localOptions"
               ref="optionsRef"
-              :key="option.id ? option.id : option.label"
-              :disabled="option.disabled"
-              :label="option.label"
+              :key="option.id"
+              :option="option"
               :hovered-option="hoveredOption"
               :selected="selectedOptions.includes(option)"
               @focus="onOptionHover"

@@ -50,7 +50,7 @@ export const PopperTrigger = ["click", "hover", "focus", "manual"] as const;
 export type TPopperTrigger = (typeof PopperTrigger)[number];
 
 export type TPopSelectOption = {
-  id?: string | number;
+  id: string | number;
   icon?: TIcon;
   label: string;
   disabled?: boolean;
