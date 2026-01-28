@@ -19,7 +19,7 @@ const emit = defineEmits(["click", "focus", "hover"]);
 const root = ref();
 
 const highlighted = computed(() => {
-  return props.hoveredOption && props.hoveredOption.label === props.option.label;
+  return props.hoveredOption && props.hoveredOption.id === props.option.id;
 });
 
 const onOptionClick = () => {
