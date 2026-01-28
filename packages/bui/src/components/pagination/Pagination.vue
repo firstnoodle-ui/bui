@@ -15,7 +15,7 @@ const emit = defineEmits(["change"]);
 const navRef = ref<HTMLElement>();
 
 const pageOptions = computed((): TPopSelectOption[] => {
-  return range(0, lastPage).map((num: number) => ({ label: `${num + 1}` }));
+  return range(0, lastPage).map((num: number) => ({ id: `${num + 1}`, label: `${num + 1}` }));
 });
 const prevStyle = computed(() => borders ? { borderRadius: "8px 0 0 8px" } : undefined);
 const nextStyle = computed(() => borders ? { borderRadius: "0px 8px 8px 0px" } : undefined);
