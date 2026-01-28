@@ -319,7 +319,7 @@ defineExpose({ close, focus });
             <PopSelectOption
               v-for="option in localOptions"
               ref="optionsRef"
-              :key="option.id || option.label"
+              :key="option.id ? option.id : option.label"
               :disabled="option.disabled"
               :label="option.label"
               :hovered-option="hoveredOption"
