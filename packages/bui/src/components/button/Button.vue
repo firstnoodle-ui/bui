@@ -62,6 +62,9 @@ const loadSpinnerClass = computed(() => {
   else if (props.variant === "outlineSubtle" || props.variant === "textSubtle") {
     classes.push("text-slate-700 dark:text-slate-200");
   }
+  else if (props.variant === "outlineDestructive") {
+    classes.push("text-red-500");
+  }
   return classes.join(" ");
 });
 
@@ -171,6 +174,21 @@ const buttonClasses = computed(() => {
               "bg-red-600 hover:bg-red-700 focus-visible:bg-red-700 active:bg-red-800",
               "border border-red-600 hover:border-red-700 focus-visible:border-red-700 active:border-red-800",
               "text-white",
+            ]
+        ),
+      );
+      break;
+    case "outlineDestructive":
+      result.push(
+        ...(props.focus
+          ? ["bg-red-200 border-red-700 text-red-700 dark:bg-red-900 dark:border-red-600 dark:text-red-100"]
+          : [
+              "hover:bg-red-100 focus-visible:bg-red-100 active:bg-red-200",
+              "border border-red-500 hover:border-red-600 focus-visible:border-red-600 active:border-red-700",
+              "text-red-500 hover:text-red-600 focus-visible:text-red-600 active:text-red-700",
+              "dark:hover:bg-red-900/50 dark:focus-visible:bg-red-900/50 dark:active:bg-red-900",
+              "dark:border-red-500 dark:hover:border-red-400 dark:focus-visible:border-red-400 dark:active:border-red-300",
+              "dark:text-red-500 dark:hover:text-red-400 focus-visible:text-red-400 dark:active:text-red-300",
             ]
         ),
       );

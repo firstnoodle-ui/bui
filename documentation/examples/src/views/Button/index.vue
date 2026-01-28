@@ -19,7 +19,7 @@ const isFocused = ref(false);
 const hasNotification = ref(false);
 const label = ref("Label");
 
-const variantOptions: string[] = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive"];
+const variantOptions: string[] = ["fill", "outline", "outlineDestructive", "outlineSubtle", "text", "textSubtle", "destructive"];
 const selectedVariant = ref<string | undefined>();
 
 const selectedIcon = ref<string | undefined>();

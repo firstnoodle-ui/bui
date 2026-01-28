@@ -1,4 +1,4 @@
-export const buttonVariants = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive"] as const;
+export const buttonVariants = ["fill", "outline", "outlineSubtle", "text", "textSubtle", "destructive", "outlineDestructive"] as const;
 export type ButtonVariant = (typeof buttonVariants)[number];
 
 export const ButtonType = ["default", "primary", "error"] as const;
