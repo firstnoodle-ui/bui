@@ -80,7 +80,13 @@ const onDeleteEntryById = (id: string) => {
   inputElement.value?.focus();
 };
 
-defineExpose({ importEntries, inputElement });
+const clear = () => {
+  parsedEntries.value = [];
+  inputValue.value = "";
+  emit("update:entries", parsedEntries.value);
+};
+
+defineExpose({ clear, importEntries, inputElement });
 </script>
 
 <template>
