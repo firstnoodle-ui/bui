@@ -28,6 +28,7 @@ const emit = defineEmits<{
         <slot name="footer-left" />
       </BFlexbox>
       <BFlexbox class="gap-2">
+        <slot name="footer-right" />
         <BConfirmCancel
           small
           order="confirm-last"
