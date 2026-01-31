@@ -20,6 +20,11 @@ const importEntries = (importString: string) => {
   emit("update:entries", parsedEntries.value);
 };
 
+const replaceEntries = (importString: string) => {
+  parsedEntries.value = [...parseInput(importString)];
+  emit("update:entries", parsedEntries.value);
+};
+
 /**
  * Update inputValue and if comma (',') is hit, parse inputValue and reset
  */
@@ -86,7 +91,7 @@ const clear = () => {
   emit("update:entries", parsedEntries.value);
 };
 
-defineExpose({ clear, importEntries, inputElement });
+defineExpose({ clear, importEntries, inputElement, replaceEntries });
 </script>
 
 <template>
