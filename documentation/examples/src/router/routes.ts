@@ -143,6 +143,12 @@ export default [
     meta: { group: "Utils" },
   },
   {
+    path: "/progress",
+    name: "Progress",
+    component: () => import("../views/Progress/index.vue"),
+    meta: { group: "Standard" },
+  },
+  {
     path: "/pop-select",
     name: "PopSelect",
     component: () => import("../views/PopSelect/index.vue"),

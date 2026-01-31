@@ -31,6 +31,7 @@ export * from "./pop-calendar";
 export * from "./pop-confirm";
 export * from "./pop-select";
 export * from "./popper";
+export * from "./progress";
 export * from "./screen-overlay";
 export * from "./scrollbar";
 export * from "./segmented-controls";
