@@ -33,11 +33,13 @@ const textareaRef = ref<HTMLTextAreaElement>();
 const inputRef = ref<HTMLInputElement>();
 
 onMounted(() => {
-  if (multiline) {
-    textareaRef.value?.focus();
-  }
-  else {
-    inputRef.value?.focus();
+  if (autoFocus) {
+    if (multiline) {
+      textareaRef.value?.focus();
+    }
+    else {
+      inputRef.value?.focus();
+    }
   }
 });
 
