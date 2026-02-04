@@ -54,6 +54,7 @@ export type TPopSelectOption = {
   icon?: TIcon;
   label: string;
   disabled?: boolean;
+  value?: unknown;
   meta?: unknown;
 };
 
