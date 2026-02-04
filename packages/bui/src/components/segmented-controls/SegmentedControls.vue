@@ -3,9 +3,10 @@ import type { Segment } from "./types";
 import { BFlexbox } from "../flexbox";
 import SegmentButton from "./SegmentButton.vue";
 
-const { selectedSegment } = defineProps<{
+const { selectedSegment, size = "small" } = defineProps<{
   segments: Segment[];
   selectedSegment: Segment;
+  size?: "small" | "medium" | "large";
 }>();
 
 const emit = defineEmits<{
@@ -22,6 +23,7 @@ const getSegmentActiveState = (segment: Segment) => segment.label === selectedSe
       :key="segment.label"
       :segment="segment"
       :active="getSegmentActiveState(segment)"
+      :size="size"
       @click="emit('select', segment)"
     />
   </BFlexbox>

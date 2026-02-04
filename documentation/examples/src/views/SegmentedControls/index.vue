@@ -8,12 +8,14 @@ import {
 
 const segments: Segment[] = [
   {
-    icon: "agent",
-    label: "Agents",
+    id: "email",
+    icon: "paper-plane",
+    label: "Email invites",
   },
   {
-    icon: "box",
-    label: "Products",
+    id: "link",
+    icon: "link",
+    label: "Sharable invite link",
   },
 ];
 
@@ -26,6 +28,7 @@ const onSelect = (segment: Segment) => selectedSegment.value = segment;
     <template #default="{ print }">
       <section class="flex items-center space-x-2">
         <BSegmentedControls
+          size="medium"
           :segments="segments"
           :selected-segment="selectedSegment"
           @select="(segment) => {
