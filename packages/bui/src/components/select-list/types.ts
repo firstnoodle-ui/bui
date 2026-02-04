@@ -7,7 +7,7 @@ export const selectOptionVariants = ["checkbox", "deletable", "single"] as const
 export type SelectOptionVariant = typeof selectOptionVariants[number];
 
 export type SelectListOption = {
-  id?: string | number;
+  id: string | number;
   icon?: TIcon;
   label: string;
   disabled?: boolean;
