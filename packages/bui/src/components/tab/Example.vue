@@ -82,7 +82,7 @@ const selectedTabId = ref(tabs[0].id);
                   }"
                 >
                   <span class="relative text-xs font-medium truncate">{{ `More (${count})` }}</span>
-                  <BIcon name="chevron-down-small" />
+                  <BIcon :name="visible ? 'chevron-up-small' : 'chevron-down-small'" />
                 </button>
                 <div class="flex w-full h-px px-2">
                   <div
@@ -96,6 +96,7 @@ const selectedTabId = ref(tabs[0].id);
                 <BSelectListOption
                   v-for="tab in tabs"
                   :key="tab.id"
+                  small
                   :option="(tab as SelectListOption)"
                   variant="single"
                   :selected="false"
@@ -107,19 +108,6 @@ const selectedTabId = ref(tabs[0].id);
               </BPopperContent>
             </template>
           </BPopper>
-        </template>
-
-        <template #overflow-menu="{ tabs, select }">
-          <!-- <BPopperContent class="absolute p-2">
-              <button
-                v-for="tab in tabs"
-                :key="tab.id"
-                class="block px-4 py-2 hover:bg-gray-100"
-                @click="select(tab.id)"
-              >
-                {{ tab.label }}
-              </button>
-            </BPopperContent> -->
         </template>
       </OverflowTabs>
     </nav>
