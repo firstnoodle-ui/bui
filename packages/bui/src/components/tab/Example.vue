@@ -1,52 +1,127 @@
 <script setup lang="ts">
+import type { SelectListOption } from "../..";
+import type { TIcon } from "../types";
 import type { OverflowTab } from "./useOverflowTabs";
 import { ref } from "vue";
+import { BFlexbox, BIcon, BPopper, BPopperContent, BSelectList, BSelectListOption } from "../..";
 import OverflowTabs from "./OverflowTabs.vue";
 
-const tabs: ({ label: string } & OverflowTab)[] = [
-  { id: "Home", label: "Home" },
-  { id: "Test", label: "Test" },
-  { id: "Groceries", label: "Groceries" },
+const tabs: ({ icon: TIcon; label: string } & OverflowTab)[] = [
+  {
+    id: "questions",
+    icon: "question",
+    label: "Questions",
+  },
+  {
+    id: "files",
+    icon: "paper",
+    label: "Files",
+  },
+  {
+    id: "agents",
+    icon: "agent",
+    label: "Agents",
+  },
+  {
+    id: "agent-flows",
+    icon: "agent-flow",
+    label: "AgentFlows",
+  },
+  {
+    id: "enrollments",
+    icon: "team",
+    label: "Enrollments",
+  },
 ];
 
-const selectedTab = ref<OverflowTab>(tabs[0]);
+const selectedTabId = ref(tabs[0].id);
 </script>
 
 <template>
-  <OverflowTabs
-    v-model="selectedTab.id"
-    :tabs="tabs"
-  >
-    <template #tab="{ tab, selected, attrs, select }">
-      <button
-        v-bind="attrs"
-        class="px-4 py-2 border-b-2 whitespace-nowrap"
-        :class="selected
-          ? 'border-blue-500 text-blue-600'
-          : 'border-transparent text-gray-500'"
-        @click="select"
+  <div class="border-b border-default gap-0">
+    <nav class="-mx-2 -mb-px">
+      <OverflowTabs
+        v-model="selectedTabId"
+        :tabs="tabs"
       >
-        {{ tab.label }}
-      </button>
-    </template>
+        <template #tab="{ tab, selected, attrs, select }">
+          <div class="group flex flex-col justify-center gap-1">
+            <button
+              v-bind="attrs"
+              class="flex items-center gap-1 h-6 px-2 rounded-lg cursor-pointer"
+              :class="{
+                'text-action border-action': selected,
+                'text-tertiary border-default hover:bg-tertiary': !selected,
+              }"
+              @click="select"
+            >
+              <BIcon :name="tab.icon" />
+              <span class="relative text-xs font-medium truncate">{{ tab.label }}</span>
+            </button>
+            <div class="flex w-full h-px px-2">
+              <div
+                class="flex w-full h-full border-b"
+                :class="{
+                  'border-action': selected,
+                  'border-default': !selected,
+                }"
+              />
+            </div>
+          </div>
+        </template>
 
-    <template #overflow-trigger="{ count }">
-      <button class="px-4 py-2 border-b-2">
-        More ({{ count }}) ▾
-      </button>
-    </template>
+        <template #overflow-trigger="{ count, tabs, select }">
+          <BPopper trigger="click" placement="bottom-end">
+            <template #default="{ visible }">
+              <div class="group -mb-px flex flex-col justify-center gap-1">
+                <button
+                  class="flex items-center gap-1 h-6 px-2 rounded-lg cursor-pointer"
+                  :class="{
+                    'text-action border-action bg-tertiary': visible,
+                    'text-tertiary border-default hover:bg-tertiary': !visible,
+                  }"
+                >
+                  <span class="relative text-xs font-medium truncate">{{ `More (${count})` }}</span>
+                  <BIcon name="chevron-down-small" />
+                </button>
+                <div class="flex w-full h-px px-2">
+                  <div
+                    class="flex w-full h-full border-b border-default"
+                  />
+                </div>
+              </div>
+            </template>
+            <template #content="{ close }">
+              <BPopperContent>
+                <BSelectListOption
+                  v-for="tab in tabs"
+                  :key="tab.id"
+                  :option="(tab as SelectListOption)"
+                  variant="single"
+                  :selected="false"
+                  @click="
+                    select(tab.id);
+                    close();
+                  "
+                />
+              </BPopperContent>
+            </template>
+          </BPopper>
+        </template>
 
-    <template #overflow-menu="{ tabs, select }">
-      <div class="absolute bg-white border shadow">
-        <button
-          v-for="tab in tabs"
-          :key="tab.id"
-          class="block px-4 py-2 hover:bg-gray-100"
-          @click="select(tab.id)"
-        >
-          {{ tab.label }}
-        </button>
-      </div>
-    </template>
-  </OverflowTabs>
+        <template #overflow-menu="{ tabs, select }">
+          <!-- <BPopperContent class="absolute p-2">
+              <button
+                v-for="tab in tabs"
+                :key="tab.id"
+                class="block px-4 py-2 hover:bg-gray-100"
+                @click="select(tab.id)"
+              >
+                {{ tab.label }}
+              </button>
+            </BPopperContent> -->
+        </template>
+      </OverflowTabs>
+    </nav>
+  </div>
 </template>

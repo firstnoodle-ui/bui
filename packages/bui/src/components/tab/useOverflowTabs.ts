@@ -15,8 +15,9 @@ export function useOverflowTabs<T extends OverflowTab>(
   const visibleIds = ref<string[]>([]);
   const overflowIds = ref<string[]>([]);
 
-  // Cache tab widths since hidden tabs won't have refs after overflow
+  // Cache widths since hidden elements won't have refs after overflow
   const cachedTabWidths = ref<Map<string, number>>(new Map());
+  const cachedOverflowWidth = ref(0);
 
   function recalc() {
     if (!containerRef.value) return;
@@ -38,9 +39,14 @@ export function useOverflowTabs<T extends OverflowTab>(
       });
     }
 
+    // Cache overflow button width when visible
+    if (overflowTriggerRef.value) {
+      cachedOverflowWidth.value = overflowTriggerRef.value.offsetWidth;
+    }
+
     const containerWidth = containerRef.value.clientWidth;
     const tabWidths = allTabs.map(t => cachedTabWidths.value.get(t.id) ?? 0);
-    const overflowWidth = overflowTriggerRef.value?.offsetWidth ?? 0;
+    const overflowWidth = cachedOverflowWidth.value;
 
     let used = 0;
     let cutoff = tabs().length;

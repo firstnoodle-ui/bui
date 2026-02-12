@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { OverflowTab } from "./useOverflowTabs";
 import { computed } from "vue";
+import { BFlexbox } from "../flexbox";
 import { useOverflowTabs } from "./useOverflowTabs";
 
 type Props<T extends OverflowTab> = {
@@ -25,6 +26,10 @@ const {
   () => props.modelValue,
 );
 
+const setTabRef = (i: number, el: HTMLElement | null) => {
+  if (el) tabRefs.value[i] = el;
+};
+
 const visibleTabs = computed(() =>
   props.tabs.filter(t => visibleIds.value.includes(t.id)),
 );
@@ -37,7 +42,7 @@ const overflowTabs = computed(() =>
 <template>
   <div
     ref="containerRef"
-    class="flex w-full overflow-hidden border border-blue-500"
+    class="flex w-full overflow-hidden"
     role="tablist"
     aria-orientation="horizontal"
   >
@@ -56,21 +61,17 @@ const overflowTabs = computed(() =>
           'aria-selected': tab.id === modelValue,
           'aria-controls': `panel-${tab.id}`,
           onKeydown,
-          'ref': (el: HTMLElement) => (tabRefs[i] = el),
+          'ref': (el: HTMLElement | null) => setTabRef(i, el),
         }"
         :select="() => emit('update:modelValue', tab.id)"
       />
     </template>
 
     <!-- Overflow trigger -->
-    <div v-if="overflowTabs.length" ref="overflowTriggerRef">
+    <div v-if="overflowTabs.length" ref="overflowTriggerRef" class="inline-flex">
       <slot
         name="overflow-trigger"
         :count="overflowTabs.length"
-      />
-
-      <slot
-        name="overflow-menu"
         :tabs="overflowTabs"
         :select="(id: string) => emit('update:modelValue', id)"
       />
