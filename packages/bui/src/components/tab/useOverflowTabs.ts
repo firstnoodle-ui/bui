@@ -68,10 +68,21 @@ export function useOverflowTabs<T extends OverflowTab>(
       used += tabWidths[i];
     }
 
-    visibleIds.value = tabs().slice(0, cutoff).map(t => t.id);
-    overflowIds.value = tabs().slice(cutoff).map(t => t.id);
-    // console.log(visibleIds.value);
-    // console.log(overflowIds.value);
+    const visible = tabs().slice(0, cutoff).map(t => t.id);
+    const overflow = tabs().slice(cutoff).map(t => t.id);
+
+    // Ensure selected tab stays visible
+    const currentSelected = selectedId();
+    if (overflow.includes(currentSelected)) {
+      const selectedIndex = overflow.indexOf(currentSelected);
+      overflow.splice(selectedIndex, 1);
+      const demoted = visible.pop();
+      if (demoted) overflow.unshift(demoted);
+      visible.push(currentSelected);
+    }
+
+    visibleIds.value = visible;
+    overflowIds.value = overflow;
   }
 
   // Ensure selected tab is always visible
