@@ -10,10 +10,10 @@ import { BFlexbox } from "..";
   >
     <slot />
     <BFlexbox tag="footer" justify="between" class="gap-2 px-2 py-2 border-t border-default">
-      <BFlexbox>
+      <BFlexbox class="flex-1">
         <slot name="footer-left" />
       </BFlexbox>
-      <BFlexbox class="gap-2">
+      <BFlexbox class="flex-none">
         <slot name="footer-right" />
       </BFlexbox>
     </BFlexbox>
