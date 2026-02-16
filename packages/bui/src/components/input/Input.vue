@@ -27,7 +27,7 @@ const {
   autoFocus?: boolean;
 }>();
 
-const emit = defineEmits(["change", "enter"]);
+const emit = defineEmits(["change", "enter", "escape"]);
 
 const textareaRef = ref<HTMLTextAreaElement>();
 const inputRef = ref<HTMLInputElement>();
@@ -58,6 +58,11 @@ const onEnter = (e: KeyboardEvent) => {
   e.stopPropagation();
   e.preventDefault();
   emit("enter");
+};
+const onEscape = (e: KeyboardEvent) => {
+  e.stopPropagation();
+  e.preventDefault();
+  emit("escape");
 };
 
 const onBlur = (event: Event) => {
@@ -128,6 +133,7 @@ defineExpose({ focus });
       }"
       @change.stop.prevent
       @keydown.enter.stop.prevent="onEnter"
+      @keydown.escape.stop.prevent="onEscape"
       @keyup.enter.stop.prevent
       @blur="onBlur"
       @input.stop.prevent="onInput"
