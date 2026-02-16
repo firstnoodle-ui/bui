@@ -8,6 +8,7 @@ const { placeholder = "Enter value, comma separated", validators = [] } = define
 const emit = defineEmits<{
   (e: "update:entries", entries: TagInputEntry[]): void;
   (e: "raw-input-parsed", entry: TagInputEntry | null): void;
+  (e: "enter-key-up"): void;
 }>();
 
 const inputElement = ref<HTMLInputElement>();
@@ -116,6 +117,7 @@ defineExpose({ clear, importEntries, inputElement, replaceEntries });
       :placeholder="parsedEntries.length ? '' : placeholder"
       class="flex-1 min-w-0 h-6 text-xs leading-tight bg-transparent focus:outline-hidden"
       @keyup.delete="onDeleteKeyUp"
+      @keyup.enter="emit('enter-key-up')"
       @change.stop.prevent
       @input.stop.prevent="onInput"
     >
