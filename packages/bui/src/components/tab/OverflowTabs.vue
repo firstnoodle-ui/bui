@@ -1,42 +1,31 @@
-<script setup lang="ts">
-import type { OverflowTab } from "./useOverflowTabs";
+<script setup lang="ts" generic="T extends OverflowTab">
+import type { ComponentPublicInstance } from "vue";
+import type { OverflowTab } from "./types";
 import { computed } from "vue";
-import { BFlexbox } from "../flexbox";
 import { useOverflowTabs } from "./useOverflowTabs";
 
-type Props<T extends OverflowTab> = {
+const props = defineProps<{
   tabs: T[];
-  modelValue: string;
-};
-
-const props = defineProps<Props<any>>();
-const emit = defineEmits<{
-  (e: "update:modelValue", value: string): void;
+  selectedTabId: string;
 }>();
 
-const {
-  containerRef,
-  tabRefs,
-  overflowTriggerRef,
-  visibleIds,
-  overflowIds,
-  onKeydown,
-} = useOverflowTabs(
-  () => props.tabs,
-  () => props.modelValue,
-);
+const emit = defineEmits<{
+  (e: "select", tabId: string): void;
+}>();
+
+const { containerRef, tabRefs, overflowTriggerRef, visibleIds, overflowIds, onKeydown }
+  = useOverflowTabs(
+    () => props.tabs,
+    () => props.selectedTabId,
+  );
 
 const setTabRef = (i: number, el: HTMLElement | null) => {
   if (el) tabRefs.value[i] = el;
 };
 
-const visibleTabs = computed(() =>
-  props.tabs.filter(t => visibleIds.value.includes(t.id)),
-);
+const visibleTabs = computed(() => props.tabs.filter(t => visibleIds.value.includes(t.id)));
 
-const overflowTabs = computed(() =>
-  props.tabs.filter(t => overflowIds.value.includes(t.id)),
-);
+const overflowTabs = computed(() => props.tabs.filter(t => overflowIds.value.includes(t.id)));
 </script>
 
 <template>
@@ -46,24 +35,22 @@ const overflowTabs = computed(() =>
     role="tablist"
     aria-orientation="horizontal"
   >
-    <template
-      v-for="(tab, i) in visibleTabs"
-      :key="tab.id"
-    >
+    <template v-for="(tab, i) in visibleTabs" :key="tab.id">
       <slot
         name="tab"
         :tab="tab"
-        :selected="tab.id === modelValue"
+        :selected="tab.id === selectedTabId"
         :attrs="{
           'id': `tab-${tab.id}`,
           'role': 'tab',
-          'tabindex': tab.id === modelValue ? 0 : -1,
-          'aria-selected': tab.id === modelValue,
+          'tabindex': tab.id === selectedTabId ? 0 : -1,
+          'aria-selected': tab.id === selectedTabId,
           'aria-controls': `panel-${tab.id}`,
           onKeydown,
-          'ref': (el: HTMLElement | null) => setTabRef(i, el),
+          'ref': (el: Element | ComponentPublicInstance | null) =>
+            setTabRef(i, el as HTMLElement | null),
         }"
-        :select="() => emit('update:modelValue', tab.id)"
+        :select="() => emit('select', tab.id)"
       />
     </template>
 
@@ -73,7 +60,7 @@ const overflowTabs = computed(() =>
         name="overflow-trigger"
         :count="overflowTabs.length"
         :tabs="overflowTabs"
-        :select="(id: string) => emit('update:modelValue', id)"
+        :select="(id: string) => emit('select', id)"
       />
     </div>
   </div>

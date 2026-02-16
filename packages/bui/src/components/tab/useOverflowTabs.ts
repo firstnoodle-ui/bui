@@ -1,13 +1,7 @@
+import type { OverflowTab } from "./types";
 import { computed, nextTick, onMounted, ref, watch } from "vue";
 
-export type OverflowTab = {
-  id: string;
-};
-
-export function useOverflowTabs<T extends OverflowTab>(
-  tabs: () => T[],
-  selectedId: () => string,
-) {
+export function useOverflowTabs<T extends OverflowTab>(tabs: () => T[], selectedId: () => string) {
   const containerRef = ref<HTMLElement>();
   const tabRefs = ref<HTMLElement[]>([]);
   const overflowTriggerRef = ref<HTMLElement>();
@@ -55,10 +49,7 @@ export function useOverflowTabs<T extends OverflowTab>(
       const remaining = tabWidths.length - i - 1;
       const needsOverflow = remaining > 0;
 
-      const next
-        = used
-          + tabWidths[i]
-          + (needsOverflow ? overflowWidth : 0);
+      const next = used + tabWidths[i] + (needsOverflow ? overflowWidth : 0);
 
       if (next > containerWidth) {
         cutoff = i;
@@ -68,8 +59,12 @@ export function useOverflowTabs<T extends OverflowTab>(
       used += tabWidths[i];
     }
 
-    const visible = tabs().slice(0, cutoff).map(t => t.id);
-    const overflow = tabs().slice(cutoff).map(t => t.id);
+    const visible = tabs()
+      .slice(0, cutoff)
+      .map(t => t.id);
+    const overflow = tabs()
+      .slice(cutoff)
+      .map(t => t.id);
 
     // Ensure selected tab stays visible
     const currentSelected = selectedId();
@@ -128,8 +123,7 @@ export function useOverflowTabs<T extends OverflowTab>(
         nextIndex = (currentIndex + 1) % allIds.length;
         break;
       case "ArrowLeft":
-        nextIndex
-        = (currentIndex - 1 + allIds.length) % allIds.length;
+        nextIndex = (currentIndex - 1 + allIds.length) % allIds.length;
         break;
       case "Home":
         nextIndex = 0;

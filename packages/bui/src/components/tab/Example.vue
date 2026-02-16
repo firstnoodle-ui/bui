@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { SelectListOption } from "../..";
 import type { TIcon } from "../types";
-import type { OverflowTab } from "./useOverflowTabs";
+import type { OverflowTab } from "./types";
 import { ref } from "vue";
-import { BFlexbox, BIcon, BPopper, BPopperContent, BSelectList, BSelectListOption } from "../..";
+import { BIcon, BPopper, BPopperContent, BSelectListOption } from "../..";
 import OverflowTabs from "./OverflowTabs.vue";
 
-const tabs: ({ icon: TIcon; label: string } & OverflowTab)[] = [
+const theTabs: ({ icon: TIcon; label: string } & OverflowTab)[] = [
   {
     id: "questions",
     icon: "question",
@@ -34,15 +34,16 @@ const tabs: ({ icon: TIcon; label: string } & OverflowTab)[] = [
   },
 ];
 
-const selectedTabId = ref(tabs[0].id);
+const selectedTabId = ref(theTabs[0].id);
 </script>
 
 <template>
   <div class="border-b border-default gap-0">
     <nav class="-mx-2 -mb-px">
       <OverflowTabs
-        v-model="selectedTabId"
-        :tabs="tabs"
+        :selected-tab-id="selectedTabId"
+        :tabs="theTabs"
+        @select="(tabId:string) => selectedTabId = tabId"
       >
         <template #tab="{ tab, selected, attrs, select }">
           <div class="group flex flex-col justify-center gap-1">
