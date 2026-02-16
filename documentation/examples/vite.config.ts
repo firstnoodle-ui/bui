@@ -8,6 +8,8 @@ export default defineConfig({
   base: "/bui/",
   server: {
     open: true,
+    port: 5174,
+    strictPort: true,
   },
   plugins: [vue(), tailwindcss()],
   resolve: {
