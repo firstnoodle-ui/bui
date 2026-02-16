@@ -1,19 +1,5 @@
 <script setup lang="ts">
-import type { ConfirmCancelProps } from "..";
-import { BConfirmCancel, BFlexbox } from "..";
-
-const {
-  cancelLabel = "Cancel",
-  confirmLabel = "Save",
-  loading = false,
-} = defineProps<ConfirmCancelProps & {
-  loading?: boolean;
-}>();
-
-const emit = defineEmits<{
-  (e: "confirm"): void;
-  (e: "cancel"): void;
-}>();
+import { BFlexbox } from "..";
 </script>
 
 <template>
@@ -29,16 +15,6 @@ const emit = defineEmits<{
       </BFlexbox>
       <BFlexbox class="gap-2">
         <slot name="footer-right" />
-        <BConfirmCancel
-          small
-          order="confirm-last"
-          :loading="loading"
-          :confirm-label="confirmLabel"
-          :confirm-disabled="confirmDisabled"
-          :cancel-label="cancelLabel"
-          @cancel="emit('cancel')"
-          @confirm="emit('confirm')"
-        />
       </BFlexbox>
     </BFlexbox>
   </BFlexbox>
