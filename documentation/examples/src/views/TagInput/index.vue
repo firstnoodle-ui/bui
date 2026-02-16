@@ -15,6 +15,8 @@ const validators: TagInputValidator[] = [
   },
 ];
 
+const parsedRawInput = ref<TagInputEntry | null>(null);
+
 const importStr = "mail@test.dk, yolo@mail.com, lego@land.dev, test@dtu.dk, mikkel@dtu.dk";
 
 // create ref and trigger import
@@ -24,7 +26,7 @@ const tagInputRef = ref<typeof BTagInput>();
 <template>
   <ComponentPage>
     <template #default="{ print }">
-      <!-- <BButton label="import" @click="tagInputRef?.importEntries(importStr)" /> -->
+      <BButton label="import" @click="tagInputRef?.importEntries(importStr)" />
 
       <BFlexbox col class="gap-8">
         <BFlexbox align="start" fullwidth class="gap-2">
@@ -40,7 +42,13 @@ const tagInputRef = ref<typeof BTagInput>();
             </BFlexbox>
             <BFlexbox align="start" class="gap-2">
               <div class="w-full overflow-hidden border border-default rounded-lg focus:border-action focus-within:border-action">
-                <BTagInput ref="tagInputRef" placeholder="Emails, comma separated" :validators="validators" @update:entries="(value:TagInputEntry[]) => print(JSON.stringify(value))" />
+                <BTagInput
+                  ref="tagInputRef"
+                  placeholder="Emails, comma separated"
+                  :validators="validators"
+                  @update:entries="(value:TagInputEntry[]) => print(JSON.stringify(value))"
+                  @raw-input-parsed="(entry:TagInputEntry|null) => parsedRawInput = entry"
+                />
               </div>
             </BFlexbox>
           </BFlexbox>
@@ -50,7 +58,7 @@ const tagInputRef = ref<typeof BTagInput>();
               icon="paper-plane"
               label="Invite"
               class="flex-none"
-              @click="print(tagInputRef?.entries)"
+              @click="print(parsedRawInput ? JSON.stringify(parsedRawInput) : 'null')"
             />
           </BFlexbox>
         </BFlexbox>

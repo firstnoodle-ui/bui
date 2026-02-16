@@ -5,7 +5,10 @@ import { BFlexbox } from "../flexbox";
 import { EntryTag } from "./components";
 
 const { placeholder = "Enter value, comma separated", validators = [] } = defineProps<{ placeholder?: string; validators?: TagInputValidator[] }>();
-const emit = defineEmits<{ (e: "update:entries", entries: TagInputEntry[]): void }>();
+const emit = defineEmits<{
+  (e: "update:entries", entries: TagInputEntry[]): void;
+  (e: "raw-input-parsed", entry: TagInputEntry | null): void;
+}>();
 
 const inputElement = ref<HTMLInputElement>();
 const inputValue = ref("");
@@ -37,11 +40,15 @@ const onInput = (event: Event) => {
       parsedEntries.value = [...parsedEntries.value, ...parseInput(inputValue.value)];
       inputValue.value = "";
       emit("update:entries", parsedEntries.value);
+      emit("raw-input-parsed", null);
+    }
+    else {
+      emit("raw-input-parsed", parseInput(inputValue.value)[0]);
     }
   }
 };
 
-const parseInput = (value: string) => {
+const parseInput = (value: string): TagInputEntry[] => {
   return value.trim().split(",").filter(entry => entry.length).map((entry: string, index) => {
     const trimmed = entry.trim();
 
