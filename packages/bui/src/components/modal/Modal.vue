@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { Slots } from "vue";
 import type { TOverlayType } from "../types";
-import { onMounted, ref, useSlots } from "vue";
+import { computed, onMounted, ref, useSlots } from "vue";
 import { BButton, BFadeInUp, BScreenOverlay, BVerticalLayout, BWindowFrame } from "../";
-import { useEscapeKey } from "../../composables";
+import { useEscapeKey, useTrapFocus } from "../../composables";
 
 const props = withDefaults(
   defineProps<{
@@ -41,7 +41,10 @@ const emit = defineEmits(["close", "ready"]);
 
 const slots: Slots = useSlots();
 const windowRef = ref<typeof BWindowFrame>();
+const trapElementRef = computed(() => windowRef.value?.$el as HTMLElement | undefined);
 const show = ref(false);
+
+const { trapFocus, releaseFocus } = useTrapFocus(trapElementRef, true);
 
 onMounted(() => {
   if (slots.default && (props.title || slots.header || slots.main || slots.footer)) {
@@ -53,7 +56,10 @@ onMounted(() => {
   show.value = true;
 });
 
-const close = () => (show.value = false);
+const close = () => {
+  releaseFocus();
+  show.value = false;
+};
 
 const onClose = async () => {
   if (!props.closeable) return;
@@ -72,7 +78,7 @@ const onClose = async () => {
 props.closeable && useEscapeKey(onClose);
 
 const onTransitionAfterEnter = () => {
-  // windowRef.value!.trapFocus();
+  trapFocus();
   emit("ready");
 };
 
