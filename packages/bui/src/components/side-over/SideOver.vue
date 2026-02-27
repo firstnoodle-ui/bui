@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import type { Slots } from "vue";
 import type { TOverlayType } from "../types";
-import { onMounted, ref, useSlots } from "vue";
-import { BButton, BScreenOverlay, BVerticalLayout } from "../";
-import { useEscapeKey } from "../../";
-import WindowFrame from "../window-frame/WindowFrame.vue";
+import { computed, onMounted, ref, useSlots } from "vue";
+import { BButton, BScreenOverlay, BVerticalLayout, BWindowFrame } from "../";
+import { useEscapeKey, useTrapFocus } from "../../composables";
 
 const {
   closeable = true,
@@ -39,12 +38,18 @@ const {
 const emit = defineEmits(["close", "open"]);
 const slots: Slots = useSlots();
 const show = ref(false);
-const panelRef = ref<HTMLDivElement>();
+const windowRef = ref<typeof BWindowFrame>();
+const trapElementRef = computed(() => windowRef.value?.$el as HTMLElement | undefined);
+
+const { trapFocus, releaseFocus } = useTrapFocus(trapElementRef, true);
 
 // when component is mounted start the transition
 onMounted(() => (show.value = true));
 
-const close = () => (show.value = false);
+const close = () => {
+  releaseFocus();
+  show.value = false;
+};
 
 const onClose = async () => {
   if (!closeable) return;
@@ -62,13 +67,8 @@ const onClose = async () => {
 
 closeable && useEscapeKey(onClose);
 
-// afterTransition -> start trapFocus
 const onTransitionAfterEnter = () => {
-  // focus the dialog after transition
-  // panelRef.value?.focus();
-
-  // trap focus inside the dialog (without focusing the first focusable element)
-  // trapFocus();
+  trapFocus();
   emit("open");
 };
 
@@ -87,9 +87,9 @@ defineExpose({ close });
         :leave-to-class="placement === 'right' ? 'translate-x-full' : '-translate-x-full'"
         @after-enter="onTransitionAfterEnter"
       >
-        <WindowFrame
+        <BWindowFrame
           v-show="show"
-          ref="panelRef"
+          ref="windowRef"
           class="flex flex-col overflow-hidden w-full h-full focus:outline-hidden"
           :class="[widthClass, {
             'py-4': !slots.default,
@@ -118,7 +118,7 @@ defineExpose({ close });
               </footer>
             </template>
           </BVerticalLayout>
-        </WindowFrame>
+        </BWindowFrame>
       </transition>
     </BScreenOverlay>
   </Teleport>
