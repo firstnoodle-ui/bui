@@ -11,8 +11,8 @@ export const useTrapFocus = (
   trapElement: Ref<HTMLElement | null | undefined>,
   focusFirstElement: boolean = false,
 ) => {
-  const focusableSelector =
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+  const focusableSelector
+    = "button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])";
 
   const getFocusableElements = (): HTMLElement[] => {
     if (!trapElement.value) return [];
@@ -33,10 +33,12 @@ export const useTrapFocus = (
     if (!activeEl || !trapElement.value?.contains(activeEl)) {
       (e.shiftKey ? last : first).focus();
       e.preventDefault();
-    } else if (e.shiftKey && activeEl === first) {
+    }
+    else if (e.shiftKey && activeEl === first) {
       last.focus();
       e.preventDefault();
-    } else if (!e.shiftKey && activeEl === last) {
+    }
+    else if (!e.shiftKey && activeEl === last) {
       first.focus();
       e.preventDefault();
     }
