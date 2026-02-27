@@ -7,7 +7,7 @@ import PropControlBase from "./PropControlBase.vue";
 const { clearable = false, options, value } = defineProps<{ value?: string; options: string[]; name: string; clearable?: boolean }>();
 
 const emit = defineEmits(["select"]);
-const localOptions = computed(() => options.map(o => ({ label: o })));
+const localOptions = computed(() => options.map(o => ({ id: o, label: o })));
 const selected = computed(() => localOptions.value.find(o => o.label === value));
 
 const onSelect = (option: TPopSelectOption) => emit("select", option.label);
