@@ -27,11 +27,16 @@ export const useTrapFocus = (
 
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
+    const activeEl = document.activeElement as HTMLElement | null;
 
-    if (e.shiftKey && document.activeElement === first) {
+    // If focus is outside the trap element, redirect it inside
+    if (!activeEl || !trapElement.value?.contains(activeEl)) {
+      (e.shiftKey ? last : first).focus();
+      e.preventDefault();
+    } else if (e.shiftKey && activeEl === first) {
       last.focus();
       e.preventDefault();
-    } else if (!e.shiftKey && document.activeElement === last) {
+    } else if (!e.shiftKey && activeEl === last) {
       first.focus();
       e.preventDefault();
     }
