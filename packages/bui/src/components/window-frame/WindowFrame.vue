@@ -16,7 +16,7 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="windowRef" tabindex="0" class="w-full flex flex-col bg-primary shadow-xl border border-default rounded-xl focus:outline-hidden">
+  <div ref="windowRef" class="w-full flex flex-col bg-primary shadow-xl border border-default rounded-xl focus:outline-hidden">
     <slot />
   </div>
 </template>
