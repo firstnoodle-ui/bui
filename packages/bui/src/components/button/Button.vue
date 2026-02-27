@@ -131,9 +131,9 @@ const buttonClasses = computed(() => {
               "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
               "border border-stone-300 hover:border-stone-400 focus-visible:border-stone-400 active:border-stone-500",
               "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
-              "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
-              "dark:border-stone-700 dark:hover:border-stone-600 focus-visible:border-stone-600 dark:active:border-stone-500",
-              "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+              "dark:hover:bg-neutral-700 dark:focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+              "dark:border-stone-700 dark:hover:border-stone-600 dark:focus-visible:border-stone-600 dark:active:border-stone-500",
+              "dark:text-slate-200 dark:hover:text-slate-100 dark:focus-visible:text-slate-100 dark:active:text-white",
             ]
         ),
       );
@@ -147,7 +147,7 @@ const buttonClasses = computed(() => {
               "border-none",
               "text-blue-500 hover:text-blue-600 focus-visible:text-blue-600 active:text-blue-700",
               "dark:hover:bg-blue-900 dark:focus-visible:bg-blue-900 dark:active:bg-blue-700",
-              "dark:text-blue-500 dark:hover:text-blue-100 focus-visible:text-blue-100 dark:active:text-white",
+              "dark:text-blue-500 dark:hover:text-blue-100 dark:focus-visible:text-blue-100 dark:active:text-white",
             ]
         ),
       );
@@ -160,8 +160,8 @@ const buttonClasses = computed(() => {
               "hover:bg-slate-100 focus-visible:bg-slate-100 active:bg-slate-200",
               "border-none",
               "text-slate-700 hover:text-slate-800 focus-visible:text-slate-800 active:text-slate-900",
-              "dark:hover:bg-neutral-700 focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
-              "dark:text-slate-200 dark:hover:text-slate-100 focus-visible:text-slate-100 dark:active:text-white",
+              "dark:hover:bg-neutral-700 dark:focus-visible:bg-neutral-700 dark:active:bg-neutral-600",
+              "dark:text-slate-200 dark:hover:text-slate-100 dark:focus-visible:text-slate-100 dark:active:text-white",
             ]
         ),
       );
@@ -188,7 +188,7 @@ const buttonClasses = computed(() => {
               "text-red-500 hover:text-red-600 focus-visible:text-red-600 active:text-red-700",
               "dark:hover:bg-red-900/50 dark:focus-visible:bg-red-900/50 dark:active:bg-red-900",
               "dark:border-red-500 dark:hover:border-red-400 dark:focus-visible:border-red-400 dark:active:border-red-300",
-              "dark:text-red-500 dark:hover:text-red-400 focus-visible:text-red-400 dark:active:text-red-300",
+              "dark:text-red-500 dark:hover:text-red-400 dark:focus-visible:text-red-400 dark:active:text-red-300",
             ]
         ),
       );
