@@ -1,3 +1,4 @@
+import type { Ref } from "vue";
 import { onUnmounted } from "vue";
 
 /**
@@ -6,35 +7,33 @@ import { onUnmounted } from "vue";
  * 'trapElement' is the vue ref to the HTML element that we want to trap focus (tabindex) inside
  */
 
-export const useTrapFocus = (trapElement: any, focusFirstElement: boolean = false) => {
-  // add all the elements inside modal which you want to make focusable
-  const focusableElements = "button, [href], input, select, textarea, [tabindex]:not([tabindex=\"-1\"])";
+export const useTrapFocus = (
+  trapElement: Ref<HTMLElement | null | undefined>,
+  focusFirstElement: boolean = false,
+) => {
+  const focusableSelector =
+    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
 
-  let firstFocusableElement: HTMLElement;
-  let focusableContent: Element[];
-  let lastFocusableElement: HTMLElement;
+  const getFocusableElements = (): HTMLElement[] => {
+    if (!trapElement.value) return [];
+    return Array.from(trapElement.value.querySelectorAll<HTMLElement>(focusableSelector));
+  };
 
   const handleKeyDown = (e: KeyboardEvent) => {
-    const isTabPressed = e.key === "Tab";
+    if (e.key !== "Tab") return;
 
-    if (!isTabPressed)
-      return;
+    const focusable = getFocusableElements();
+    if (focusable.length === 0) return;
 
-    if (e.shiftKey) {
-      if (firstFocusableElement && lastFocusableElement) {
-        if (document.activeElement === firstFocusableElement) {
-          lastFocusableElement!.focus();
-          e.preventDefault();
-        }
-      }
-    }
-    else {
-      if (firstFocusableElement && lastFocusableElement) {
-        if (document.activeElement === lastFocusableElement) {
-          firstFocusableElement!.focus();
-          e.preventDefault();
-        }
-      }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      last.focus();
+      e.preventDefault();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      first.focus();
+      e.preventDefault();
     }
   };
 
@@ -44,18 +43,21 @@ export const useTrapFocus = (trapElement: any, focusFirstElement: boolean = fals
       return;
     }
 
-    firstFocusableElement = trapElement.value.querySelectorAll(focusableElements)[0] as HTMLElement;
-    focusableContent = Array.from(trapElement.value.querySelectorAll(focusableElements));
-    lastFocusableElement = focusableContent[focusableElements.length - 1] as HTMLElement;
-
     document.addEventListener("keydown", handleKeyDown);
 
-    if (firstFocusableElement && focusFirstElement) {
-      firstFocusableElement.focus();
+    if (focusFirstElement) {
+      const focusable = getFocusableElements();
+      if (focusable.length > 0) {
+        focusable[0].focus();
+      }
     }
   };
 
-  onUnmounted(() => document.removeEventListener("keydown", handleKeyDown));
+  const releaseFocus = () => {
+    document.removeEventListener("keydown", handleKeyDown);
+  };
 
-  return { trapFocus };
+  onUnmounted(releaseFocus);
+
+  return { trapFocus, releaseFocus };
 };
