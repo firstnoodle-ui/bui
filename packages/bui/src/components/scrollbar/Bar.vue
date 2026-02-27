@@ -132,7 +132,7 @@ const onThumbKeydown = (event: KeyboardEvent) => {
       ref="thumbRef"
       :style="renderThumbStyle()"
       class="scrollbar__thumb"
-      tabindex="0"
+      :tabindex="props.size ? 0 : -1"
       role="slider"
       :aria-label="`${props.vertical ? 'Vertical' : 'Horizontal'} scrollbar thumb`"
       :aria-valuenow="props.move || 0"
