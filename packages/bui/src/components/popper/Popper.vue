@@ -4,7 +4,7 @@ import type { TPopperTrigger } from "../types";
 import { autoUpdate, computePosition, flip, limitShift, offset, shift } from "@floating-ui/dom";
 import debounce from "debounce";
 import { nextTick, onMounted, onUnmounted, ref, useSlots, watch } from "vue";
-import { useClickOutside, useMounted } from "../../composables";
+import { useClickOutside, useMounted, useTrapFocus } from "../../composables";
 import { sameWidthAsElementMiddleware, sameWidthAsTriggerMiddleware } from "./middleware";
 
 const props = withDefaults(defineProps<{
@@ -56,6 +56,11 @@ const isOpen = ref(false);
 const { mounted } = useMounted();
 
 const { disableClickOutside, enableClickOutside, updateClickOutside } = useClickOutside(() => closePopper());
+const { trapFocus, releaseFocus } = useTrapFocus(popperRef);
+
+const onEscapeKey = (e: KeyboardEvent) => {
+  if (e.key === "Escape") close();
+};
 
 const update = async () => {
   if (triggerRef.value && popperRef.value) {
@@ -131,7 +136,15 @@ onUnmounted(() => {
 const close = () => {
   openPopperDebounce.clear();
   if (!isOpen.value) return;
+  releaseFocus();
+  window.removeEventListener("keydown", onEscapeKey);
   isOpen.value = false;
+
+  if (props.trigger !== "hover") {
+    const focusable = triggerRef.value?.querySelector<HTMLElement>("button, [href], input, select, textarea, [tabindex]");
+    (focusable ?? triggerRef.value)?.focus();
+  }
+
   emit("close");
 
   props.closeOnClickOutside && disableClickOutside();
@@ -151,6 +164,11 @@ const open = async () => {
   cleanup = autoUpdate(triggerRef.value as HTMLElement, popperRef.value as HTMLElement, update);
 
   props.closeOnClickOutside && popperRef.value && triggerRef.value && enableClickOutside([popperRef.value, triggerRef.value]);
+
+  if (props.trigger !== "hover") {
+    nextTick(trapFocus);
+    window.addEventListener("keydown", onEscapeKey);
+  }
 };
 
 const openPopperDebounce = debounce(open, props.openDelay);
