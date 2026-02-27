@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { TOverlayType } from "../types";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { BButton, BFadeInUp, BScreenOverlay, BVerticalLayout, BWindowFrame } from "../";
-import { useEscapeKey } from "../../composables";
+import { useEscapeKey, useTrapFocus } from "../../composables";
 
 const {
   closeable = true,
@@ -18,11 +18,18 @@ const {
 const emit = defineEmits(["close", "open"]);
 
 const show = ref(false);
+const windowRef = ref<typeof BWindowFrame>();
+const trapElementRef = computed(() => windowRef.value?.$el as HTMLElement | undefined);
+
+const { trapFocus, releaseFocus } = useTrapFocus(trapElementRef, true);
 
 // when component is mounted start the transition
 onMounted(() => (show.value = true));
 
-const close = () => (show.value = false);
+const close = () => {
+  releaseFocus();
+  show.value = false;
+};
 const onClose = () => closeable && close();
 closeable && useEscapeKey(onClose);
 
@@ -32,8 +39,8 @@ defineExpose({ close });
 <template>
   <Teleport :to="target">
     <BScreenOverlay :show="show" :type="overlayType" @click="onClose" @close="emit('close')">
-      <BFadeInUp @transition-after-enter="emit('open')">
-        <BWindowFrame v-show="show" class="h-64 max-w-2xl md:w-1/2 md:max-w-lg p-4 md:px-8">
+      <BFadeInUp @transition-after-enter="() => { trapFocus(); emit('open'); }">
+        <BWindowFrame v-show="show" ref="windowRef" class="h-64 max-w-2xl md:w-1/2 md:max-w-lg p-4 md:px-8">
           <BVerticalLayout>
             <template #header>
               <header class="flex items-center justify-between w-full h-12">
