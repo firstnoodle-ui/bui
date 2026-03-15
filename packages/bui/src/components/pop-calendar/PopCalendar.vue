@@ -64,6 +64,8 @@ const onOpen = (targets: HTMLElement[]) => {
   <BPopper
     ref="popperRef"
     trigger="click"
+    focus-trigger-on-close
+    close-on-escape-key
     :placement="placement"
     :disabled="disabled"
     @close="emit('close')"

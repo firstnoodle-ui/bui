@@ -247,6 +247,8 @@ defineExpose({ close, focus });
   <BPopper
     ref="popperRef"
     trigger="click"
+    focus-trigger-on-close
+    close-on-escape-key
     :placement="placement"
     :disabled="disabled"
     :popper-width-class="popperWidthClass"

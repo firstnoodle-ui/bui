@@ -48,6 +48,8 @@ const onConfirm = () => {
   <BPopper
     ref="popperRef"
     trigger="click"
+    focus-trigger-on-close
+    close-on-escape-key
     :placement="placement"
     :offset-options="offsetOptions || { mainAxis: 4 }"
     @open="onOpen"

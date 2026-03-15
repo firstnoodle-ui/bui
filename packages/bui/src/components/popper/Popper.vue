@@ -10,8 +10,10 @@ import { sameWidthAsElementMiddleware, sameWidthAsTriggerMiddleware } from "./mi
 const props = withDefaults(defineProps<{
   closeDelay?: number;
   closeOnClickOutside?: boolean;
+  closeOnEscapeKey?: boolean;
   disabled?: boolean;
   flipOptions?: Partial<FlipOptions>;
+  focusTriggerOnClose?: boolean;
   limitShiftOptions?: Partial<LimitShiftOptions>;
   offsetOptions?: Partial<OffsetOptions>;
   shiftOptions?: Partial<ShiftOptions>;
@@ -28,8 +30,10 @@ const props = withDefaults(defineProps<{
 }>(), {
   closeDelay: 20,
   closeOnClickOutside: true,
+  closeOnEscapeKey: false,
   disabled: false,
   flipOptions: () => ({}),
+  focusTriggerOnClose: false,
   offsetOptions: () => ({}),
   shiftOptions: () => ({}),
   openDelay: 0,
@@ -137,10 +141,10 @@ const close = () => {
   openPopperDebounce.clear();
   if (!isOpen.value) return;
   releaseFocus();
-  window.removeEventListener("keydown", onEscapeKey);
+  if (props.closeOnEscapeKey) window.removeEventListener("keydown", onEscapeKey);
   isOpen.value = false;
 
-  if (props.trigger !== "hover") {
+  if (props.focusTriggerOnClose && props.trigger !== "hover") {
     const focusable = triggerRef.value?.querySelector<HTMLElement>("button, [href], input, select, textarea, [tabindex]");
     (focusable ?? triggerRef.value)?.focus();
   }
@@ -167,7 +171,7 @@ const open = async () => {
 
   if (props.trigger !== "hover") {
     nextTick(trapFocus);
-    window.addEventListener("keydown", onEscapeKey);
+    if (props.closeOnEscapeKey) window.addEventListener("keydown", onEscapeKey);
   }
 };
 
