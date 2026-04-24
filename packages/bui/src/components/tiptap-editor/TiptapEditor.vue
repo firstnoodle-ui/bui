@@ -93,10 +93,12 @@ watch(hasUsedNewline, (newVal) => {
 watch(
   () => placeholder,
   (newPlaceholder) => {
-    editor.value?.extensionManager.extensions
-      .find(ext => ext.name === "placeholder")
-      ?.options
-      .configure({ placeholder: newPlaceholder });
+    const ext = editor.value?.extensionManager.extensions
+      .find(ext => ext.name === "placeholder");
+    if (ext) {
+      ext.options.placeholder = newPlaceholder;
+      editor.value?.view.dispatch(editor.value.state.tr);
+    }
   },
 );
 
