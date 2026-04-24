@@ -51,7 +51,7 @@ const onInsert = () => {
   }
 
   if (linkAddress.value) {
-    props.editor.chain().focus().extendMarkRange("link").setLink({ href: linkAddress.value }).run();
+    props.editor.chain().focus().extendMarkRange("link").setLink({ href: linkAddress.value, target: "_blank" }).run();
 
     const transaction = props.editor.state.tr.insertText(linkDisplayName.value);
     props.editor.view.dispatch(transaction);
